@@ -5476,11 +5476,7 @@ footer {
     gap: 20px;
   }
 
-  .product-featured .showcase-img {
-    max-width: -webkit-fit-content;
-    max-width: -moz-fit-content;
-    max-width: fit-content;
-  }
+  .product-featured .showcase-img { max-width: -webkit-fit-content; max-width: -moz-fit-content; max-width: "100%"; }
 
   .product-featured .showcase-content {
     margin-top: 0;
