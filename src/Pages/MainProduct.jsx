@@ -33,7 +33,7 @@ const ProductMain = () => {
 
   return (
     <div className="product-main">
-      <h2 className="title">New Products</h2>
+      <h1 style={{textAlign:"center"}} className="title">Our Products</h1>
 
       <div className="product-grid">
 

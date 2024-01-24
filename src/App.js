@@ -5,6 +5,7 @@ import Header from "./common/Header";
 import ProductShowcase from "./common/ProductShowCase";
 import ProductMain from "./Pages/MainProduct";
 import Home from "./Pages/Home";
+import BestSallerSlider from "./Pages/BestSallerSlider";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Header />
       <Home/>
+      <BestSallerSlider/>
         <ProductMain />
 
         <MyFooter />
