@@ -3,7 +3,7 @@ import './App.css';
 import MyFooter from './common/Footer';
 import Header from './common/Header';
 import ProductShowcase from './common/ProductShowCase';
-import ProductMain from './Components/pages/MainProduct';
+import ProductMain from './Pages/MainProduct';
 
 function App() {
   return (

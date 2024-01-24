@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductShowcase from '../../common/ProductShowCase';
+import ProductShowcase from '../common/ProductShowCase';
 // import ProductShowcase from './ProductShowcase'; // Make sure to adjust the path
 
 const ProductMain = () => {
