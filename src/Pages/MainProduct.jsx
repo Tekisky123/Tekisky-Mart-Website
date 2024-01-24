@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductShowcase from '../common/ProductShowCase';
+import axios from 'axios';
 // import ProductShowcase from './ProductShowcase'; // Make sure to adjust the path
 
 const ProductMain = () => {
@@ -11,7 +12,7 @@ const ProductMain = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('https://tekiskymart.onrender.com/admin/getproduct');
-        setProducts(response.data.products);
+        setProducts(response?.data?.products);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -38,14 +39,14 @@ const ProductMain = () => {
 
            {products.map((product) => (
           <ProductShowcase
-            key={product._id}
-            category={product.productCategory}
-            title={product.productName}
-            imgSrcDefault={product.imageURL[0]}
-            imgSrcHover={product.imageURL[1]||product.imageURL[0]}
+            key={product?._id}
+            category={product?.productCategory}
+            title={product?.productName}
+            imgSrcDefault={product?.imageURL[0]}
+            imgSrcHover={product?.imageURL[1]||product?.imageURL[0]}
             badge={{ text: '15%', className: '' }}
-            price={product.productDetails[0].offerPrice}
-            originalPrice={product.productDetails[0].mrp}
+            price={product?.productDetails[0]?.offerPrice}
+            originalPrice={product?.productDetails[0]?.mrp}
             rating={{ fullStars: 3, emptyStars: 2 }}
           />
         ))}
