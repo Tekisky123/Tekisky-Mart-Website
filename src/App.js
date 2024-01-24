@@ -1,14 +1,26 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import MyFooter from './common/Footer';
 import Header from './Components/Header';
+import ProductShowcase from './common/ProductShowCase';
+import ProductMain from './Components/pages/MainProduct';
 
 function App() {
   return (
     <div className="App">
+      
       <BrowserRouter>
       <Header/>
-      </BrowserRouter>
-    </div>
+
+
+        <ProductMain/>
+
+        <MyFooter/>
+        </BrowserRouter>
+
+
+        
+      </div>
   );
 }
 
