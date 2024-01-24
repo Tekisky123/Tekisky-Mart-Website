@@ -2,6 +2,15 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
+import { CiHeart, CiHome, CiLinkedin, CiSearch, CiUser } from "react-icons/ci";
+import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { FaFacebookSquare, FaInstagram, FaWhatsapp} from "react-icons/fa";
+import { IoBagHandleOutline } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { TbCategory } from "react-icons/tb";
+
+
+
 
 const Header = () => {
   useEffect(() => {
@@ -60,24 +69,24 @@ const Header = () => {
         <div className="container">
           <ul className="header-social-container">
             <li>
-              <a href="#" className="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
+              <Link href="#" className="social-link">
+              <FaWhatsapp />
+              </Link>
             </li>
             <li>
-              <a href="#" className="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
+              <Link href="#" className="social-link">
+              <FaInstagram />
+              </Link>
             </li>
             <li>
-              <a href="#" className="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
+              <Link href="#" className="social-link">
+              <CiLinkedin />
+              </Link>
             </li>
             <li>
-              <a href="#" className="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
+              <Link href="#" className="social-link">
+              <FaFacebookSquare />
+              </Link>
             </li>
           </ul>
 
@@ -117,22 +126,22 @@ const Header = () => {
               placeholder="Enter your product name..."
             />
             <button className="search-btn">
-              <ion-icon name="search-outline"></ion-icon>
+            <CiSearch />
             </button>
           </div>
 
           <div className="header-user-actions">
             <button className="action-btn">
-              <ion-icon name="person-outline"></ion-icon>
+            <CiUser />
             </button>
 
             <button className="action-btn">
-              <ion-icon name="heart-outline"></ion-icon>
+            <CiHeart />
               <span className="count">0</span>
             </button>
 
             <button className="action-btn">
-              <ion-icon name="bag-handle-outline"></ion-icon>
+            <HiOutlineShoppingCart />
               <span className="count">0</span>
             </button>
           </div>
@@ -143,157 +152,164 @@ const Header = () => {
         <div className="container">
           <ul className="desktop-menu-category-list">
             <li className="menu-category">
-              <a href="#" className="menu-title">
+              <Link href="#" className="menu-title">
                 Home
-              </a>
+              </Link>
             </li>
 
             <li className="menu-category">
-              <a href="#" className="menu-title">
+              <Link href="#" className="menu-title">
                 Categories
-              </a>
+              </Link>
 
               <div className="dropdown-panel">
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Electronics</a>
+                    <Link href="#">Dates</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Desktop</a>
+                    <Link href="#">Desktop</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Laptop</a>
+                    <Link href="#">Laptop</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Camera</a>
+                    <Link href="#">Camera</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Tablet</a>
+                    <Link href="#">Tablet</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Headphone</a>
+                    <Link href="#">Headphone</Link>
                   </li>
 
                   <li className="panel-list-item">
-                    <a href="#">
+                    <Link href="#">
                       {/* <img src="./assets/images/electronics-banner-1.jpg" alt="headphone collection" width="250" height="119" /> */}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Men's</a>
+                    <Link href="#">Clothes</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Formal</a>
+                    <Link href="#">Formal</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Casual</a>
+                    <Link href="#">Casual</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Sports</a>
+                    <Link href="#">Sports</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Jacket</a>
+                    <Link href="#">Jacket</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Sunglasses</a>
+                    <Link href="#">Sunglasses</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
+                    <Link href="#">
                       {/* <img src="./assets/images/mens-banner.jpg" alt="men's fashion" width="250" height="119" /> */}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Women's</a>
+                    <Link href="#">HomeMade Snacks</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Formal</a>
+                    <Link href="#">Formal</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Casual</a>
+                    <Link href="#">Casual</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Perfume</a>
+                    <Link href="#">Perfume</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Cosmetics</a>
+                    <Link href="#">Cosmetics</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Bags</a>
+                    <Link href="#">Bags</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
+                    <Link href="#">
                       {/* <img src="./assets/images/womens-banner.jpg" alt="women's fashion" width="250" height="119" /> */}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Electronics</a>
+                    <Link href="#">Perfumes</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Smart Watch</a>
+                    <Link href="#">Smart Watch</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Smart TV</a>
+                    <Link href="#">Smart TV</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Keyboard</a>
+                    <Link href="#">Keyboard</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Mouse</a>
+                    <Link href="#">Mouse</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Microphone</a>
+                    <Link href="#">Microphone</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
+                    <Link href="#">
                       {/* <img src="./assets/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119" /> */}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
             </li>
             <li className="menu-category">
-        <a href="#" className="menu-title">Home</a>
+        <Link href="#" className="menu-title">Dates</Link>
       </li>
         <li className="menu-category">
-        <a href="#" className="menu-title">Home</a>
+        <Link href="#" className="menu-title">HomeMade Snacks</Link>
       </li>
         <li className="menu-category">
-        <a href="#" className="menu-title">Home</a>
+        <Link href="#" className="menu-title">Clothes</Link>
       </li>
         <li className="menu-category">
-        <a href="#" className="menu-title">Home</a>
+        <Link href="#" className="menu-title">Perfumes</Link>
       </li>
           </ul>
         </div>
       </nav>
 
       <div className="mobile-bottom-navigation">
-        <button data-mobile-menu-open-btn>Open Menu</button>
+        <button data-mobile-menu-open-btn>
+        <GiHamburgerMenu />
+</button>
 
         <button className="action-btn">
-          <ion-icon name="bag-handle-outline"></ion-icon>
+        {/* <CiUser /> */}
+        <IoBagHandleOutline />
           <span className="count">0</span>
         </button>
 
         <button className="action-btn">
-          <ion-icon name="home-outline"></ion-icon>
+       
+        <CiHome />
         </button>
 
         <button className="action-btn">
-          <ion-icon name="heart-outline"></ion-icon>
+        
+        <CiHeart />
           <span className="count">0</span>
         </button>
 
-        <button data-mobile-menu-open-btn>Open Menu</button>
+        <button data-mobile-menu-open-btn>
+        <TbCategory />
+        </button>
       </div>
 
       <nav className="mobile-navigation-menu has-scrollbar" data-mobile-menu>
@@ -304,9 +320,9 @@ const Header = () => {
 
         <ul className="mobile-menu-category-list">
           <li className="menu-category">
-            <a href="#" className="menu-title">
+            <Link href="#" className="menu-title">
               Home
-            </a>
+            </Link>
           </li>
 
           <li className="menu-category">
@@ -322,24 +338,24 @@ const Header = () => {
             </button>
             <ul className="submenu-category-list" data-accordion>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Shirt
-                </a>
+                </Link>
               </li>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Shirt
-                </a>
+                </Link>
               </li>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Shirt
-                </a>
+                </Link>
               </li>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Shirt
-                </a>
+                </Link>
               </li>
               {/* ... other submenu items ... */}
             </ul>
@@ -358,24 +374,24 @@ const Header = () => {
             </button>
             <ul className="submenu-category-list" data-accordion>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Dress & Frock
-                </a>
+                </Link>
               </li>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Dress & Frock
-                </a>
+                </Link>
               </li>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Dress & Frock
-                </a>
+                </Link>
               </li>
               <li className="submenu-category">
-                <a href="#" className="submenu-title">
+                <Link href="#" className="submenu-title">
                   Dress & Frock
-                </a>
+                </Link>
               </li>
               {/* ... other submenu items ... */}
             </ul>
@@ -384,15 +400,15 @@ const Header = () => {
           {/* ... other menu categories ... */}
 
           <li className="menu-category">
-            <a href="#" className="menu-title">
+            <Link href="#" className="menu-title">
               Blog
-            </a>
+            </Link>
           </li>
 
           <li className="menu-category">
-            <a href="#" className="menu-title">
+            <Link href="#" className="menu-title">
               Hot Offers
-            </a>
+            </Link>
           </li>
         </ul>
 
@@ -408,9 +424,9 @@ const Header = () => {
               </button>
               <ul className="submenu-category-list" data-accordion>
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">
+                  <Link href="#" className="submenu-title">
                     English
-                  </a>
+                  </Link>
                 </li>
                 {/* ... other language options ... */}
               </ul>
@@ -426,9 +442,9 @@ const Header = () => {
               </button>
               <ul className="submenu-category-list" data-accordion>
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">
+                  <Link href="#" className="submenu-title">
                     USD &dollar;
-                  </a>
+                  </Link>
                 </li>
                 {/* ... other currency options ... */}
               </ul>
@@ -437,9 +453,9 @@ const Header = () => {
 
           <ul className="menu-social-container">
             <li>
-              <a href="#" className="social-link">
+              <Link href="#" className="social-link">
                 <ion-icon name="logo-facebook"></ion-icon>
-              </a>
+              </Link>
             </li>
             {/* ... other social links ... */}
           </ul>
