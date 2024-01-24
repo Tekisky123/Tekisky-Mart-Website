@@ -2,6 +2,8 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import MyFooter from './common/Footer';
 import Header from './Components/Header';
+import ProductShowcase from './common/ProductShowCase';
+import ProductMain from './Components/pages/MainProduct';
 
 function App() {
   return (
@@ -11,14 +13,14 @@ function App() {
       <Header/>
 
 
-      
+        <ProductMain/>
 
-      <MyFooter/>
-      </BrowserRouter>
+        <MyFooter/>
+        </BrowserRouter>
 
 
-      
-    </div>
+        
+      </div>
   );
 }
 
