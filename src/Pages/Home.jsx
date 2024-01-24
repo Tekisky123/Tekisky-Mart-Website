@@ -4,21 +4,21 @@ import Banner from '../common/Banner';
 const Home = () => {
     const bannersData = [
         {
-          imgSrc: "https://media.istockphoto.com/id/542563100/photo/bowl-of-dried-dates.jpg?b=1&s=612x612&w=0&k=20&c=2FPYT-UIB2RVcZB_2oUjgyjAMuaqCWKt8FcESIbr5qs=",
+          imgSrc: "https://img.freepik.com/free-photo/small-bowl-dates-handful-marble-background-high-quality-photo_114579-53295.jpg",
           subtitle: "Trending item",
           title: "Women's latest fashion sale",
           price: "20.00",
           link: "/shop/womens-fashion",
         },
         {
-          imgSrc: "https://media.istockphoto.com/id/516816754/photo/raw-organic-medjool-dates.webp?b=1&s=170667a&w=0&k=20&c=lwwvcvLPvRCrMby0vWJNp8Woe343H6cT6ywy63TBxcA=",
+          imgSrc: "https://img.freepik.com/free-photo/dried-dates-kurma_114579-35149.jpg",
           subtitle: "Trending item",
           title: "Women's latest fashion sale",
           price: "20.00",
           link: "/shop/womens-fashion",
         },
         {
-          imgSrc: "https://static.vecteezy.com/system/resources/thumbnails/001/223/614/small/dried-dates-on-minimal-background.jpg",
+          imgSrc: "https://i.pinimg.com/736x/53/7b/54/537b541f0cb00f7db66d6f4866f9e140.jpg",
           subtitle: "Trending accessories",
           title: "Modern sunglasses",
           price: "15.00",

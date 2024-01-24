@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
+import logo from "../Assets/Images/WhatsApp_Image_2024-01-24_at_4.46.39_PM-removebg-preview.png"
 import { CiHeart, CiHome, CiLinkedin, CiSearch, CiUser } from "react-icons/ci";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp} from "react-icons/fa";
@@ -115,7 +116,7 @@ const Header = () => {
       <div className="header-main">
         <div className="container">
           <Link className="header-logo">
-            {/* <img src="./assets/images/logo/logo.svg" alt="Anon's logo" width="120" height="36" /> */}
+            <img src={logo} alt="Anon's logo" width="320" height="80" />
           </Link>
 
           <div className="header-search-container">

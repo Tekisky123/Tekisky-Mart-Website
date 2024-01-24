@@ -1,35 +1,40 @@
 import React from 'react';
+import { CiHeart } from 'react-icons/ci';
+import { FaRegEye } from 'react-icons/fa';
+import { IoRepeatOutline } from 'react-icons/io5';
+import { IoIosAddCircle } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const ProductShowcase = ({ category, title, imgSrcDefault, imgSrcHover, badge, price, originalPrice, rating }) => {
   return (
     <div className="showcase">
       <div className="showcase-banner">
-        <img src={imgSrcDefault} alt={title} width="300" className="product-img default" />
-        <img src={imgSrcHover} alt={title} width="300" className="product-img hover" />
+        <img src={imgSrcDefault} alt={title} className="product-img default" />
+        <img src={imgSrcHover} alt={title} className="product-img hover" />
 
         {badge && <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>}
 
         <div className="showcase-actions">
           <button className="btn-action">
-            <ion-icon name="heart-outline"></ion-icon>
+            <CiHeart />
           </button>
           <button className="btn-action">
-            <ion-icon name="eye-outline"></ion-icon>
+            <FaRegEye />
           </button>
           <button className="btn-action">
-            <ion-icon name="repeat-outline"></ion-icon>
+            <IoRepeatOutline />
           </button>
           <button className="btn-action">
-            <ion-icon name="bag-add-outline"></ion-icon>
+            <IoIosAddCircle />
           </button>
         </div>
       </div>
 
       <div className="showcase-content">
-        <a href="#" className="showcase-category">{category}</a>
-        <a href="#">
+        <Link className="showcase-category">{category}</Link>
+        <Link>
           <h3 className="showcase-title">{title}</h3>
-        </a>
+        </Link>
 
         <div className="showcase-rating">
           {rating &&
