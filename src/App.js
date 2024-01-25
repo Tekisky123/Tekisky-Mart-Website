@@ -1,25 +1,21 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import MyFooter from "./common/Footer";
 import Header from "./common/Header";
-import ProductShowcase from "./common/ProductShowCase";
-import ProductMain from "./Pages/MainProduct";
+
 import Home from "./Pages/Home";
 import BestSallerSlider from "./Pages/BestSallerSlider";
 
 function App() {
-
-
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-      <Home/>
-      <BestSallerSlider/>
-        <ProductMain />
+      <Header />
 
-        <MyFooter />
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <> <BestSallerSlider /> <Home /> </>} />
+      </Routes>
+
+      <MyFooter />
     </div>
   );
 }
