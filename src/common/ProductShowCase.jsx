@@ -21,9 +21,7 @@ const ProductShowcase = ({
         <img src={imgSrcDefault} alt={title} className="product-img default" />
         <img src={imgSrcHover} alt={title} className="product-img hover" />
 
-        {badge && (
-          <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>
-        )}
+        {/* {badge && <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>} */}
 
         <div className="showcase-actions">
           <button className="btn-action">
@@ -62,7 +60,10 @@ const ProductShowcase = ({
           <p className="price">{`$${price}`}</p>
           {originalPrice && <del>{`$${originalPrice}`}</del>}
         </div>
+        <div className="buttons">
         <button className="add-cart-btn-cards">add to cart</button>
+        <button className="add-cart-btn-cards">Buy Now</button>
+        </div>
       </div>
     </div>
   );
