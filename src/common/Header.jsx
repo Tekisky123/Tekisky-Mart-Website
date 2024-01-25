@@ -1,69 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
-import logo from "../Assets/Images/WhatsApp_Image_2024-01-24_at_4.46.39_PM-removebg-preview.png"
+import logo from "../Assets/Images/WhatsApp_Image_2024-01-24_at_4.46.39_PM-removebg-preview.png";
 import { CiHeart, CiHome, CiLinkedin, CiSearch, CiUser } from "react-icons/ci";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { FaFacebookSquare, FaInstagram, FaWhatsapp} from "react-icons/fa";
+import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
+import { IoCloseSharp } from "react-icons/io5";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbCategory } from "react-icons/tb";
 
-
-
-
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
+  const overlayRef = useRef(null);
+
   useEffect(() => {
-    document.addEventListener("DOMContentLoaded", function () {
-      const mobileMenu = document.querySelectorAll("[data-mobile-menu]");
-      const overlay = document.querySelector("[data-overlay]");
-      const mobileMenuOpenBtn = document.body.querySelectorAll(
-        "[data-mobile-menu-open-btn]"
-      );
-      const mobileMenuCloseBtn = document.body.querySelectorAll(
-        "[data-mobile-menu-close-btn]"
-      );
+    const handleMobileMenuClose = () => {
+      setIsMobileMenuOpen(false);
+    };
 
-      const mobileMenuOpenFunc = (index) => {
-        mobileMenu[index].classList.add("active");
-        overlay.classList.add("active");
-      };
-
-      const mobileMenuCloseFunc = (index) => {
-        mobileMenu[index].classList.remove("active");
-        overlay.classList.remove("active");
-      };
-
-      const handleClick = (index) => {
-        mobileMenuOpenBtn[index].addEventListener("click", () =>
-          mobileMenuOpenFunc(index)
-        );
-        mobileMenuCloseBtn[index].addEventListener("click", () =>
-          mobileMenuCloseFunc(index)
-        );
-        overlay.addEventListener("click", () => mobileMenuCloseFunc(index));
-      };
-
-      for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
-        handleClick(i);
+    const handleOverlayClick = (event) => {
+      if (overlayRef.current && event.target === overlayRef.current) {
+        handleMobileMenuClose();
       }
+    };
 
-      // Cleanup event listeners when component unmounts
-      return () => {
-        for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
-          mobileMenuOpenBtn[i].removeEventListener("click", () =>
-            mobileMenuOpenFunc(i)
-          );
-          mobileMenuCloseBtn[i].removeEventListener("click", () =>
-            mobileMenuCloseFunc(i)
-          );
-          overlay.removeEventListener("click", () => mobileMenuCloseFunc(i));
-        }
-      };
-    });
+    document.addEventListener("click", handleOverlayClick);
+
+    return () => {
+      document.removeEventListener("click", handleOverlayClick);
+    };
   }, []);
 
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleMobileMenuClose = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleAccordionToggle = (event) => {
+    const accordionBtn = event.currentTarget;
+    const accordionPanel = accordionBtn.nextElementSibling;
+  
+    if (accordionPanel) {
+      accordionPanel.classList.toggle('active');
+      accordionBtn.classList.toggle('active');
+    }
+  };
   return (
     <header>
       <div className="header-top">
@@ -71,22 +59,22 @@ const Header = () => {
           <ul className="header-social-container">
             <li>
               <Link href="#" className="social-link">
-              <FaWhatsapp />
+                <FaWhatsapp />
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-              <FaInstagram />
+                <FaInstagram />
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-              <CiLinkedin />
+                <CiLinkedin />
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-              <FaFacebookSquare />
+                <FaFacebookSquare />
               </Link>
             </li>
           </ul>
@@ -127,23 +115,23 @@ const Header = () => {
               placeholder="Enter your product name..."
             />
             <button className="search-btn">
-            <CiSearch />
+              <CiSearch />
             </button>
           </div>
 
           <div className="header-user-actions">
             <button className="action-btn">
-            <CiUser />
+              <CiUser />
             </button>
 
             <button className="action-btn">
-            <CiHeart />
-              <span className="count">0</span>
+              <CiHeart />
+              <span className="count">10</span>
             </button>
 
             <button className="action-btn">
-            <HiOutlineShoppingCart />
-              <span className="count">0</span>
+              <HiOutlineShoppingCart />
+              <span className="count">10</span>
             </button>
           </div>
         </div>
@@ -271,52 +259,136 @@ const Header = () => {
               </div>
             </li>
             <li className="menu-category">
-        <Link href="#" className="menu-title">Dates</Link>
-      </li>
-        <li className="menu-category">
-        <Link href="#" className="menu-title">HomeMade Snacks</Link>
-      </li>
-        <li className="menu-category">
-        <Link href="#" className="menu-title">Clothes</Link>
-      </li>
-        <li className="menu-category">
-        <Link href="#" className="menu-title">Perfumes</Link>
-      </li>
+              <Link href="#" className="menu-title">
+                Dates
+              </Link>
+              <ul className="dropdown-list">
+                <li className="dropdown-item">
+                  <Link>Shirt</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Shorts & Jeans</Link>
+                </li>
+
+                <li class="dropdown-item">
+                  <Link>Safety Shoes</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Wallet</Link>
+                </li>
+              </ul>
+            </li>
+            <li className="menu-category">
+              <Link href="#" className="menu-title">
+                HomeMade Snacks
+              </Link>
+              <ul className="dropdown-list">
+                <li className="dropdown-item">
+                  <Link>Shirt</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Shorts & Jeans</Link>
+                </li>
+
+                <li class="dropdown-item">
+                  <Link>Safety Shoes</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Wallet</Link>
+                </li>
+              </ul>
+            </li>
+            <li className="menu-category">
+              <Link href="#" className="menu-title">
+                Clothes
+              </Link>
+              <ul className="dropdown-list">
+                <li className="dropdown-item">
+                  <Link>Shirt</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Shorts & Jeans</Link>
+                </li>
+
+                <li class="dropdown-item">
+                  <Link>Safety Shoes</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Wallet</Link>
+                </li>
+              </ul>
+            </li>
+            <li className="menu-category">
+              <Link href="#" className="menu-title">
+                Perfumes
+              </Link>
+              <ul className="dropdown-list">
+                <li className="dropdown-item">
+                  <Link>Shirt</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Shorts & Jeans</Link>
+                </li>
+
+                <li class="dropdown-item">
+                  <Link>Safety Shoes</Link>
+                </li>
+
+                <li className="dropdown-item">
+                  <Link>Wallet</Link>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
       </nav>
 
+      {/* mobile menu start */}
+
       <div className="mobile-bottom-navigation">
-        <button data-mobile-menu-open-btn>
-        <GiHamburgerMenu />
-</button>
+        <button data-mobile-menu-open-btn onClick={handleMobileMenuToggle}>
+          <GiHamburgerMenu />
+        </button>
 
         <button className="action-btn">
-        {/* <CiUser /> */}
-        <IoBagHandleOutline />
+          {/* <CiUser /> */}
+          <IoBagHandleOutline />
           <span className="count">0</span>
         </button>
 
         <button className="action-btn">
-       
-        <CiHome />
+          <CiHome />
         </button>
 
         <button className="action-btn">
-        
-        <CiHeart />
+          <CiHeart />
           <span className="count">0</span>
         </button>
 
         <button data-mobile-menu-open-btn>
-        <TbCategory />
+          <TbCategory />
         </button>
       </div>
 
-      <nav className="mobile-navigation-menu has-scrollbar" data-mobile-menu>
+      <nav
+        ref={mobileMenuRef}
+        className={`mobile-navigation-menu has-scrollbar ${
+          isMobileMenuOpen ? "active" : ""
+        }`}
+        data-mobile-menu
+      >
         <div className="menu-top">
           <h2 className="menu-title">Menu</h2>
-          <button data-mobile-menu-close-btn>Close Menu</button>
+          <button data-mobile-menu-close-btn onClick={handleMobileMenuClose}>
+            <IoCloseSharp />
+          </button>
         </div>
 
         <ul className="mobile-menu-category-list">
@@ -327,7 +399,11 @@ const Header = () => {
           </li>
 
           <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn>
+          <button
+              className="accordion-menu"
+              data-accordion-btn
+              onClick={handleAccordionToggle}
+            >
               <p className="menu-title">Men's</p>
               <div>
                 <ion-icon name="add-outline" className="add-icon"></ion-icon>
@@ -363,7 +439,7 @@ const Header = () => {
           </li>
 
           <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn>
+            <button className="accordion-menu" data-accordion-btn   onClick={handleAccordionToggle}>
               <p className="menu-title">Women's</p>
               <div>
                 <ion-icon name="add-outline" className="add-icon"></ion-icon>

@@ -76,7 +76,7 @@
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 li {
@@ -3052,6 +3052,8 @@ body::-webkit-scrollbar-thumb:hover {
   -webkit-animation: popup 1s ease-in-out 5s forwards;
   animation: popup 1s ease-in-out 5s forwards;
 }
+
+
 
 @-webkit-keyframes popup {
   0% {

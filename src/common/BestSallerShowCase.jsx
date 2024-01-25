@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BestSallerShowCase = ({ imgSrc, title, rating, description, price, originalPrice, soldCount, availableCount, days, hours, minutes, seconds }) => {
   return (
@@ -12,7 +13,7 @@ const BestSallerShowCase = ({ imgSrc, title, rating, description, price, origina
           <div className="showcase-rating">{rating}</div>
 
           <h3 className="showcase-title">
-            <a href="#">{title}</a>
+            <Link>{title}</Link>
           </h3>
 
           <p className="showcase-desc">{description}</p>
