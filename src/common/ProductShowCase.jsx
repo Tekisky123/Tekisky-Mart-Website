@@ -1,18 +1,29 @@
-import React from 'react';
-import { CiHeart } from 'react-icons/ci';
-import { FaRegEye } from 'react-icons/fa';
-import { IoRepeatOutline } from 'react-icons/io5';
+import React from "react";
+import { CiHeart } from "react-icons/ci";
+import { FaRegEye } from "react-icons/fa";
+import { IoRepeatOutline } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
-import { Link } from 'react-router-dom';
-
-const ProductShowcase = ({ category, title, imgSrcDefault, imgSrcHover, badge, price, originalPrice, rating }) => {
+import { Link } from "react-router-dom";
+import "../App.css"
+const ProductShowcase = ({
+  category,
+  title,
+  imgSrcDefault,
+  imgSrcHover,
+  badge,
+  price,
+  originalPrice,
+  rating,
+}) => {
   return (
     <div className="showcase">
       <div className="showcase-banner">
         <img src={imgSrcDefault} alt={title} className="product-img default" />
         <img src={imgSrcHover} alt={title} className="product-img hover" />
 
-        {badge && <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>}
+        {badge && (
+          <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>
+        )}
 
         <div className="showcase-actions">
           <button className="btn-action">
@@ -51,6 +62,7 @@ const ProductShowcase = ({ category, title, imgSrcDefault, imgSrcHover, badge, p
           <p className="price">{`$${price}`}</p>
           {originalPrice && <del>{`$${originalPrice}`}</del>}
         </div>
+        <button className="add-cart-btn-cards">add to cart</button>
       </div>
     </div>
   );

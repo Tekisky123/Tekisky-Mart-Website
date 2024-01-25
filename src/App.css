@@ -774,6 +774,22 @@ body::-webkit-scrollbar-thumb:hover {
 .banner-btn:hover {
   background: var(--eerie-black);
 }
+.add-cart-btn-cards{
+  background: var(--eerie-black);
+  color: var(--white);
+  background: var(--salmon-pink);
+  padding: 8px 15px;
+  color: var(--white);
+  font-weight: var(--fs-9);
+  font-weight: var(--weight-700);
+  text-transform: uppercase;
+  -webkit-border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 15px;
+  -webkit-transition: var(--transition-timing);
+  -o-transition: var(--transition-timing);
+  transition: var(--transition-timing);
+}
 
 /*-----------------------------------*\
   #CATEGORY
