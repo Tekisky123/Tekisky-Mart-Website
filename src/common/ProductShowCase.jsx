@@ -1,11 +1,20 @@
-import React from 'react';
-import { CiHeart } from 'react-icons/ci';
-import { FaRegEye } from 'react-icons/fa';
-import { IoRepeatOutline } from 'react-icons/io5';
+import React from "react";
+import { CiHeart } from "react-icons/ci";
+import { FaRegEye } from "react-icons/fa";
+import { IoRepeatOutline } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
-import { Link } from 'react-router-dom';
-
-const ProductShowcase = ({ category, title, imgSrcDefault, imgSrcHover, badge, price, originalPrice, rating }) => {
+import { Link } from "react-router-dom";
+import "../App.css"
+const ProductShowcase = ({
+  category,
+  title,
+  imgSrcDefault,
+  imgSrcHover,
+  badge,
+  price,
+  originalPrice,
+  rating,
+}) => {
   return (
     <div className="showcase">
       <div className="showcase-banner">
@@ -50,6 +59,10 @@ const ProductShowcase = ({ category, title, imgSrcDefault, imgSrcHover, badge, p
         <div className="price-box">
           <p className="price">{`$${price}`}</p>
           {originalPrice && <del>{`$${originalPrice}`}</del>}
+        </div>
+        <div className="buttons">
+        <button className="add-cart-btn-cards">add to cart</button>
+        <button className="add-cart-btn-cards">Buy Now</button>
         </div>
       </div>
     </div>
