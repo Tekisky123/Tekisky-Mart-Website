@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
 import logo from "../Assets/Images/WhatsApp_Image_2024-01-24_at_4.46.39_PM-removebg-preview.png";
@@ -11,8 +11,11 @@ import { IoCloseSharp } from "react-icons/io5";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbCategory } from "react-icons/tb";
+import { Context } from "./Context";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { cartItems } = useContext(Context);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const overlayRef = useRef(null);
@@ -126,12 +129,12 @@ const Header = () => {
 
             <button className="action-btn">
               <CiHeart />
-              <span className="count">10</span>
+              <span className="count">0</span>
             </button>
 
-            <button className="action-btn">
+            <button className="action-btn" onClick={() => navigate("/shopping-cart")}>
               <HiOutlineShoppingCart />
-              <span className="count">10</span>
+              <span className="count">{cartItems ? cartItems.length : 0}</span>
             </button>
           </div>
         </div>
@@ -140,7 +143,7 @@ const Header = () => {
       <nav className="desktop-navigation-menu">
         <div className="container">
           <ul className="desktop-menu-category-list">
-            <li className="menu-category">
+            <li className="menu-category" onClick={() => navigate("/")}>
               <Link href="#" className="menu-title">
                 Home
               </Link>
