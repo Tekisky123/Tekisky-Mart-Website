@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import '../Assets/Styles/SingleProduct.css'; // Import the CSS file
 
 // SingleProduct component
@@ -39,17 +42,30 @@ const SingleProduct = () => {
     imageURL,
   } = product;
 
+  // Settings for the react-slick carousel
+  const carouselSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true, // Auto scroll
+    autoplaySpeed: 3000, // Delay between slides in milliseconds (e.g., 3000ms = 3 seconds)
+  };
+
   return (
     <div className="product-container">
       <div className="image-carousel">
-        {imageURL.map((url, index) => (
-          <img
-            key={index}
-            src={url}
-            alt={`Product ${index + 1}`}
-            className={`product-image ${index === 0 ? 'main-image' : ''}`}
-          />
-        ))}
+        <Slider {...carouselSettings}>
+          {imageURL.map((url, index) => (
+            <img
+              key={index}
+              src={url}
+              alt={`Product ${index + 1}`}
+              className="product-image"
+            />
+          ))}
+        </Slider>
       </div>
 
       <div className="product-details">
@@ -68,8 +84,10 @@ const SingleProduct = () => {
             ))}
           </div>
 
+        </div>
+        <div className="buying-section">
           <div className="quantity-section">
-            <label htmlFor="quantity" className="quantity-label">Quantity:</label>
+            {/* <label htmlFor="quantity" className="quantity-label">Quantity:</label> */}
             <div className="quantity-input-container">
               <button className="quantity-button" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
               <input
@@ -86,7 +104,7 @@ const SingleProduct = () => {
               Buy Now
             </button>
           </div>
-        </div>
+      </div>
       </div>
     </div>
   );

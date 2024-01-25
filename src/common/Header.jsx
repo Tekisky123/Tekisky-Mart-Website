@@ -157,20 +157,18 @@ const Header = () => {
                     <Link href="#">Dates</Link>
                   </li>
                   <li className="panel-list-item">
-                    <Link href="#">Desktop</Link>
+                    <Link href="#">Dry Dates</Link>
                   </li>
                   <li className="panel-list-item">
-                    <Link href="#">Laptop</Link>
+                    <Link href="#">Dry Fruits</Link>
                   </li>
                   <li className="panel-list-item">
-                    <Link href="#">Camera</Link>
+                    <Link href="#">Seedless Dates</Link>
                   </li>
                   <li className="panel-list-item">
-                    <Link href="#">Tablet</Link>
+                    <Link href="#">Stuffed Dates</Link>
                   </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Headphone</Link>
-                  </li>
+                
 
                   <li className="panel-list-item">
                     <Link href="#">
@@ -264,19 +262,19 @@ const Header = () => {
               </Link>
               <ul className="dropdown-list">
                 <li className="dropdown-item">
-                  <Link>Shirt</Link>
+                  <Link>Dry Dates</Link>
                 </li>
 
                 <li className="dropdown-item">
-                  <Link>Shorts & Jeans</Link>
+                  <Link>Dry Fruits</Link>
                 </li>
 
                 <li class="dropdown-item">
-                  <Link>Safety Shoes</Link>
+                  <Link>Seedless Dates</Link>
                 </li>
 
                 <li className="dropdown-item">
-                  <Link>Wallet</Link>
+                  <Link>Stuffed Dates</Link>
                 </li>
               </ul>
             </li>
