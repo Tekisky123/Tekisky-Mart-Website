@@ -5,6 +5,7 @@ import Header from "./common/Header";
 
 import Home from "./Pages/Home";
 import BestSallerSlider from "./Pages/BestSallerSlider";
+import ShoppingCart from "./Pages/Cart";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={ <> <BestSallerSlider /> <Home /> </>} />
+        <Route path="/shopping-cart" element={<ShoppingCart/>} />
       </Routes>
 
       <MyFooter />
