@@ -12,7 +12,7 @@ const ProductShowcase = ({ category, title, imgSrcDefault, imgSrcHover, badge, p
         <img src={imgSrcDefault} alt={title} className="product-img default" />
         <img src={imgSrcHover} alt={title} className="product-img hover" />
 
-        {badge && <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>}
+        {/* {badge && <p className={`showcase-badge ${badge.className}`}>{badge.text}</p>} */}
 
         <div className="showcase-actions">
           <button className="btn-action">
