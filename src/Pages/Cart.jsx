@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "../Assets/Styles/cart.css"
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import { Row, Col } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import { Context } from '../common/Context';
 
 const ShoppingCart = () => {
   const [products, setProducts] = useState([
@@ -21,6 +22,15 @@ const ShoppingCart = () => {
       quantity: 1
     }
   ]);
+
+  const {
+    cartItems,
+    handleRemoveFromCart,
+    cartSubTotal,
+    handleCartProductQuantity,
+    selectProductData,
+    setOurProduct,ourProduct
+  } = useContext(Context);
 
   const [tax] = useState(5);
   const [promotions] = useState([
@@ -98,7 +108,7 @@ const ShoppingCart = () => {
           <li>Home</li>
           <li>Shopping Cart</li>
         </ul>
-        <span className="count">{itemCount} items in the bag</span>
+        {/* <span className="count">{itemCount} items in the bag</span> */}
       </header>
       {/* End Header */}
 
@@ -106,18 +116,18 @@ const ShoppingCart = () => {
       <section className="ourcontainer">
         {products.length > 0 ? (
           <ul className="products">
-            {products.map((product, index) => (
+          {cartItems.map((item,index) => (
               <li className="row" key={index}>
                 <div className="col left">
                   <div className="thumbnail">
                     <a href="#">
-                      <img src={product.image} alt={product.name} />
+                      <img src={item.imageURL[0]} alt={item.imageURL[0]} />
                     </a>
                   </div>
                   <div className="detail">
-                    <div className="name"><a style={{color:"#ff6666"}} href="#">{product.name}</a></div>
-                    <div className="description">{product.description}</div>
-                    <div className="price">{currencyFormatted(product.price)}</div>
+                    <div className="name" style={{color:"#ff6666"}}>{item.productName}</div>
+                    {/* <div className="description">{product.description}</div> */}
+                    <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.productDetails[0]?.offerPrice )}&#8377;</div>
                   </div>
                 </div>
 
@@ -134,17 +144,17 @@ const ShoppingCart = () => {
                     <div className="p-counter">
                   <span
                     className="minus"
-                    // onClick={() => handleCartProductQuantity("dec", item)}
+                    onClick={() => handleCartProductQuantity("dec", item)}
                   >
                     <FaMinus  style={{color:"#ff6666"}}/>
                   </span>
                   <span style={{width:"70px"}} className="qty">
-                  <p>5</p>
-                  {/* {item?.selectedSize?.quantity || item?.productDetails[0]?.quantity} */}
+                  
+                  {item?.selectedSize?.quantity || item?.productDetails[0]?.quantity}
                   </span>
                   <span
                     className="plus"
-                    // onClick={() => handleCartProductQuantity("inc", item)}
+                    onClick={() => handleCartProductQuantity("inc", item)}
                   >
                     <FaPlus  style={{color:"#ff6666"}}/>
                   </span>
@@ -152,7 +162,7 @@ const ShoppingCart = () => {
                   </div>
 
                   <div className="remove">
-                    <svg onClick={() => removeItem(index)} version="1.1" className="close" xmlns="//www.w3.org/2000/svg" xmlnsXlink="//www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" enableBackground="new 0 0 60 60" xmlSpace="preserve">
+                    <svg onClick={() => handleRemoveFromCart(item,index)} version="1.1" className="close" xmlns="//www.w3.org/2000/svg" xmlnsXlink="//www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" enableBackground="new 0 0 60 60" xmlSpace="preserve">
                       <polygon points="38.936,23.561 36.814,21.439 30.562,27.691 24.311,21.439 22.189,23.561 28.441,29.812 22.189,36.064 24.311,38.186 30.562,31.934 36.814,38.186 38.936,36.064 32.684,29.812"></polygon>
                     </svg>
                   </div>
@@ -186,15 +196,17 @@ const ShoppingCart = () => {
 
         <div className="summary">
           <ul>
-            <li>Subtotal <span>{currencyFormatted(subTotal)}</span></li>
+            <li>Subtotal <span>{currencyFormatted(cartSubTotal)}</span></li>
             {discount > 0 && <li>Discount <span>{currencyFormatted(discountPrice)}</span></li>}
-            <li>Tax <span>{currencyFormatted(tax)}</span></li>
-            <li className="total">Total <span>{currencyFormatted(totalPrice)}</span></li>
+            <li>Tax <span>
+            {/* {currencyFormatted(tax)} */}0
+            </span></li>
+            <li className="total">Total <span>{currencyFormatted(cartSubTotal)}</span></li>
           </ul>
         </div>
 
         <div className="checkout">
-          <button className='cartButton' type="button">Check Out</button>
+          <button  disabled={cartSubTotal === 0 || isNaN(cartSubTotal) || cartItems.length <= 0} className='cartButton' type="button">Check Out</button>
         </div>
       </section>
     </div>

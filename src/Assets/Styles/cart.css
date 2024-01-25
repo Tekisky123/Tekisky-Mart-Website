@@ -81,6 +81,7 @@
   .ourcontainer {
     width: 90%;
     margin: 0 auto;
+    margin-bottom: 50px;
     overflow: auto;
   }
   .header {
@@ -152,6 +153,9 @@
     position: absolute;
     right: 0;
     top: calc(50% - 30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .detail {
@@ -284,9 +288,12 @@
   .checkout > .cartButton {
     font-size: 1.2rem;
     padding: 0.8rem 2.8rem;
-    border-radius: 1.5rem;
+    /* border-radius: 1.5rem; */
     background-color: #ff6666;
     color: #fff;
+  }
+  .checkout > .cartButton:disabled {
+ background-color: lightgrey;
   }
   
   .empty-product {

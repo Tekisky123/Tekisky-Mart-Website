@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { CiHeart } from "react-icons/ci";
@@ -6,12 +6,14 @@ import { FaRegEye } from "react-icons/fa";
 import { IoRepeatOutline } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import "../App.css";
+import { Context } from '../common/Context';
 
 const ProductMain = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { handleAddToCartHome, ToastContainer,quantity } = useContext(Context);
 
   const navigateToSingleProduct = (productId) => {
     navigate(`/single-product/${productId}`);
@@ -45,7 +47,7 @@ const ProductMain = () => {
       <h1 style={{ textAlign: "center" }} className="title">Our Products</h1>
 
       <div className="product-grid">
-        {products.map((product) => (
+        {products.map((product,index) => (
           <div className="showcase" key={product?._id}>
             <div className="showcase-banner">
               {/* Check if product?.imageURL is truthy before accessing its properties */}
@@ -60,13 +62,13 @@ const ProductMain = () => {
                 <button className="btn-action">
                   <CiHeart />
                 </button>
-                <button className="btn-action">
+                <button className="btn-action" onClick={() => navigateToSingleProduct(product._id)}>
                   <FaRegEye />
                 </button>
                 <button className="btn-action">
                   <IoRepeatOutline />
                 </button>
-                <button className="btn-action">
+                <button className="btn-action" onClick={() => {handleAddToCartHome(product, quantity,index)}}>
                   <IoIosAddCircle />
                 </button>
               </div>
@@ -93,7 +95,7 @@ const ProductMain = () => {
               </div>
 
               <div className="buttons">
-                <button className="add-cart-btn-cards">add to cart</button>
+                <button className="add-cart-btn-cards"  onClick={() => {handleAddToCartHome(product, quantity,index)}}>add to cart</button>
                 <button className="add-cart-btn-cards" onClick={() => navigateToSingleProduct(product._id)}>Buy Now</button>
               </div>
             </div>

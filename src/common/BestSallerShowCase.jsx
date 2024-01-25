@@ -26,18 +26,18 @@ const BestSallerShowCase = ({ imgSrc, title, rating, description, price, origina
           <button className="add-cart-btn">add to cart</button>
 
           <div className="showcase-status">
-            <div className="wrapper">
+            {/* <div className="wrapper">
               <p>
                 already sold: <b>{soldCount}</b>
               </p>
               <p>
                 available: <b>{availableCount}</b>
               </p>
-            </div>
-            <div className="showcase-status-bar"></div>
+            </div> */}
+            {/* <div className="showcase-status-bar"></div> */}
           </div>
 
-          <div className="countdown-box">
+          {/* <div className="countdown-box">
             <p className="countdown-desc">Hurry Up! Offer ends in:</p>
 
             <div className="countdown">
@@ -58,7 +58,7 @@ const BestSallerShowCase = ({ imgSrc, title, rating, description, price, origina
                 <p className="display-text">Sec</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
