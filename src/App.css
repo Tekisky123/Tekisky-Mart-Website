@@ -456,6 +456,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 .header-logo {
   margin-bottom: 20px;
+ width: 320px;
+ height: 80px;
 }
 
 .header-logo img {
@@ -563,6 +565,8 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
   border-bottom: 2px solid var(--cultured);
 }
+.hamburger{
+font-size: 22px;}
 
 .menu-top .menu-title {
   color: var(--salmon-pink);

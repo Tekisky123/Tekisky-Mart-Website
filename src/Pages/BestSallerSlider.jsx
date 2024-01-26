@@ -58,8 +58,8 @@ const BestSallerSlider = () => {
             </>
           }
           description="Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor dolor sit amet consectetur Lorem ipsum dolor"
-          price="$1990.00"
-          originalPrice="$2000.00"
+          price="₹1990.00"
+          originalPrice="₹2000.00"
           soldCount={15}
           availableCount={40}
           days={360}

@@ -107,7 +107,7 @@ const Header = () => {
       <div className="header-main">
         <div className="container">
           <Link className="header-logo">
-            <img src={logo} alt="Anon's logo" width="320" height="80" />
+            <img src={logo} alt="Anon's logo" className="header-logo" />
           </Link>
 
           <div className="header-search-container">
@@ -355,16 +355,15 @@ const Header = () => {
 
       <div className="mobile-bottom-navigation">
         <button data-mobile-menu-open-btn onClick={handleMobileMenuToggle}>
-          <GiHamburgerMenu />
+          <GiHamburgerMenu className="hamburger"/>
         </button>
 
-        <button className="action-btn">
-          {/* <CiUser /> */}
-          <IoBagHandleOutline />
-          <span className="count">0</span>
-        </button>
+        <button className="action-btn" onClick={() => navigate("/shopping-cart")}>
+              <HiOutlineShoppingCart />
+              <span className="count">{cartItems ? cartItems.length : 0}</span>
+            </button>
 
-        <button className="action-btn">
+        <button className="action-btn" onClick={()=>navigate("/")}>
           <CiHome />
         </button>
 
@@ -374,7 +373,7 @@ const Header = () => {
         </button>
 
         <button data-mobile-menu-open-btn>
-          <TbCategory />
+          <TbCategory className="hamburger" />
         </button>
       </div>
 
