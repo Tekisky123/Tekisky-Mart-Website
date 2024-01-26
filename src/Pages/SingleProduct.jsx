@@ -143,6 +143,11 @@ const SingleProduct = () => {
             </div>
            
             </div>
+            <div style={{display:"flex",justifyContent:"end"}}>
+            <button className="add-to-cart-button">
+              Add to cart
+            </button>
+            </div>
 
             <button className="buy-now-button">
               Check out
