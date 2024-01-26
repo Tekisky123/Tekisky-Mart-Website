@@ -7,6 +7,7 @@ import Home from "./Pages/Home";
 import BestSallerSlider from "./Pages/BestSallerSlider";
 import ShoppingCart from "./Pages/Cart";
 import SingleProduct from "./Pages/SingleProduct";
+import PaymentStep from "./Pages/PaymentSteps";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={ <> <BestSallerSlider /> <Home /> </>} />
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct/>}/>
+        <Route path="/payment-step" element={<PaymentStep/>}/>
       </Routes>
 
       <MyFooter />

@@ -15,7 +15,7 @@
   
   .product-image {
     width: 100%;
-    height: auto;
+    height: 400px;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
   }
@@ -52,7 +52,7 @@
   }
   
   .quantity-section {
-    width: 35%;
+    /* width: 35%; */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -67,22 +67,31 @@
   .quantity-input-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .counterDiv{
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: flex-start;
   }
   
   .quantity-input {
-    width: 50px;
+    /* width: 50px; */
     margin: 0 10px;
     text-align: center;
     font-size: 16px;
   }
   
   .quantity-button {
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #4CAF50;
+    padding: 0px 10px;
+    font-size: 20px;
+    background-color: #ff6666;
     color: white;
     border: none;
-    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
     margin-bottom: 10px;
   }
@@ -90,10 +99,259 @@
   .buy-now-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #ff6666;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    width: 100%;
+    font-weight: bold;
   }
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* .first-image-container {
+   
+    height: 250px !important;
+    background-size: contain;
+   background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  .first-container-heading {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* top: 80px; */
+  }
+
+
+  .size-form {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .size-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 70px;
+  }
+  
+  .size-label.selected {
+    border-color: #ff6666; /* Change the color as needed */
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px #ff6666;
+  }
+  
+  .size-label input {
+    display: none;
+  }
+  
+  .checkoutBtn{
+    width: 50%;
+    cursor: pointer;
+    border: none;
+    background-color: #ff6666;
+    color: #fff;
+    height: 40px;
+    margin-bottom: 1.5rem;
+  }
+  .checkoutBtn:disabled{
+    background-color: lightgrey;
+  }
+
+  .form-div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .form-div span{
+  margin: 0%;
+  margin-top: 10px;
+  }
+
+.NextBtn{
+  background: #ff6666;
+  border-radius: 0px;
+  border: none !important;
+  cursor: pointer!important;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+  }
+.MyInput{
+  width: 100%;
+  height: 50px;
+  padding: 0px 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.Row{
+  align-items: center;
+  gap: 15px;
+}
+
+.stepContiner{
+  /* height: 400px; */
+}
+
+.Formlabel{
+
+  color: gray;
+  font-size: 18px;
+}
+.Formlabel .error-message{
+  color: red;
+  margin: 0px 5px;
+  font-size: 20px;
+}
+
+.totalDiv{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem!important;
+}
+
+.totalCart{
+  border: 1px solid lightgrey;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.customerDetail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.customerDetail div{
+ width: 100%;
+ display: flex;
+ justify-content: space-evenly;
+}
+.customerDetail div span{
+  /* border: 1px solid gray; */
+  width: 50%;
+  padding: 5px 15px;
+}
+
+.ReactModalPortal div {
+  z-index: 10;
+}
+
+
+
+
+
+
+  .progress-bar {
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: space-evenly!important;
+    align-items: end;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .step {
+    width: 30px;
+    height: 30px;
+    /* border: 2px solid #ccc; */
+    /* border-radius: 50%; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    font-size: 17px;
+    font-weight: bold;
+    color: #555;
+    background-color: #fff;
+    z-index: 1;
+  }
+  .step:active{
+    color: #ffc107;
+  }
+  .active {
+    /* background-color: #198754; */
+    color: #ffc107;
+    /* border-color: #198754; */
+  
+  }
+  
+  .completed {
+    /* background-color: #4CAF50; */
+    color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+    .ReactModalPortal div {
+
+      padding: 0px!important;
+      inset:0px
+    }
+    .progress-bar{
+      position: relative;
+        top: 30px;
+        right: 50px;
+        height: 100px;
+    }
+    .NextBtn{
+      width: 100px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .progress-bar {
+      flex-direction: column !important;
+      align-items: center;
+    }
+  
+    .step {
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .step {
+      font-size: 16px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+
+  @media only screen and (max-width: 768px) {
+    /* Adjust styles for screens with a maximum width of 768px */
+    .first-image-container {
+        height: 200px; 
+        background-attachment:fixed;
+    }
+  
+    .first-container-heading {
+        font-size: 20px; /* Adjust the font size as needed */
+        top: 50px; /* Adjust the position as needed */
+    }
+  }
+  
+
