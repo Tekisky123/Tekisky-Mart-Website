@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
-import logo from "../Assets/Images/WhatsApp_Image_2024-01-24_at_4.46.39_PM-removebg-preview.png";
+import logo from "../Assets/Images/logo-removebg-preview.png";
 import { CiHeart, CiHome, CiLinkedin, CiSearch, CiUser } from "react-icons/ci";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";

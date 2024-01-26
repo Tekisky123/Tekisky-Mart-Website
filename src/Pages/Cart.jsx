@@ -125,7 +125,7 @@ const ShoppingCart = () => {
                     </a>
                   </div>
                   <div className="detail">
-                    <div className="name" style={{color:"#ff6666"}}>{item.productName}</div>
+                    <div className="name" style={{color:"#0cc1e06"}}>{item.productName}</div>
                     {/* <div className="description">{product.description}</div> */}
                     <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.offerPrice )}</div>
                   </div>
@@ -146,7 +146,7 @@ const ShoppingCart = () => {
                     className="minus"
                     onClick={() => handleCartProductQuantity("dec", item)}
                   >
-                    <FaMinus  style={{color:"#ff6666"}}/>
+                    <FaMinus  style={{color:"#0cc1e06"}}/>
                   </span>
                   <span style={{width:"70px"}} className="qty">
                   
@@ -156,7 +156,7 @@ const ShoppingCart = () => {
                     className="plus"
                     onClick={() => handleCartProductQuantity("inc", item)}
                   >
-                    <FaPlus  style={{color:"#ff6666"}}/>
+                    <FaPlus  style={{color:"#0cc1e06"}}/>
                   </span>
                 </div>
                   </div>
@@ -213,4 +213,4 @@ const ShoppingCart = () => {
   );
 };
 
-export default ShoppingCart;
+export default ShoppingCart;

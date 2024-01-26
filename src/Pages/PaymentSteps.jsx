@@ -88,8 +88,8 @@ const PaymentStep = () => {
       payload.products = selectedProducts;
 
       console.log("payload", payload);
-      const response = await axios.post(
-        `${Base_Url}${saveOrderProductAPI}`,
+      const response = await axios.post(`
+    ${Base_Url}${saveOrderProductAPI}`,
         payload
       );
       const data = response.data;
@@ -499,4 +499,4 @@ const PaymentStep = () => {
   );
 };
 
-export default PaymentStep;
+export default PaymentStep;

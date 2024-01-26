@@ -81,7 +81,7 @@
 .quantity-button {
   padding: 5px 10px;
   font-size: 16px;
-  background-color: #ff6666;
+  background-color: #0cc1e0;
   color: white;
   border: none;
   cursor: pointer;
@@ -91,7 +91,7 @@
 .buy-now-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #ff6666;
+  background-color: #0cc1e0;
   color: white;
   border: none;
   cursor: pointer;
@@ -215,9 +215,9 @@
 
 :root {
   --hue: 223;
-  --bg: #ff6666;
-  --fg: #ff6666;
-  --primary: #ff6666;
+  --bg: #0cc1e0;
+  --fg: #0cc1e0;
+  --primary: #0cc1e0;
   --trans-dur: 0.3s;
   /* font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320)); */
 }
@@ -368,7 +368,7 @@
   .quantity-button {
     padding: 0px 10px;
     font-size: 20px;
-    background-color: #ff6666;
+    background-color: #0cc1e0;
     color: white;
     border: none;
     font-weight: bold;
@@ -379,7 +379,7 @@
   .buy-now-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #ff6666;
+    background-color: #0cc1e0;
     color: white;
     border: none;
     cursor: pointer;
@@ -390,7 +390,7 @@
     padding: 10px 20px;
     margin: 10px 0px;
     font-size: 16px;
-    background-color: #ff6666;
+    background-color: #0cc1e0;
     color: white;
     border: none;
     cursor: pointer;
@@ -447,9 +447,9 @@
   }
   
   .size-label.selected {
-    border-color: #ff6666; /* Change the color as needed */
+    border-color: #0cc1e0; /* Change the color as needed */
     border-radius: 5px;
-    box-shadow: 1px 1px 8px #ff6666;
+    box-shadow: 1px 1px 8px #0cc1e0;
   }
   
   .size-label input {
@@ -460,7 +460,7 @@
     width: 50%;
     cursor: pointer;
     border: none;
-    background-color: #ff6666;
+    background-color: #0cc1e0;
     color: #fff;
     height: 40px;
     margin-bottom: 1.5rem;
@@ -480,7 +480,7 @@
   }
 
 .NextBtn{
-  background: #ff6666;
+  background: #0cc1e0;
   border-radius: 0px;
   border: none !important;
   cursor: pointer!important;

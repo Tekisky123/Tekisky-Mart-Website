@@ -34,7 +34,7 @@ useEffect(() => {
   cartItems.forEach(item => {
     if (item && item.selectedSize ) {
       subTotal += item?.selectedSize?.offerPrice * item?.selectedSize?.quantity;
-    }else if(item && item.productDetails[0]){
+    }else if(item && item){
       subTotal += item?.offerPrice * item?.quantity;
     }
     
@@ -257,4 +257,4 @@ const handleCartProductQuantity = (type, product) => {
   );
 };
 
-export default AppContext;
+export default AppContext;
