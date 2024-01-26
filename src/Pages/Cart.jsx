@@ -127,7 +127,7 @@ const ShoppingCart = () => {
                   <div className="detail">
                     <div className="name" style={{color:"#ff6666"}}>{item.productName}</div>
                     {/* <div className="description">{product.description}</div> */}
-                    <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.productDetails[0]?.offerPrice )}</div>
+                    <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.offerPrice )}</div>
                   </div>
                 </div>
 
@@ -150,7 +150,7 @@ const ShoppingCart = () => {
                   </span>
                   <span style={{width:"70px"}} className="qty">
                   
-                  {item?.selectedSize?.quantity || item?.productDetails[0]?.quantity}
+                  {item?.selectedSize?.quantity || item?.quantity}
                   </span>
                   <span
                     className="plus"

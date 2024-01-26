@@ -143,7 +143,7 @@ const ProductMain = () => {
 
             <div className="showcase-content">
               <p className="showcase-category">{product?.productCategory}</p>
-              <h2 className=" weight">{product?.productDetails[0]?.packetweight}</h2>
+              <h2 className=" weight">{product?.packetweight}</h2>
               <p>
                 <Link
                   to={`/single-product/${product?._id}`}
@@ -163,9 +163,9 @@ const ProductMain = () => {
               </div>
 
               <div className="price-box">
-                <p className="price">{`₹${product?.productDetails[0]?.offerPrice}`}</p>
-                {product?.productDetails[0]?.mrp && (
-                  <del>{`₹${product?.productDetails[0]?.mrp}`}</del>
+                <p className="price">{`₹${product?.offerPrice}`}</p>
+                {product?.mrp && (
+                  <del>{`₹${product?.mrp}`}</del>
                 )}
               </div>
 

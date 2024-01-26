@@ -35,11 +35,11 @@ useEffect(() => {
     if (item && item.selectedSize ) {
       subTotal += item?.selectedSize?.offerPrice * item?.selectedSize?.quantity;
     }else if(item && item.productDetails[0]){
-      subTotal += item?.productDetails[0]?.offerPrice * item?.productDetails[0]?.quantity;
+      subTotal += item?.offerPrice * item?.quantity;
     }
     
   });
-  // singleTotal = singleProductSubTotal?.offerPrice * item?.productDetails[0]?.quantity||1;
+  // singleTotal = singleProductSubTotal?.offerPrice * item?.quantity||1;
 
   // singleProductSubTotal.offerPrice 
   setCartSubTotal(singleTotal||subTotal);
@@ -124,7 +124,7 @@ useEffect(() => {
     console.log("items:", items);
     console.log("index:", index);
     console.log("productDetails:", items[index]?.productDetails[0]);
-    console.log("quantity:", items[index]?.productDetails[0]?.quantity);
+    console.log("quantity:", items[index]?.quantity);
 
     if (index !== -1) {
       if (Array.isArray(items[index].productDetails[0].quantity)) {
@@ -133,7 +133,7 @@ useEffect(() => {
         items[index].productDetails[0].quantity = [quantity];
       }
     } else {
-      if (Array.isArray(product.productDetails[0]?.quantity)) {
+      if (Array.isArray(product.quantity)) {
         product.productDetails[0].quantity = quantity;
       } else {
         product.productDetails[0].quantity = [quantity];
