@@ -1108,6 +1108,14 @@ body::-webkit-scrollbar-thumb:hover {
   text-transform: capitalize;
   margin-bottom: 3px;
 }
+.weight{
+  font-size: 25px;
+  width: max-content;
+  color: var(--davys-gray);
+
+  text-transform: capitalize;
+  margin-bottom: 3px;
+}
 
 .product-minimal .showcase-category:hover {
   color: var(--salmon-pink);
@@ -6211,3 +6219,62 @@ footer {
     max-width: 460px;
   }
 }
+
+/* Add keyframe animation for the skeleton loading effect */
+/* Add shimmer animation for the skeleton loading effect */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px;
+  }
+  100% {
+    background-position: 1000px;
+  }
+}
+
+.showcase.skeleton {
+  background-color: #9b9999;
+  overflow: hidden;
+}
+
+.skeleton {
+  background: linear-gradient(to right, #f0f0f0 4%, #e0e0e0 25%, #f0f0f0 36%);
+  background-size: 1000px 100%;
+  height: 400px;
+  width: 100%;
+  margin-bottom: 10px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-img{
+  background-color: #9b99993d;
+  height: 100px !important;
+}
+
+.skeleton-btn {
+  height: 30px;
+  width: 30px;
+  background-color: gray;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.skeleton-btn:last-child {
+  margin-right: 0;
+}
+
+.skeleton-img.default,
+.skeleton-img.hover {
+  width: 100%;
+  height: 100%;
+  /* border-radius: 8px; */
+}
+
+.skeleton-img.default {
+  animation: shimmer 1.0s infinite linear;
+}
+
+.skeleton-img.hover {
+  animation: shimmer 1.0s infinite linear -0.75s;
+}
+

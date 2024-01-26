@@ -1,7 +1,7 @@
 // Import necessary dependencies
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -9,7 +9,14 @@ import '../Assets/Styles/SingleProduct.css'; // Import the CSS file
 
 // SingleProduct component
 const SingleProduct = () => {
+  
+  
   const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   // State to store product data
   const [product, setProduct] = useState(null);
@@ -32,7 +39,36 @@ const SingleProduct = () => {
 
   // Check if product data is still loading
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      
+      <div className="product-container">
+       <div className="preloader">
+  <svg className="cart" role="img" aria-label="Shopping cart line animation" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8">
+      <g className="cart__track" stroke="hsla(0,10%,10%,0.1)">
+        <polyline points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" />
+        <circle cx="43" cy="111" r="13" />
+        <circle cx="102" cy="111" r="13" />
+      </g>
+      <g className="cart__lines" stroke="currentColor">
+        <polyline className="cart__top" points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" strokeDasharray="338 338" strokeDashoffset="-338" />
+        <g className="cart__wheel1" transform="rotate(-90,43,111)">
+          <circle className="cart__wheel-stroke" cx="43" cy="111" r="13" strokeDasharray="81.68 81.68" strokeDashoffset="81.68" />
+        </g>
+        <g className="cart__wheel2" transform="rotate(90,102,111)">
+          <circle className="cart__wheel-stroke" cx="102" cy="111" r="13" strokeDasharray="81.68 81.68" strokeDashoffset="81.68" />
+        </g>
+      </g>
+    </g>
+  </svg>
+  <div className="preloader__text">
+    <p className="preloader__msg">Bringing you the goods…</p>
+    <p className="preloader__msg preloader__msg--last">This is taking long. Something’s wrong.</p>
+  </div>
+</div>
+
+      </div>
+    );
   }
 
   // Destructure product data
@@ -76,7 +112,7 @@ const SingleProduct = () => {
             <h2>Product Details</h2>
             {productDetails.map((detail) => (
               <div key={detail._id}>
-                <p>Stock Qty: {detail.availableStockQty}</p>
+                {/* <p>Stock Qty: {detail.availableStockQty}</p> */}
                 <p>MRP: {detail.mrp}</p>
                 <p>Offer Price: {detail.offerPrice}</p>
                 <p>Packet Weight: {detail.packetweight}</p>

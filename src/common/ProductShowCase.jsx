@@ -57,8 +57,8 @@ const ProductShowcase = ({
         </div>
 
         <div className="price-box">
-          <p className="price">{`$${price}`}</p>
-          {originalPrice && <del>{`$${originalPrice}`}</del>}
+          <p className="price">{`₹${price}`}</p>
+          {originalPrice && <del>{`₹${originalPrice}`}</del>}
         </div>
         <div className="buttons">
         <button className="add-cart-btn-cards">add to cart</button>

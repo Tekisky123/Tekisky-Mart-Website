@@ -85,7 +85,7 @@ const Header = () => {
           <div className="header-alert-news">
             <p>
               <b>Free Shipping</b>
-              This Week Order Over - $55
+              This Week Order Over - ₹55
             </p>
           </div>
 

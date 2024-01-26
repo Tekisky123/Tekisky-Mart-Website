@@ -53,7 +53,7 @@ const ShoppingCart = () => {
   const currencyFormatted = (value) => {
     return Number(value).toLocaleString("en-US", {
       style: "currency",
-      currency: "USD"
+      currency: "INR"
     });
   };
 
@@ -127,7 +127,7 @@ const ShoppingCart = () => {
                   <div className="detail">
                     <div className="name" style={{color:"#ff6666"}}>{item.productName}</div>
                     {/* <div className="description">{product.description}</div> */}
-                    <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.productDetails[0]?.offerPrice )}&#8377;</div>
+                    <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.productDetails[0]?.offerPrice )}</div>
                   </div>
                 </div>
 

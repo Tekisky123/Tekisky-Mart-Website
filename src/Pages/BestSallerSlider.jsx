@@ -34,8 +34,8 @@ const BestSallerSlider = () => {
             </>
           }
           description="Packed with natural sugars (fructose, glucose, and sucrose), they provide an energy boost and contain ample iron"
-          price="$150.00"
-          originalPrice="$200.00"
+          price="₹150.00"
+          originalPrice="₹200.00"
           soldCount={20}
           availableCount={40}
           days={360}
