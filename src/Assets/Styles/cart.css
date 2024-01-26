@@ -17,6 +17,7 @@
     max-width: 100%;
     vertical-align: middle;
     border-radius: 4px;
+    height: 150px;
   }
   
   a {
@@ -161,6 +162,11 @@
   .detail {
     padding: 0 0.5rem;
     line-height: 2.2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
   
   .detail .name {

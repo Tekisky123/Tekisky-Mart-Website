@@ -111,11 +111,15 @@ const SingleProduct = () => {
           <div className="details-section">
             <h2>Product Details</h2>
             {productDetails.map((detail) => (
+             <div>
+
               <div key={detail._id}>
                 {/* <p>Stock Qty: {detail.availableStockQty}</p> */}
                 <p>MRP: {detail.mrp}</p>
                 <p>Offer Price: {detail.offerPrice}</p>
                 <p>Packet Weight: {detail.packetweight}</p>
+                
+              </div>
               </div>
             ))}
           </div>
@@ -125,7 +129,9 @@ const SingleProduct = () => {
           <div className="quantity-section">
             {/* <label htmlFor="quantity" className="quantity-label">Quantity:</label> */}
             <div className="quantity-input-container">
-              <button className="quantity-button" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
+            <label htmlFor="quantity" className="quantity-label">Quantity:</label>
+            <div className='counterDiv'>
+            <button className="quantity-button" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
               <input
                 type="number"
                 id="quantity"
@@ -135,9 +141,11 @@ const SingleProduct = () => {
               />
               <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
             </div>
+           
+            </div>
 
             <button className="buy-now-button">
-              Buy Now
+              Check out
             </button>
           </div>
       </div>
