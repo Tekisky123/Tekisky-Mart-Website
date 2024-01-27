@@ -141,7 +141,7 @@ const SingleProduct = () => {
                 onChange={(e) => setQuantity(e.target.value)}
                 className="quantity-input"
               /> */}
-              { singleItems ? singleItems?.quantity : 1}
+              { singleItems ? singleItems?.quantity||1 : 1}
               <button className="quantity-button" onClick={() => handleSingleProductQuantity("inc", product)}><FaPlus  style={{color:"#0cc1e06"}}/></button>
             </div>
            

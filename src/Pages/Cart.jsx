@@ -46,6 +46,8 @@ const ShoppingCart = () => {
 
   const subTotal = products.reduce((total, product) => total + (product.quantity * product.price), 0);
 
+  const savedAmount = products.reduce((total, product) => total + (product.quantity * product.price), 0);
+
   const discountPrice = subTotal * (discount / 100);
 
   const totalPrice = subTotal - discountPrice + tax;
