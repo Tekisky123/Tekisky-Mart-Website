@@ -6,7 +6,7 @@ import axios from "axios";
 import { Base_Url, saveOrderProductAPI } from "../common/Apis";
 import { Context } from "../common/Context";
 
-const PaymentStep = () => {
+const SpPaymentStep = () => {
   const {
     productSize,
     cartItems,
@@ -74,13 +74,11 @@ const PaymentStep = () => {
 
       const selectedProducts = [];
 
-        cartItems.forEach((product, index) => {
-          selectedProducts.push({
-            product: product._id,
-            quantity: product?.quantity[0]||product?.quantity,
-          });
+        selectedProducts.push({
+          product: singleItems._id,
+          quantity: singleItems?.quantity[0],
         });
-  
+      
       payload.products = selectedProducts;
       console.log("payload", payload);
 
@@ -207,6 +205,11 @@ const PaymentStep = () => {
       openModal();
     }
   };
+
+  const handlePrevious=()=>{
+     setSingleItems([])
+     navigate(`/single-product/${singleItems._id}`)
+    }
 
   return (
     <div>
@@ -397,13 +400,7 @@ const PaymentStep = () => {
                     >
                       <button
                         className="NextBtn"
-                        onClick={() => {
-                          cartSubTotal === 0 ||
-                          isNaN(cartSubTotal) ||
-                          cartItems.length <= 0
-                            ? navigate("/")
-                            : navigate("/shopping-cart");
-                        }}
+                        onClick={handlePrevious}
                       >
                         Previous
                       </button>
@@ -509,4 +506,4 @@ const PaymentStep = () => {
   );
 };
 
-export default PaymentStep;
+export default SpPaymentStep;

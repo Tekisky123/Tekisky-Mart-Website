@@ -11,6 +11,7 @@ import PaymentStep from "./Pages/PaymentSteps";
 import AddProductForm from "./Pages/AddProductForm";
 import Login from "./Pages/Login";
 import CreateUser from "./Pages/CreateUser";
+import SpPaymentStep from "./Pages/SpPaymentStep";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct/>}/>
         <Route path="/payment-step" element={<PaymentStep/>}/>
+        <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-user" element={<CreateUser/>}/>
