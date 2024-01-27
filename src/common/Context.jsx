@@ -34,7 +34,7 @@ useEffect(() => {
   cartItems.forEach(item => {
     if (item && item.selectedSize ) {
       subTotal += item?.selectedSize?.offerPrice * item?.selectedSize?.quantity;
-    }else if(item && item){
+    }else if(item){
       subTotal += item?.offerPrice * item?.quantity;
     }
     
@@ -68,7 +68,7 @@ useEffect(() => {
 
     if (!selectProductData) {
       // Handle the case where selectProductData is not defined
-      ourProduct.push(product.productDetails[0]._id);
+      ourProduct.push(product._id);
       console.error("selectProductData is not defined");
   
     }else{
@@ -79,22 +79,17 @@ useEffect(() => {
     let items = [...cartItems];
     let index = items.findIndex(p => p.id === product._id);
 
-    console.log("items:", items);
-    console.log("index:", index);
-    console.log("productDetails:", items[index]?.productDetails[currentItem]);
-    console.log("quantity:", items[index]?.productDetails[currentItem]?.quantity);
-
     if (index !== -1) {
-      if (Array.isArray(items[index].productDetails[currentItem].quantity)) {
-        items[index].productDetails[currentItem].quantity += quantity;
+      if (Array.isArray(items[index].quantity)) {
+        items[index].quantity += quantity;
       } else {
-        items[index].productDetails[currentItem].quantity = [quantity];
+        items[index].quantity = [quantity];
       }
     } else {
-      if (Array.isArray(product.productDetails[currentItem]?.quantity)) {
-        product.productDetails[currentItem].quantity = quantity;
+      if (Array.isArray(product?.quantity)) {
+        product.quantity = quantity;
       } else {
-        product.productDetails[currentItem].quantity = [quantity];
+        product.quantity = [quantity];
       }
       items = [...items, product];
     }
@@ -110,7 +105,7 @@ useEffect(() => {
 
     if (!selectProductData) {
       // Handle the case where selectProductData is not defined
-      ourProduct.push(product.productDetails[0]._id);
+      ourProduct.push(product?._id);
       console.error("selectProductData is not defined");
   
     }else{
@@ -121,22 +116,17 @@ useEffect(() => {
     let items = [...cartItems];
     let index = items.findIndex(p => p.id === product._id);
 
-    console.log("items:", items);
-    console.log("index:", index);
-    console.log("productDetails:", items[index]?.productDetails[0]);
-    console.log("quantity:", items[index]?.quantity);
-
     if (index !== -1) {
-      if (Array.isArray(items[index].productDetails[0].quantity)) {
-        items[index].productDetails[0].quantity += quantity;
+      if (Array.isArray(items[index].quantity)) {
+        items[index].quantity += quantity;
       } else {
-        items[index].productDetails[0].quantity = [quantity];
+        items[index].quantity = [quantity];
       }
     } else {
       if (Array.isArray(product.quantity)) {
-        product.productDetails[0].quantity = quantity;
+        product.quantity = quantity;
       } else {
-        product.productDetails[0].quantity = [quantity];
+        product.quantity = [quantity];
       }
       items = [...items, product];
     }
@@ -179,7 +169,7 @@ const handleCartProductQuantity = (type, product) => {
     return prevItems.map((item) => {
       if (item._id === product._id) {
         let productDetails = item.selectedSize;
-        let homeProductDetails = item.productDetails[0];
+        let homeProductDetails = item;
 
         // if (!productDetails) {
         //   // Handle the case where productDetails is undefined
