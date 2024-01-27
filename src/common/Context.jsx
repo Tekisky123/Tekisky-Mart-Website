@@ -18,38 +18,66 @@ const AppContext = ({ children }) => {
   const [productSize, setProductSize] = useState("");
   const [cartCount, setCartCount] = useState(0);
   const [cartSubTotal, setCartSubTotal] = useState(0);
+  const [totalSavedAmount, setTotalSavedAmount] = useState(0);
   const [singleProductSubTotal, setSingleProductSubTotal] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
 
   console.log("singleItems",singleItems)
 
+  // useEffect(() => {
+  //   let subTotal = 0;
+  //   let singleTotal = 0;
+  //   let savedAmount=0;
+  //   cartItems.forEach((item) => {
+  //     if (item && item.selectedSize) {
+  //       subTotal +=item?.selectedSize?.offerPrice * item?.selectedSize?.quantity;
+  //     } else if (item) {
+  //       subTotal += item?.offerPrice * item?.quantity;
+  //     }
+  //   });
+  //   // singleTotal = singleProductSubTotal?.offerPrice * item?.quantity||1;
+
+  //   // singleProductSubTotal.offerPrice
+  //   setCartSubTotal(singleTotal || subTotal);
+
+  //   let count = 0;
+
+  //   cartItems.forEach((item) => {
+  //     if (item && item.selectedSize) {
+  //       count += item.selectedSize;
+  //     }
+  //   });
+  //   setCartCount(count);
+  // }, [cartItems]);
+
+
   useEffect(() => {
     let subTotal = 0;
-    let singleTotal = 0;
+    let totalSavedAmount = 0;
+    let cartCount = 0;
+  
     cartItems.forEach((item) => {
       if (item && item.selectedSize) {
-        subTotal +=
-          item?.selectedSize?.offerPrice * item?.selectedSize?.quantity;
+        const itemSubTotal = item.selectedSize.offerPrice * item.selectedSize.quantity;
+        subTotal += itemSubTotal;
+        totalSavedAmount += (item.selectedSize.mrp - item.selectedSize.offerPrice) * item.selectedSize.quantity;
       } else if (item) {
-        subTotal += item?.offerPrice * item?.quantity;
+        const itemSubTotal = item.offerPrice * item.quantity;
+        subTotal += itemSubTotal;
+        totalSavedAmount += (item.mrp - item.offerPrice) * item.quantity;
       }
+  
+      // Count the total number of items
+      cartCount += item.quantity || 0;
     });
-    // singleTotal = singleProductSubTotal?.offerPrice * item?.quantity||1;
-
-    // singleProductSubTotal.offerPrice
-    setCartSubTotal(singleTotal || subTotal);
-
-    let count = 0;
-
-    cartItems.forEach((item) => {
-      if (item && item.selectedSize) {
-        count += item.selectedSize;
-      }
-    });
-    setCartCount(count);
+  
+    setCartSubTotal(subTotal);
+    setTotalSavedAmount(totalSavedAmount);
+    setCartCount(cartCount);
   }, [cartItems]);
 
+  
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
     if (storedCartItems) {
@@ -253,7 +281,8 @@ const AppContext = ({ children }) => {
         setSingleProductSubTotal,
         singleProductSubTotal,
         handleBuyNow,
-        handleSingleProductQuantity
+        handleSingleProductQuantity,
+        totalSavedAmount
       }}
     >
       {children}

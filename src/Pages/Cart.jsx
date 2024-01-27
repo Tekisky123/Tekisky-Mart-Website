@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from '../common/Context';
 
 const ShoppingCart = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([
     {
       image: "https://via.placeholder.com/200x150",
@@ -29,7 +30,8 @@ const ShoppingCart = () => {
     cartSubTotal,
     handleCartProductQuantity,
     selectProductData,
-    setOurProduct,ourProduct
+    setOurProduct,ourProduct,
+    totalSavedAmount
   } = useContext(Context);
 
   const [tax] = useState(5);
@@ -204,11 +206,12 @@ const ShoppingCart = () => {
             {/* {currencyFormatted(tax)} */}0
             </span></li>
             <li className="total">Total <span>{currencyFormatted(cartSubTotal)}</span></li>
+            <li style={{color:"#0cc1e0"}} className="total">Total Amount Saved <span >{currencyFormatted(totalSavedAmount)}</span></li>
           </ul>
         </div>
 
         <div className="checkout">
-          <button  disabled={cartSubTotal === 0 || isNaN(cartSubTotal) || cartItems.length <= 0} className='cartButton' type="button">Check Out</button>
+          <button  disabled={cartSubTotal === 0 || isNaN(cartSubTotal) || cartItems.length <= 0} onClick={()=>navigate('/payment-step')} className='cartButton' type="button">Check Out</button>
         </div>
       </section>
     </div>
