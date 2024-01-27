@@ -9,6 +9,7 @@ import ShoppingCart from "./Pages/Cart";
 import SingleProduct from "./Pages/SingleProduct";
 import PaymentStep from "./Pages/PaymentSteps";
 import AddProductForm from "./Pages/AddProductForm";
+import SpPaymentStep from "./Pages/SpPaymentStep";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct/>}/>
         <Route path="/payment-step" element={<PaymentStep/>}/>
+        <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
         <Route path="/add-product" element={<AddProductForm/>}/>
       </Routes>
 

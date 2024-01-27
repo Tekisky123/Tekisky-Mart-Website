@@ -14,7 +14,7 @@ import { Context } from '../common/Context';
 const SingleProduct = () => {
   const navigate = useNavigate();
   
-  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems} = useContext(Context);
+  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems,handleSingleCheckout} = useContext(Context);
   const { id } = useParams();
   const location = useLocation();
 
@@ -156,7 +156,7 @@ const SingleProduct = () => {
             </button>
             </div>
 
-            <button className="buy-now-button" onClick={()=>navigate('/payment-step')}>
+            <button className="buy-now-button" onClick={()=>handleSingleCheckout(product)}>
               Check out
             </button>
           </div>

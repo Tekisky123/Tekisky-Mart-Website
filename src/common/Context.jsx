@@ -123,7 +123,6 @@ const AppContext = ({ children }) => {
     if (!selectProductData) {
       // Handle the case where selectProductData is not defined
       ourProduct.push(product?._id);
-      console.error("selectProductData is not defined");
     } else {
       // Assuming ourProduct is defined somewhere in your code
       ourProduct.push(selectProductData._id);
@@ -179,8 +178,13 @@ const AppContext = ({ children }) => {
 
 
   const handleBuyNow = (product) => {
-    setSingleItems(product)
+    // setSingleItems(product)
     navigate(`/single-product/${product?._id}`)
+  }
+
+  const handleSingleCheckout = (product) => {
+    setSingleItems(product)
+    navigate(`/sp-payment-step`)
   }
 
   const handleCartProductQuantity = (type, product) => {
@@ -282,7 +286,8 @@ const AppContext = ({ children }) => {
         singleProductSubTotal,
         handleBuyNow,
         handleSingleProductQuantity,
-        totalSavedAmount
+        totalSavedAmount,
+        handleSingleCheckout
       }}
     >
       {children}
