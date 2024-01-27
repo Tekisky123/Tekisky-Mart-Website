@@ -83,24 +83,13 @@ const Header = () => {
           </ul>
 
           <div className="header-alert-news">
-            <p>
-              <b>Free Shipping</b>
-              This Week Order Over - ₹55
-            </p>
+            
+              <b>Free Shipping </b>
+             <span> In Nanded </span>
+            
           </div>
 
-          <div className="header-top-actions">
-            <select name="currency">
-              <option value="usd">USD &dollar;</option>
-              <option value="eur">EUR &euro;</option>
-            </select>
-
-            <select name="language">
-              <option value="en-US">English</option>
-              <option value="es-ES">Espa&ntilde;ol</option>
-              <option value="fr">Fran&ccedil;ais</option>
-            </select>
-          </div>
+          
         </div>
       </div>
 
@@ -123,14 +112,14 @@ const Header = () => {
           </div>
 
           <div className="header-user-actions">
-            <button className="action-btn">
+            {/* <button className="action-btn">
               <CiUser />
             </button>
 
             <button className="action-btn">
               <CiHeart />
               <span className="count">0</span>
-            </button>
+            </button> */}
 
             <button className="action-btn" onClick={() => navigate("/shopping-cart")}>
               <HiOutlineShoppingCart />
@@ -155,30 +144,7 @@ const Header = () => {
               </Link>
 
               <div className="dropdown-panel">
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Dates</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Dry Dates</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Dry Fruits</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Seedless Dates</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Stuffed Dates</Link>
-                  </li>
                 
-
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      {/* <img src="./assets/images/electronics-banner-1.jpg" alt="headphone collection" width="250" height="119" /> */}
-                    </Link>
-                  </li>
-                </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
@@ -261,9 +227,9 @@ const Header = () => {
             </li>
             <li className="menu-category">
               <Link href="#" className="menu-title">
-                Dates
+                Dates <span>(Khajurr)</span>
               </Link>
-              <ul className="dropdown-list">
+              {/* <ul className="dropdown-list">
                 <li className="dropdown-item">
                   <Link>Dry Dates</Link>
                 </li>
@@ -279,13 +245,13 @@ const Header = () => {
                 <li className="dropdown-item">
                   <Link>Stuffed Dates</Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
             <li className="menu-category">
               <Link href="#" className="menu-title">
                 HomeMade Snacks
               </Link>
-              <ul className="dropdown-list">
+              {/* <ul className="dropdown-list">
                 <li className="dropdown-item">
                   <Link>Shirt</Link>
                 </li>
@@ -301,7 +267,7 @@ const Header = () => {
                 <li className="dropdown-item">
                   <Link>Wallet</Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
             <li className="menu-category">
               <Link href="#" className="menu-title">
@@ -317,11 +283,11 @@ const Header = () => {
                 </li>
 
                 <li class="dropdown-item">
-                  <Link>Safety Shoes</Link>
+                  <Link>Womens</Link>
                 </li>
 
                 <li className="dropdown-item">
-                  <Link>Wallet</Link>
+                  <Link>Kids</Link>
                 </li>
               </ul>
             </li>
@@ -329,7 +295,7 @@ const Header = () => {
               <Link href="#" className="menu-title">
                 Perfumes
               </Link>
-              <ul className="dropdown-list">
+              {/* <ul className="dropdown-list">
                 <li className="dropdown-item">
                   <Link>Shirt</Link>
                 </li>
@@ -345,7 +311,7 @@ const Header = () => {
                 <li className="dropdown-item">
                   <Link>Wallet</Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
           </ul>
         </div>
@@ -367,10 +333,10 @@ const Header = () => {
           <CiHome />
         </button>
 
-        <button className="action-btn">
+        {/* <button className="action-btn">
           <CiHeart />
           <span className="count">0</span>
-        </button>
+        </button> */}
 
         <button data-mobile-menu-open-btn>
           <TbCategory className="hamburger" />
@@ -387,13 +353,13 @@ const Header = () => {
         <div className="menu-top">
           <h2 className="menu-title">Menu</h2>
           <button data-mobile-menu-close-btn onClick={handleMobileMenuClose}>
-            <IoCloseSharp />
+            <IoCloseSharp className="hamburger"/>
           </button>
         </div>
 
         <ul className="mobile-menu-category-list">
           <li className="menu-category">
-            <Link href="#" className="menu-title">
+            <Link to={"/"} className="menu-title">
               Home
             </Link>
           </li>
@@ -404,7 +370,7 @@ const Header = () => {
               data-accordion-btn
               onClick={handleAccordionToggle}
             >
-              <p className="menu-title">Men's</p>
+              <p className="menu-title">Clothes</p>
               <div>
                 <ion-icon name="add-outline" className="add-icon"></ion-icon>
                 <ion-icon
@@ -416,22 +382,22 @@ const Header = () => {
             <ul className="submenu-category-list" data-accordion>
               <li className="submenu-category">
                 <Link href="#" className="submenu-title">
-                  Shirt
+                  Shirts
                 </Link>
               </li>
               <li className="submenu-category">
                 <Link href="#" className="submenu-title">
-                  Shirt
+                Shorts & Jeans
                 </Link>
               </li>
               <li className="submenu-category">
                 <Link href="#" className="submenu-title">
-                  Shirt
+                  Womens
                 </Link>
               </li>
               <li className="submenu-category">
                 <Link href="#" className="submenu-title">
-                  Shirt
+                  Kids
                 </Link>
               </li>
               {/* ... other submenu items ... */}
@@ -439,8 +405,8 @@ const Header = () => {
           </li>
 
           <li className="menu-category">
-            <button className="accordion-menu" data-accordion-btn   onClick={handleAccordionToggle}>
-              <p className="menu-title">Women's</p>
+            {/* <button className="accordion-menu" data-accordion-btn   onClick={handleAccordionToggle}>
+              <p className="menu-title">Clothes</p>
               <div>
                 <ion-icon name="add-outline" className="add-icon"></ion-icon>
                 <ion-icon
@@ -448,8 +414,8 @@ const Header = () => {
                   className="remove-icon"
                 ></ion-icon>
               </div>
-            </button>
-            <ul className="submenu-category-list" data-accordion>
+            </button> */}
+            {/* <ul className="submenu-category-list" data-accordion>
               <li className="submenu-category">
                 <Link href="#" className="submenu-title">
                   Dress & Frock
@@ -470,26 +436,30 @@ const Header = () => {
                   Dress & Frock
                 </Link>
               </li>
-              {/* ... other submenu items ... */}
-            </ul>
+            </ul> */}
           </li>
 
           {/* ... other menu categories ... */}
 
           <li className="menu-category">
             <Link href="#" className="menu-title">
-              Blog
+              Dates
             </Link>
           </li>
 
           <li className="menu-category">
             <Link href="#" className="menu-title">
-              Hot Offers
+              HomeMade Snacks
+            </Link>
+          </li>
+          <li className="menu-category">
+            <Link href="#" className="menu-title">
+             Perfumes
             </Link>
           </li>
         </ul>
 
-        <div className="menu-bottom">
+        {/* <div className="menu-bottom">
           <ul className="menu-category-list">
             <li className="menu-category">
               <button className="accordion-menu" data-accordion-btn>
@@ -505,7 +475,6 @@ const Header = () => {
                     English
                   </Link>
                 </li>
-                {/* ... other language options ... */}
               </ul>
             </li>
 
@@ -523,7 +492,6 @@ const Header = () => {
                     USD &dollar;
                   </Link>
                 </li>
-                {/* ... other currency options ... */}
               </ul>
             </li>
           </ul>
@@ -534,9 +502,8 @@ const Header = () => {
                 <ion-icon name="logo-facebook"></ion-icon>
               </Link>
             </li>
-            {/* ... other social links ... */}
           </ul>
-        </div>
+        </div> */}
       </nav>
     </header>
   );

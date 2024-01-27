@@ -452,6 +452,7 @@ body::-webkit-scrollbar-thumb:hover {
 .header-main {
   padding: 20px 0;
   border-bottom: 1px solid var(--cultured);
+  
 }
 
 .header-logo {
@@ -1889,6 +1890,7 @@ footer {
     display: block;
     padding: 10px 0;
     border-bottom: 1px solid var(--cultured);
+    background-color: #0cc0e053;
   }
 
   .header-social-container,
@@ -1898,7 +1900,7 @@ footer {
 
   .header-alert-news {
     color: var(--sonic-silver);
-    font-size: var(--fs-9);
+    font-size: 15px !important;
     text-transform: uppercase;
   }
 
@@ -2356,6 +2358,7 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 30px;
+    background-color: #0cc0e03b;
   }
 
   .desktop-menu-category-list .menu-category:not(:nth-child(2)) {
@@ -3017,13 +3020,13 @@ body::-webkit-scrollbar-thumb:hover {
 
 .title {
   color: var(--eerie-black);
-  font-size: var(--fs-5);
+  font-size:30px;
   font-weight: var(--weight-600);
   letter-spacing: 0.4px;
   text-transform: capitalize;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--cultured);
-  margin-bottom: 30px;
+  margin: 30px 0;
 }
 
 /*-----------------------------------*\
@@ -5724,14 +5727,14 @@ footer {
   .dropdown-panel {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 300px;
     background: var(--white);
-    width: 100%;
+    width: 700px;
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr 30px 1fr 30px 1fr 30px 1fr;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 50px;
     padding: 30px;
     border: 1px solid var(--cultured);
     -webkit-box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);

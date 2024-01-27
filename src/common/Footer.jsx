@@ -6,7 +6,7 @@ const MyFooter = () => {
 
       <div className="footer-category">
 
-        <div className="container">
+        {/* <div className="container">
 
           <h2 className="footer-category-title">Brand directory</h2>
 
@@ -76,7 +76,7 @@ const MyFooter = () => {
             <a href="#" className="footer-category-link">lipstick</a>
           </div>
 
-        </div>
+        </div> */}
 
       </div>
 

@@ -21,26 +21,26 @@ const AddProductForm = () => {
     manufactureDate: '',
     expiryDate: '',
     sellerInformation: '',
+    dealOfDay: false
   });
 
   const [filePreviews, setFilePreviews] = useState([]);
 
   const [errors, setErrors] = useState({});
 
- 
   const handleFilesChange = useCallback((e) => {
     const { name, files } = e.target;
 
     const previews = Array.from(files).map((file) =>
-    URL.createObjectURL(file)
-  );
+      URL.createObjectURL(file)
+    );
 
     setFormData((prevData) => ({
       ...prevData,
       [name]: Array.from(files),
     }));
     setFilePreviews(previews);
-  }, []); 
+  }, []);
 
   const handleRemoveFile = useCallback((index) => {
     setFormData((prevData) => {
@@ -59,8 +59,8 @@ const AddProductForm = () => {
       };
     });
   }, []);
+
   useEffect(() => {
-    // Revoke object URLs when the component unmounts
     return () => {
       filePreviews.forEach((preview) => URL.revokeObjectURL(preview));
     };
@@ -101,30 +101,33 @@ const AddProductForm = () => {
     try {
       await axios.post(apiUrl, formDataToSend);
       console.log('Data successfully posted');
-      // Navigate to the previous or home page after successful submission
       navigate('/');
     } catch (error) {
       console.error('Error posting data:', error);
     }
   };
 
-
   return (
     <form onSubmit={handleSubmit} className="addProductForm">
-    <label className="formLabel">
-      Product Category:
-      <input
-        type="text"
-        value={formData.productCategory}
-        onChange={(e) =>
-          setFormData({ ...formData, productCategory: e.target.value })
-        }
-        className={`formInput ${errors.productCategory ? 'error' : ''}`}
-      />
-      {errors.productCategory && (
-        <span className="errorMessage">{errors.productCategory}</span>
-      )}
-    </label>
+     <label className="formLabel">
+        Product Category:
+        <select
+          value={formData.productCategory}
+          onChange={(e) =>
+            setFormData({ ...formData, productCategory: e.target.value })
+          }
+          className={`formInput ${errors.productCategory ? 'error' : ''}`}
+        >
+          <option value="">Select Category</option>
+          <option value="DATES">DATES</option>
+          <option value="HOMEMADE SNACKS">HOMEMADE SNACKS</option>
+          <option value="CLOTHES">CLOTHES</option>
+          <option value="PERFUMES">PERFUMES</option>
+        </select>
+        {errors.productCategory && (
+          <span className="errorMessage">{errors.productCategory}</span>
+        )}
+      </label>
 
     <label className="formLabel">
       Product Name:
@@ -356,6 +359,21 @@ const AddProductForm = () => {
         className="formInput"
       />
     </label>
+    <div className="cl-toggle-switch">
+    <label className="formLabel">
+        Deal of the Day:
+        <label className="cl-switch">
+          <input
+            type="checkbox"
+            checked={formData.dealOfDay}
+            onChange={() =>
+              setFormData({ ...formData, dealOfDay: !formData.dealOfDay })
+            }
+          />
+          <span className="slider"></span>
+        </label>
+      </label>
+      </div>
 
     <button type="submit" className="formButton">
       Submit
