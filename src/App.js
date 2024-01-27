@@ -9,6 +9,8 @@ import ShoppingCart from "./Pages/Cart";
 import SingleProduct from "./Pages/SingleProduct";
 import PaymentStep from "./Pages/PaymentSteps";
 import AddProductForm from "./Pages/AddProductForm";
+import Login from "./Pages/Login";
+import CreateUser from "./Pages/CreateUser";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/single-product/:id" element={<SingleProduct/>}/>
         <Route path="/payment-step" element={<PaymentStep/>}/>
         <Route path="/add-product" element={<AddProductForm/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/create-user" element={<CreateUser/>}/>
       </Routes>
 
       <MyFooter />

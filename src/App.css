@@ -1842,8 +1842,8 @@ footer {
 }
 
 .payment-img {
-  max-width: 335px;
-  width: 100%;
+  width: 300px;
+  height: 30px;
   margin: auto;
   margin-bottom: 15px;
 }
@@ -5071,12 +5071,7 @@ footer {
   text-align: center;
 }
 
-.payment-img {
-  max-width: 335px;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 15px;
-}
+
 
 .copyright {
   color: var(--sonic-silver);

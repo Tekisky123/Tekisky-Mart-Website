@@ -148,7 +148,7 @@ const SingleProduct = () => {
             </div>
            
             </div>
-            <div style={{display:"flex",justifyContent:"end"}}>
+            <div className='button-div'>
             <button className="add-to-cart-button" onClick={() => {
                     handleAddToCart(product, quantity);
                   }}>

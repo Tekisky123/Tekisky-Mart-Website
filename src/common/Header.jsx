@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
 import logo from "../Assets/Images/logo-removebg-preview.png";
-import { CiHeart, CiHome, CiLinkedin, CiSearch, CiUser } from "react-icons/ci";
+import { CiHome, CiLinkedin, CiSearch } from "react-icons/ci";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { IoBagHandleOutline } from "react-icons/io5";
 import { IoCloseSharp } from "react-icons/io5";
+import { LuLogIn } from "react-icons/lu";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbCategory } from "react-icons/tb";
@@ -49,10 +49,10 @@ const Header = () => {
   const handleAccordionToggle = (event) => {
     const accordionBtn = event.currentTarget;
     const accordionPanel = accordionBtn.nextElementSibling;
-  
+
     if (accordionPanel) {
-      accordionPanel.classList.toggle('active');
-      accordionBtn.classList.toggle('active');
+      accordionPanel.classList.toggle("active");
+      accordionBtn.classList.toggle("active");
     }
   };
   return (
@@ -83,13 +83,9 @@ const Header = () => {
           </ul>
 
           <div className="header-alert-news">
-            
-              <b>Free Shipping </b>
-             <span> In Nanded </span>
-            
+            <b>Free Shipping </b>
+            <span> In Nanded </span>
           </div>
-
-          
         </div>
       </div>
 
@@ -117,13 +113,20 @@ const Header = () => {
             </button>
 
             <button className="action-btn">
-              <CiHeart />
+              <LuLogIn />
               <span className="count">0</span>
             </button> */}
 
-            <button className="action-btn" onClick={() => navigate("/shopping-cart")}>
+            <button
+              className="action-btn"
+              onClick={() => navigate("/shopping-cart")}
+            >
               <HiOutlineShoppingCart />
               <span className="count">{cartItems ? cartItems.length : 0}</span>
+            </button>
+
+            <button className="action-btn" onClick={() => navigate("/login")}>
+              <LuLogIn />
             </button>
           </div>
         </div>
@@ -144,8 +147,6 @@ const Header = () => {
               </Link>
 
               <div className="dropdown-panel">
-                
-
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
                     <Link href="#">Clothes</Link>
@@ -321,15 +322,18 @@ const Header = () => {
 
       <div className="mobile-bottom-navigation">
         <button data-mobile-menu-open-btn onClick={handleMobileMenuToggle}>
-          <GiHamburgerMenu className="hamburger"/>
+          <GiHamburgerMenu className="hamburger" />
         </button>
 
-        <button className="action-btn" onClick={() => navigate("/shopping-cart")}>
-              <HiOutlineShoppingCart />
-              <span className="count">{cartItems ? cartItems.length : 0}</span>
-            </button>
+        <button
+          className="action-btn"
+          onClick={() => navigate("/shopping-cart")}
+        >
+          <HiOutlineShoppingCart />
+          <span className="count">{cartItems ? cartItems.length : 0}</span>
+        </button>
 
-        <button className="action-btn" onClick={()=>navigate("/")}>
+        <button className="action-btn" onClick={() => navigate("/")}>
           <CiHome />
         </button>
 
@@ -338,8 +342,11 @@ const Header = () => {
           <span className="count">0</span>
         </button> */}
 
-        <button data-mobile-menu-open-btn>
-          <TbCategory className="hamburger" />
+        <button
+          className="action-btn hamburger"
+          onClick={() => navigate("/login")}
+        >
+          <LuLogIn />
         </button>
       </div>
 
@@ -353,7 +360,7 @@ const Header = () => {
         <div className="menu-top">
           <h2 className="menu-title">Menu</h2>
           <button data-mobile-menu-close-btn onClick={handleMobileMenuClose}>
-            <IoCloseSharp className="hamburger"/>
+            <IoCloseSharp className="hamburger" />
           </button>
         </div>
 
@@ -365,7 +372,7 @@ const Header = () => {
           </li>
 
           <li className="menu-category">
-          <button
+            <button
               className="accordion-menu"
               data-accordion-btn
               onClick={handleAccordionToggle}
@@ -387,7 +394,7 @@ const Header = () => {
               </li>
               <li className="submenu-category">
                 <Link href="#" className="submenu-title">
-                Shorts & Jeans
+                  Shorts & Jeans
                 </Link>
               </li>
               <li className="submenu-category">
@@ -454,7 +461,7 @@ const Header = () => {
           </li>
           <li className="menu-category">
             <Link href="#" className="menu-title">
-             Perfumes
+              Perfumes
             </Link>
           </li>
         </ul>
