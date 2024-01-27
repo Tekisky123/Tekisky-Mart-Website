@@ -2,15 +2,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../Assets/Styles/SingleProduct.css'; // Import the CSS file
 import { Context } from '../common/Context';
 
+
 // SingleProduct component
 const SingleProduct = () => {
+  const navigate = useNavigate();
   
   const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems} = useContext(Context);
   const { id } = useParams();
@@ -154,10 +156,11 @@ const SingleProduct = () => {
             </button>
             </div>
 
-            <button className="buy-now-button">
+            <button className="buy-now-button" onClick={()=>navigate('/payment-step')}>
               Check out
             </button>
           </div>
+          
       </div>
       </div>
     </div>
