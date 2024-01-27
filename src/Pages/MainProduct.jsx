@@ -21,11 +21,8 @@ const ProductMain = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { handleAddToCartHome, ToastContainer, quantity } = useContext(Context);
+  const { handleAddToCartHome, ToastContainer, quantity ,handleBuyNow} = useContext(Context);
 
-  const navigateToSingleProduct = (productId) => {
-    navigate(`/single-product/${productId}`);
-  };
 
   // Fetch products on component mount
   useEffect(() => {
@@ -123,7 +120,7 @@ const ProductMain = () => {
                 </button>
                 <button
                   className="btn-action"
-                  onClick={() => navigateToSingleProduct(product._id)}
+                  onClick={() => handleBuyNow(product)}
                 >
                   <FaRegEye />
                 </button>
@@ -180,7 +177,7 @@ const ProductMain = () => {
                 </button>
                 <button
                   className="add-cart-btn-cards"
-                  onClick={() => navigateToSingleProduct(product._id)}
+                  onClick={() => handleBuyNow(product)}
                 >
                   Buy Now
                 </button>

@@ -1,16 +1,18 @@
 // Import necessary dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import { useLocation, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../Assets/Styles/SingleProduct.css'; // Import the CSS file
+import { Context } from '../common/Context';
 
 // SingleProduct component
 const SingleProduct = () => {
   
-  
+  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems} = useContext(Context);
   const { id } = useParams();
   const location = useLocation();
 
@@ -21,14 +23,13 @@ const SingleProduct = () => {
   // State to store product data
   const [product, setProduct] = useState(null);
   // State to manage quantity
-  const [quantity, setQuantity] = useState(1);
 
   // Effect to fetch product data based on the product ID
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`https://tekisky-mart.onrender.com/admin/getoneproduct/${id}`);
-        setProduct(response.data.getOneProduact);
+        setProduct(response?.data?.getOneProduact);
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -90,7 +91,9 @@ const SingleProduct = () => {
   };
 
   return (
+   
     <div className="product-container">
+     <ToastContainer/>
       <div className="image-carousel">
         <Slider {...carouselSettings}>
           {imageURL.map((url, index) => (
@@ -110,18 +113,17 @@ const SingleProduct = () => {
         <div className="product-info">
           <div className="details-section">
             <h2>Product Details</h2>
-            {productDetails.map((detail) => (
+ 
              <div>
 
-              <div key={detail._id}>
-                {/* <p>Stock Qty: {detail.availableStockQty}</p> */}
-                <p>MRP: {detail.mrp}</p>
-                <p>Offer Price: {detail.offerPrice}</p>
-                <p>Packet Weight: {detail.packetweight}</p>
+              <div key={product._id}>
+                <p>MRP: {product.mrp}</p>
+                <p>Offer Price: {product.offerPrice}</p>
+                <p>Packet Weight: {product.packetweight}</p>
                 
               </div>
               </div>
-            ))}
+    
           </div>
 
         </div>
@@ -131,20 +133,23 @@ const SingleProduct = () => {
             <div className="quantity-input-container">
             <label htmlFor="quantity" className="quantity-label">Quantity:</label>
             <div className='counterDiv'>
-            <button className="quantity-button" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
-              <input
+            <button className="quantity-button" onClick={() => handleSingleProductQuantity("dec", product)}><FaMinus  style={{color:"#0cc1e06"}}/></button>
+              {/* <input
                 type="number"
                 id="quantity"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 className="quantity-input"
-              />
-              <button className="quantity-button" onClick={() => setQuantity(quantity + 1)}>+</button>
+              /> */}
+              { singleItems ? singleItems?.quantity : 1}
+              <button className="quantity-button" onClick={() => handleSingleProductQuantity("inc", product)}><FaPlus  style={{color:"#0cc1e06"}}/></button>
             </div>
            
             </div>
             <div style={{display:"flex",justifyContent:"end"}}>
-            <button className="add-to-cart-button">
+            <button className="add-to-cart-button" onClick={() => {
+                    handleAddToCart(product, quantity);
+                  }}>
               Add to cart
             </button>
             </div>
