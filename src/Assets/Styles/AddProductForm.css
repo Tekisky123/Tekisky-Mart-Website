@@ -1,0 +1,238 @@
+/* AddProductForm.module.css */
+.addProductForm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .formLabel {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .formInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #b2b2b2;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .formInput:hover {
+    border-color: #0cc1e0;
+    
+  }
+  
+  .formInput:focus {
+    outline: none;
+    border-color: #0cc1e0;
+    box-shadow: 0 0 20px rgba(0, 204, 224, 0.5);
+  }
+  
+ 
+  .errorMessage {
+    color: red;
+  }
+  /* AddProductForm.css */
+.upload__box {
+    margin-top: 20px;
+  }
+  
+  .upload__btn-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .upload__btn {
+    position: relative;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .upload__inputfile {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .upload__img-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .upload__img-box {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .img-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .upload__img-close {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .delete {
+    background-color: #ff4646;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .delete:hover {
+    background-color: #ff0000;
+  }
+  
+  .add {
+    background-color: #0cc1e0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .add:hover {
+    background-color: #088cb7;
+  }
+  
+  /* AddProductForm.css end */
+  .upload__box {
+    padding: 40px;
+  }
+  
+  .upload__inputfile {
+    width: .1px;
+    height: .1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    left: -90px;
+    z-index: -1;
+  }
+  
+  .upload__btn {
+    display: inline-block;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    min-width: 116px;
+    padding: 5px;
+    transition: all .3s ease;
+    cursor: pointer;
+    border: 2px solid;
+    background-color:#0cc1e0;
+    border-color:#0cc1e0;
+    border-radius: 10px;
+    line-height: 5px;
+    font-size: 14px;
+  }
+  
+  .upload__btn:hover {
+    background-color: unset;
+    color: #4045ba;
+    transition: all .3s ease;
+  }
+  .formButton {
+    display: inline-block;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    min-width: 116px;
+    padding: 5px;
+    transition: all .3s ease;
+    cursor: pointer;
+    border: 2px solid;
+    background-color:#0cc1e0;
+    border-color:#0cc1e0;
+    border-radius: 10px;
+    line-height: 35px;
+    font-size: 14px;
+  }
+  
+  .formButton:hover {
+    background-color: unset;
+    color: #4045ba;
+    transition: all .3s ease;  }
+  
+  
+  .upload__btn-box {
+    margin-bottom: 10px;
+  }
+  
+  .upload__btn p {
+    margin-top: 15px;
+  }
+  
+  .upload__img-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+  
+  .upload__img-box {
+    width: 200px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+  
+  .upload__img-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    line-height: 24px;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .upload__img-close:after {
+    content: '\2716';
+    font-size: 14px;
+    color: white;
+  }
+  

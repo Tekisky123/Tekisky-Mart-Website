@@ -8,6 +8,7 @@ import BestSallerSlider from "./Pages/BestSallerSlider";
 import ShoppingCart from "./Pages/Cart";
 import SingleProduct from "./Pages/SingleProduct";
 import PaymentStep from "./Pages/PaymentSteps";
+import AddProductForm from "./Pages/AddProductForm";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct/>}/>
         <Route path="/payment-step" element={<PaymentStep/>}/>
+        <Route path="/add-product" element={<AddProductForm/>}/>
       </Routes>
 
       <MyFooter />
