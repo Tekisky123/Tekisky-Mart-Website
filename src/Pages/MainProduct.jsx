@@ -12,17 +12,26 @@ import { Context } from "../common/Context";
 // ProductMain component
 const ProductMain = () => {
   const location = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const getCategoryProducts = (category, isMobile) => {
+    const maxProducts = isMobile ? 1 : 4; // Display 1 product for mobile, 4 for other screens
+    const filteredProducts = products.filter(
+      (product) => product.productCategory === category
+    );
+    return filteredProducts.slice(0, maxProducts);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
-  
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { handleAddToCartHome, ToastContainer, quantity ,handleBuyNow} = useContext(Context);
-
+  const { handleAddToCartHome, ToastContainer, quantity, handleBuyNow } =
+    useContext(Context);
 
   // Fetch products on component mount
   useEffect(() => {
@@ -63,7 +72,6 @@ const ProductMain = () => {
                   <div className="skeleton-btn"></div>
                   <div className="skeleton-btn"></div>
                 </div>
-                
               </div>
 
               <div className="showcase-content">
@@ -95,99 +103,122 @@ const ProductMain = () => {
         Our Products
       </h1>
 
-      <div className="product-grid">
-        {products.map((product, index) => (
-          <div className="showcase" key={product?._id}>
-            <div className="showcase-banner">
-              {product?.imageURL && (
-                <>
-                  <img
-                    src={product.imageURL[0]}
-                    alt={product.productName}
-                    className="product-img default"
-                  />
-                  <img
-                    src={product.imageURL[1] || product.imageURL[0]}
-                    alt={product.productName}
-                    className="product-img hover"
-                  />
-                </>
-              )}
+      {/* Iterate through unique categories */}
+      {Array.from(
+        new Set(products.map((product) => product.productCategory))
+      ).map((category) => (
+        <div key={category}>
+          <h2 className="heading-of-category">{category}</h2>
 
-              <div className="showcase-actions">
-                <button className="btn-action">
-                  <CiHeart />
-                </button>
-                <button
-                  className="btn-action"
-                  onClick={() => handleBuyNow(product)}
-                >
-                  <FaRegEye />
-                </button>
-                <button className="btn-action">
-                  <IoRepeatOutline />
-                </button>
-                <button
-                  className="btn-action"
-                  onClick={() => {
-                    handleAddToCartHome(product, quantity, index);
-                  }}
-                >
-                  <IoIosAddCircle />
-                </button>
-              </div>
-            </div>
-
-            <div className="showcase-content">
-              <p className="showcase-category">{product?.productCategory}</p>
-              <h2 className=" weight">{product?.packetweight}</h2>
-              <p>
-                <Link
-                  to={`/single-product/${product?._id}`}
-                  className="showcase-title"
-                >
-                  {product?.productName}
-                </Link>
-              </p>
-
-              <div className="showcase-rating">
-                {Array.from({ length: 3 }, (_, index) => (
-                  <ion-icon key={index} name="star"></ion-icon>
-                ))}
-                {Array.from({ length: 2 }, (_, index) => (
-                  <ion-icon key={index} name="star-outline"></ion-icon>
-                ))}
-              </div>
-
-              <div className="price-box">
-                <p className="price">{`₹${product?.offerPrice}`}</p>
-                {product?.mrp && (
-                  <del>{`₹${product?.mrp}`}</del>
-                )}
-              </div>
-
-              <div className="buttons">
-                <button
-                  className="add-cart-btn-cards"
-                  onClick={() => {
-                    handleAddToCartHome(product, quantity, index);
-                  }}
-                >
-                  add to cart
-                </button>
-                <button
-                  className="add-cart-btn-cards"
-                  onClick={() => handleBuyNow(product)}
-                >
-                  Buy Now
-                </button>
-              </div>
-            </div>
+          <div className="view-all-btn">
+            <button
+              onClick={() => {
+                setSelectedCategory(category);
+                navigate(`/category/${category}`);
+              }}
+            >
+              View All
+            </button>
           </div>
-        ))}
-      </div>
+
+          <div className="product-grid">
+            {getCategoryProducts(category, window.innerWidth <= 768).map(
+              (product, index) => (
+              <div className="showcase" key={product?._id}>
+                <div className="showcase-banner">
+                  {product?.imageURL && (
+                    <>
+                      <img
+                        src={product.imageURL[0]}
+                        alt={product.productName}
+                        className="product-img default"
+                      />
+                      <img
+                        src={product.imageURL[1] || product.imageURL[0]}
+                        alt={product.productName}
+                        className="product-img hover"
+                      />
+                    </>
+                  )}
+
+                  <div className="showcase-actions">
+                    <button className="btn-action">
+                      <CiHeart />
+                    </button>
+                    <button
+                      className="btn-action"
+                      onClick={() => handleBuyNow(product)}
+                    >
+                      <FaRegEye />
+                    </button>
+                    <button className="btn-action">
+                      <IoRepeatOutline />
+                    </button>
+                    <button
+                      className="btn-action"
+                      onClick={() => {
+                        handleAddToCartHome(product, quantity, index);
+                      }}
+                    >
+                      <IoIosAddCircle />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="showcase-content">
+                  <p className="showcase-category">
+                    {product?.productCategory}
+                  </p>
+                  <h2 className=" weight">{product?.packetweight}</h2>
+                  <p>
+                    <Link
+                      to={`/single-product/${product?._id}`}
+                      className="showcase-title"
+                    >
+                      {product?.productName}
+                    </Link>
+                  </p>
+
+                  <div className="showcase-rating">
+                    {Array.from({ length: 3 }, (_, index) => (
+                      <ion-icon key={index} name="star"></ion-icon>
+                    ))}
+                    {Array.from({ length: 2 }, (_, index) => (
+                      <ion-icon key={index} name="star-outline"></ion-icon>
+                    ))}
+                  </div>
+
+                  <div className="price-box">
+                    <p className="price">{`₹${product?.offerPrice}`}</p>
+                    {product?.mrp && <del>{`₹${product?.mrp}`}</del>}
+                  </div>
+
+                  <div className="buttons">
+                    <button
+                      className="add-cart-btn-cards"
+                      onClick={() => {
+                        handleAddToCartHome(product, quantity, index);
+                      }}
+                    >
+                      add to cart
+                    </button>
+                    <button
+                      className="add-cart-btn-cards"
+                      onClick={() => handleBuyNow(product)}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View All button */}
+        </div>
+      ))}
     </div>
   );
 };
 
-export default ProductMain;
+export default ProductMain;

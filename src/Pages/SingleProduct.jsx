@@ -125,8 +125,8 @@ const SingleProduct = () => {
              <div>
 
               <div key={product._id}>
-                <p>MRP: {product.mrp}</p>
-                <p>Offer Price: {product.offerPrice}</p>
+                <p>MRP: <del>₹{product.mrp}</del></p>
+                <p>Offer Price: ₹{product.offerPrice}</p>
                 <p>Packet Weight: {product.packetweight}</p>
                 
               </div>
@@ -154,7 +154,7 @@ const SingleProduct = () => {
             </div>
            
             </div>
-            <div style={{display:"flex",justifyContent:"end"}}>
+            <div className='button-div'>
             <button className="add-to-cart-button" onClick={() => {
                     handleAddToCart(product, quantity);
                   }}>

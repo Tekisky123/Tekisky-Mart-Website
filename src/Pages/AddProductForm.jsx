@@ -69,13 +69,15 @@ const AddProductForm = () => {
   const validateForm = () => {
     const newErrors = {};
     for (const key in formData) {
-      if (key !== 'files' && !formData[key]) {
+      // Exclude checkbox (dealOfDay) from validation
+      if (key !== 'files' && key !== 'dealOfDay' && !formData[key]) {
         newErrors[key] = 'This field is required *';
       }
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
