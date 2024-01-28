@@ -119,8 +119,8 @@ const SingleProduct = () => {
              <div>
 
               <div key={product._id}>
-                <p>MRP: {product.mrp}</p>
-                <p>Offer Price: {product.offerPrice}</p>
+                <p>MRP: <del>₹{product.mrp}</del></p>
+                <p>Offer Price: ₹{product.offerPrice}</p>
                 <p>Packet Weight: {product.packetweight}</p>
                 
               </div>

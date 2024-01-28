@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebookSquare, FaLinkedin, FaTwitterSquare, FaWhatsappSquare } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import paymentimg from "../Assets/Images/payment.png"
 
 const MyFooter = () => {
@@ -258,10 +258,20 @@ const MyFooter = () => {
                 <ion-icon name="mail-outline"></ion-icon>
               </div>
 
-              <a href="mailto:example@gmail.com" className="footer-nav-link">
+              <Link className="footer-nav-link">
                 sales@tekisky.com
-              </a>
+              </Link>
             </li>
+            <li className="footer-nav-item flex">
+              <div className="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+
+              <Link to={"/login"} className="footer-nav-link" >
+                Login
+              </Link>
+            </li>
+
           </ul>
 
           <ul className="footer-nav-list">

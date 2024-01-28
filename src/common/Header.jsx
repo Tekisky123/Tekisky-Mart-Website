@@ -19,6 +19,25 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const overlayRef = useRef(null);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // Fetch product categories from your API endpoint
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("https://tekiskymart.onrender.com/admin/getproduct");
+        const data = await response.json();
+        const uniqueCategories = Array.from(
+          new Set(data.products.map((product) => product.productCategory))
+        );
+        setCategories(uniqueCategories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const handleMobileMenuClose = () => {
@@ -125,15 +144,15 @@ const Header = () => {
               <span className="count">{cartItems ? cartItems.length : 0}</span>
             </button>
 
-            <button className="action-btn" onClick={() => navigate("/login")}>
+            {/* <button className="action-btn">
               <LuLogIn />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
 
       <nav className="desktop-navigation-menu">
-        <div className="container">
+        <div className="main-container">
           <ul className="desktop-menu-category-list">
             <li className="menu-category" onClick={() => navigate("/")}>
               <Link href="#" className="menu-title">
@@ -141,179 +160,15 @@ const Header = () => {
               </Link>
             </li>
 
-            <li className="menu-category">
-              <Link href="#" className="menu-title">
-                Categories
-              </Link>
-
-              <div className="dropdown-panel">
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Clothes</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Formal</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Casual</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Sports</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Jacket</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Sunglasses</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      {/* <img src="./assets/images/mens-banner.jpg" alt="men's fashion" width="250" height="119" /> */}
-                    </Link>
-                  </li>
-                </ul>
-
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">HomeMade Snacks</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Formal</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Casual</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Perfume</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Cosmetics</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Bags</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      {/* <img src="./assets/images/womens-banner.jpg" alt="women's fashion" width="250" height="119" /> */}
-                    </Link>
-                  </li>
-                </ul>
-
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Perfumes</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Smart Watch</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Smart TV</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Keyboard</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Mouse</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Microphone</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      {/* <img src="./assets/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119" /> */}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li className="menu-category">
-              <Link href="#" className="menu-title">
-                Dates <span>(Khajurr)</span>
-              </Link>
-              {/* <ul className="dropdown-list">
-                <li className="dropdown-item">
-                  <Link>Dry Dates</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Dry Fruits</Link>
-                </li>
-
-                <li class="dropdown-item">
-                  <Link>Seedless Dates</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Stuffed Dates</Link>
-                </li>
-              </ul> */}
-            </li>
-            <li className="menu-category">
-              <Link href="#" className="menu-title">
-                HomeMade Snacks
-              </Link>
-              {/* <ul className="dropdown-list">
-                <li className="dropdown-item">
-                  <Link>Shirt</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Shorts & Jeans</Link>
-                </li>
-
-                <li class="dropdown-item">
-                  <Link>Safety Shoes</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Wallet</Link>
-                </li>
-              </ul> */}
-            </li>
-            <li className="menu-category">
-              <Link href="#" className="menu-title">
-                Clothes
-              </Link>
-              <ul className="dropdown-list">
-                <li className="dropdown-item">
-                  <Link>Shirt</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Shorts & Jeans</Link>
-                </li>
-
-                <li class="dropdown-item">
-                  <Link>Womens</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Kids</Link>
-                </li>
-              </ul>
-            </li>
-            <li className="menu-category">
-              <Link href="#" className="menu-title">
-                Perfumes
-              </Link>
-              {/* <ul className="dropdown-list">
-                <li className="dropdown-item">
-                  <Link>Shirt</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Shorts & Jeans</Link>
-                </li>
-
-                <li class="dropdown-item">
-                  <Link>Safety Shoes</Link>
-                </li>
-
-                <li className="dropdown-item">
-                  <Link>Wallet</Link>
-                </li>
-              </ul> */}
-            </li>
+            {/* Dynamically render product categories */}
+            {categories.map((category) => (
+              <li className="menu-category" key={category}>
+                 <Link to={`/category/${category}`} className="menu-title">
+                  {category}
+                </Link>
+              </li>
+            ))}
+        
           </ul>
         </div>
       </nav>
@@ -325,6 +180,10 @@ const Header = () => {
           <GiHamburgerMenu className="hamburger" />
         </button>
 
+        <button className="action-btn" onClick={() => navigate("/")}>
+          <CiHome />
+        </button>
+
         <button
           className="action-btn"
           onClick={() => navigate("/shopping-cart")}
@@ -333,21 +192,17 @@ const Header = () => {
           <span className="count">{cartItems ? cartItems.length : 0}</span>
         </button>
 
-        <button className="action-btn" onClick={() => navigate("/")}>
-          <CiHome />
-        </button>
-
         {/* <button className="action-btn">
           <CiHeart />
           <span className="count">0</span>
         </button> */}
 
-        <button
+        {/* <button
           className="action-btn hamburger"
           onClick={() => navigate("/login")}
         >
           <LuLogIn />
-        </button>
+        </button> */}
       </div>
 
       <nav
@@ -371,45 +226,32 @@ const Header = () => {
             </Link>
           </li>
 
-          <li className="menu-category">
-            <button
-              className="accordion-menu"
-              data-accordion-btn
-              onClick={handleAccordionToggle}
-            >
-              <p className="menu-title">Clothes</p>
-              <div>
-                <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                <ion-icon
-                  name="remove-outline"
-                  className="remove-icon"
-                ></ion-icon>
-              </div>
-            </button>
-            <ul className="submenu-category-list" data-accordion>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Shirts
+          {/* Dynamically render product categories */}
+    {categories.map((category) => (
+      <li className="menu-category" key={category}>
+        <button
+          className="accordion-menu"
+          data-accordion-btn
+          onClick={handleAccordionToggle}
+        >
+          <Link to={`/category/${category}`} className="menu-title">
+                  {category}
                 </Link>
-              </li>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Shorts & Jeans
-                </Link>
-              </li>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Womens
-                </Link>
-              </li>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Kids
-                </Link>
-              </li>
+          <div>
+            <ion-icon name="add-outline" className="add-icon"></ion-icon>
+            <ion-icon
+              name="remove-outline"
+              className="remove-icon"
+            ></ion-icon>
+          </div>
+        </button>
+        <ul className="submenu-category-list" data-accordion>
+          {/* You can add submenu items here if needed */}
+        </ul>
+      </li>
+    ))}
               {/* ... other submenu items ... */}
-            </ul>
-          </li>
+          
 
           <li className="menu-category">
             {/* <button className="accordion-menu" data-accordion-btn   onClick={handleAccordionToggle}>
@@ -446,71 +288,11 @@ const Header = () => {
             </ul> */}
           </li>
 
-          {/* ... other menu categories ... */}
 
-          <li className="menu-category">
-            <Link href="#" className="menu-title">
-              Dates
-            </Link>
-          </li>
 
-          <li className="menu-category">
-            <Link href="#" className="menu-title">
-              HomeMade Snacks
-            </Link>
-          </li>
-          <li className="menu-category">
-            <Link href="#" className="menu-title">
-              Perfumes
-            </Link>
-          </li>
         </ul>
 
-        {/* <div className="menu-bottom">
-          <ul className="menu-category-list">
-            <li className="menu-category">
-              <button className="accordion-menu" data-accordion-btn>
-                <p className="menu-title">Language</p>
-                <ion-icon
-                  name="caret-back-outline"
-                  className="caret-back"
-                ></ion-icon>
-              </button>
-              <ul className="submenu-category-list" data-accordion>
-                <li className="submenu-category">
-                  <Link href="#" className="submenu-title">
-                    English
-                  </Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className="menu-category">
-              <button className="accordion-menu" data-accordion-btn>
-                <p className="menu-title">Currency</p>
-                <ion-icon
-                  name="caret-back-outline"
-                  className="caret-back"
-                ></ion-icon>
-              </button>
-              <ul className="submenu-category-list" data-accordion>
-                <li className="submenu-category">
-                  <Link href="#" className="submenu-title">
-                    USD &dollar;
-                  </Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
-
-          <ul className="menu-social-container">
-            <li>
-              <Link href="#" className="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </Link>
-            </li>
-          </ul>
-        </div> */}
+        
       </nav>
     </header>
   );

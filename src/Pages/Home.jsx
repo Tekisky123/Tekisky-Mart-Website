@@ -2,6 +2,7 @@ import React from "react";
 import Banner from "../common/Banner";
 import ProductMain from "../Pages/MainProduct";
 import "../App.css";
+import DealOfTheDay from "../common/DealOfTheDay";
 
 const Home = () => {
   const bannersData = [
@@ -34,6 +35,7 @@ const Home = () => {
   return (
     <>
       <Banner banners={bannersData} />
+    <DealOfTheDay/>
       
       <ProductMain />
     </>
