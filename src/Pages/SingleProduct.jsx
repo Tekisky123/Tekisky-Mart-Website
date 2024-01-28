@@ -14,7 +14,7 @@ import { Context } from '../common/Context';
 const SingleProduct = () => {
   const navigate = useNavigate();
   
-  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems,handleSingleCheckout} = useContext(Context);
+  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems,handleSingleCheckout,setSingleItems} = useContext(Context);
   const { id } = useParams();
   const location = useLocation();
 
@@ -39,6 +39,12 @@ const SingleProduct = () => {
 
     fetchProduct();
   }, [id]);
+
+  useEffect(() => {
+    handleSingleProductQuantity('inc', product)
+
+  }, [])
+  
 
   // Check if product data is still loading
   if (!product) {

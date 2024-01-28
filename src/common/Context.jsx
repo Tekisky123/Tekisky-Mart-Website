@@ -237,7 +237,7 @@ const AppContext = ({ children }) => {
 
         if (newItem) {
           if (type === "inc") {
-            if (typeof newItem.quantity === "number") {
+            if (typeof newItem.quantity == "number") {
               newItem.quantity += 1;
             } else {
               newItem.quantity = 1;
@@ -246,7 +246,7 @@ const AppContext = ({ children }) => {
             newItem.quantity -= 1;
           }
         }
-      
+        newItem.product = product;
   
       return newItem;
     });
