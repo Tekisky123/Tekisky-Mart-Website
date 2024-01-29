@@ -18,7 +18,8 @@ const PaymentStep = () => {
     selectProductData,
     ourProduct,
     singleItems,
-    setSingleItems
+    setSingleItems,
+    totalSavedAmount
   } = useContext(Context);
   console.log("cartItems",cartItems);
   console.log("singleItems",singleItems);
@@ -472,8 +473,8 @@ const PaymentStep = () => {
                         free delivery for order above 500 delivery charge 20 rs
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
-                        <span>flate Rate :</span>
-                        <span>&#8377; 60.00</span>
+                        <span>Total amount saved :</span>
+                        <span>&#8377; {totalSavedAmount}</span>
                       </h6>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
                         Shipping to maharashtra

@@ -11,7 +11,8 @@ const SpPaymentStep = () => {
     productSize,
     cartItems,
     handleRemoveFromCart,
-    cartSubTotal,
+    singleSubTotal,
+    singleSavedAmount,
     handleCartProductQuantity,
     ToastContainer,
     toast,
@@ -69,14 +70,14 @@ const SpPaymentStep = () => {
         landmark: formData.landMark,
         address: formData.additionalAdd,
         products: [],
-        totalAmount: cartSubTotal,
+        totalAmount: singleSubTotal,
       };
 
       const selectedProducts = [];
 
         selectedProducts.push({
-          product: singleItems._id,
-          quantity: singleItems?.quantity[0],
+          product: singleItems.product._id || singleItems._id,
+          quantity: singleItems?.quantity[0] || singleItems?.quantity,
         });
       
       payload.products = selectedProducts;
@@ -207,8 +208,9 @@ const SpPaymentStep = () => {
   };
 
   const handlePrevious=()=>{
-     setSingleItems([])
-     navigate(`/single-product/${singleItems._id}`)
+    //  setSingleItems({})
+    //  navigate(`/single-product/${singleItems.product._id}`)
+     navigate(`/`)
     }
 
   return (
@@ -460,7 +462,7 @@ const SpPaymentStep = () => {
                     <div>
                       <h5 className="totalDiv">
                         <span>Subtotal</span>
-                        <span>{cartSubTotal} &#8377;</span>
+                        <span>{singleSubTotal} &#8377;</span>
                       </h5>
                       <h5 style={{ fontWeight: "600", marginBottom: "1rem" }}>
                         Shipping
@@ -469,8 +471,8 @@ const SpPaymentStep = () => {
                         free delivery for order above 500 delivery charge 20 rs
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
-                        <span>flate Rate :</span>
-                        <span>&#8377; 60.00</span>
+                        <span>saved Amount:</span>
+                        <span>&#8377; {singleSavedAmount}</span>
                       </h6>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
                         Shipping to maharashtra
@@ -480,7 +482,7 @@ const SpPaymentStep = () => {
                         className="totalDiv"
                       >
                         <span>Total</span>
-                        <span>{cartSubTotal} &#8377;</span>
+                        <span>{singleSubTotal} &#8377;</span>
                       </h5>
                       {/* <button style={{width:"100%",marginBottom:"0.5rem"}} className="checkoutBtn" onClick={()=>navigate('/payment_step')}>Proceed To Checkout</button> */}
                     </div>

@@ -14,7 +14,7 @@ import { Context } from '../common/Context';
 const SingleProduct = () => {
   const navigate = useNavigate();
   
-  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems,handleSingleCheckout} = useContext(Context);
+  const { handleAddToCart, ToastContainer, quantity ,handleSingleProductQuantity,singleItems,handleSingleCheckout,setSingleItems,setSingleSavedAmount,setSingleSubTotal} = useContext(Context);
   const { id } = useParams();
   const location = useLocation();
 
@@ -32,6 +32,12 @@ const SingleProduct = () => {
       try {
         const response = await axios.get(`https://tekisky-mart.onrender.com/admin/getoneproduct/${id}`);
         setProduct(response?.data?.getOneProduact);
+
+        setSingleItems({
+        ...singleItems,
+        product: response?.data?.getOneProduact,
+      });
+       
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -40,7 +46,33 @@ const SingleProduct = () => {
     fetchProduct();
   }, [id]);
 
-  // Check if product data is still loading
+
+
+
+
+
+
+
+
+    useEffect(() => {
+    handleSingleProductQuantity('inc', product)
+  }, [])
+
+  useEffect(() => {
+    let singleSubTotal = 0;
+    let singleSavedAmount = 0;
+  
+
+        const itemSubTotal = singleItems?.product?.offerPrice * singleItems?.product?.quantity;
+        singleSubTotal += itemSubTotal;
+        singleSavedAmount += (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * singleItems?.quantity;
+      
+  
+    setSingleSubTotal(singleSubTotal);
+    setSingleSavedAmount(singleSavedAmount);
+
+  }, [singleItems]);
+
   if (!product) {
     return (
       
