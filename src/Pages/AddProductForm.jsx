@@ -66,18 +66,18 @@ const AddProductForm = () => {
     };
   }, [filePreviews]);
 
-  const validateForm = () => {
-    const newErrors = {};
-    for (const key in formData) {
-      // Exclude checkbox (dealOfDay) from validation
-      if (key !== 'files' && key !== 'dealOfDay' && !formData[key]) {
-        newErrors[key] = 'This field is required *';
-      }
+const validateForm = () => {
+  const newErrors = {};
+  for (const key in formData) {
+    // Exclude checkbox (dealOfDay) from validation
+    if (key !== 'files' && key !== 'dealOfDay' && !formData[key]) {
+      newErrors[key] = 'This field is required *';
     }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-  
+  }
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
