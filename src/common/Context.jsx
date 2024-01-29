@@ -18,38 +18,15 @@ const AppContext = ({ children }) => {
   const [productSize, setProductSize] = useState("");
   const [cartCount, setCartCount] = useState(0);
   const [cartSubTotal, setCartSubTotal] = useState(0);
+  const [singleSubTotal, setSingleSubTotal] = useState(0);
+
   const [totalSavedAmount, setTotalSavedAmount] = useState(0);
+  const [singleSavedAmount, setSingleSavedAmount] = useState(0);
   const [singleProductSubTotal, setSingleProductSubTotal] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
 
   console.log("singleItems",singleItems)
-
-  // useEffect(() => {
-  //   let subTotal = 0;
-  //   let singleTotal = 0;
-  //   let savedAmount=0;
-  //   cartItems.forEach((item) => {
-  //     if (item && item.selectedSize) {
-  //       subTotal +=item?.selectedSize?.offerPrice * item?.selectedSize?.quantity;
-  //     } else if (item) {
-  //       subTotal += item?.offerPrice * item?.quantity;
-  //     }
-  //   });
-  //   // singleTotal = singleProductSubTotal?.offerPrice * item?.quantity||1;
-
-  //   // singleProductSubTotal.offerPrice
-  //   setCartSubTotal(singleTotal || subTotal);
-
-  //   let count = 0;
-
-  //   cartItems.forEach((item) => {
-  //     if (item && item.selectedSize) {
-  //       count += item.selectedSize;
-  //     }
-  //   });
-  //   setCartCount(count);
-  // }, [cartItems]);
 
 
   useEffect(() => {
@@ -183,7 +160,7 @@ const AppContext = ({ children }) => {
   }
 
   const handleSingleCheckout = (product) => {
-    setSingleItems(product)
+    // setSingleItems(product)
     navigate(`/sp-payment-step`)
   }
 
@@ -246,7 +223,7 @@ const AppContext = ({ children }) => {
             newItem.quantity -= 1;
           }
         }
-        newItem.product = product;
+        // newItem.product = product;
   
       return newItem;
     });
@@ -287,7 +264,11 @@ const AppContext = ({ children }) => {
         handleBuyNow,
         handleSingleProductQuantity,
         totalSavedAmount,
-        handleSingleCheckout
+        handleSingleCheckout,
+        singleSubTotal,
+        setSingleSubTotal,
+        setSingleSavedAmount,
+        singleSavedAmount
       }}
     >
       {children}
