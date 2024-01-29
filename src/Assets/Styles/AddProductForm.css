@@ -7,6 +7,9 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
   }
+  .title{
+    text-align: center;
+  }
   
   .formLabel {
     display: block;
@@ -350,3 +353,32 @@
    .cl-switch > input:checked:disabled + span::after {
     background-color: #61b5b4;
    }
+
+   .addProductForm {
+    position: relative;
+  }
+  
+  .spinner {
+    position:static;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 11.2px;
+   height: 11.2px;
+   animation: spinner-z355kx 1s infinite linear;
+   border-radius: 11.2px;
+   box-shadow: 28px 0px 0 0 #0cc1e0, 17.4px 21.8px 0 0 #0cc1e0, -6.2px 27.2px 0 0 #0cc1e0, -25.2px 12px 0 0 #0cc1e0, -25.2px -12px 0 0 #0cc1e0, -6.2px -27.2px 0 0 #0cc1e0, 17.4px -21.8px 0 0 #0cc1e0;
+
+  }
+  @keyframes spinner-z355kx {
+    to {
+       transform: rotate(360deg);
+    }
+ }
+  
+  .addProductForm.loading {
+    filter: blur(5px); /* Add blur effect when loading */
+    pointer-events: none; /* Disable interaction with blurred content */
+  }
+  

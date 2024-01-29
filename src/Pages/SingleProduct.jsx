@@ -154,6 +154,7 @@ const SingleProduct = () => {
                 <p>MRP: <del>₹{product.mrp}</del></p>
                 <p>Offer Price: ₹{product.offerPrice}</p>
                 <p>Packet Weight: {product.packetweight}</p>
+                <p>Description: {product.description}</p>
                 
               </div>
               </div>

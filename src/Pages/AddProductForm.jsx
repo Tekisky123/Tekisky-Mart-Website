@@ -27,6 +27,8 @@ const AddProductForm = () => {
   const [filePreviews, setFilePreviews] = useState([]);
 
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleFilesChange = useCallback((e) => {
     const { name, files } = e.target;
@@ -85,6 +87,8 @@ const validateForm = () => {
     if (!validateForm()) {
       return;
     }
+    setIsLoading(true); // Set loading to true when submitting
+
 
     const apiUrl = 'https://tekiskymart.onrender.com/admin/addproduct';
 
@@ -106,10 +110,14 @@ const validateForm = () => {
       navigate('/');
     } catch (error) {
       console.error('Error posting data:', error);
+    }finally {
+      setIsLoading(false); // Set loading to false when the request is complete
     }
   };
 
   return (
+    <div  className={`addProductForm ${isLoading ? 'loading' : ''}`}>
+      {isLoading && <div className="spinner"></div>}
     <form onSubmit={handleSubmit} className="addProductForm">
      <label className="formLabel">
         Product Category:
@@ -381,6 +389,7 @@ const validateForm = () => {
       Submit
     </button>
   </form>
+  </div>
   );
 };
 
