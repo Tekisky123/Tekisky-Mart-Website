@@ -75,9 +75,11 @@ const SpPaymentStep = () => {
 
       const selectedProducts = [];
 
+      let quantity=singleItems?.quantity ? singleItems?.quantity : 1
+
         selectedProducts.push({
           product: singleItems.product._id || singleItems._id,
-          quantity: singleItems?.quantity[0] || singleItems?.quantity,
+          quantity: quantity,
         });
       
       payload.products = selectedProducts;
@@ -96,6 +98,7 @@ const SpPaymentStep = () => {
         setSingleItems([])
         // Close the modal only after a successful request
         closeModal();
+        navigate('/')
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);

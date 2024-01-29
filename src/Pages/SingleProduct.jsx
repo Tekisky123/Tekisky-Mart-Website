@@ -61,11 +61,11 @@ const SingleProduct = () => {
   useEffect(() => {
     let singleSubTotal = 0;
     let singleSavedAmount = 0;
-  
+    let quantity=singleItems?.quantity ? singleItems?.quantity : 1;
 
-        const itemSubTotal = singleItems?.product?.offerPrice * singleItems?.product?.quantity;
+        const itemSubTotal = singleItems?.product?.offerPrice * quantity;
         singleSubTotal += itemSubTotal;
-        singleSavedAmount += (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * singleItems?.quantity;
+        singleSavedAmount += (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * quantity;
       
   
     setSingleSubTotal(singleSubTotal);
