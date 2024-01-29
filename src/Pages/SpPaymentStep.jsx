@@ -95,7 +95,7 @@ const SpPaymentStep = () => {
         toast.success(
           "Your order has been placed successfully. Our operator will contact you shortly"
         );
-        setSingleItems([])
+        // setSingleItems([])
         // Close the modal only after a successful request
         closeModal();
         navigate('/')
