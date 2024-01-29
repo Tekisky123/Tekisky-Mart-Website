@@ -98,6 +98,7 @@ const PaymentStep = () => {
         setSingleItems([])
         // Close the modal only after a successful request
         closeModal();
+        navigate('/')
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
