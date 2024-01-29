@@ -1,4 +1,4 @@
-import {  Route, Routes, useNavigate } from "react-router-dom";
+import {  Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import MyFooter from "./common/Footer";
 import Header from "./common/Header";
@@ -21,13 +21,18 @@ function App() {
   const {singleItems} = useContext(Context);
 
 
-  useEffect (() => {
+  const location = useLocation();
 
-    if (singleItems && Object.keys(singleItems).length === 0) {
+  useEffect(() => {
+    // Check if singleItems is empty and the current pathname is either "singleProduct" or "paymentStep"
+    if (
+      singleItems &&
+      Object.keys(singleItems).length === 0 &&
+      (location.pathname.includes('/single-product') || location.pathname === '/sp-payment-step')
+    ) {
       navigate('/');
     }
-
-  }, [singleItems, navigate]);
+  }, [singleItems, location.pathname, navigate]);
   return (
     <div className="App">
       <Header />
