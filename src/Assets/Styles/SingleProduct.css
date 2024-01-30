@@ -19,6 +19,8 @@
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
   aspect-ratio: 4 / 5; /* Maintain a fixed aspect ratio for the images */
+  object-fit: scale-down;
+
 }
 
 .product-image:hover {

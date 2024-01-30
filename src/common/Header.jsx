@@ -119,10 +119,10 @@ const Header = () => {
               type="search"
               name="search"
               className="search-field"
-              placeholder="Enter your product name..."
+              placeholder="Search..."
             />
             <button className="search-btn">
-              <CiSearch />
+              <CiSearch className="search" />
             </button>
           </div>
 

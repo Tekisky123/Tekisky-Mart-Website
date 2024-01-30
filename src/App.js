@@ -14,6 +14,7 @@ import SpPaymentStep from "./Pages/SpPaymentStep";
 import CategoryPage from "./common/CategoryPage";
 import { useContext, useEffect } from "react";
 import { Context } from "./common/Context";
+import AllOrders from "./Pages/AllOrders";
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
+        <Route path="/all-orders" element={<AllOrders />} />
 
       </Routes>
 
