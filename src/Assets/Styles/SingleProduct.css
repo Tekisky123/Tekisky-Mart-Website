@@ -850,6 +850,7 @@
   .product-details {
     height: auto;
     padding: 10px;
+    width: 100%!important;
   }
 
   .product-details h3 {
