@@ -5706,9 +5706,12 @@ footer {
     font-size: 12px;
     font-weight: var(--weight-500);
     line-height: 1;
+    width: 20px;
+    display: flex;
     padding: 2px 4px;
-    -webkit-border-radius: 20px;
-    border-radius: 20px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
   }
 
   .desktop-navigation-menu {

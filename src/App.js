@@ -16,6 +16,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "./common/Context";
 import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
+import SallerAllOrders from "./Pages/SallerAllOrders";
 
 function App() {
 
@@ -24,7 +25,8 @@ function App() {
 
 
   const location = useLocation();
-
+  const userType ="superadmin";
+  
   useEffect(() => {
     // Check if singleItems is empty and the current pathname is either "singleProduct" or "paymentStep"
     if (
@@ -45,6 +47,7 @@ function App() {
       <>
       <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/users" element={<Users/>}/>
+        <Route path="/all-orders" element={<AllOrders />} />
       </>
 
      }
@@ -57,7 +60,7 @@ function App() {
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
-        <Route path="/all-orders" element={<AllOrders />} />
+        <Route path="/saller-orders" element={<SallerAllOrders />} />
 
  
       </Routes>

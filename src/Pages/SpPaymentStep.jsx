@@ -94,14 +94,18 @@ const SpPaymentStep = () => {
         payload
       );
       const data = response.data;
-      if (data.success) {
+      console.log("res",response)
+      console.log("data",response.data)
+      if (data.success||response.status==201) {
         toast.success(
-          "Your order has been placed successfully. Our operator will contact you shortly"
+          "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
         );
         // setSingleItems([])
         // Close the modal only after a successful request
         closeModal();
-        navigate('/')
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
@@ -184,12 +188,7 @@ const SpPaymentStep = () => {
     var requiredFields = [
       "phoneNumber",
       "fullName",
-      // "AlternateNumber",
-      // "email",
-      // "houseNo",
-      // "area",
-      "landMark",
-      // "addressType",
+      // "landMark",
       "additionalAdd",
     ];
 
@@ -234,11 +233,12 @@ const SpPaymentStep = () => {
           </div>
         </div>
       )}
-      <ToastContainer />
+  
 
       <h2 className="first-container-heading">Payment Step</h2>
 
       <div className="stepContiner">
+      <ToastContainer />
         <div style={{ width: "80%", margin: " 80px auto" }}>
           <form action="">
             <>
@@ -302,23 +302,7 @@ const SpPaymentStep = () => {
                     />
                   </Col>
                  
-                  <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                      Landmark e.g. near IT park
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="text"
-                      className="MyInput"
-                      placeholder="Enter Landmark e.g. near IT park"
-                      name="landMark"
-                      value={formData.landMark}
-                      onChange={handleInputChange}
-                    />
-                  </Col>
+             
                 
                   <Col xs={12} md={4} xl={4}>
                     {" "}
@@ -336,6 +320,23 @@ const SpPaymentStep = () => {
                       placeholder="Enter House No, Bulding ,Company ,Appartment ,Area Colony , Street , Sector , Village"
                       name="additionalAdd"
                       value={formData.additionalAdd}
+                      onChange={handleInputChange}
+                    />
+                  </Col>
+                  <Col xs={12} md={4} xl={4}>
+                    {" "}
+                    <div className="Formlabel">
+                      Landmark e.g. near IT park
+                      {/* <span className="error-message">⁕</span>{" "} */}
+                    </div>
+                  </Col>
+                  <Col xs={12} md={6} xl={6}>
+                    <input
+                      type="text"
+                      className="MyInput"
+                      placeholder="Enter Landmark e.g. near IT park"
+                      name="landMark"
+                      value={formData.landMark}
                       onChange={handleInputChange}
                     />
                   </Col>

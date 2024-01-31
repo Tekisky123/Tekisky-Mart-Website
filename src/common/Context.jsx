@@ -92,7 +92,7 @@ const AppContext = ({ children }) => {
 
     localStorage.setItem("cartItems", JSON.stringify(items));
 
-    toast.success(`${product?.productName} has been added to your cart`);
+    toast.success(`${product?.productName} has been added to your cart`, { autoClose: 1500 });
     setCartItems(items);
   };
 
@@ -125,7 +125,7 @@ const AppContext = ({ children }) => {
 
     localStorage.setItem("cartItems", JSON.stringify(items));
 
-    toast.success(`${product?.productName} has been added to your cart`);
+    toast.success(`${product?.productName} has been added to your cart`, { autoClose: 1500 });
     setCartItems(items);
   };
 
