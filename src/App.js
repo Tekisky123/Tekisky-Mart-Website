@@ -39,6 +39,14 @@ function App() {
       <Header />
 
       <Routes>
+
+     {userType == "superadmin" &&
+      <>
+      <Route path="/create-user" element={<CreateUser/>}/>
+        <Route path="/users" element={<Users/>}/>
+      </>
+
+     }
         
         <Route path="/" element={ <Home /> } />
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
@@ -49,8 +57,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
 
-        <Route path="/create-user" element={<CreateUser/>}/>
-        <Route path="/users" element={<Users/>}/>
+ 
       </Routes>
 
       <MyFooter />

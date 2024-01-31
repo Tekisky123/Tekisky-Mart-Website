@@ -58,13 +58,13 @@ const Users = () => {
       const updatedUser = updatedData[editIndex];
 
       const payload = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        mobileNumber: formData.mobileNumber,
-        email: formData.email,
-        role: formData.role,
-        shopCategory: formData.shopCategory,
-      };
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      mobileNumber: formData.mobileNumber,
+      email: formData.email,
+      role: formData.role,
+      shopCategory: formData.shopCategory,
+    };
       console.log("payload",payload)
       // Make API call to update user
       await axios.get(`${Base_Url}${updateUserAPI}${id}`, payload);
