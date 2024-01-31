@@ -376,3 +376,46 @@
     }
   }
   
+
+
+
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  .col.right{
+    width: 50%;
+  }
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .ourcontainer{
+    width: 100%;
+  }
+  .col.right{
+    width: 50%;
+  }
+  .remove{
+    width: 20%;
+  }
+}
+
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .ourcontainer{
+    width: 100%;
+  }
+}
+
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+  .ourcontainer{
+    width: 100%;
+  }
+}
+
+
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {}
+
+
+@media only screen and (min-width: 1401px)  {}

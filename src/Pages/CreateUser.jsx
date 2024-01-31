@@ -12,8 +12,11 @@ const AddUser = () => {
     mobileNumber: "",
     email: "",
     password: "",
-    role: "", // Assuming a default role for simplicity
-    shopCategory: "", // Specific to shop users
+    role: "",
+    shopName: "",
+    shopAddress: "", 
+    gstNumber: "", 
+    shopCategory: "", 
   });
 
   // State for feedback messages
@@ -131,12 +134,53 @@ const AddUser = () => {
             className="formInput"
           >
             <option value="">Select Role</option>
-            <option value="seller">Saller</option>
+            <option value="seller">Seller</option>
             <option value="superadmin">Super Admin</option>
           </select>
         </div>
 
         {/* Additional fields specific to shop users */}
+
+            {/* Additional fields specific to seller role */}
+            {formData.role === "seller" && (
+          <>
+            <div>
+              <label className="formLabel">Shop Name:</label>
+              <input
+                className="formInput"
+                type="text"
+                name="shopName"
+                value={formData.shopName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div>
+  <label className="formLabel">Shop Address:</label>
+  <textarea
+    className="formInput"
+    name="shopAddress"
+    value={formData.shopAddress}
+    onChange={handleChange}
+    required
+    rows={4} // Specify the number of visible rows
+  />
+</div>
+
+            <div>
+              <label className="formLabel">G.S.T. Number:</label>
+              <input
+                className="formInput"
+                type="text"
+                name="gstNumber"
+                value={formData.gstNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </>
+        )}
         <div>
           <label className="formLabel">Shop Category:</label>
           <select

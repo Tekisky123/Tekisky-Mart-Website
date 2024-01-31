@@ -16,13 +16,15 @@ import { useContext, useEffect } from "react";
 import { Context } from "./common/Context";
 import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
+import SallerAllOrders from "./Pages/SallerAllOrders";
 
 function App() {
   const navigate = useNavigate();
   const { singleItems } = useContext(Context);
 
   const location = useLocation();
-
+  const userType ="superadmin";
+  
   useEffect(() => {
     // Check if singleItems is empty and the current pathname is either "singleProduct" or "paymentStep"
     if (
@@ -39,17 +41,27 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shopping-cart" element={<ShoppingCart />} />
-        <Route path="/single-product/:id" element={<SingleProduct />} />
-        <Route path="/payment-step" element={<PaymentStep />} />
-        <Route path="/sp-payment-step" element={<SpPaymentStep />} />
-        <Route path="/add-product" element={<AddProductForm />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/category/:category" element={<CategoryPage />} />
+
+     {userType == "superadmin" &&
+      <>
+      <Route path="/create-user" element={<CreateUser/>}/>
+        <Route path="/users" element={<Users/>}/>
         <Route path="/all-orders" element={<AllOrders />} />
-        <Route path="/create-user" element={<CreateUser />} />
-        <Route path="/users" element={<Users />} />
+      </>
+
+     }
+        
+        <Route path="/" element={ <Home /> } />
+        <Route path="/shopping-cart" element={<ShoppingCart/>} />
+        <Route path="/single-product/:id" element={<SingleProduct/>}/>
+        <Route path="/payment-step" element={<PaymentStep/>}/>
+        <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
+        <Route path="/add-product" element={<AddProductForm/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/category/:category" element={<CategoryPage />} />
+        <Route path="/saller-orders" element={<SallerAllOrders />} />
+
+ 
       </Routes>
 
       <MyFooter />

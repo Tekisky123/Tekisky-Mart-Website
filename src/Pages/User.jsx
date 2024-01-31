@@ -6,7 +6,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { MdFileDownloadDone } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
-
+import { useNavigate } from "react-router-dom";
 import {
   AllUserAPI,
   Base_Url,
@@ -14,7 +14,10 @@ import {
   updateUserAPI,
 } from "../common/Apis";
 
+
 const Users = () => {
+
+  const navigate = useNavigate();
   const [editIndex, setEditIndex] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
@@ -58,16 +61,16 @@ const Users = () => {
       const updatedUser = updatedData[editIndex];
 
       const payload = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        mobileNumber: formData.mobileNumber,
-        email: formData.email,
-        role: formData.role,
-        shopCategory: formData.shopCategory,
-      };
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      mobileNumber: formData.mobileNumber,
+      email: formData.email,
+      role: formData.role,
+      shopCategory: formData.shopCategory,
+    };
       console.log("payload",payload)
       // Make API call to update user
-      await axios.get(`${Base_Url}${updateUserAPI}${id}`, payload);
+      await axios.post(`${Base_Url}${updateUserAPI}${id}`, payload);
 
       setUserData(updatedData);
       setEditIndex(null);
@@ -135,7 +138,12 @@ const Users = () => {
   };
 
   return (
-    <div style={{ width: "90%", margin: "auto" }}>
+    <div style={{ width: "90%", margin: "auto",overflowX:"auto" }}>
+    <div style={{marginBottom:"40px"}}>
+      <button className="formButton" onClick={()=>navigate('/create-user')}>
+       Create user
+      </button>
+    </div>
       <Table striped bordered hover>
         <thead>
           <tr>

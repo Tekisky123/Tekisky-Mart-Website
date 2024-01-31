@@ -19,7 +19,7 @@ const ProductMain = () => {
     const filteredProducts = products.filter(
       (product) => product.productCategory === category
     );
-    return filteredProducts.slice(0, maxProducts);
+    return filteredProducts.reverse().slice(0, maxProducts);
   };
 
   useEffect(() => {
