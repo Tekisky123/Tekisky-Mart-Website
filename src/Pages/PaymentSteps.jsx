@@ -190,7 +190,7 @@ const PaymentStep = () => {
 
     if (phoneNumber) {
       const isConfirmed = window.confirm(
-        `Are you sure ${phoneNumber} is correct?`
+        `Are you suren mobile number  ${phoneNumber} is correct?`
       );
 
       if (!isConfirmed) {
