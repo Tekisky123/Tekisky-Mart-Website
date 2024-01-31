@@ -130,11 +130,11 @@ const PaymentStep = () => {
       const numericValue = value.replace(/[^0-9-]/g, "");
 
       // Ensure the length does not exceed 10 digits
-      const maxLength = 12;
+      const maxLength = 10;
       const truncatedValue = numericValue.slice(0, maxLength);
 
       // Parse the numeric value as an integer
-      const intValue = parseInt(truncatedValue, 12);
+      const intValue = parseInt(truncatedValue, 10);
 
       // Check if the parsed value is a positive number
       const isValidNumber = !isNaN(intValue) && intValue >= 0;
