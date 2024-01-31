@@ -15,6 +15,7 @@ import CategoryPage from "./common/CategoryPage";
 import { useContext, useEffect } from "react";
 import { Context } from "./common/Context";
 import AllOrders from "./Pages/AllOrders";
+import Users from "./Pages/User";
 
 function App() {
 
@@ -47,10 +48,11 @@ function App() {
         <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/all-orders" element={<AllOrders />} />
 
+        <Route path="/create-user" element={<CreateUser/>}/>
+        <Route path="/users" element={<Users/>}/>
       </Routes>
 
       <MyFooter />

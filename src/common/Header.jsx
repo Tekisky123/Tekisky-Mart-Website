@@ -7,10 +7,8 @@ import { CiHome, CiLinkedin, CiSearch } from "react-icons/ci";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
-import { LuLogIn } from "react-icons/lu";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { TbCategory } from "react-icons/tb";
 import { Context } from "./Context";
 
 const Header = () => {

@@ -156,6 +156,11 @@ const AppContext = ({ children }) => {
 
   const handleBuyNow = (product) => {
     // setSingleItems(product)
+    // console.log('buyNow', product);
+    setSingleItems({
+      ...singleItems,
+      product:product,
+    });
     navigate(`/single-product/${product?._id}`)
   }
 

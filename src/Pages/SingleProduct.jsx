@@ -63,9 +63,9 @@ const SingleProduct = () => {
     let singleSavedAmount = 0;
     let quantity=singleItems?.quantity ? singleItems?.quantity : 1;
 
-        const itemSubTotal = singleItems?.product?.offerPrice * quantity;
-        singleSubTotal += itemSubTotal;
-        singleSavedAmount += (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * quantity;
+      const itemSubTotal = singleItems?.product?.offerPrice * quantity;
+      singleSubTotal += itemSubTotal;
+      singleSavedAmount += (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * quantity;
       
   
     setSingleSubTotal(singleSubTotal);

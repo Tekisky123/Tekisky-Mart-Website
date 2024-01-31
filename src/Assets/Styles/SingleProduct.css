@@ -625,11 +625,11 @@
   
   
   @media screen and (max-width: 600px) {
-    .ReactModalPortal div {
+    /* .ReactModalPortal div {
 
       padding: 0px!important;
       inset:0px
-    }
+    } */
     .progress-bar{
       position: relative;
         top: 30px;
@@ -852,6 +852,7 @@
   .product-details {
     height: auto;
     padding: 10px;
+    width: 100%!important;
   }
 
   .product-details h3 {

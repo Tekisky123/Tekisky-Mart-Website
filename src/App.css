@@ -1,19 +1,5 @@
-/*-----------------------------------*\
-  #style.css
-\*-----------------------------------*/
-
-/**
- * copyright 2022 @codewithsadee 
- */
-
-/*-----------------------------------*\
-  #CUSTOM PROPERTY
-\*-----------------------------------*/
-
 :root {
-  /**
-   * colors
-   */
+
 
   --spanish-gray: hsl(0, 0%, 60%);
   --sonic-silver: hsl(0, 0%, 47%);
@@ -27,9 +13,6 @@
   --white: hsl(0, 100%, 100%);
   --onyx: hsl(0, 0%, 27%);
 
-  /**
-   * typography
-   */
 
   --fs-1: 1.563rem;
   --fs-2: 1.375rem;
@@ -56,16 +39,21 @@
   --border-radius-md: 10px;
   --border-radius-sm: 5px;
 
-  /**
-   * transition 
-   */
+
 
   --transition-timing: 0.2s ease;
 }
 
-/*-----------------------------------*\
-  #RESET
-\*-----------------------------------*/
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 *,
 *::before,
@@ -271,7 +259,7 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: var(--border-radius-md);
   overflow: hidden;
   z-index: 2;
-  animation: scaleUp 0.5s ease-in-out 5s forwards;
+  animation: scaleUp 0.5s ease-in-out 1s forwards !important;
 }
 
 @keyframes scaleUp {
@@ -2315,6 +2303,7 @@ footer {
 
   .footer-nav .container {
     display: flex;
+    
     flex-wrap: wrap;
     row-gap: 50px;
     column-gap: 20px;
@@ -3211,9 +3200,10 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: var(--border-radius-md);
   overflow: hidden;
   z-index: 2;
-  -webkit-animation: scaleUp 0.5s ease-in-out 5s forwards;
-  animation: scaleUp 0.5s ease-in-out 5s forwards;
+  -webkit-animation: scaleUp 0.5s ease-in-out 1s forwards !important;
+  animation: scaleUp 0.5s ease-in-out 1s forwards !important;
 }
+
 
 @-webkit-keyframes scaleUp {
   0% {

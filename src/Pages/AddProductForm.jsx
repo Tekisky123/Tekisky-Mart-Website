@@ -5,7 +5,7 @@ import "../Assets/Styles/AddProductForm.css"
 
 const AddProductForm = () => {
   const navigate = useNavigate();
-
+  const [showOtherCategoryInput, setShowOtherCategoryInput] = useState(false);
   const [formData, setFormData] = useState({
     productCategory: '',
     productName: '',
@@ -43,6 +43,17 @@ const AddProductForm = () => {
     }));
     setFilePreviews(previews);
   }, []);
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      productCategory: selectedCategory,
+    }));
+
+    // Show additional input when "Others" is selected
+    setShowOtherCategoryInput(selectedCategory === 'OTHERS');
+  };
 
   const handleRemoveFile = useCallback((index) => {
     setFormData((prevData) => {
@@ -79,6 +90,8 @@ const validateForm = () => {
   setErrors(newErrors);
   return Object.keys(newErrors).length === 0;
 };
+
+
 
 
   const handleSubmit = async (e) => {
@@ -129,25 +142,38 @@ const validateForm = () => {
         </div>
       )}
     <form onSubmit={handleSubmit} className="addProductForm">
-     <label className="formLabel">
-        Product Category:
-        <select
-          value={formData.productCategory}
-          onChange={(e) =>
-            setFormData({ ...formData, productCategory: e.target.value })
-          }
-          className={`formInput ${errors.productCategory ? 'error' : ''}`}
-        >
-          <option value="">Select Category</option>
-          <option value="DATES">DATES</option>
-          <option value="HOMEMADE SNACKS">HOMEMADE SNACKS</option>
-          <option value="CLOTHES">CLOTHES</option>
-          <option value="PERFUMES">PERFUMES</option>
-        </select>
-        {errors.productCategory && (
-          <span className="errorMessage">{errors.productCategory}</span>
+    <label className="formLabel">
+          Product Category:
+          <select
+            value={formData.productCategory}
+            onChange={handleCategoryChange}
+            className={`formInput ${errors.productCategory ? 'error' : ''}`}
+          >
+            <option value="">Select Category</option>
+            <option value="DATES">DATES</option>
+            <option value="HOMEMADE SNACKS">HOMEMADE SNACKS</option>
+            <option value="CLOTHES">CLOTHES</option>
+            <option value="PERFUMES">PERFUMES</option>
+            <option value="OTHERS">OTHERS</option>
+          </select>
+          {errors.productCategory && (
+            <span className="errorMessage">{errors.productCategory}</span>
+          )}
+        </label>
+
+        {showOtherCategoryInput && (
+          <label className="formLabel">
+            Other Category:
+            <input
+              type="text"
+              value={formData.otherCategory}
+              onChange={(e) =>
+                setFormData({ ...formData, otherCategory: e.target.value })
+              }
+              className="formInput"
+            />
+          </label>
         )}
-      </label>
 
     <label className="formLabel">
       Product Name:
@@ -195,56 +221,74 @@ const validateForm = () => {
     </label>
 
     <label className="formLabel">
-      Available Stock Qty:
-      <input
-        type="number"
-        value={formData.availableStockQty}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            availableStockQty: parseInt(e.target.value, 10),
-          })
-        }
-        className={`formInput ${errors.availableStockQty ? 'error' : ''}`}
-      />
-      {errors.availableStockQty && (
-        <span className="errorMessage">{errors.availableStockQty}</span>
-      )}
-    </label>
+  Available Stock Qty:
+  <input
+    type="number"
+    value={formData.availableStockQty}
+    onChange={(e) => {
+      const value = e.target.value;
+      const isValid = /^\d{0,10}$/.test(value); // Validate if it's a positive number with a maximum of 10 digits
 
-    <label className="formLabel">
-      MRP:
-      <input
-        type="number"
-        value={formData.mrp}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            mrp: parseInt(e.target.value, 10),
-          })
-        }
-        className={`formInput ${errors.mrp ? 'error' : ''}`}
-      />
-      {errors.mrp && <span className="errorMessage">{errors.mrp}</span>}
-    </label>
+      if (isValid) {
+        setFormData({
+          ...formData,
+          availableStockQty: value === '' ? '' : parseInt(value, 10),
+        });
+      }
+    }}
+    className={`formInput ${errors.availableStockQty ? 'error' : ''}`}
+  />
+  {errors.availableStockQty && (
+    <span className="errorMessage">{errors.availableStockQty}</span>
+  )}
+</label>
 
-    <label className="formLabel">
-      Offer Price:
-      <input
-        type="number"
-        value={formData.offerPrice}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            offerPrice: parseInt(e.target.value, 10),
-          })
-        }
-        className={`formInput ${errors.offerPrice ? 'error' : ''}`}
-      />
-      {errors.offerPrice && (
-        <span className="errorMessage">{errors.offerPrice}</span>
-      )}
-    </label>
+
+<label className="formLabel">
+  MRP:
+  <input
+    type="number"
+    value={formData.mrp}
+    onChange={(e) => {
+      const value = e.target.value;
+      const isValid = /^\d{0,10}$/.test(value); // Validate if it's a positive number with a maximum of 10 digits
+
+      if (isValid) {
+        setFormData({
+          ...formData,
+          mrp: value === '' ? '' : parseInt(value, 10),
+        });
+      }
+    }}
+    className={`formInput ${errors.mrp ? 'error' : ''}`}
+  />
+  {errors.mrp && <span className="errorMessage">{errors.mrp}</span>}
+</label>
+
+
+<label className="formLabel">
+  Offer Price:
+  <input
+    type="number"
+    value={formData.offerPrice}
+    onChange={(e) => {
+      const value = e.target.value;
+      const isValid = /^\d{0,10}$/.test(value); // Validate if it's a positive number with a maximum of 10 digits
+
+      if (isValid) {
+        setFormData({
+          ...formData,
+          offerPrice: value === '' ? '' : parseInt(value, 10),
+        });
+      }
+    }}
+    className={`formInput ${errors.offerPrice ? 'error' : ''}`}
+  />
+  {errors.offerPrice && (
+    <span className="errorMessage">{errors.offerPrice}</span>
+  )}
+</label>
+
 
     <label className="formLabel">
       Packet Weight:
@@ -277,19 +321,29 @@ const validateForm = () => {
     </label>
 
     <label className="formLabel">
-      Created By:
-      <input
-        type="text"
-        value={formData.createdby}
-        onChange={(e) =>
-          setFormData({ ...formData, createdby: e.target.value })
-        }
-        className={`formInput ${errors.createdby ? 'error' : ''}`}
-      />
-      {errors.createdby && (
-        <span className="errorMessage">{errors.createdby}</span>
-      )}
-    </label>
+  Created By (Mob. No):
+  <input
+    type="tel" // Use type "tel" to indicate it's a telephone number
+    pattern="[0-9]{0,10}" // Set a pattern for positive numbers with a maximum length of 10 digits
+    value={formData.createdby}
+    onChange={(e) => {
+      const value = e.target.value;
+      const isValid = /^[0-9]{0,10}$/.test(value); // Validate if it's a positive number with a maximum of 10 digits
+
+      if (isValid) {
+        setFormData({
+          ...formData,
+          createdby: value,
+        });
+      }
+    }}
+    className={`formInput ${errors.createdby ? 'error' : ''}`}
+  />
+  {errors.createdby && (
+    <span className="errorMessage">{errors.createdby}</span>
+  )}
+</label>
+
 
     {/* <label className="formLabel">
       Files:

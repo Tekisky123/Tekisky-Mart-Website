@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { MdCancel } from 'react-icons/md';
 import '../Assets/Styles/AllOrders.css';
 
@@ -37,8 +37,9 @@ const AllOrders = () => {
       {orders.map((order) => (
         <div key={order._id} className="product">
           <div className="product-card">
-            <h2 className="name">{order.customerName}</h2>
-            <span className="price">₹{order.totalAmount.toFixed(2)}</span>
+            <h2 className="name">Name : {order.customerName}</h2>
+            <h4 className="">Order Status :-{order.orderStatus}</h4>
+            <span className="price">Total Amount :₹{order.totalAmount.toFixed(2)}</span>
             <button className="popup-btn" onClick={() => openModal(order)}>
                More Details 
             </button>
@@ -58,30 +59,44 @@ const AllOrders = () => {
     <button onClick={closeModal} className="close-btn">
       <MdCancel className="cancel-btn" />
     </button>
+
+    {/* Display Customer Information */}
+    <div className="customer-info">
+      
+      <h5>Customer Name : {selectedProduct?.customerName}</h5>
+      <h5>Mobile Number: {selectedProduct?.mobileNumber}</h5>
+      {selectedProduct?.alternateNumber && (
+        <h5>Alternate Mobile: {selectedProduct?.alternateNumber}</h5>
+      )}
+      <h5>Address: {selectedProduct?.address}</h5>
+      <h5>Landmark: {selectedProduct?.landmark}</h5>
+    </div>
+
+    {/* Display Product Details */}
     {selectedProduct?.productsDetails.map((product, index) => (
-      <div key={index} className="product-info">
-        <div className="product-img">
+      
+      <div key={index} className="product-info-order">
+        <div className="model-product-img">
           <img src={product.imageURL[0]} alt={product.productName} />
         </div>
         <div className="info">
-          <h2>
-            {product.productName}
+          <h4>
+            Product Name :{product.productName}
             <br />
             <span>Weight: {product.packetweight}</span>
-          </h2>
-          <p>Description: {product.description}</p>
+          </h4>
+          <h4>Product Description :{product.description}</h4>
           <div className="details">
-            <span className="price">₹{product.mrp.toFixed(2)}</span>
-            <p>Quantity: {product.quantity}</p>
-            </div>
+            <h5 className="price">Product Price: ₹{product.mrp.toFixed(2)}</h5>
+            <h5>Quantity: {product.quantity}</h5>
+          </div>
         </div>
-        {/* <Link className="add-cart-btn">View Product</Link> */}
+        {/* Add any additional information you want to display for each product */}
       </div>
     ))}
-           
-          
-        </div>
-      </Modal>
+  </div>
+</Modal>
+
     </div>
   );
 };
