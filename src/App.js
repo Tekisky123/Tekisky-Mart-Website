@@ -1,4 +1,4 @@
-import {  Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import MyFooter from "./common/Footer";
 import Header from "./common/Header";
@@ -19,10 +19,8 @@ import Users from "./Pages/User";
 import SallerAllOrders from "./Pages/SallerAllOrders";
 
 function App() {
-
   const navigate = useNavigate();
-  const {singleItems} = useContext(Context);
-
+  const { singleItems } = useContext(Context);
 
   const location = useLocation();
   const userType ="superadmin";
@@ -32,9 +30,10 @@ function App() {
     if (
       singleItems &&
       Object.keys(singleItems).length === 0 &&
-      (location.pathname.includes('/single-product') || location.pathname === '/sp-payment-step')
+      (location.pathname.includes("/single-product") ||
+        location.pathname === "/sp-payment-step")
     ) {
-      navigate('/');
+      navigate("/");
     }
   }, [singleItems, location.pathname, navigate]);
   return (
