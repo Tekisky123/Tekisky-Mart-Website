@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
@@ -8,22 +8,15 @@ import { Context } from "../common/Context";
 
 const SpPaymentStep = () => {
   const {
-    productSize,
     cartItems,
-    handleRemoveFromCart,
     singleSubTotal,
     singleSavedAmount,
-    handleCartProductQuantity,
     ToastContainer,
     toast,
-    selectProductData,
-    ourProduct,
     singleItems,
-    setSingleItems
   } = useContext(Context);
-  console.log("cartItems",cartItems);
-  console.log("singleItems",singleItems);
-  const [status, setStatus] = useState(0);
+  console.log("cartItems", cartItems);
+  console.log("singleItems", singleItems);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -33,7 +26,6 @@ const SpPaymentStep = () => {
     houseNo: "",
     area: "",
     landMark: "",
-    // addressType: "",
     additionalAdd: "",
   });
   const [errors, setErrors] = useState({
@@ -50,7 +42,6 @@ const SpPaymentStep = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -78,13 +69,13 @@ const SpPaymentStep = () => {
 
       const selectedProducts = [];
 
-      let quantity=singleItems?.quantity ? singleItems?.quantity : 1
+      let quantity = singleItems?.quantity ? singleItems?.quantity : 1;
 
-        selectedProducts.push({
-          product: singleItems.product._id || singleItems._id,
-          quantity: quantity,
-        });
-      
+      selectedProducts.push({
+        product: singleItems.product._id || singleItems._id,
+        quantity: quantity,
+      });
+
       payload.products = selectedProducts;
       console.log("payload", payload);
 
@@ -101,7 +92,7 @@ const SpPaymentStep = () => {
         // setSingleItems([])
         // Close the modal only after a successful request
         closeModal();
-        navigate('/')
+        navigate("/");
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
@@ -111,7 +102,7 @@ const SpPaymentStep = () => {
       // Handle network error
       console.error("Network error:", error);
       // You might want to show an error message to the user here
-    }finally {
+    } finally {
       setLoading(false); // Set loading to false when the request is complete
     }
   };
@@ -181,6 +172,22 @@ const SpPaymentStep = () => {
 
   const handleNext = (e) => {
     e.preventDefault();
+    const { phoneNumber } = formData;
+
+    if (phoneNumber) {
+      const isConfirmed = window.confirm(
+        `Are you sure ${phoneNumber} is correct?`
+      );
+
+      if (!isConfirmed) {
+        // Stop here if not confirmed
+        return;
+      }
+    } else {
+      alert("Mobile number is required");
+      return;
+    }
+
     var requiredFields = [
       "phoneNumber",
       "fullName",
@@ -215,15 +222,15 @@ const SpPaymentStep = () => {
     }
   };
 
-  const handlePrevious=()=>{
+  const handlePrevious = () => {
     //  setSingleItems({})
     //  navigate(`/single-product/${singleItems.product._id}`)
-     navigate(`/`)
-    }
+    navigate(`/`);
+  };
 
   return (
     <div>
-       {loading && (
+      {loading && (
         <div className="loader-container">
           <div className="spinner">
             <div></div>
@@ -301,7 +308,7 @@ const SpPaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                 
+
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
@@ -319,7 +326,7 @@ const SpPaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                
+
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
@@ -350,10 +357,7 @@ const SpPaymentStep = () => {
                         display: "flex",
                       }}
                     >
-                      <button
-                        className="NextBtn"
-                        onClick={handlePrevious}
-                      >
+                      <button className="NextBtn" onClick={handlePrevious}>
                         Previous
                       </button>
                       <button className="NextBtn" onClick={handleNext}>

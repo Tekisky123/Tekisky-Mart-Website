@@ -1,4 +1,4 @@
-import {  Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import MyFooter from "./common/Footer";
 import Header from "./common/Header";
@@ -18,10 +18,8 @@ import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
 
 function App() {
-
   const navigate = useNavigate();
-  const {singleItems} = useContext(Context);
-
+  const { singleItems } = useContext(Context);
 
   const location = useLocation();
 
@@ -30,9 +28,10 @@ function App() {
     if (
       singleItems &&
       Object.keys(singleItems).length === 0 &&
-      (location.pathname.includes('/single-product') || location.pathname === '/sp-payment-step')
+      (location.pathname.includes("/single-product") ||
+        location.pathname === "/sp-payment-step")
     ) {
-      navigate('/');
+      navigate("/");
     }
   }, [singleItems, location.pathname, navigate]);
   return (
@@ -40,19 +39,17 @@ function App() {
       <Header />
 
       <Routes>
-        
-        <Route path="/" element={ <Home /> } />
-        <Route path="/shopping-cart" element={<ShoppingCart/>} />
-        <Route path="/single-product/:id" element={<SingleProduct/>}/>
-        <Route path="/payment-step" element={<PaymentStep/>}/>
-        <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
-        <Route path="/add-product" element={<AddProductForm/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
+        <Route path="/single-product/:id" element={<SingleProduct />} />
+        <Route path="/payment-step" element={<PaymentStep />} />
+        <Route path="/sp-payment-step" element={<SpPaymentStep />} />
+        <Route path="/add-product" element={<AddProductForm />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/all-orders" element={<AllOrders />} />
-
-        <Route path="/create-user" element={<CreateUser/>}/>
-        <Route path="/users" element={<Users/>}/>
+        <Route path="/create-user" element={<CreateUser />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
 
       <MyFooter />

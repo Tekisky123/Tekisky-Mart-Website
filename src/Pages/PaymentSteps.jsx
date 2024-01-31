@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,  useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
@@ -11,22 +11,16 @@ import "../Assets/Styles/PaymentSteps.css"
 
 const PaymentStep = () => {
   const {
-    productSize,
     cartItems,
-    handleRemoveFromCart,
     cartSubTotal,
-    handleCartProductQuantity,
     ToastContainer,
     toast,
-    selectProductData,
-    ourProduct,
     singleItems,
     setSingleItems,
     totalSavedAmount,
   } = useContext(Context);
   console.log("cartItems", cartItems);
   console.log("singleItems", singleItems);
-  const [status, setStatus] = useState(0);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -188,14 +182,37 @@ const PaymentStep = () => {
 
   const handleNext = (e) => {
     e.preventDefault();
+    const { phoneNumber } = formData;
+
+    if (phoneNumber) {
+      const isConfirmed = window.confirm(
+        `Are you sure ${phoneNumber} is correct?`
+      );
+
+      if (!isConfirmed) {
+        // Stop here if not confirmed
+        return;
+      }
+    } else {
+      alert("Mobile number is required");
+      return;
+    }
+
     var requiredFields = [
       "phoneNumber",
       "fullName",
+      // "AlternateNumber",
+      // "email",
+      // "houseNo",
+      // "area",
       "landMark",
+      // "addressType",
       "additionalAdd",
     ];
 
     let hasError = false;
+
+    console.log(hasError);
 
     requiredFields.forEach((field) => {
       if (!formData[field]) {
@@ -209,19 +226,12 @@ const PaymentStep = () => {
 
     if (hasError) {
       alert("Mandatory fields are required");
-    } else {
-      const isPhoneNumberValid = validatePhoneNumber(formData.phoneNumber);
-
-      if (!isPhoneNumberValid) {
-        // Display an error modal for invalid phone number
-        alert(
-          "Invalid or non-Indian phone number. Please enter a valid Indian phone number."
-        );
-      } else {
-        openModal();
-      }
+    }
+    if (!hasError) {
+      openModal();
     }
   };
+
 
   return (
     <div>

@@ -719,7 +719,7 @@
   background-color: #0cc1e0;
   color: #fff;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   margin-top: 20px;
 }
 
@@ -765,7 +765,7 @@
   }
 
   .countdown-timer {
-    padding: 20px;
+    padding: 10px;
   }
 
   .countdown-label {
