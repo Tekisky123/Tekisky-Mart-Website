@@ -24,7 +24,9 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
 
   const [userData, setUserData] = useState([]);
-
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [password, setPassword] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -53,6 +55,30 @@ const Users = () => {
   const handleEdit = (index) => {
     setEditIndex(index);
     setFormData(userData[index]);
+  };
+
+  const openChangePasswordModal = (userId) => {
+    setSelectedUserId(userId);
+    setShowChangePasswordModal(true);
+  };
+
+  const closeChangePasswordModal = () => {
+    setSelectedUserId(null);
+    setShowChangePasswordModal(false);
+    setPassword(""); // Reset password state
+  };
+
+  const handleChangePassword = async () => {
+    try {
+      // Make API call to update password
+      await axios.post(`${Base_Url}${updateUserAPI}${selectedUserId}`, {
+        password,
+      });
+
+      closeChangePasswordModal();
+    } catch (error) {
+      console.error("Error updating password:", error);
+    }
   };
 
   const handleSaveEdit = async (id) => {
@@ -248,6 +274,7 @@ const Users = () => {
                     >
                       <MdCancel />
                     </Button>
+                    
                   </>
                 ) : (
                   <div
@@ -262,6 +289,13 @@ const Users = () => {
                     >
                       <MdDeleteForever />
                     </Button>
+                    <Button
+                    style={{color:"#fff"}}
+                      variant="info"
+                      onClick={() => openChangePasswordModal(row._id)}
+                    >
+                      Change Password
+                    </Button>
                   </div>
                 )}
               </td>
@@ -271,21 +305,28 @@ const Users = () => {
       </Table>
 
       <Modal
-        className="deleteModal"
-        show={showDeleteModal}
-        onHide={cancelDelete}
+        className="changePasswordModal"
+        show={showChangePasswordModal}
+        onHide={closeChangePasswordModal}
         animation={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Delete Confirmation</Modal.Title>
+          <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this row?</Modal.Body>
+        <Modal.Body>
+          <label>New Password:</label>
+          <FormControl
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={cancelDelete}>
+          <Button variant="secondary" onClick={closeChangePasswordModal}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={confirmDelete}>
-            Delete
+          <Button variant="success" onClick={handleChangePassword}>
+            Save
           </Button>
         </Modal.Footer>
       </Modal>

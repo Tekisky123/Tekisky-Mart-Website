@@ -240,12 +240,6 @@ const MyFooter = () => {
 
       <div className="footer-bottom">
         <div className="container">
-          <img
-            src={paymentimg}
-            alt="payment method"
-            className="payment-img"
-          />
-
           <p className="copyright">
             Copyright &copy; <Link>Tekisky Pvt Ltd</Link> all rights reserved.
           </p>
