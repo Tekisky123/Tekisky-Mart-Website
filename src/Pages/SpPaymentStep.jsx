@@ -49,6 +49,8 @@ const SpPaymentStep = () => {
   });
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -62,6 +64,7 @@ const SpPaymentStep = () => {
     // Handle form submission and order details here
     console.log("Form data:", formData);
     console.log("Order details:", cartItems);
+    setLoading(true);
     try {
       const payload = {
         customerName: formData.fullName,
@@ -108,6 +111,8 @@ const SpPaymentStep = () => {
       // Handle network error
       console.error("Network error:", error);
       // You might want to show an error message to the user here
+    }finally {
+      setLoading(false); // Set loading to false when the request is complete
     }
   };
 
@@ -218,6 +223,17 @@ const SpPaymentStep = () => {
 
   return (
     <div>
+       {loading && (
+        <div className="loader-container">
+          <div className="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
       <ToastContainer />
 
       <h2 className="first-container-heading">Payment Step</h2>
@@ -285,57 +301,7 @@ const SpPaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                    Email Address
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col> */}
-                  {/* <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="email"
-                      className="MyInput"
-                      placeholder="Enter Email Adress"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </Col> */}
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                    House No, Bulding ,Company ,Appartment
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="text"
-                      className="MyInput"
-                      placeholder="Enter House No, Bulding ,Company ,Appartment"
-                      name="houseNo"
-                      value={formData.houseNo}
-                      onChange={handleInputChange}
-                    />
-                  </Col> */}
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                      Area Colony , Street , Sector , Village
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="text"
-                      className="MyInput"
-                      placeholder="Enter Area Colony , Street , Sector , Village"
-                      name="area"
-                      value={formData.area}
-                      onChange={handleInputChange}
-                    />
-                  </Col> */}
+                 
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
@@ -353,26 +319,7 @@ const SpPaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                    Address Type
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                  <select
-                  name="addressType"
-                  className="MyInput"
-                  value={formData.addressType}
-                  onChange={handleInputChange}
-                >
-                  <option value="empty">Select Address Type</option>
-                  <option value="male">Home</option>
-                  <option value="female">Office</option>
-
-                </select>
-                  </Col> */}
+                
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">

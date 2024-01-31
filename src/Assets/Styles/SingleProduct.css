@@ -19,6 +19,8 @@
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
   aspect-ratio: 4 / 5; /* Maintain a fixed aspect ratio for the images */
+  object-fit: scale-down;
+
 }
 
 .product-image:hover {
@@ -623,11 +625,11 @@
   
   
   @media screen and (max-width: 600px) {
-    .ReactModalPortal div {
+    /* .ReactModalPortal div {
 
       padding: 0px!important;
       inset:0px
-    }
+    } */
     .progress-bar{
       position: relative;
         top: 30px;

@@ -45,6 +45,16 @@
 }
 
 
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 *,
 *::before,
 *::after {
@@ -452,12 +462,18 @@ body::-webkit-scrollbar-thumb:hover {
   color: var(--onyx);
   padding: 10px 15px;
   padding-right: 50px;
-  border: 1px solid var(--cultured);
+  border: 1px solid #0cc1e0;
   border-radius: var(--border-radius-md);
 }
 
 .search-field::-webkit-search-cancel-button {
   display: none;
+  
+}
+.search-field:focus {
+  outline: none;
+  border-color: #0cc1e0;
+  box-shadow: 1px 1px 20px rgba(0, 205, 224, 0.656);
 }
 
 .search-btn {
@@ -467,10 +483,52 @@ body::-webkit-scrollbar-thumb:hover {
   right: 2px;
   transform: translateY(-50%);
   color: var(--onyx);
-  font-size: 18px;
+  font-size: 12px;
   padding: 8px 15px;
   border-radius: var(--border-radius-md);
   transition: color var(--transition-timing);
+}
+.search{
+  font-size: 20px;
+}
+
+/* Add this to your CSS or create a new stylesheet */
+.search-results-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  max-height: 100%;
+  overflow: auto;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.search-results-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
 }
 
 .search-btn:hover {
@@ -2245,6 +2303,7 @@ footer {
 
   .footer-nav .container {
     display: flex;
+    
     flex-wrap: wrap;
     row-gap: 50px;
     column-gap: 20px;
@@ -3145,6 +3204,7 @@ body::-webkit-scrollbar-thumb:hover {
   animation: scaleUp 0.5s ease-in-out 1s forwards !important;
 }
 
+
 @-webkit-keyframes scaleUp {
   0% {
     -webkit-transform: scale(0.9);
@@ -3398,7 +3458,8 @@ body::-webkit-scrollbar-thumb:hover {
   color: var(--onyx);
   padding: 10px 15px;
   padding-right: 50px;
-  border: 1px solid var(--cultured);
+  border: 1px solid #0cc1e0;
+  box-shadow: 0px 0px 5px #0cc1e0;
   -webkit-border-radius: var(--border-radius-md);
   border-radius: var(--border-radius-md);
 }
@@ -3416,7 +3477,7 @@ body::-webkit-scrollbar-thumb:hover {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   color: var(--onyx);
-  font-size: 18px;
+  font-size: 12px;
   padding: 8px 15px;
   -webkit-border-radius: var(--border-radius-md);
   border-radius: var(--border-radius-md);

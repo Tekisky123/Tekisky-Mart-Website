@@ -54,8 +54,8 @@ const ProductMain = () => {
   // Render skeleton loading effect
   if (loading) {
     return (
-      <div className="product-main">
-        <ToastContainer />
+      <div className="product-main notification-toadt">
+        <ToastContainer/>
         <h1 style={{ textAlign: "center" }} className="title">
           Our Products
         </h1>

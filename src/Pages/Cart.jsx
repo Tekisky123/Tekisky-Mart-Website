@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import "../Assets/Styles/cart.css"
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import { Row, Col } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from '../common/Context';
 
 const ShoppingCart = () => {
@@ -109,7 +109,7 @@ const ShoppingCart = () => {
       <header className="header">
         <h1>Shopping Cart</h1>
         <ul className="breadcrumb">
-          <li>Home</li>
+          <Link to={"/"}><li>Home</li></Link>
           <li>Shopping Cart</li>
         </ul>
         {/* <span className="count">{itemCount} items in the bag</span> */}

@@ -5,6 +5,9 @@ import Modal from "react-modal";
 import axios from "axios";
 import { Base_Url, saveOrderProductAPI } from "../common/Apis";
 import { Context } from "../common/Context";
+import parsePhoneNumberFromString from "libphonenumber-js";
+import "../Assets/Styles/PaymentSteps.css"
+
 
 const PaymentStep = () => {
   const {
@@ -19,10 +22,10 @@ const PaymentStep = () => {
     ourProduct,
     singleItems,
     setSingleItems,
-    totalSavedAmount
+    totalSavedAmount,
   } = useContext(Context);
-  console.log("cartItems",cartItems);
-  console.log("singleItems",singleItems);
+  console.log("cartItems", cartItems);
+  console.log("singleItems", singleItems);
   const [status, setStatus] = useState(0);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -49,6 +52,7 @@ const PaymentStep = () => {
   });
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -62,6 +66,7 @@ const PaymentStep = () => {
     // Handle form submission and order details here
     console.log("Form data:", formData);
     console.log("Order details:", cartItems);
+    setLoading(true);
     try {
       const payload = {
         customerName: formData.fullName,
@@ -75,13 +80,13 @@ const PaymentStep = () => {
 
       const selectedProducts = [];
 
-        cartItems.forEach((product, index) => {
-          selectedProducts.push({
-            product: product._id,
-            quantity: product?.quantity[0]||product?.quantity,
-          });
+      cartItems.forEach((product, index) => {
+        selectedProducts.push({
+          product: product._id,
+          quantity: product?.quantity[0] || product?.quantity,
         });
-  
+      });
+
       payload.products = selectedProducts;
       console.log("payload", payload);
 
@@ -95,10 +100,10 @@ const PaymentStep = () => {
         toast.success(
           "Your order has been placed successfully. Our operator will contact you shortly"
         );
-        setSingleItems([])
+        setSingleItems([]);
         // Close the modal only after a successful request
         closeModal();
-        navigate('/')
+        navigate("/");
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
@@ -108,6 +113,8 @@ const PaymentStep = () => {
       // Handle network error
       console.error("Network error:", error);
       // You might want to show an error message to the user here
+    }finally {
+      setLoading(false); // Set loading to false when the request is complete
     }
   };
 
@@ -174,23 +181,21 @@ const PaymentStep = () => {
     }
   };
 
+  const validatePhoneNumber = (phoneNumber) => {
+    const parsedNumber = parsePhoneNumberFromString(phoneNumber, "IN");
+    return parsedNumber && parsedNumber.isValid();
+  };
+
   const handleNext = (e) => {
     e.preventDefault();
     var requiredFields = [
       "phoneNumber",
       "fullName",
-      // "AlternateNumber",
-      // "email",
-      // "houseNo",
-      // "area",
       "landMark",
-      // "addressType",
       "additionalAdd",
     ];
 
     let hasError = false;
-
-    console.log(hasError);
 
     requiredFields.forEach((field) => {
       if (!formData[field]) {
@@ -204,14 +209,33 @@ const PaymentStep = () => {
 
     if (hasError) {
       alert("Mandatory fields are required");
-    }
-    if (!hasError) {
-      openModal();
+    } else {
+      const isPhoneNumberValid = validatePhoneNumber(formData.phoneNumber);
+
+      if (!isPhoneNumberValid) {
+        // Display an error modal for invalid phone number
+        alert(
+          "Invalid or non-Indian phone number. Please enter a valid Indian phone number."
+        );
+      } else {
+        openModal();
+      }
     }
   };
 
   return (
     <div>
+       {loading && (
+        <div className="loader-container">
+          <div className="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
       <ToastContainer />
 
       <h2 className="first-container-heading">Payment Step</h2>
@@ -279,57 +303,7 @@ const PaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                    Email Address
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col> */}
-                  {/* <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="email"
-                      className="MyInput"
-                      placeholder="Enter Email Adress"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </Col> */}
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                    House No, Bulding ,Company ,Appartment
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="text"
-                      className="MyInput"
-                      placeholder="Enter House No, Bulding ,Company ,Appartment"
-                      name="houseNo"
-                      value={formData.houseNo}
-                      onChange={handleInputChange}
-                    />
-                  </Col> */}
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                      Area Colony , Street , Sector , Village
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                    <input
-                      type="text"
-                      className="MyInput"
-                      placeholder="Enter Area Colony , Street , Sector , Village"
-                      name="area"
-                      value={formData.area}
-                      onChange={handleInputChange}
-                    />
-                  </Col> */}
+
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
@@ -347,26 +321,7 @@ const PaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  {/* <Col xs={12} md={4} xl={4}>
-                    {" "}
-                    <div className="Formlabel">
-                    Address Type
-                      <span className="error-message">⁕</span>{" "}
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} xl={6}>
-                  <select
-                  name="addressType"
-                  className="MyInput"
-                  value={formData.addressType}
-                  onChange={handleInputChange}
-                >
-                  <option value="empty">Select Address Type</option>
-                  <option value="male">Home</option>
-                  <option value="female">Office</option>
 
-                </select>
-                  </Col> */}
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
@@ -487,7 +442,6 @@ const PaymentStep = () => {
                         <span>Total</span>
                         <span>{cartSubTotal} &#8377;</span>
                       </h5>
-                      {/* <button style={{width:"100%",marginBottom:"0.5rem"}} className="checkoutBtn" onClick={()=>navigate('/payment_step')}>Proceed To Checkout</button> */}
                     </div>
                   </div>
                 </Col>

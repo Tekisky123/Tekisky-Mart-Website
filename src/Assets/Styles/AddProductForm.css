@@ -1,384 +1,434 @@
 /* AddProductForm.module.css */
 .addProductForm {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  .title{
-    text-align: center;
-  }
-  
-  .formLabel {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .formInput {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #b2b2b2;
-    border-radius: 4px;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .formInput:hover {
-    border-color: #0cc1e0;
-    
-  }
-  
-  .formInput:focus {
-    outline: none;
-    border-color: #0cc1e0;
-    box-shadow: 0 0 20px rgba(0, 204, 224, 0.5);
-  }
-  
- 
-  .errorMessage {
-    color: red;
-  }
-  /* AddProductForm.css */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+.title {
+  text-align: center;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #b2b2b2;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.formInput:hover {
+  border-color: #0cc1e0;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #0cc1e0;
+  box-shadow: 0 0 20px rgba(0, 204, 224, 0.5);
+}
+
+.errorMessage {
+  color: red;
+}
+/* AddProductForm.css */
 .upload__box {
-    margin-top: 20px;
-  }
-  
-  .upload__btn-box {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .upload__btn {
-    position: relative;
-    overflow: hidden;
-    margin-right: 10px;
-  }
-  
-  .upload__inputfile {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  .upload__img-wrap {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .upload__img-box {
-    width: 100px;
-    height: 100px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .img-bg {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-  
-  .upload__img-close {
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .form-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .form-group {
-    flex: 1;
-    margin-right: 20px;
-  }
-  
-  .delete {
-    background-color: #ff4646;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .delete:hover {
-    background-color: #ff0000;
-  }
-  
-  .add {
-    background-color: #0cc1e0;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .add:hover {
-    background-color: #088cb7;
-  }
-  
-  /* AddProductForm.css end */
-  .upload__box {
-    padding: 40px;
-  }
-  
-  .upload__inputfile {
-    width: .1px;
-    height: .1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    left: -90px;
-    z-index: -1;
-  }
-  
-  .upload__btn {
-    display: inline-block;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    min-width: 116px;
-    padding: 5px;
-    transition: all .3s ease;
-    cursor: pointer;
-    border: 2px solid;
-    background-color:#0cc1e0;
-    border-color:#0cc1e0;
-    border-radius: 10px;
-    line-height: 5px;
-    font-size: 14px;
-  }
-  
-  .upload__btn:hover {
-    background-color: unset;
-    color: #4045ba;
-    transition: all .3s ease;
-  }
-  .formButton {
-    display: inline-block;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    min-width: 116px;
-    padding: 5px;
-    transition: all .3s ease;
-    cursor: pointer;
-    border: 2px solid;
-    background-color:#0cc1e0;
-    border-color:#0cc1e0;
-    border-radius: 10px;
-    line-height: 35px;
-    font-size: 14px;
-  }
-  
-  .formButton:hover {
-    background-color: unset;
-    color: #4045ba;
-    transition: all .3s ease;  }
-  
-  
-  .upload__btn-box {
-    margin-bottom: 10px;
-  }
-  
-  .upload__btn p {
-    margin-top: 15px;
-  }
-  
-  .upload__img-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
-  }
-  
-  .upload__img-box {
-    width: 200px;
-    padding: 0 10px;
-    margin-bottom: 12px;
-  }
-  
-  .upload__img-close {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    text-align: center;
-    line-height: 24px;
-    z-index: 1;
-    cursor: pointer;
-  }
-  
-  .upload__img-close:after {
-    content: '\2716';
-    font-size: 14px;
-    color: white;
-  }
-  
-  .cl-toggle-switch {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   }
-   
-   .cl-switch {
-    position: relative;
-    display: inline-block;
-   }
-   /* Input */
-   .cl-switch > input {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    z-index: -1;
-    position: absolute;
-    right: 6px;
-    top: -8px;
-    display: block;
-    margin: 0;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background-color: rgb(0, 0, 0, 0.38);
-    outline: none;
-    opacity: 0;
-    transform: scale(1);
-    pointer-events: none;
-    transition: opacity 0.3s 0.1s, transform 0.2s 0.1s;
-   }
-   /* Track */
-   .cl-switch > span::before {
-    content: "";
-    float: right;
-    display: inline-block;
-    margin: 5px 0 5px 10px;
-    border-radius: 7px;
-    width: 36px;
-    height: 14px;
-    background-color: rgb(0, 0, 0, 0.38);
-    vertical-align: top;
-    transition: background-color 0.2s, opacity 0.2s;
-   }
-   /* Thumb */
-   .cl-switch > span::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    right: 16px;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    transition: background-color 0.2s, transform 0.2s;
-   }
-   /* Checked */
-   .cl-switch > input:checked {
-    right: -10px;
-    background-color: #85b8b7;
-   }
-   
-   .cl-switch > input:checked + span::before {
-    background-color: #85b8b7;
-   }
-   
-   .cl-switch > input:checked + span::after {
-    background-color: #018786;
-    transform: translateX(16px);
-   }
-   /* Hover, Focus */
-   .cl-switch:hover > input {
-    opacity: 0.04;
-   }
-   
-   .cl-switch > input:focus {
-    opacity: 0.12;
-   }
-   
-   .cl-switch:hover > input:focus {
-    opacity: 0.16;
-   }
-   /* Active */
-   .cl-switch > input:active {
-    opacity: 1;
-    transform: scale(0);
-    transition: transform 0s, opacity 0s;
-   }
-   
-   .cl-switch > input:active + span::before {
-    background-color: #8f8f8f;
-   }
-   
-   .cl-switch > input:checked:active + span::before {
-    background-color: #85b8b7;
-   }
-   /* Disabled */
-   .cl-switch > input:disabled {
-    opacity: 0;
-   }
-   
-   .cl-switch > input:disabled + span::before {
-    background-color: #ddd;
-   }
-   
-   .cl-switch > input:checked:disabled + span::before {
-    background-color: #bfdbda;
-   }
-   
-   .cl-switch > input:checked:disabled + span::after {
-    background-color: #61b5b4;
-   }
+  margin-top: 20px;
+}
 
-   .addProductForm {
-    position: relative;
-  }
-  
-  .spinner {
-    position:static;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    width: 11.2px;
-   height: 11.2px;
-   animation: spinner-z355kx 1s infinite linear;
-   border-radius: 11.2px;
-   box-shadow: 28px 0px 0 0 #0cc1e0, 17.4px 21.8px 0 0 #0cc1e0, -6.2px 27.2px 0 0 #0cc1e0, -25.2px 12px 0 0 #0cc1e0, -25.2px -12px 0 0 #0cc1e0, -6.2px -27.2px 0 0 #0cc1e0, 17.4px -21.8px 0 0 #0cc1e0;
+.upload__btn-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
+.upload__btn {
+  position: relative;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.upload__inputfile {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload__img-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.upload__img-box {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.upload__img-close {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.delete {
+  background-color: #ff4646;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background-color: #ff0000;
+}
+
+.add {
+  background-color: #0cc1e0;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.add:hover {
+  background-color: #088cb7;
+}
+
+/* AddProductForm.css end */
+.upload__box {
+  padding: 40px;
+}
+
+.upload__inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  left: -90px;
+  z-index: -1;
+}
+
+.upload__btn {
+  display: inline-block;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  min-width: 116px;
+  padding: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid;
+  background-color: #0cc1e0;
+  border-color: #0cc1e0;
+  border-radius: 10px;
+  line-height: 5px;
+  font-size: 14px;
+}
+
+.upload__btn:hover {
+  background-color: unset;
+  color: #4045ba;
+  transition: all 0.3s ease;
+}
+.formButton {
+  display: inline-block;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  min-width: 116px;
+  padding: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid;
+  background-color: #0cc1e0;
+  border-color: #0cc1e0;
+  border-radius: 10px;
+  line-height: 35px;
+  font-size: 14px;
+}
+
+.formButton:hover {
+  background-color: unset;
+  color: #4045ba;
+  transition: all 0.3s ease;
+}
+
+.upload__btn-box {
+  margin-bottom: 10px;
+}
+
+.upload__btn p {
+  margin-top: 15px;
+}
+
+.upload__img-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.upload__img-box {
+  width: 200px;
+  padding: 0 10px;
+  margin-bottom: 12px;
+}
+
+.upload__img-close {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+  line-height: 24px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.upload__img-close:after {
+  content: "\2716";
+  font-size: 14px;
+  color: white;
+}
+
+.cl-toggle-switch {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cl-switch {
+  position: relative;
+  display: inline-block;
+}
+/* Input */
+.cl-switch > input {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  z-index: -1;
+  position: absolute;
+  right: 6px;
+  top: -8px;
+  display: block;
+  margin: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(0, 0, 0, 0.38);
+  outline: none;
+  opacity: 0;
+  transform: scale(1);
+  pointer-events: none;
+  transition: opacity 0.3s 0.1s, transform 0.2s 0.1s;
+}
+/* Track */
+.cl-switch > span::before {
+  content: "";
+  float: right;
+  display: inline-block;
+  margin: 5px 0 5px 10px;
+  border-radius: 7px;
+  width: 36px;
+  height: 14px;
+  background-color: rgb(0, 0, 0, 0.38);
+  vertical-align: top;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+/* Thumb */
+.cl-switch > span::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 16px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  transition: background-color 0.2s, transform 0.2s;
+}
+/* Checked */
+.cl-switch > input:checked {
+  right: -10px;
+  background-color: #85b8b7;
+}
+
+.cl-switch > input:checked + span::before {
+  background-color: #85b8b7;
+}
+
+.cl-switch > input:checked + span::after {
+  background-color: #018786;
+  transform: translateX(16px);
+}
+/* Hover, Focus */
+.cl-switch:hover > input {
+  opacity: 0.04;
+}
+
+.cl-switch > input:focus {
+  opacity: 0.12;
+}
+
+.cl-switch:hover > input:focus {
+  opacity: 0.16;
+}
+/* Active */
+.cl-switch > input:active {
+  opacity: 1;
+  transform: scale(0);
+  transition: transform 0s, opacity 0s;
+}
+
+.cl-switch > input:active + span::before {
+  background-color: #8f8f8f;
+}
+
+.cl-switch > input:checked:active + span::before {
+  background-color: #85b8b7;
+}
+/* Disabled */
+.cl-switch > input:disabled {
+  opacity: 0;
+}
+
+.cl-switch > input:disabled + span::before {
+  background-color: #ddd;
+}
+
+.cl-switch > input:checked:disabled + span::before {
+  background-color: #bfdbda;
+}
+
+.cl-switch > input:checked:disabled + span::after {
+  background-color: #61b5b4;
+}
+
+.addProductForm {
+  position: relative;
+}
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px); /* Adjust the blur as needed */
+  z-index: 999;
+}
+
+.spinner {
+  position: relative;
+  width: 15.7px;
+  height: 15.7px;
+}
+
+.spinner div {
+  animation: spinner-4t3wzl 1.875s infinite backwards;
+  background-color: #0cc1e0;
+  border-radius: 50%;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.spinner div:nth-child(1) {
+  animation-delay: 0.15s;
+  background-color: rgba(12, 193, 224, 0.9);
+}
+
+.spinner div:nth-child(2) {
+  animation-delay: 0.3s;
+  background-color: rgba(12, 193, 224, 0.8);
+}
+
+.spinner div:nth-child(3) {
+  animation-delay: 0.45s;
+  background-color: rgba(12, 193, 224, 0.7);
+}
+
+.spinner div:nth-child(4) {
+  animation-delay: 0.6s;
+  background-color: rgba(12, 193, 224, 0.6);
+}
+
+.spinner div:nth-child(5) {
+  animation-delay: 0.75s;
+  background-color: rgba(12, 193, 224, 0.5);
+}
+.units-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.units-group input select {
+  width: 60%;
+}
+.units-label {
+  width: 58%;
+  text-align: end;
+  padding: 8px;
+}
+
+@keyframes spinner-4t3wzl {
+  0% {
+    transform: rotate(0deg) translateY(-200%);
   }
-  @keyframes spinner-z355kx {
-    to {
-       transform: rotate(360deg);
-    }
- }
-  
-  .addProductForm.loading {
-    filter: blur(5px); /* Add blur effect when loading */
-    pointer-events: none; /* Disable interaction with blurred content */
+
+  60%,
+  100% {
+    transform: rotate(360deg) translateY(-200%);
   }
-  
+}

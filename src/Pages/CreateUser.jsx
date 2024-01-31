@@ -54,11 +54,11 @@ const AddUser = () => {
     <div>
       <h2 className="title">Add User</h2>
 
-      {message && (
+      {/* {message && (
         <div style={{ color: message.type === "success" ? "green" : "red" }}>
           {message.content}
         </div>
-      )}
+      )} */}
 
       <form onSubmit={handleSubmit} className="addProductForm">
         <div>
@@ -131,7 +131,7 @@ const AddUser = () => {
             className="formInput"
           >
             <option value="">Select Role</option>
-            <option value="admin">Admin</option>
+            <option value="seller">Saller</option>
             <option value="superadmin">Super Admin</option>
           </select>
         </div>
@@ -147,7 +147,7 @@ const AddUser = () => {
           >
             <option value="dates">Dates</option>
             <option value="clothing">Clothing</option>
-            <option value="groceries">Groceries</option>
+            <option value="Homemade Snacks">Homemade Snacks</option>
             <option value="others">Others</option>
           </select>
         </div>
