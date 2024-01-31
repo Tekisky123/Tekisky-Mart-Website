@@ -11,9 +11,9 @@ export const Base_Url= 'https://tekiskymart.onrender.com';
 
  export const AllOrderAPI="/order/getAllOrders";
  export const AllUserAPI="/user/getUsers";
- export const updateUserAPI="/updateUser/";
- export const deleteUserAPI="/deleteUser/";
- export const getOneUserAPI="/getOneUser/";
+ export const updateUserAPI="/user/updateUser/";
+ export const deleteUserAPI="/user/deleteUser/";
+ export const getOneUserAPI="/user/getOneUser/";
 
 
 
