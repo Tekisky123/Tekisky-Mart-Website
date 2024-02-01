@@ -187,7 +187,7 @@ const SpPaymentStep = () => {
 
     if (phoneNumber) {
       const isConfirmed = window.confirm(
-        `Are you suren mobile number  ${phoneNumber} is correct?`
+        `Are you sure This mobile number  ${phoneNumber} is correct?`
       );
 
       if (!isConfirmed) {

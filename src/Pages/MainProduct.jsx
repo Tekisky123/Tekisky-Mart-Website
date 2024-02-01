@@ -165,7 +165,8 @@ const ProductMain = () => {
                   <p className="showcase-category">
                     {product?.productCategory}
                   </p>
-                  <h2 className=" weight">{product?.packetweight}</h2>
+                  <h2 className=" weight">{product?.packetweight} {product.unitOfMeasure}</h2>
+
                   <p>
                     <Link
                       to={`/single-product/${product?._id}`}

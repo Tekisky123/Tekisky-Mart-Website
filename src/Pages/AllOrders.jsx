@@ -134,7 +134,9 @@ const AllOrders = () => {
                   <td>{order.mobileNumber}</td>
                   <td>{order.address}</td>
                   <td>{order.totalAmount}</td>
-                  <td><b>{order.orderStatus}</b></td>
+                  <td>
+                    <b>{order.orderStatus}</b>
+                  </td>
                   <td>{formatDate(order.createdAt)}</td>
                   <td>
                     <BootstrapButton
@@ -194,28 +196,32 @@ const AllOrders = () => {
               <p>Address: {selectedOrder.address}</p>
               <p>Landmark: {selectedOrder.landmark}</p>
               <p>Total Amount: {selectedOrder.totalAmount}</p>
-              <p>Order Status: <b>{selectedOrder.orderStatus}</b></p>
+              <p>
+                Order Status: <b>{selectedOrder.orderStatus}</b>
+              </p>
               <p>Created At: {formatDate(selectedOrder.createdAt)}</p>
 
               <h5>Products:</h5>
               <ul>
-                {selectedOrder.productsDetails.map((product, index) => (
-                  <li key={product._id}>
-                    <p>Product {index + 1}:</p>
-                    <p>Product Name: {product?.productName}</p>
-                    <p>
-                      Image URL:{" "}
-                      <img
-                        src={product.imageURL[0]}
-                        alt={`Product ${index + 1}`}
-                      />
-                    </p>
-                    <p>Packet Weight: {product.packetweight}</p>
-                    <p>MRP: {product.mrp}</p>
-                    <p>Quantity: {product.quantity}</p>
-                    <p>Created By: {product.createBy}</p>
-                  </li>
-                ))}
+              {selectedOrder.productDetails &&
+  selectedOrder.productDetails.map((product, index) => (
+    <li key={product._id}>
+      <p>Product {index + 1}:</p>
+      <p>Product Name: {product?.productName}</p>
+      <p>
+        Image URL:{" "}
+        <img src={product.imageURL[0]} alt={`Product ${index + 1}`} />
+      </p>
+      <p>
+        Packet Weight: {product.packetweight} {product.unitOfMeasure}
+      </p>
+      <p>MRP: {product.mrp}</p>
+      <p>Quantity: {product.quantity}</p>
+      <p>Created By: {product.createBy}</p>
+    </li>
+  ))}
+
+
               </ul>
             </div>
           )}
