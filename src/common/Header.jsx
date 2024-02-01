@@ -18,6 +18,73 @@ const Header = () => {
   const mobileMenuRef = useRef(null);
   const overlayRef = useRef(null);
   const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSearchChange = async (event) => {
+    const newSearchQuery = event.target.value;
+
+    // Update the search query as the user types
+    setSearchQuery(newSearchQuery);
+
+    try {
+      setIsLoading(true);
+
+      // Check if the search query is non-empty before making the API call
+      if (newSearchQuery.trim() !== "") {
+        const response = await fetch(`https://tekiskymart.onrender.com/admin/getproduct?search=${newSearchQuery}`);
+        const data = await response.json();
+
+        if (data.success) {
+          const matchingProducts = data.products.filter(product =>
+            product.productName.toLowerCase().includes(newSearchQuery.toLowerCase())
+          );
+
+          setSearchResults(matchingProducts);
+        } else {
+          setSearchResults([]);
+        }
+      } else {
+        // If the search query is empty, clear the search results
+        setSearchResults([]);
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  
+  const closeModal = () => {
+    setSearchResults([]);
+    setSearchQuery(""); // Clear the search input
+  };
+
+  const handleSuggestionClick = async (id) => {
+    try {
+      const response = await fetch(`https://tekiskymart.onrender.com/admin/getoneproduct/${id}`);
+      const data = await response.json();
+
+      if (data.success) {
+        const product = data.getOneProduct;
+        console.log('dgasdhgashd',product);
+        // Product found, navigate to the product page using the _id
+        navigate(`/single-product/${product._id}`);
+        // Close the search results dropdown and clear the search input
+        closeModal();
+      } else {
+        // Log the full response for debugging purposes
+        console.error("Unexpected response:", response);
+        // Product not found, handle accordingly (e.g., show an error message)
+        console.error("Product not found");
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+      // Handle the error (e.g., show an error message)
+    }
+  };
 
   useEffect(() => {
     // Fetch product categories from your API endpoint
@@ -113,16 +180,44 @@ const Header = () => {
           </Link>
 
           <div className="header-search-container">
-            <input
-              type="search"
-              name="search"
-              className="search-field"
-              placeholder="Search..."
-            />
-            <button className="search-btn">
-              <CiSearch className="search" />
-            </button>
-          </div>
+  <div className="search-container">
+    <input
+      type="search"
+      name="search"
+      className="search-field"
+      placeholder="Search..."
+      value={searchQuery}
+      onChange={handleSearchChange}
+    />
+    {searchResults.length > 0 && (
+      <div className="search-results-dropdown">
+        <button className="close-modal-btn" onClick={closeModal}>
+          <IoCloseSharp className="close-icon" />
+        </button>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {searchResults.map((product) => (
+              <div
+                key={product.productId}
+                onClick={() => handleSuggestionClick(product._id)}
+              >
+                <img src={product.imageURL[0]} alt={product.productName} />
+                <p>{product.productName}</p>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    )}
+    {!isLoading && searchQuery.trim() !== '' && searchResults.length === 0 && <p>No products found</p>}
+  </div>
+  <button className="search-btn">
+    <CiSearch className="search" />
+  </button>
+</div>
+
 
           <div className="header-user-actions">
             {/* <button className="action-btn">

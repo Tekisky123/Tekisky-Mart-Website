@@ -6,6 +6,7 @@ import "../Assets/Styles/AddProductForm.css"
 const AddProductForm = () => {
   const navigate = useNavigate();
   const [showOtherCategoryInput, setShowOtherCategoryInput] = useState(false);
+  const [unitOfMeasure, setUnitOfMeasure] = useState('');
   const [formData, setFormData] = useState({
     productCategory: '',
     productName: '',
@@ -94,39 +95,41 @@ const validateForm = () => {
 
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!validateForm()) {
-      return;
+  if (!validateForm()) {
+    return;
+  }
+  setLoading(true);
+
+  const apiUrl = 'https://tekiskymart.onrender.com/admin/addproduct';
+
+  const formDataToSend = new FormData();
+
+  for (const key in formData) {
+    if (key === 'files') {
+      formData[key].forEach((file) => {
+        formDataToSend.append('files', file);
+      });
+    } else if (key === 'packetweight') {
+      formDataToSend.append('packetweight', `${formData.packetweight} ${unitOfMeasure}`);
+    } else {
+      formDataToSend.append(key, formData[key]);
     }
-    setLoading(true); // Set loading to true when submitting
+  }
 
+  try {
+    await axios.post(apiUrl, formDataToSend);
+    console.log('Data successfully posted');
+    navigate('/');
+  } catch (error) {
+    console.error('Error posting data:', error);
+  } finally {
+    setLoading(false);
+  }
+};
 
-    const apiUrl = 'https://tekiskymart.onrender.com/admin/addproduct';
-
-    const formDataToSend = new FormData();
-
-    for (const key in formData) {
-      if (key === 'files') {
-        formData[key].forEach((file) => {
-          formDataToSend.append('files', file);
-        });
-      } else {
-        formDataToSend.append(key, formData[key]);
-      }
-    }
-
-    try {
-      await axios.post(apiUrl, formDataToSend);
-      console.log('Data successfully posted');
-      navigate('/');
-    } catch (error) {
-      console.error('Error posting data:', error);
-    }finally {
-      setLoading(false); // Set loading to false when the request is complete
-    }
-  };
 
   return (
     <div  className="addProductForm">
@@ -290,10 +293,10 @@ const validateForm = () => {
 </label>
 
 
-    <label className="formLabel">
+<label className="formLabel">
       Packet Weight:
       <input
-        type="text"
+        type="number"
         value={formData.packetweight}
         onChange={(e) =>
           setFormData({ ...formData, packetweight: e.target.value })
@@ -302,6 +305,25 @@ const validateForm = () => {
       />
       {errors.packetweight && (
         <span className="errorMessage">{errors.packetweight}</span>
+      )}
+    </label>
+
+    <label className="formLabel">
+      Unit of Measure:
+      <select
+        value={unitOfMeasure}
+        onChange={(e) => setUnitOfMeasure(e.target.value)}
+        className={`formInput ${errors.unitOfMeasure ? 'error' : ''}`}
+      >
+        <option value="">Select Unit</option>
+        <option value="g">Gram (g)</option>
+        <option value="kg">kilogram  (kg)</option>
+        <option value="l">Liter (l)</option>
+        <option value="ml">Milli liter (ml)</option>
+        {/* Add more units as needed */}
+      </select>
+      {errors.unitOfMeasure && (
+        <span className="errorMessage">{errors.unitOfMeasure}</span>
       )}
     </label>
 

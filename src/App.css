@@ -112,25 +112,6 @@ body {
  * scrollbar style
  */
 
-body::-webkit-scrollbar {
-  width: 15px;
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--white);
-  border-left: 1px solid var(--cultured);
-}
-
-body::-webkit-scrollbar-thumb {
-  background: hsl(0, 0%, 80%);
-  border: 3px solid var(--white);
-  border-radius: 10px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 0%, 70%);
-}
-
 /*-----------------------------------*\
   #REUSED STYLE
 \*-----------------------------------*/
@@ -139,28 +120,6 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 0 15px;
 }
 
-.has-scrollbar {
-  padding-bottom: 5px;
-}
-
-.has-scrollbar::-webkit-scrollbar {
-  width: 12px; /* for vertical scroll */
-  height: 12px; /* for horizontal scroll */
-}
-
-.has-scrollbar::-webkit-scrollbar-thumb {
-  background: transparent;
-  border: 3px solid var(--white);
-  border-radius: 20px;
-}
-
-.has-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: hsl(0, 0%, 90%);
-}
-
-.has-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 0%, 80%);
-}
 
 .title {
   color: var(--eerie-black);
@@ -517,7 +476,7 @@ body::-webkit-scrollbar-thumb:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  /* z-index: 999; */
 }
 
 .modal-close-btn {
@@ -5414,7 +5373,78 @@ footer {
     min-width: calc(50% - 15px);
   }
 }
+/* search  */
 
+.search-container {
+  position: relative;
+  background-color: white;
+  /* z-index: 999; */
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  z-index: 99;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-results-dropdown div {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  border: 0.1px solid rgba(128, 128, 128, 0.197);
+
+}
+.close-modal-btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-icon {
+  font-size: 30px;
+}
+
+.search-results-dropdown img {
+  width: 100px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.search-results-dropdown p {
+  margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+  .search-results-dropdown div {
+    flex-direction: row; /* Change to column layout for mobile view */
+    justify-content:start;
+    border: 0.1px solid rgba(128, 128, 128, 0.197);
+
+    padding: 8px;
+  }
+
+  .search-results-dropdown img {
+    width: 20%; /* Make image responsive */
+    height: 80px;
+    object-fit: scale-down;
+  }
+
+  .close-icon {
+    font-size: 24px;
+  }
+}
 /**
  * responsive larger than 768px screen
  */
@@ -5479,6 +5509,11 @@ footer {
   /**
    * #HEADER 
    */
+/* Add this to your existing CSS or create a new CSS file */
+/* Add this to your existing CSS or create a new CSS file */
+/* Add this to your existing CSS or create a new CSS file */
+
+
 
   .header-main .container {
     gap: 80px;
