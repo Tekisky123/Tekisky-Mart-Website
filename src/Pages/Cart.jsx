@@ -125,7 +125,7 @@ const ShoppingCart = () => {
                 <div className="col left">
                   <div className="thumbnail">
                     <a href="#">
-                      <img src={item.imageURL[0]} alt={item.imageURL[0]} />
+                      <img className='cartImg' src={item.imageURL[0]} alt={item.imageURL[0]} />
                     </a>
                   </div>
                   <div className="detail">
