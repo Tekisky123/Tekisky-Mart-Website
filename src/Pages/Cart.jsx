@@ -124,9 +124,9 @@ const ShoppingCart = () => {
               <li className="row" key={index}>
                 <div className="col left">
                   <div className="thumbnail">
-                    <a href="#">
+                    <Link>
                       <img src={item.imageURL[0]} alt={item.imageURL[0]} />
-                    </a>
+                    </Link>
                   </div>
                   <div className="detail">
                     <div className="name" style={{color:"#0cc1e06"}}>{item.productName}</div>

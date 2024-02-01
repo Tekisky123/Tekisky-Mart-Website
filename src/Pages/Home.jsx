@@ -12,7 +12,7 @@ const Home = () => {
       subtitle: "Trending item",
       title: " Indulge in Pure Sweetness: Elevate your taste buds with Kimia Dates ",
       price: "200.00",
-      link: "/",
+      link: "/category/OTHERS",
     },
     {
       imgSrc:

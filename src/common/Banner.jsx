@@ -13,7 +13,7 @@ const Banner = ({ banners }) => {
                 <p className="banner-subtitle">{banner.subtitle}</p>
                 <h2 className="banner-title">{banner.title}</h2>
                 <p className="banner-text">
-                  starting at &dollar; <b>{banner.price}</b>
+                  starting at ₹ <b>{banner.price}</b>
                 </p>
                 <Link to={banner.link} className="banner-btn">
                   Shop now

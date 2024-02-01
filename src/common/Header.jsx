@@ -57,14 +57,33 @@ const Header = () => {
   };
   
   
-  
-
-  const handleSuggestionClick = (productId) => {
-    // Implement navigation logic to the product page based on productId
-    // For example, navigate(`/product/${productId}`)
-  };
   const closeModal = () => {
     setSearchResults([]);
+    setSearchQuery(""); // Clear the search input
+  };
+
+  const handleSuggestionClick = async (id) => {
+    try {
+      const response = await fetch(`https://tekiskymart.onrender.com/admin/getoneproduct/${id}`);
+      const data = await response.json();
+
+      if (data.success) {
+        const product = data.getOneProduct;
+        console.log('dgasdhgashd',product);
+        // Product found, navigate to the product page using the _id
+        navigate(`/single-product/${product._id}`);
+        // Close the search results dropdown and clear the search input
+        closeModal();
+      } else {
+        // Log the full response for debugging purposes
+        console.error("Unexpected response:", response);
+        // Product not found, handle accordingly (e.g., show an error message)
+        console.error("Product not found");
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+      // Handle the error (e.g., show an error message)
+    }
   };
 
   useEffect(() => {
@@ -161,39 +180,44 @@ const Header = () => {
           </Link>
 
           <div className="header-search-container">
-        <div className="search-container">
-          <input
-            type="search"
-            name="search"
-            className="search-field"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          {searchResults.length > 0 && (
-            <div className="search-results-dropdown">
-               <button className="close-modal-btn" onClick={closeModal}>
-                <IoCloseSharp className="close-icon"/>
-              </button>
-              {isLoading && <p>Loading...</p>}
-              {!isLoading &&
-                searchResults.map((product) => (
-                  <div
-                    key={product.productId}
-                    onClick={() => handleSuggestionClick(product.productId)}
-                  >
-                    <img src={product.imageURL[0]} alt={product.productName} />
-                    <p>{product.productName}</p>
-                  </div>
-                ))}
-             
-            </div>
-          )}
-        </div>
-        <button className="search-btn">
-          <CiSearch className="search" />
+  <div className="search-container">
+    <input
+      type="search"
+      name="search"
+      className="search-field"
+      placeholder="Search..."
+      value={searchQuery}
+      onChange={handleSearchChange}
+    />
+    {searchResults.length > 0 && (
+      <div className="search-results-dropdown">
+        <button className="close-modal-btn" onClick={closeModal}>
+          <IoCloseSharp className="close-icon" />
         </button>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {searchResults.map((product) => (
+              <div
+                key={product.productId}
+                onClick={() => handleSuggestionClick(product._id)}
+              >
+                <img src={product.imageURL[0]} alt={product.productName} />
+                <p>{product.productName}</p>
+              </div>
+            ))}
+          </>
+        )}
       </div>
+    )}
+    {!isLoading && searchQuery.trim() !== '' && searchResults.length === 0 && <p>No products found</p>}
+  </div>
+  <button className="search-btn">
+    <CiSearch className="search" />
+  </button>
+</div>
+
 
           <div className="header-user-actions">
             {/* <button className="action-btn">
