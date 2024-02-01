@@ -19,11 +19,9 @@ const PaymentStep = () => {
     setSingleItems,
     totalSavedAmount,
   } = useContext(Context);
-  console.log("cartItems", cartItems);
-  console.log("singleItems", singleItems);
+
   const [showPopup, setShowPopup] = useState(false);
 
-  console.log('showPopup',showPopup)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -62,9 +60,7 @@ const PaymentStep = () => {
   };
 
   const handleSubmit = async () => {
-    // Handle form submission and order details here
-    console.log("Form data:", formData);
-    console.log("Order details:", cartItems);
+  
     setLoading(true);
     try {
       const payload = {
@@ -88,7 +84,7 @@ const PaymentStep = () => {
       });
 
       payload.products = selectedProducts;
-      console.log("payload", payload);
+
 
       const response = await axios.post(
         `
@@ -107,10 +103,10 @@ const PaymentStep = () => {
         
   setTimeout(() => {
       setShowPopup(false);
-    }, 3000); 
+    }, 5000); 
         setTimeout(() => {
           navigate("/");
-        }, 4000);
+        }, 5000);
        
       } else {
         // Handle error if needed
@@ -222,8 +218,6 @@ const PaymentStep = () => {
     ];
 
     let hasError = false;
-
-    console.log(hasError);
 
     requiredFields.forEach((field) => {
       if (!formData[field]) {

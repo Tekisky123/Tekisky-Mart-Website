@@ -16,7 +16,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "./common/Context";
 import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
-import SallerAllOrders from "./Pages/SallerAllOrders";
+import SellerAllOrders from "./Pages/SallerAllOrders";
 
 function App() {
   const navigate = useNavigate();
@@ -47,19 +47,22 @@ function App() {
       <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/users" element={<Users/>}/>
         <Route path="/all-orders" element={<AllOrders />} />
-      </>
+      </> }
+               
+               
+        <Route path="/add-product" element={<AddProductForm/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/seller-orders" element={<SellerAllOrders />} />
 
-     }
-        
+
         <Route path="/" element={ <Home /> } />
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
         <Route path="/payment-step" element={<PaymentStep/>}/>
         <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
-        <Route path="/add-product" element={<AddProductForm/>}/>
-        <Route path="/login" element={<Login/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
-        <Route path="/saller-orders" element={<SallerAllOrders />} />
+
+
 
  
       </Routes>

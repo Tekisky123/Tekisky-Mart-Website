@@ -36,12 +36,11 @@ const Users = () => {
     shopCategory: "",
   });
 
-  console.log("formdata",formData)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`${Base_Url}${AllUserAPI}`);
-        console.log("response", response);
+
         setUserData(response?.data?.users?.users);
         setLoading(false);
       } catch (error) {
@@ -94,7 +93,7 @@ const Users = () => {
       role: formData.role,
       shopCategory: formData.shopCategory,
     };
-      console.log("payload",payload)
+
       // Make API call to update user
       await axios.post(`${Base_Url}${updateUserAPI}${id}`, payload);
 
@@ -119,7 +118,6 @@ const Users = () => {
   //       updatedData.splice(index, 1);
   //       setUserData(updatedData);
 
-  //       console.log(`Delete row at index ${index}`);
   //     }
   //   };
 
@@ -133,7 +131,7 @@ const Users = () => {
     }
   };
   const confirmDelete = async (id) => {
-    console.log("id", id);
+
     try {
       const updatedData = [...userData];
       const deletedUser = updatedData[deleteIndex];

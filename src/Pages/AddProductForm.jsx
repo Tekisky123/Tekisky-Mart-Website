@@ -44,6 +44,7 @@ const AddProductForm = () => {
     }));
     setFilePreviews(previews);
   }, []);
+  
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
 
@@ -121,7 +122,6 @@ const handleSubmit = async (e) => {
 
   try {
     await axios.post(apiUrl, formDataToSend);
-    console.log('Data successfully posted');
     navigate('/');
   } catch (error) {
     console.error('Error posting data:', error);
