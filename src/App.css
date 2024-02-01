@@ -3041,7 +3041,7 @@ body::-webkit-scrollbar-thumb:hover {
   text-transform: capitalize;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--cultured);
-  margin: 30px 0;
+  margin: 0px 30px 30px 30px;
 }
 
 /*-----------------------------------*\
@@ -3495,7 +3495,11 @@ body::-webkit-scrollbar-thumb:hover {
   line-height: 1;
   padding: 2px 4px;
   -webkit-border-radius: 20px;
-  border-radius: 20px;
+  border-radius: 50%;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mobile-navigation-menu {

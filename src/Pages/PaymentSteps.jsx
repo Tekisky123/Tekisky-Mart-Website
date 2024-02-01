@@ -21,6 +21,9 @@ const PaymentStep = () => {
   } = useContext(Context);
   console.log("cartItems", cartItems);
   console.log("singleItems", singleItems);
+  const [showPopup, setShowPopup] = useState(false);
+
+  console.log('showPopup',showPopup)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -30,6 +33,7 @@ const PaymentStep = () => {
     houseNo: "",
     area: "",
     landMark: "",
+    pincode: "",
     // addressType: "",
     additionalAdd: "",
   });
@@ -41,6 +45,7 @@ const PaymentStep = () => {
     houseNo: "",
     area: "",
     landMark: "",
+    pincode: "",
     addressType: "",
     additionalAdd: "",
   });
@@ -67,6 +72,7 @@ const PaymentStep = () => {
         mobileNumber: formData.phoneNumber,
         alternateNumber: formData.AlternateNumber,
         landmark: formData.landMark,
+        pincode: formData.pincode,
         address: formData.additionalAdd,
         products: [],
         totalAmount: cartSubTotal,
@@ -95,12 +101,16 @@ const PaymentStep = () => {
         toast.success(
           "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
         );
-        setSingleItems([]);
-        // Close the modal only after a successful request
+        setShowPopup(true);
+        // setSingleItems([]);
         closeModal();
+        
+  setTimeout(() => {
+      setShowPopup(false);
+    }, 3000); 
         setTimeout(() => {
           navigate("/");
-        }, 2000);
+        }, 4000);
        
       } else {
         // Handle error if needed
@@ -115,6 +125,7 @@ const PaymentStep = () => {
       setLoading(false); // Set loading to false when the request is complete
     }
   };
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -205,7 +216,8 @@ const PaymentStep = () => {
     var requiredFields = [
       "phoneNumber",
       "fullName",
-      // "landMark",
+      "landMark",
+      "pincode",
       "additionalAdd",
     ];
 
@@ -340,7 +352,7 @@ const PaymentStep = () => {
                     {" "}
                     <div className="Formlabel">
                       Landmark e.g. near IT park
-                      {/* <span className="error-message">⁕</span>{" "} */}
+                      <span className="error-message">⁕</span>{" "}
                     </div>
                   </Col>
                   <Col xs={12} md={6} xl={6}>
@@ -350,6 +362,24 @@ const PaymentStep = () => {
                       placeholder="Enter Landmark e.g. near IT park"
                       name="landMark"
                       value={formData.landMark}
+                      onChange={handleInputChange}
+                    />
+                  </Col>
+
+                  <Col xs={12} md={4} xl={4}>
+                    {" "}
+                    <div className="Formlabel">
+                    Pin Code 
+                      <span className="error-message">⁕</span>{" "}
+                    </div>
+                  </Col>
+                  <Col xs={12} md={6} xl={6}>
+                    <input
+                      type="text"
+                      className="MyInput"
+                      placeholder="Enter pincode"
+                      name="pincode"
+                      value={formData.pincode}
                       onChange={handleInputChange}
                     />
                   </Col>
@@ -405,23 +435,27 @@ const PaymentStep = () => {
                 <Col xs={12} md={8} xl={8}>
                   <div className="customerDetail">
                     <div>
-                      <span>Name</span>
+                      <span style={{fontWeight:"bold"}}>Name</span>
                       <span>{formData.fullName}</span>
                     </div>
                     <div>
-                      <span>Contact Number</span>
+                      <span style={{fontWeight:"bold"}}>Contact Number</span>
                       <span>{formData.phoneNumber}</span>
                     </div>
                     <div>
-                      <span>Alternate Mobile Number</span>
+                      <span style={{fontWeight:"bold"}}>Alternate Mobile Number</span>
                       <span>{formData.AlternateNumber}</span>
                     </div>
                     <div>
-                      <span>Landmark</span>
+                      <span style={{fontWeight:"bold"}}>Landmark</span>
                       <span>{formData.landMark}</span>
                     </div>
                     <div>
-                      <span>Address Details</span>
+                      <span style={{fontWeight:"bold"}}>Pin Code</span>
+                      <span>{formData.pincode}</span>
+                    </div>
+                    <div>
+                      <span style={{fontWeight:"bold"}}>Address Details</span>
                       <span>{formData.additionalAdd}</span>
                     </div>
                   </div>
@@ -438,7 +472,8 @@ const PaymentStep = () => {
                         Shipping
                       </h5>
                       <h6 style={{ color: "gray" }}>
-                        free delivery for order above 500 delivery charge 20 rs
+                        free delivery for order above 500 
+                        {/* delivery charge 20 rs */}
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
                         <span>Total amount saved :</span>
@@ -472,6 +507,21 @@ const PaymentStep = () => {
             </div>
           </div>
         </Modal>
+        {showPopup && (
+          <div className="popup-overlay">
+            <div className="popup-container">
+              <div className="card">
+                <div className="circle-container">
+                  <i className="checkmark">✓</i>
+                </div>
+                <h1 className="title">Order Successfull</h1>
+                <h5>Your order Id : 5412458</h5>
+                <p className="message">Your order has been placed successfully<br/> Our delivery boy will contact you shortly</p>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

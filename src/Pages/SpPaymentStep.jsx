@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import { Base_Url, saveOrderProductAPI } from "../common/Apis";
 import { Context } from "../common/Context";
+import "../Assets/Styles/PaymentSteps.css"
 
 const SpPaymentStep = () => {
   const {
@@ -15,8 +16,7 @@ const SpPaymentStep = () => {
     toast,
     singleItems,
   } = useContext(Context);
-  console.log("cartItems", cartItems);
-  console.log("singleItems", singleItems);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -26,6 +26,7 @@ const SpPaymentStep = () => {
     houseNo: "",
     area: "",
     landMark: "",
+    pincode: "",
     additionalAdd: "",
   });
   const [errors, setErrors] = useState({
@@ -36,6 +37,7 @@ const SpPaymentStep = () => {
     houseNo: "",
     area: "",
     landMark: "",
+    pincode: "",
     addressType: "",
     additionalAdd: "",
   });
@@ -62,6 +64,7 @@ const SpPaymentStep = () => {
         mobileNumber: formData.phoneNumber,
         alternateNumber: formData.AlternateNumber,
         landmark: formData.landMark,
+        pincode: formData.pincode,
         address: formData.additionalAdd,
         products: [],
         totalAmount: singleSubTotal,
@@ -93,10 +96,14 @@ const SpPaymentStep = () => {
         );
         // setSingleItems([])
         // Close the modal only after a successful request
+        setShowPopup(true);
         closeModal();
         setTimeout(() => {
+      setShowPopup(false);
+    }, 3000); 
+        setTimeout(() => {
           navigate("/");
-        }, 2000);
+        }, 4000);
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
@@ -195,7 +202,8 @@ const SpPaymentStep = () => {
     var requiredFields = [
       "phoneNumber",
       "fullName",
-      // "landMark",
+      "landMark",
+      "pincode",
       "additionalAdd",
     ];
 
@@ -334,7 +342,7 @@ const SpPaymentStep = () => {
                     {" "}
                     <div className="Formlabel">
                       Landmark e.g. near IT park
-                      {/* <span className="error-message">⁕</span>{" "} */}
+                      <span className="error-message">⁕</span>{" "}
                     </div>
                   </Col>
                   <Col xs={12} md={6} xl={6}>
@@ -344,6 +352,23 @@ const SpPaymentStep = () => {
                       placeholder="Enter Landmark e.g. near IT park"
                       name="landMark"
                       value={formData.landMark}
+                      onChange={handleInputChange}
+                    />
+                  </Col>
+                  <Col xs={12} md={4} xl={4}>
+                    {" "}
+                    <div className="Formlabel">
+                    Pin Code 
+                      <span className="error-message">⁕</span>{" "}
+                    </div>
+                  </Col>
+                  <Col xs={12} md={6} xl={6}>
+                    <input
+                      type="text"
+                      className="MyInput"
+                      placeholder="Enter pincode"
+                      name="pincode"
+                      value={formData.pincode}
                       onChange={handleInputChange}
                     />
                   </Col>
@@ -390,20 +415,24 @@ const SpPaymentStep = () => {
                 <Col xs={12} md={8} xl={8}>
                   <div className="customerDetail">
                     <div>
-                      <span>Name</span>
+                      <span style={{fontWeight:"bold"}}>Name</span>
                       <span>{formData.fullName}</span>
                     </div>
                     <div>
-                      <span>Contact Number</span>
+                      <span style={{fontWeight:"bold"}}>Contact Number</span>
                       <span>{formData.phoneNumber}</span>
                     </div>
                     <div>
-                      <span>Alternate Mobile Number</span>
+                      <span style={{fontWeight:"bold"}}>Alternate Mobile Number</span>
                       <span>{formData.AlternateNumber}</span>
                     </div>
                     <div>
-                      <span>Landmark</span>
+                      <span style={{fontWeight:"bold"}}>Landmark</span>
                       <span>{formData.landMark}</span>
+                    </div>
+                    <div>
+                      <span style={{fontWeight:"bold"}}>Pin Code</span>
+                      <span>{formData.pincode}</span>
                     </div>
                     <div>
                       <span>Address Details</span>
@@ -423,7 +452,8 @@ const SpPaymentStep = () => {
                         Shipping
                       </h5>
                       <h6 style={{ color: "gray" }}>
-                        free delivery for order above 500 delivery charge 20 rs
+                        free delivery for order above 500 
+                        {/* delivery charge 20 rs */}
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
                         <span>saved Amount:</span>
@@ -458,6 +488,20 @@ const SpPaymentStep = () => {
             </div>
           </div>
         </Modal>
+        {showPopup && (
+          <div className="popup-overlay">
+            <div className="popup-container">
+              <div className="card">
+                <div className="circle-container">
+                  <i className="checkmark">✓</i>
+                </div>
+                <h1 className="title">Order Successfull</h1>
+                <h5>Your order Id : 5412458</h5>
+                <p className="message">Your order has been placed successfully<br/> Our delivery boy will contact you shortly</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

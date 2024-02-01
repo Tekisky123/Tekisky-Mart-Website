@@ -563,6 +563,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 .customerDetail div{
  width: 100%;
@@ -790,9 +791,6 @@
     
   }
 
-  .slider2-item {
-    flex-direction: column;
-  }
 
   .slider2-item img {
     width: 100%;
@@ -915,5 +913,101 @@
 
   .countdown-item span {
     font-size: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  .slider2-item img{
+    object-fit: contain;
+    height: 300px;
+  }
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+
+  .slider2-item img{
+    object-fit: contain;
+    height: 300px;
+  }
+  .countdown-timer{
+width: 100%;
+  }
+}
+
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+
+  .slider2-item img{
+    object-fit: contain;
+    height: 400px;
+  }
+  .countdown-timer{
+width: 100%;
+  }
+  .product-details {
+    height: auto;
+    width: 85%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+}
+
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+  .slider2-item img{
+    object-fit: contain;
+  }
+}
+
+
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+
+  .slider2-item img{
+    object-fit: contain;
+  }
+  .slider2-item{
+    height: 330px;
+  }
+  .deal-of-the-day-slider{
+    height: 100%;
+  }
+}
+
+
+@media only screen and (min-width: 1401px)  {
+  .slider2-item img{
+    object-fit: contain;
+  }
+  .slider2-item{
+    height: 350px;
+  }
+  .deal-of-the-day-slider{
+    height: 100%;
   }
 }
