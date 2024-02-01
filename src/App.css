@@ -438,7 +438,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .header-main {
-  padding: 20px 0;
+  /* padding: 20px 0; */
   border-bottom: 1px solid var(--cultured);
   
 }
@@ -1963,7 +1963,7 @@ footer {
   }
 
   .header-main {
-    padding: 25px 0;
+    /* padding: 25px 0; */
   }
 
   .mobile-bottom-navigation {
@@ -3437,7 +3437,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .header-main {
-  padding: 20px 0;
+  /* padding: 20px 0; */
   border-bottom: 1px solid var(--cultured);
 }
 
@@ -5195,7 +5195,7 @@ footer {
   }
 
   .header-main {
-    padding: 25px 0;
+    /* padding: 25px 0; */
   }
 
   .mobile-bottom-navigation {
