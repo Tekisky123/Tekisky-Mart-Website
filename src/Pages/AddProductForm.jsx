@@ -42,6 +42,7 @@ const AddProductForm = () => {
     }));
     setFilePreviews(previews);
   }, []);
+  
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
 

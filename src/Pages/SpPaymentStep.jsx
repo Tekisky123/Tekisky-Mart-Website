@@ -54,9 +54,7 @@ const SpPaymentStep = () => {
   };
 
   const handleSubmit = async () => {
-    // Handle form submission and order details here
-    console.log("Form data:", formData);
-    console.log("Order details:", cartItems);
+
     setLoading(true);
     try {
       const payload = {
@@ -80,7 +78,7 @@ const SpPaymentStep = () => {
       });
 
       payload.products = selectedProducts;
-      console.log("payload", payload);
+
 
       const response = await axios.post(
         `
@@ -88,8 +86,7 @@ const SpPaymentStep = () => {
         payload
       );
       const data = response.data;
-      console.log("res",response)
-      console.log("data",response.data)
+
       if (data.success||response.status==201) {
         toast.success(
           "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
@@ -100,10 +97,10 @@ const SpPaymentStep = () => {
         closeModal();
         setTimeout(() => {
       setShowPopup(false);
-    }, 3000); 
+    }, 5000); 
         setTimeout(() => {
           navigate("/");
-        }, 4000);
+        }, 5000);
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
@@ -209,7 +206,6 @@ const SpPaymentStep = () => {
 
     let hasError = false;
 
-    console.log(hasError);
 
     requiredFields.forEach((field) => {
       if (!formData[field]) {

@@ -397,7 +397,7 @@ body {
 }
 
 .header-main {
-  padding: 20px 0;
+  /* padding: 20px 0; */
   border-bottom: 1px solid var(--cultured);
   
 }
@@ -1873,14 +1873,12 @@ footer {
   display: inline;
   color: inherit;
 }
-
-/*-----------------------------------*\
-  #RESPONSIVE
-\*-----------------------------------*/
-
-/**
- * responsive larger than 480px screen
- */
+/* .header-logo */
+@media (min-width: 320px) {
+.header-logo{
+  width: auto;
+}
+}
 
 @media (min-width: 480px) {
   /**
@@ -1922,7 +1920,7 @@ footer {
   }
 
   .header-main {
-    padding: 25px 0;
+    /* padding: 25px 0; */
   }
 
   .mobile-bottom-navigation {
@@ -2009,9 +2007,6 @@ footer {
   }
 }
 
-/**
- * responsive larger than 570px screen
- */
 
 @media (min-width: 570px) {
   /**
@@ -2118,9 +2113,6 @@ footer {
   }
 }
 
-/**
- * responsive larger than 768px screen
- */
 
 @media (min-width: 768px) {
   /**
@@ -2279,9 +2271,7 @@ footer {
   }
 }
 
-/**
- * responsive larger than 1024px screen
- */
+
 
 @media (min-width: 1024px) {
   /**
@@ -2689,9 +2679,7 @@ footer {
   }
 }
 
-/**
- * responsive larger than 1200px screen
- */
+
 
 @media (min-width: 1200px) {
   /**
@@ -2803,9 +2791,7 @@ footer {
   }
 }
 
-/**
- * responsive larger than 1400px screen
- */
+
 
 @media (min-width: 1400px) {
   /**
@@ -2837,17 +2823,7 @@ footer {
     max-width: 460px;
   }
 }
-/*-----------------------------------*\
-  #style.css
-\*-----------------------------------*/
 
-/**
- * copyright 2022 @codewithsadee 
- */
-
-/*-----------------------------------*\
-  #CUSTOM PROPERTY
-\*-----------------------------------*/
 
 :root {
   /**
@@ -3396,7 +3372,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .header-main {
-  padding: 20px 0;
+  /* padding: 20px 0; */
   border-bottom: 1px solid var(--cultured);
 }
 
@@ -5154,7 +5130,7 @@ footer {
   }
 
   .header-main {
-    padding: 25px 0;
+    /* padding: 25px 0; */
   }
 
   .mobile-bottom-navigation {
@@ -6073,9 +6049,6 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /**
-   * #TESTIMONIALS, CTA & SERVICE 
-   */
 
   .testimonials-box {
     display: -webkit-box;
@@ -6123,9 +6096,6 @@ footer {
     min-width: 20%;
   }
 
-  /**
-   * #BLOG
-   */
 
   .blog-card {
     min-width: -webkit-calc(33.33% - 20px);
@@ -6136,9 +6106,7 @@ footer {
     --fs-5: 1rem;
   }
 
-  /**
-   * #FOOTER
-   */
+
 
   .footer-nav-list {
     min-width: -webkit-calc(20% - 16px);

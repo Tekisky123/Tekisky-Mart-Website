@@ -961,8 +961,9 @@ width: 100%;
 @media only screen and (min-width: 769px) and (max-width: 992px) {
 
   .slider2-item img{
-    object-fit: contain;
+    object-fit: cover;
     height: 400px;
+    width: 350px;
   }
   .countdown-timer{
 width: 100%;

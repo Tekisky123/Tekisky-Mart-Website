@@ -69,7 +69,7 @@ const Header = () => {
 
       if (data.success) {
         const product = data.getOneProduct;
-        console.log('dgasdhgashd',product);
+  
         // Product found, navigate to the product page using the _id
         navigate(`/single-product/${product._id}`);
         // Close the search results dropdown and clear the search input

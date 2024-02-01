@@ -26,7 +26,7 @@ const AppContext = ({ children }) => {
   const [quantity, setQuantity] = useState(1);
 
 
-  console.log("singleItems",singleItems)
+
 
 
   useEffect(() => {
@@ -129,10 +129,9 @@ const AppContext = ({ children }) => {
     setCartItems(items);
   };
 
-  // console.log("cartItems",cartItems)
+
 
   const handleRemoveFromCart = (product, index) => {
-    console.log("product", product);
 
     // Remove from cartItems
     let updatedCartItems = [...cartItems];
@@ -156,7 +155,7 @@ const AppContext = ({ children }) => {
 
   const handleBuyNow = (product) => {
     // setSingleItems(product)
-    // console.log('buyNow', product);
+
     setSingleItems({
       ...singleItems,
       product:product,

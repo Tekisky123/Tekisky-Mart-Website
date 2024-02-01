@@ -80,7 +80,7 @@ const DealOfTheDay = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 10000000000,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
