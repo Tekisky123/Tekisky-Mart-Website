@@ -19,6 +19,7 @@ import { Context } from "./common/Context";
 import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
 import SellerAllOrders from "./Pages/SallerAllOrders";
+import ProductList from './Pages/ProductList';
 import PreOrder from './Pages/PreOrder';
 import SaleWithUs from './Pages/SaleWithUs';
 
@@ -69,6 +70,8 @@ const token = localStorage.getItem('token');
         <Route path="/all-orders" element={<AllOrders />} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/add-product" element={<AddProductForm/>}/>
+        <Route path="/products-list" element={<ProductList/>}/>
+        
       </> 
       }
      {userRole == "seller" &&
@@ -76,6 +79,8 @@ const token = localStorage.getItem('token');
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/seller-orders" element={<SellerAllOrders />} />
+        <Route path="/products-list" element={<ProductList/>}/>
+
       </> 
       }
                
