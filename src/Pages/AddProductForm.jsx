@@ -316,11 +316,10 @@ const AddProductForm = () => {
             className={`formInput ${errors.unitOfMeasure ? "error" : ""}`}
           >
             <option value="">Select Unit</option>
-            <option value="gram">Gram</option>
-            <option value="kg">Kilogram</option>
-            <option value="ml">Milliliter</option>
-            <option value="l">Liter</option>
-            {/* Add more units as needed */}
+            <option value="gram">Gram (g)</option>
+            <option value="kg">Kilogram (kg)</option>
+            <option value="ml">Milliliter (ml)</option>
+            <option value="l">Liter (l)</option>
           </select>
           {errors.unitOfMeasure && (
             <span className="errorMessage">{errors.unitOfMeasure}</span>

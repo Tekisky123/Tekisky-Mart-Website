@@ -4,14 +4,93 @@ import axios from "axios";
 import Modal from "react-modal";
 import { Button as BootstrapButton, Form, Dropdown } from "react-bootstrap";
 import "../Assets/Styles/AllOrders.css";
+import QRCode from "qrcode.react";
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../Assets/Styles/AddProductForm.css";
 
 Modal.setAppElement("#root");
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [qrCodeData, setQRCodeData] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterType, setFilterType] = useState("all");
+  const [isEditOrderStatus, setIsEditOrderStatus] = useState(false);
+  const [newOrderStatus, setNewOrderStatus] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [orderStatusClass, setOrderStatusClass] = useState("");
+
+  const handleEditOrderStatus = () => {
+    if (selectedOrder && selectedOrder.orderStatus !== undefined) {
+      setNewOrderStatus(selectedOrder.orderStatus);
+
+      // Set the dynamic class based on the order status
+      switch (selectedOrder.orderStatus) {
+        case "order-Verified":
+          setOrderStatusClass("order-verified");
+          break;
+        case "Dispatched":
+          setOrderStatusClass("dispatched");
+          break;
+        case "order-cancelled":
+          setOrderStatusClass("order-cancelled");
+          break;
+        case "Delivered":
+          setOrderStatusClass("delivered");
+          break;
+        default:
+          setOrderStatusClass("");
+      }
+
+      setIsEditOrderStatus(true);
+    } else {
+      console.error("Invalid selectedOrder or orderStatus");
+    }
+  };
+
+  const handleUpdateOrderStatus = async () => {
+    try {
+      setIsLoading(true);
+
+      const apiUrl = `https://tekiskymart.onrender.com/order/updateOrderById/${selectedOrder._id}`;
+
+      await axios.put(apiUrl, { orderStatus: newOrderStatus });
+
+      // Fetch the updated order details
+      const updatedOrderResponse = await axios.get(
+        `https://tekiskymart.onrender.com/order/getOrderById/${selectedOrder._id}`
+      );
+
+      // Update the local state with the new order details
+      const updatedOrders = orders.map((order) =>
+        order._id === selectedOrder._id
+          ? updatedOrderResponse.data.order
+          : order
+      );
+
+      setOrders(updatedOrders);
+
+      // Close the dropdown
+      setIsEditOrderStatus(false);
+      setIsLoading(false);
+
+      // Show toast notification
+      toast.success(`Order status successfully updated to ${newOrderStatus}`, {
+        autoClose: 1500,
+      });
+
+      // Close the modal after the loading is complete
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      setIsLoading(false);
+      // Show error toast notification
+      toast.error("Failed to update order status");
+    }
+  };
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -31,6 +110,12 @@ const AllOrders = () => {
   const handleMoreInfo = (order) => {
     setSelectedOrder(order);
     setIsModalOpen(true);
+
+    // Generate QR code data
+    const productDetails = order.productDetails;
+
+    const productDetailsString = JSON.stringify(productDetails);
+    setQRCodeData(productDetailsString);
   };
 
   const handleCloseModal = () => {
@@ -91,8 +176,21 @@ const AllOrders = () => {
 
   const filteredOrders = filterOrders();
 
+  const downloadQRCode = (data, filename) => {
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${filename}_qr_code.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="container mt-4">
+      <ToastContainer />
       <h2>Order Details</h2>
       <Form>
         <Form.Group controlId="filterDropdown">
@@ -110,7 +208,6 @@ const AllOrders = () => {
           </Dropdown>
         </Form.Group>
       </Form>
-
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
           <thead>
@@ -135,8 +232,18 @@ const AllOrders = () => {
                   <td>{order.address}</td>
                   <td>{order.totalAmount}</td>
                   <td>
-                    <b>{order.orderStatus}</b>
-                  </td>
+  <b style={{ color: 
+    order && order.orderStatus === "new order" ? "#3bd30c" :
+    order && order.orderStatus === "order-Verified" ? "#0cc1e0" :
+    order && order.orderStatus === "Dispatched" ? "orange" :
+    order && order.orderStatus === "order-cancelled" ? "red" :
+    order && order.orderStatus === "Delivered" ? "green" : "black"
+  }}>
+    {order ? order.orderStatus : ""}
+  </b>
+</td>
+
+
                   <td>{formatDate(order.createdAt)}</td>
                   <td>
                     <BootstrapButton
@@ -156,8 +263,6 @@ const AllOrders = () => {
           </tbody>
         </table>
       </div>
-
-      {/* More Info Modal */}
       {/* More Info Modal using react-modal */}
       <Modal
         isOpen={isModalOpen}
@@ -170,7 +275,7 @@ const AllOrders = () => {
           },
           content: {
             width: "80%", // Adjust the width as needed
-            maxWidth: "600px", // Adjust the max-width as needed
+            maxWidth: "800px", // Adjust the max-width as needed
             margin: "auto",
           },
         }}
@@ -186,43 +291,149 @@ const AllOrders = () => {
             <span aria-hidden="true">&times;</span>
           </BootstrapButton>
         </div>
-        <div className="modal-body ">
+        <div className="modal-body order-details">
+          {isLoading && (
+            <div className="loader-container">
+              <div className="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          )}
           {selectedOrder && (
-            <div className="order-details">
-              <p>Order ID: {selectedOrder.orderId}</p>
-              <p>Customer Name: {selectedOrder.customerName}</p>
-              <p>Mobile Number: {selectedOrder.mobileNumber}</p>
-              <p>Alternate Number: {selectedOrder.alternateNumber}</p>
-              <p>Address: {selectedOrder.address}</p>
-              <p>Landmark: {selectedOrder.landmark}</p>
-              <p>Total Amount: {selectedOrder.totalAmount}</p>
-              <p>
-                Order Status: <b>{selectedOrder.orderStatus}</b>
-              </p>
-              <p>Created At: {formatDate(selectedOrder.createdAt)}</p>
+            <div>
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td>Order ID</td>
+                    <td>{selectedOrder.orderId}</td>
+                  </tr>
+                  <tr>
+                    <td>Customer Name</td>
+                    <td>{selectedOrder.customerName}</td>
+                  </tr>
+                  <tr>
+                    <td>Mobile Number</td>
+                    <td>{selectedOrder.mobileNumber}</td>
+                  </tr>
+                  <tr>
+                    <td>Alternate Number</td>
+                    <td>{selectedOrder.alternateNumber}</td>
+                  </tr>
+                  <tr>
+                    <td>Address</td>
+                    <td>{selectedOrder.address}</td>
+                  </tr>
+                  <tr>
+                    <td>Landmark</td>
+                    <td>{selectedOrder.landmark}</td>
+                  </tr>
+                  <tr>
+                    <td>Total Amount</td>
+                    <td>{selectedOrder.totalAmount}</td>
+                  </tr>
+                  <tr>
+                    <td>Order Status</td>
+                    <td>
+                      {selectedOrder &&
+                      selectedOrder.orderStatus !== undefined ? (
+                        <div className="order-status-container">
+                          <b>{selectedOrder.orderStatus}</b>
+                          <MdOutlineModeEditOutline
+                            className="edit-icon"
+                            onClick={() => handleEditOrderStatus()}
+                          />
+                          {isEditOrderStatus && (
+                            <select
+                              className="status-dropdown"
+                              value={newOrderStatus}
+                              onChange={(e) =>
+                                setNewOrderStatus(e.target.value)
+                              }
+                            >
+                              <option value="">Select Status</option>
+                              <option value="order-Verified">
+                                Order Verified
+                              </option>
+                              <option value="Dispatched">Dispatched</option>
+                              <option value="order-cancelled">
+                                Order Cancelled
+                              </option>
+                              <option value="Delivered">Delivered</option>
+                            </select>
+                          )}
+                          {isEditOrderStatus && (
+                            <button onClick={() => handleUpdateOrderStatus()}>
+                              Update Status
+                            </button>
+                          )}
+                        </div>
+                      ) : (
+                        <span>No order selected</span>
+                      )}
+                    </td>
+                  </tr>
 
+                  <tr>
+                    <td>Created At</td>
+                    <td>{formatDate(selectedOrder.createdAt)}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              {/* Products */}
               <h5>Products:</h5>
-              <ul>
-              {selectedOrder.productDetails &&
-  selectedOrder.productDetails.map((product, index) => (
-    <li key={product._id}>
-      <p>Product {index + 1}:</p>
-      <p>Product Name: {product?.productName}</p>
-      <p>
-        Image URL:{" "}
-        <img src={product.imageURL[0]} alt={`Product ${index + 1}`} />
-      </p>
-      <p>
-        Packet Weight: {product.packetweight} {product.unitOfMeasure}
-      </p>
-      <p>MRP: {product.mrp}</p>
-      <p>Quantity: {product.quantity}</p>
-      <p>Created By: {product.createBy}</p>
-    </li>
-  ))}
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Image</th>
+                    <th>Packet Weight</th>
+                    <th>MRP</th>
+                    <th>Quantity</th>
+                    <th>Created By</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedOrder.productDetails &&
+                    selectedOrder.productDetails.map((product, index) => (
+                      <tr key={product._id}>
+                        <td>{product?.productName}</td>
+                        <td>
+                          <img
+                            src={product.imageURL[0]}
+                            alt={`Product ${index + 1}`}
+                            style={{ maxWidth: "50px", maxHeight: "50px" }}
+                          />
+                        </td>
+                        <td>
+                          {product.packetweight} {product.unitOfMeasure}
+                        </td>
+                        <td>{product.mrp}</td>
+                        <td>{product.quantity}</td>
+                        <td>{product.createdBy}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
 
+              {/* QR Code */}
+              <div className="qr-code">
+                <QRCode value={qrCodeData} size={128} />
+              </div>
 
-              </ul>
+              {/* Download QR Code button */}
+              <BootstrapButton
+                variant="success"
+                onClick={() =>
+                  downloadQRCode(qrCodeData, selectedOrder.orderId)
+                }
+              >
+                Download QR Code
+              </BootstrapButton>
             </div>
           )}
         </div>

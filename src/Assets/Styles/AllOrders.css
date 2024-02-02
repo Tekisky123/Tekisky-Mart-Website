@@ -48,3 +48,62 @@
   margin-bottom: 15px;
   
 }
+
+/* AllOrders.css */
+
+/* Styling for the order status dropdown */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.status-dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #495057;
+}
+
+.status-dropdown:hover {
+  border-color: #6c757d;
+}
+
+.status-dropdown:focus {
+  outline: none;
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+}
+
+/* Styling for the update button */
+.update-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.update-button:hover {
+  background-color: #218838;
+}
+
+/* Styling for the edit icon */
+.edit-icon {
+  margin-left: 8px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.edit-icon:hover {
+  color: #0056b3;
+  background-color: #3bd30c;
+}

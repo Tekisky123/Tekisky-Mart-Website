@@ -138,6 +138,9 @@ const Header = () => {
       accordionPanel.classList.toggle("active");
       accordionBtn.classList.toggle("active");
     }
+
+    // Close the mobile menu when an option is clicked
+    handleMobileMenuClose();
   };
   return (
     <header>
