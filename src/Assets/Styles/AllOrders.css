@@ -107,3 +107,43 @@
   color: #0056b3;
   background-color: #3bd30c;
 }
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows images to wrap to the next line if there is not enough space */
+}
+
+.modal-image {
+  max-width: 100%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+}
+
+.option-buttons{
+  display: flex;
+  justify-content: space-evenly;
+}
+.table-data-inputs input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.259);
+  /* border: none; */
+}
+.table-data-inputs select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.259);
+  /* border: none; */
+}
+
+
+.table-data-inputs input:hover {
+  border-color: #0cc1e0;
+}
+
+.table-data-inputs input:focus {
+  outline: none;
+  border-color: #0cc1e0;
+  box-shadow: 0 0 20px rgba(0, 204, 224, 0.5);
+}

@@ -724,7 +724,7 @@ font-size: 22px;}
 .slider-item .banner-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   /* object-position: right; */
 }
 
@@ -3717,9 +3717,8 @@ body::-webkit-scrollbar-thumb:hover {
 .slider-item .banner-img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-  -o-object-position: right;
+  object-fit: contain;
+  
   object-position: right;
 }
 
