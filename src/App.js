@@ -79,7 +79,7 @@ const token = localStorage.getItem('token');
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/seller-orders" element={<SellerAllOrders />} />
-        <Route path="/products-list" element={<ProductList/>}/>
+        {/* <Route path="/products-list" element={<ProductList/>}/> */}
 
       </> 
       }

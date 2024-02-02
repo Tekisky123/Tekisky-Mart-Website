@@ -22,6 +22,8 @@ const Header = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const userRole = localStorage.getItem("userRole");
+
   const handleSearchChange = async (event) => {
     const newSearchQuery = event.target.value;
 
@@ -33,12 +35,16 @@ const Header = () => {
 
       // Check if the search query is non-empty before making the API call
       if (newSearchQuery.trim() !== "") {
-        const response = await fetch(`https://tekiskymart.onrender.com/admin/getproduct?search=${newSearchQuery}`);
+        const response = await fetch(
+          `https://tekiskymart.onrender.com/admin/getproduct?search=${newSearchQuery}`
+        );
         const data = await response.json();
 
         if (data.success) {
-          const matchingProducts = data.products.filter(product =>
-            product.productName.toLowerCase().includes(newSearchQuery.toLowerCase())
+          const matchingProducts = data.products.filter((product) =>
+            product.productName
+              .toLowerCase()
+              .includes(newSearchQuery.toLowerCase())
           );
 
           setSearchResults(matchingProducts);
@@ -55,8 +61,7 @@ const Header = () => {
       setIsLoading(false);
     }
   };
-  
-  
+
   const closeModal = () => {
     setSearchResults([]);
     setSearchQuery(""); // Clear the search input
@@ -64,18 +69,23 @@ const Header = () => {
 
   const handleSuggestionClick = async (id) => {
     console.log("Suggestion clicked with ID:", id);
-  
+
     try {
-      const response = await fetch(`https://tekiskymart.onrender.com/admin/getoneproduct/${id}`);
+      const response = await fetch(
+        `https://tekiskymart.onrender.com/admin/getoneproduct/${id}`
+      );
       const data = await response.json();
-  
+
       console.log("Product data:", data);
-  
+
       if (data.success) {
         const product = data.getOneProduct;
-  
+
         // Product found, navigate to the product page using the _id
-        console.log("Navigating to product page:", `/single-product/${product._id}`);
+        console.log(
+          "Navigating to product page:",
+          `/single-product/${product._id}`
+        );
         navigate(`/single-product/${product._id}`);
         // Close the search results dropdown and clear the search input
         closeModal();
@@ -90,13 +100,14 @@ const Header = () => {
       // Handle the error (e.g., show an error message)
     }
   };
-  
 
   useEffect(() => {
     // Fetch product categories from your API endpoint
     const fetchCategories = async () => {
       try {
-        const response = await fetch("https://tekiskymart.onrender.com/admin/getproduct");
+        const response = await fetch(
+          "https://tekiskymart.onrender.com/admin/getproduct"
+        );
         const data = await response.json();
         const uniqueCategories = Array.from(
           new Set(data.products.map((product) => product.productCategory))
@@ -177,7 +188,6 @@ const Header = () => {
 
           <div className="header-alert-news">
             <b>Delivery Only In Nanded </b>
-
           </div>
         </div>
       </div>
@@ -189,44 +199,48 @@ const Header = () => {
           </Link>
 
           <div className="header-search-container">
-  <div className="search-container">
-    <input
-      type="search"
-      name="search"
-      className="search-field"
-      placeholder="Search..."
-      value={searchQuery}
-      onChange={handleSearchChange}
-    />
-    {searchResults.length > 0 && (
-      <div className="search-results-dropdown">
-        <button className="close-modal-btn" onClick={closeModal}>
-          <IoCloseSharp className="close-icon" />
-        </button>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            {searchResults.map((product) => (
-              <div
-                key={product.productId}
-                onClick={() => handleSuggestionClick(product._id)}
-              >
-                <img src={product.imageURL[0]} alt={product.productName} />
-                <p>{product.productName}</p>
-              </div>
-            ))}
-          </>
-        )}
-      </div>
-    )}
-    {!isLoading && searchQuery.trim() !== '' && searchResults.length === 0 && <p>No products found</p>}
-  </div>
-  <button className="search-btn">
-    <CiSearch className="search" />
-  </button>
-</div>
-
+            <div className="search-container">
+              <input
+                type="search"
+                name="search"
+                className="search-field"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              {searchResults.length > 0 && (
+                <div className="search-results-dropdown">
+                  <button className="close-modal-btn" onClick={closeModal}>
+                    <IoCloseSharp className="close-icon" />
+                  </button>
+                  {isLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <>
+                      {searchResults.map((product) => (
+                        <div
+                          key={product.productId}
+                          onClick={() => handleSuggestionClick(product._id)}
+                        >
+                          <img
+                            src={product.imageURL[0]}
+                            alt={product.productName}
+                          />
+                          <p>{product.productName}</p>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
+              )}
+              {!isLoading &&
+                searchQuery.trim() !== "" &&
+                searchResults.length === 0 && <p>No products found</p>}
+            </div>
+            <button className="search-btn">
+              <CiSearch className="search" />
+            </button>
+          </div>
 
           <div className="header-user-actions">
             {/* <button className="action-btn">
@@ -260,27 +274,58 @@ const Header = () => {
               <Link href="#" className="menu-title">
                 Home
               </Link>
-            </li>
 
-            {/* Dynamically render product categories */}
+            </li>
+            {userRole !== "seller" && <>
             {categories.map((category) => (
               <li className="menu-category" key={category}>
-                 <Link to={`/category/${category}`} className="menu-title">
+                <Link to={`/category/${category.toLowerCase()}`} className="menu-title">
                   {category}
                 </Link>
               </li>
             ))}
+              </>}
+
+              {userRole == "superadmin" && <>
+
+              <li className="menu-category">
+              <Link to="/all-orders" className="menu-title">
+                All Order
+              </Link>
+            </li>
+              <li className="menu-category">
+              <Link to="/products-list" className="menu-title">
+                All Products
+              </Link>
+            </li>
+              <li className="menu-category">
+              <Link to="/users" className="menu-title">
+                Users
+              </Link>
+            </li>
+
+              </> }
+
+
+              {userRole == "seller" && <>
+              
+              <li className="menu-category">
+              <Link to="/add-product" className="menu-title">
+                Add Product
+              </Link>
+            </li>
+              </>}
+
             <li className="menu-category">
-            <Link to='/pre-order' className="menu-title">
-               Pre Order
+              <Link to="/pre-order" className="menu-title">
+                Pre Order
               </Link>
             </li>
             <li className="menu-category">
-            <Link to='/saleWithUs' className="menu-title">
-               Sale with Us
+              <Link to="/saleWithUs" className="menu-title">
+                Sale with Us
               </Link>
             </li>
-        
           </ul>
         </div>
       </nav>
@@ -339,31 +384,30 @@ const Header = () => {
           </li>
 
           {/* Dynamically render product categories */}
-    {categories.map((category) => (
-      <li className="menu-category" key={category}>
-        <button
-          className="accordion-menu"
-          data-accordion-btn
-          onClick={handleAccordionToggle}
-        >
-          <Link to={`/category/${category}`} className="menu-title">
+          {categories.map((category) => (
+            <li className="menu-category" key={category}>
+              <button
+                className="accordion-menu"
+                data-accordion-btn
+                onClick={handleAccordionToggle}
+              >
+                <Link to={`/category/${category.toLowerCase()}`} className="menu-title">
                   {category}
                 </Link>
-          <div>
-            <ion-icon name="add-outline" className="add-icon"></ion-icon>
-            <ion-icon
-              name="remove-outline"
-              className="remove-icon"
-            ></ion-icon>
-          </div>
-        </button>
-        <ul className="submenu-category-list" data-accordion>
-          {/* You can add submenu items here if needed */}
-        </ul>
-      </li>
-    ))}
-              {/* ... other submenu items ... */}
-          
+                <div>
+                  <ion-icon name="add-outline" className="add-icon"></ion-icon>
+                  <ion-icon
+                    name="remove-outline"
+                    className="remove-icon"
+                  ></ion-icon>
+                </div>
+              </button>
+              <ul className="submenu-category-list" data-accordion>
+                {/* You can add submenu items here if needed */}
+              </ul>
+            </li>
+          ))}
+          {/* ... other submenu items ... */}
 
           <li className="menu-category">
             {/* <button className="accordion-menu" data-accordion-btn   onClick={handleAccordionToggle}>
@@ -399,12 +443,7 @@ const Header = () => {
               </li>
             </ul> */}
           </li>
-
-
-
         </ul>
-
-        
       </nav>
     </header>
   );
