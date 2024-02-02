@@ -176,8 +176,8 @@ const Header = () => {
           </ul>
 
           <div className="header-alert-news">
-            <b>Free Shipping </b>
-            <span> In Nanded </span>
+            <b>Delivery Only In Nanded </b>
+
           </div>
         </div>
       </div>
@@ -270,6 +270,16 @@ const Header = () => {
                 </Link>
               </li>
             ))}
+            <li className="menu-category">
+            <Link to='/pre-order' className="menu-title">
+               Pre Order
+              </Link>
+            </li>
+            <li className="menu-category">
+            <Link to='/saleWithUs' className="menu-title">
+               Sale with Us
+              </Link>
+            </li>
         
           </ul>
         </div>

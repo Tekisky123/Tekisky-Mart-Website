@@ -20,6 +20,8 @@ import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
 import SellerAllOrders from "./Pages/SallerAllOrders";
 import ProductList from './Pages/ProductList';
+import PreOrder from './Pages/PreOrder';
+import SaleWithUs from './Pages/SaleWithUs';
 
 function App() {
   const navigate = useNavigate();
@@ -37,7 +39,6 @@ const token = localStorage.getItem('token');
   const userType ="superadmin";
   
   useEffect(() => {
-    // Check if singleItems is empty and the current pathname is either "singleProduct" or "paymentStep"
     if (
       singleItems &&
       Object.keys(singleItems).length === 0 &&
@@ -83,18 +84,20 @@ const token = localStorage.getItem('token');
       </> 
       }
                
-
+     {userRole !== "seller" &&
+      <>
         <Route path="/" element={ <Home /> } />
         <Route path="/login" element={<Login/>}/>
+        <Route path="/pre-order" element={<PreOrder/>}/>
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
         <Route path="/payment-step" element={<PaymentStep/>}/>
         <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
-
-
-
- 
+        <Route path="/saleWithUs" element={<SaleWithUs />} />
+      </> 
+      }
+               
       </Routes>
 
       <MyFooter />

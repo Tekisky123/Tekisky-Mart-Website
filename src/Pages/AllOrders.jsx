@@ -214,7 +214,7 @@ const AllOrders = () => {
             <tr>
               <th>Order ID</th>
               <th>Customer Name</th>
-              <th>Mobile Number</th>
+              <th>Customer Mobile Number</th>
               <th>Address</th>
               <th>Total Amount</th>
               <th>Order Status</th>
@@ -247,6 +247,7 @@ const AllOrders = () => {
                   <td>{formatDate(order.createdAt)}</td>
                   <td>
                     <BootstrapButton
+                    style={{color:"white"}}
                       variant="info"
                       onClick={() => handleMoreInfo(order)}
                     >
@@ -316,11 +317,11 @@ const AllOrders = () => {
                     <td>{selectedOrder.customerName}</td>
                   </tr>
                   <tr>
-                    <td>Mobile Number</td>
+                    <td>WhatsApp Mobile Number</td>
                     <td>{selectedOrder.mobileNumber}</td>
                   </tr>
                   <tr>
-                    <td>Alternate Number</td>
+                    <td>Phone Number</td>
                     <td>{selectedOrder.alternateNumber}</td>
                   </tr>
                   <tr>
@@ -333,7 +334,7 @@ const AllOrders = () => {
                   </tr>
                   <tr>
                     <td>Total Amount</td>
-                    <td>{selectedOrder.totalAmount}</td>
+                    <td> <b style={{color:"#0cc1e0"}}>{selectedOrder.totalAmount}</b></td>
                   </tr>
                   <tr>
                     <td>Order Status</td>
@@ -366,7 +367,7 @@ const AllOrders = () => {
                             </select>
                           )}
                           {isEditOrderStatus && (
-                            <button onClick={() => handleUpdateOrderStatus()}>
+                            <button className="UpdateStatusBtn" onClick={() => handleUpdateOrderStatus()}>
                               Update Status
                             </button>
                           )}

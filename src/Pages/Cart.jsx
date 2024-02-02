@@ -31,7 +31,9 @@ const ShoppingCart = () => {
     handleCartProductQuantity,
     selectProductData,
     setOurProduct,ourProduct,
-    totalSavedAmount
+    totalSavedAmount,
+    cardDeliveryCharge,
+    cartGrandTotal
   } = useContext(Context);
 
   const [tax] = useState(5);
@@ -202,10 +204,10 @@ const ShoppingCart = () => {
           <ul>
             <li>Subtotal <span>{currencyFormatted(cartSubTotal)}</span></li>
             {discount > 0 && <li>Discount <span>{currencyFormatted(discountPrice)}</span></li>}
-            <li>Tax <span>
-            {/* {currencyFormatted(tax)} */}0
+            <li>Delivery Charge<span>
+            {cartItems.length <= 0 ? 0 : cardDeliveryCharge}
             </span></li>
-            <li className="total">Total <span>{currencyFormatted(cartSubTotal)}</span></li>
+            <li className="total">Total <span>{cartItems.length <= 0 ? 0 : currencyFormatted(cartGrandTotal)}</span></li>
             <li style={{color:"#0cc1e0"}} className="total">Total Amount Saved <span >{currencyFormatted(totalSavedAmount)}</span></li>
           </ul>
         </div>
