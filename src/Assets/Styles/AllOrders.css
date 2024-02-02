@@ -107,3 +107,72 @@
   color: #0056b3;
   background-color: #3bd30c;
 }
+
+.order-status-container{
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.UpdateStatusBtn{
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  min-width: 116px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid;
+  background-color: #0cc1e0;
+  border-color: #0cc1e0;
+  border-radius: 10px;
+  line-height: 35px;
+  font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ******************************************************************************************************************** */
+
+/* PreOrderPage.css */
+
+.pre-order-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 50px;
+}
+
+.pre-order-heading {
+  text-align: center;
+}
+
+.pre-order-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.pre-order-input {
+  width: 100%;
+  height: 50px;
+  padding: 0px 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.pre-order-button {
+  background: #0cc1e0;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}

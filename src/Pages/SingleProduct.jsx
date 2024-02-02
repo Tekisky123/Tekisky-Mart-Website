@@ -23,6 +23,8 @@ const SingleProduct = () => {
     setSingleItems,
     setSingleSavedAmount,
     setSingleSubTotal,
+    setSingleDeliveryCharge,
+    setSingleGrandTotal,
   } = useContext(Context);
   const { id } = useParams();
   const location = useLocation();
@@ -70,8 +72,16 @@ const SingleProduct = () => {
     singleSavedAmount +=
       (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * quantity;
 
+
+      const deliveryCharge = singleSubTotal < 500 ? 30 : 0;
+      const grandTotal = singleSubTotal + deliveryCharge;
+
+    setSingleGrandTotal(grandTotal)
+    setSingleDeliveryCharge(deliveryCharge)
     setSingleSubTotal(singleSubTotal);
     setSingleSavedAmount(singleSavedAmount);
+
+
   }, [singleItems]);
 
   if (!product) {

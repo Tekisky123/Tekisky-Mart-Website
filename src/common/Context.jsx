@@ -10,20 +10,28 @@ const AppContext = ({ children }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-  const [singleItems, setSingleItems] = useState({});
-
   const [ourProduct, setOurProduct] = useState([]);
   const [selectProductData, setSelectProductData] = useState(null);
   const [productSize, setProductSize] = useState("");
+ 
+
+  const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartSubTotal, setCartSubTotal] = useState(0);
-  const [singleSubTotal, setSingleSubTotal] = useState(0);
-
   const [totalSavedAmount, setTotalSavedAmount] = useState(0);
+  const [cartGrandTotal, setCartGrandTotal] = useState(0);
+
+
+  const [singleItems, setSingleItems] = useState({});
+  const [singleSubTotal, setSingleSubTotal] = useState(0);
   const [singleSavedAmount, setSingleSavedAmount] = useState(0);
   const [singleProductSubTotal, setSingleProductSubTotal] = useState(0);
+  const [singleGrandTotal, setSingleGrandTotal] = useState(0);
+
   const [quantity, setQuantity] = useState(1);
+
+const [cardDeliveryCharge, setCardDeliveryCharge] = useState(0)
+const [singleDeliveryCharge, setSingleDeliveryCharge] = useState(0)
 
 
 
@@ -48,10 +56,19 @@ const AppContext = ({ children }) => {
       // Count the total number of items
       cartCount += item.quantity || 0;
     });
-  
+
+      // Add delivery charge if subTotal is less than 500
+  const deliveryCharge = subTotal < 500 ? 30 : 0;
+  const grandTotal = subTotal + deliveryCharge;
+
+    setCartGrandTotal(grandTotal)
+    setCardDeliveryCharge(deliveryCharge)
     setCartSubTotal(subTotal);
     setTotalSavedAmount(totalSavedAmount);
     setCartCount(cartCount);
+
+
+
   }, [cartItems]);
 
   
@@ -272,7 +289,13 @@ const AppContext = ({ children }) => {
         singleSubTotal,
         setSingleSubTotal,
         setSingleSavedAmount,
-        singleSavedAmount
+        singleSavedAmount,
+        cartGrandTotal,
+        singleGrandTotal,
+        setSingleGrandTotal,
+        cardDeliveryCharge,
+        singleDeliveryCharge,
+        setSingleDeliveryCharge,
       }}
     >
       {children}

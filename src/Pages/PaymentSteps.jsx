@@ -7,7 +7,9 @@ import { Base_Url, saveOrderProductAPI } from "../common/Apis";
 import { Context } from "../common/Context";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import "../Assets/Styles/PaymentSteps.css"
-
+import { IoIosPhonePortrait } from "react-icons/io";
+import { FaWhatsapp } from "react-icons/fa";
+import { InputGroup, FormControl } from "react-bootstrap";
 
 const PaymentStep = () => {
   const {
@@ -18,6 +20,8 @@ const PaymentStep = () => {
     singleItems,
     setSingleItems,
     totalSavedAmount,
+    cartGrandTotal,
+    cardDeliveryCharge
   } = useContext(Context);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -73,7 +77,7 @@ const PaymentStep = () => {
         pincode: formData.pincode,
         address: formData.additionalAdd,
         products: [],
-        totalAmount: cartSubTotal,
+        totalAmount: cartGrandTotal,
       };
 
       const selectedProducts = [];
@@ -105,10 +109,10 @@ const PaymentStep = () => {
         
   setTimeout(() => {
       setShowPopup(false);
-    }, 5000); 
+    }, 10000); 
         setTimeout(() => {
           navigate("/");
-        }, 5000);
+        }, 10000);
        
       } else {
         // Handle error if needed
@@ -261,29 +265,8 @@ const PaymentStep = () => {
       <ToastContainer />
         <div style={{ width: "80%", margin: " 80px auto" }}>
           <form action="">
-            <>
-              <Row className="Row">
-                <Col xs={12} md={4} xl={4}>
-                  {" "}
-                  <div className="Formlabel">
-                    Enter Your Mobile Number
-                    <span className="error-message">⁕</span>{" "}
-                  </div>
-                </Col>
-                <Col xs={12} md={6} xl={6}>
-                  <input
-                    type="number"
-                    className="MyInput"
-                    placeholder="Phone Number"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <Col xs={12} md={6} xl={6}></Col>
-                <Col xs={12} md={6} xl={6}></Col>
-              </Row>
-            </>
+
+
 
             <>
               <div>
@@ -305,9 +288,29 @@ const PaymentStep = () => {
                     />
                   </Col>
                   <Col xs={12} md={4} xl={4}>
+                  {" "}
+                  <div className="Formlabel">
+                    Enter Your WhatsApp Number
+                  <FaWhatsapp style={{fontSize:"30px",color:"green"}}/>
+                    <span className="error-message">⁕</span>{" "}
+                  </div>
+                </Col>
+
+                <Col xs={12} md={6} xl={6}>
+                  <input
+                    type="number"
+                    className="MyInput"
+                    placeholder="Enter Your WhatsApp Number"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                  />
+                </Col>
+                  <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
-                      Alternate Mobile Number
+                      Phone Number
+                    <IoIosPhonePortrait style={{fontSize:"30px",color:"#0cc1e0"}}/>
                       {/* <span className="error-message">⁕</span>{" "} */}
                     </div>
                   </Col>
@@ -315,14 +318,12 @@ const PaymentStep = () => {
                     <input
                       type="number"
                       className="MyInput"
-                      placeholder="Enter Alternate Mobile Number"
+                      placeholder="Enter Phone Number"
                       name="AlternateNumber"
                       value={formData.AlternateNumber}
                       onChange={handleInputChange}
                     />
                   </Col>
-
-   
 
                   <Col xs={12} md={4} xl={4}>
                     {" "}
@@ -435,11 +436,11 @@ const PaymentStep = () => {
                       <span>{formData.fullName}</span>
                     </div>
                     <div>
-                      <span style={{fontWeight:"bold"}}>Contact Number</span>
+                      <span style={{fontWeight:"bold"}}>WhatsApp Number</span>
                       <span>{formData.phoneNumber}</span>
                     </div>
                     <div>
-                      <span style={{fontWeight:"bold"}}>Alternate Mobile Number</span>
+                      <span style={{fontWeight:"bold"}}>Phone Number</span>
                       <span>{formData.AlternateNumber}</span>
                     </div>
                     <div>
@@ -467,8 +468,9 @@ const PaymentStep = () => {
                       <h5 style={{ fontWeight: "600", marginBottom: "1rem" }}>
                         Shipping
                       </h5>
-                      <h6 style={{ color: "gray" }}>
-                        free delivery for order above 500 
+                      <h6 >
+                        <b style={{color:"#0cc1e0"}}>Delivery charge 30 rupees blow ₹500 </b><br/>
+                        <b style={{color:"#0cc1e0"}}>Free delivery for order above ₹500 </b>
                         {/* delivery charge 20 rs */}
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
@@ -476,14 +478,18 @@ const PaymentStep = () => {
                         <span>&#8377; {totalSavedAmount}</span>
                       </h6>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                        Shipping to maharashtra
+                        SAs of now we deliver only in Nanded and near by areas
+                      </h6>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                        <span>Delivery Charge</span>
+                        <span>{cardDeliveryCharge}</span>
                       </h6>
                       <h5
                         style={{ fontWeight: "600", marginBottom: "1rem" }}
                         className="totalDiv"
                       >
                         <span>Total</span>
-                        <span>{cartSubTotal} &#8377;</span>
+                        <span>{cartGrandTotal} &#8377;</span>
                       </h5>
                     </div>
                   </div>
