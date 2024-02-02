@@ -1,8 +1,10 @@
+
+
+import React from 'react';
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import MyFooter from "./common/Footer";
 import Header from "./common/Header";
-
 import Home from "./Pages/Home";
 import ShoppingCart from "./Pages/Cart";
 import SingleProduct from "./Pages/SingleProduct";
@@ -22,6 +24,14 @@ function App() {
   const navigate = useNavigate();
   const { singleItems } = useContext(Context);
 
+
+  // Get userRole from localStorage
+const userRole = localStorage.getItem('userRole');
+
+// Get token from localStorage
+const token = localStorage.getItem('token');
+
+
   const location = useLocation();
   const userType ="superadmin";
   
@@ -36,24 +46,38 @@ function App() {
       navigate("/");
     }
   }, [singleItems, location.pathname, navigate]);
+
+
+  useEffect(() => {
+    if(!token){
+      navigate("/");
+    }
+
+  }, [navigate])
+  
   return (
     <div className="App">
       <Header />
 
       <Routes>
 
-     {userType == "superadmin" &&
+     {userRole == "superadmin" &&
       <>
       <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/users" element={<Users/>}/>
         <Route path="/all-orders" element={<AllOrders />} />
-      </> }
-               
-               
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/add-product" element={<AddProductForm/>}/>
+      </> 
+      }
+     {userRole == "seller" &&
+      <>
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/seller-orders" element={<SellerAllOrders />} />
-
+      </> 
+      }
+               
 
         <Route path="/" element={ <Home /> } />
         <Route path="/shopping-cart" element={<ShoppingCart/>} />

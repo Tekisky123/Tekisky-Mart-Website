@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import { Button as BootstrapButton, Form, Dropdown } from "react-bootstrap";
 import "../Assets/Styles/AllOrders.css";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
