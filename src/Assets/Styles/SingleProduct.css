@@ -691,7 +691,7 @@
 /* Updated styles for image */
 .slider2-item img {
   width: 60%;
-  height: 400px;
+  height: auto;
   object-fit: cover; /* Ensure the image covers the container */
 }
 
