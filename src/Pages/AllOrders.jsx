@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Assets/Styles/AddProductForm.css";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);

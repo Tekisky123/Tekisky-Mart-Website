@@ -21,7 +21,9 @@ const PaymentStep = () => {
   } = useContext(Context);
 
   const [showPopup, setShowPopup] = useState(false);
+  const [responseData, setResponseData] = useState([]);
 
+  console.log("responseData",responseData?.order?.orderId)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -91,8 +93,8 @@ const PaymentStep = () => {
     ${Base_Url}${saveOrderProductAPI}`,
         payload
       );
-      const data = response.data;
-      
+      const data = response?.data;
+      setResponseData(data)
       if (data.success||response.status==201) {
         toast.success(
           "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
@@ -509,7 +511,7 @@ const PaymentStep = () => {
                   <i className="checkmark">✓</i>
                 </div>
                 <h1 className="title">Order Successfull</h1>
-                <h5>Your order Id : 5412458</h5>
+                <h5>Your order Id : {responseData?.order?.orderId}</h5>
                 <p className="message">Your order has been placed successfully<br/> Our delivery boy will contact you shortly</p>
               </div>
             </div>

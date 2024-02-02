@@ -677,9 +677,9 @@
 /* Original styles for larger screens */
 .deal-of-the-day-slider {
   width: 100%;
-  height: 70vh;
-  margin: 50px 0;
-  padding: 20px;
+  height: auto;
+  margin: 30px 0;
+  /* padding: 20px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -691,7 +691,7 @@
 /* Updated styles for image */
 .slider2-item img {
   width: 60%;
-  height: 100%;
+  height: 400px;
   object-fit: cover; /* Ensure the image covers the container */
 }
 
@@ -754,7 +754,7 @@
 /* Responsive styles */
 @media screen and (max-width: 1200px) {
   .deal-of-the-day-slider {
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   .product-details h3 {
