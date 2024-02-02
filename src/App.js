@@ -40,7 +40,7 @@ const token = localStorage.getItem('token');
     if (
       singleItems &&
       Object.keys(singleItems).length === 0 &&
-      (location.pathname.includes("/single-product") ||
+      (location.pathname.includes("/single-product/:id") ||
         location.pathname === "/sp-payment-step")
     ) {
       navigate("/");
@@ -48,12 +48,12 @@ const token = localStorage.getItem('token');
   }, [singleItems, location.pathname, navigate]);
 
 
-  useEffect(() => {
-    if(!token){
-      navigate("/");
-    }
+  // useEffect(() => {
+  //   if(!token){
+  //     navigate("/");
+  //   }
 
-  }, [navigate])
+  // }, [navigate])
   
   return (
     <div className="App">
@@ -80,6 +80,7 @@ const token = localStorage.getItem('token');
                
 
         <Route path="/" element={ <Home /> } />
+        <Route path="/login" element={<Login/>}/>
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
         <Route path="/payment-step" element={<PaymentStep/>}/>

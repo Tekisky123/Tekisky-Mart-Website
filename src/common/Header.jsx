@@ -63,14 +63,19 @@ const Header = () => {
   };
 
   const handleSuggestionClick = async (id) => {
+    console.log("Suggestion clicked with ID:", id);
+  
     try {
       const response = await fetch(`https://tekiskymart.onrender.com/admin/getoneproduct/${id}`);
       const data = await response.json();
-
+  
+      console.log("Product data:", data);
+  
       if (data.success) {
         const product = data.getOneProduct;
   
         // Product found, navigate to the product page using the _id
+        console.log("Navigating to product page:", `/single-product/${product._id}`);
         navigate(`/single-product/${product._id}`);
         // Close the search results dropdown and clear the search input
         closeModal();
@@ -85,6 +90,7 @@ const Header = () => {
       // Handle the error (e.g., show an error message)
     }
   };
+  
 
   useEffect(() => {
     // Fetch product categories from your API endpoint
