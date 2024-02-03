@@ -86,7 +86,7 @@ const SingleProduct = () => {
 
   if (!product) {
     return (
-      <div className="product-container">
+      <div className="product-container loader-product-container">
         <div className="preloader">
           <svg
             className="cart"

@@ -22,6 +22,7 @@ import SellerAllOrders from "./Pages/SallerAllOrders";
 import ProductList from './Pages/ProductList';
 import PreOrder from './Pages/PreOrder';
 import SaleWithUs from './Pages/SaleWithUs';
+import Enquiry from './Pages/Enquiry';
 
 function App() {
   const navigate = useNavigate();
@@ -95,6 +96,7 @@ const token = localStorage.getItem('token');
         <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/saleWithUs" element={<SaleWithUs />} />
+        <Route path="/enquiry-form" element={<Enquiry />} />
       </> 
       }
                
