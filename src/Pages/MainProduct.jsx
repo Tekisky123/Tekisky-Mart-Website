@@ -38,7 +38,7 @@ const ProductMain = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "https://tekiskymart.onrender.com/admin/getproduct"
+          "https://tekiskymart.onrender.com/product/getproduct"
         );
         setProducts(response?.data?.products);
         setLoading(false);

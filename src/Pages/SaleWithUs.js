@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 
@@ -5,18 +6,20 @@ const SaleWithUs = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     saleProduct: "",
+    hasShop: "no",
+    shopName: "",
     hasGSTNumber: "no",
     GSTNumber: "",
-    name: "",
     phoneNumber: "",
     productDetails: "",
   });
   const [errors, setErrors] = useState({
     fullName: "",
     saleProduct: "",
+    hasShop: "",
+    shopName: "",
     hasGSTNumber: "",
     GSTNumber: "",
-    name: "",
     phoneNumber: "",
     productDetails: "",
   });
@@ -84,9 +87,86 @@ const SaleWithUs = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSaleWithUs =(e)=>{
     e.preventDefault();
-    console.log(formData);
+    const { phoneNumber } = formData;
+
+    if (phoneNumber) {
+      const isConfirmed = window.confirm(
+        `Are you sure This mobile number  ${phoneNumber} is correct?`
+      );
+
+      if (!isConfirmed) {
+        // Stop here if not confirmed
+        return;
+      }
+    } else {
+      alert("Mobile number is required");
+      return;
+    }
+
+    var requiredFields = [
+      "fullName",
+      "saleProduct",
+      "hasShop",
+      "hasGSTNumber",
+      "phoneNumber",
+      "productDetails",
+    ];
+
+    let hasError = false;
+
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [field]: " ",
+        }));
+        hasError = true;
+      }
+    });
+
+    if (hasError) {
+      alert("Mandatory fields are required");
+    }
+    if (!hasError) {
+      handleSubmit()
+    }
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    const payload={
+      shopSellerName:formData.fullName,
+      doYouHaveGST:formData.hasGSTNumber=='yes' ? true : false,
+      doYouHaveShop:formData.hasShop=='yes' ? true : false,
+      GST:formData.GSTNumber,
+      shopName:formData.shopName,
+      productDetails:formData.productDetails,
+      mobileNumber:formData.phoneNumber,
+      whichProductYouHaveToSale:formData.saleProduct
+
+    }
+
+    try {
+      // Make a POST request to your backend API endpoint
+      const response = await axios.post(
+        "",
+        payload
+      );
+
+      if(response.data.status == 200 || response.data.success == true) {
+
+      
+      }
+
+    } catch (error) {
+
+      console.error("Error creating user:", error.message);
+    }
+
+   
   };
 
   return (
@@ -148,6 +228,7 @@ const SaleWithUs = () => {
                     onChange={handleInputChange}
                   />
                 </Col>
+
                 <Col xs={12} md={4} xl={4}>
                   <div className="Formlabel">
                     Which product do you want to sale
@@ -155,7 +236,7 @@ const SaleWithUs = () => {
                   </div>
                 </Col>
                 <Col xs={12} md={6} xl={6}>
-                  <select
+                  {/* <select
                     className="MyInput"
                     name="saleProduct"
                     value={formData.saleProduct}
@@ -167,18 +248,97 @@ const SaleWithUs = () => {
                     <option value="option3">Option 3</option>
                     <option value="option4">Option 4</option>
                     <option value="option5">Option 5</option>
-                  </select>
+                  </select> */}
+
+                  <input
+                type="text"
+                    className="MyInput"
+                    placeholder="Enter Product Name"
+                    name="saleProduct"
+                    value={formData.saleProduct}
+                    onChange={handleInputChange}
+                  />
                 </Col>
+  
                 <Col xs={12} md={4} xl={4}>
                   {" "}
                   <div className="Formlabel">
-                    Do You have G.S.T. Number
+                    Product Details
+                    <span className="error-message">⁕</span>{" "}
+                  </div>
+                </Col>
+                <Col xs={12} md={6} xl={6}>
+                  <textarea
+                    style={{ height: "auto" }}
+                    type="textarea"
+                    rows="4"
+                    className="MyInput"
+                    placeholder="Enter product details"
+                    name="productDetails"
+                    value={formData.productDetails}
+                    onChange={handleInputChange}
+                  />
+                </Col>
+
+                <Col xs={12} md={4} xl={4}>
+                  {" "}
+                  <div className="Formlabel">
+                    Do You have shop ?
                     {/* <span className="error-message">⁕</span>{" "} */}
                     <div
                       style={{
                         display: "flex",
                         justifyContent: "space-evenly",
                         alignItems: "center",
+                        width:"50%"
+                      }}
+                    >
+                      <label>Yes</label>
+                      <input
+                        style={{ width: "auto" }}
+                        type="radio"
+                        name="hasShop"
+                        value="yes"
+                        checked={formData.hasShop == "yes"}
+                        onChange={handleInputChange}
+                      />
+                      <label> No</label>
+                      <input
+                        style={{ width: "auto" }}
+                        type="radio"
+                        name="hasShop"
+                        value="no"
+                        checked={formData.hasShop == "no"}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  
+                  </div>
+                </Col>
+                <Col xs={12} md={6} xl={6}>
+                  {formData.hasShop === "yes" && (
+                    <input
+                      type="text"
+                      className="MyInput"
+                      placeholder="Shop Name"
+                      name="shopName"
+                      value={formData.shopName}
+                      onChange={handleInputChange}
+                    />
+                  )}
+                </Col>
+
+                <Col xs={12} md={4} xl={4}>
+                  {" "}
+                  <div className="Formlabel">
+                    Do You have G.S.T. Number ?
+                    {/* <span className="error-message">⁕</span>{" "} */}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                        width:"50%"
                       }}
                     >
                       <label>Yes</label>
@@ -216,25 +376,6 @@ const SaleWithUs = () => {
                   )}
                 </Col>
 
-                <Col xs={12} md={4} xl={4}>
-                  {" "}
-                  <div className="Formlabel">
-                    Product Details
-                    <span className="error-message">⁕</span>{" "}
-                  </div>
-                </Col>
-                <Col xs={12} md={6} xl={6}>
-                  <textarea
-                    style={{ height: "auto" }}
-                    type="textarea"
-                    rows="4"
-                    className="MyInput"
-                    placeholder="Enter product details"
-                    name="productDetails"
-                    value={formData.productDetails}
-                    onChange={handleInputChange}
-                  />
-                </Col>
 
                 <Col xs={12} md={6} xl={6}></Col>
                 <Col xs={12} md={6} xl={6}>
@@ -246,7 +387,7 @@ const SaleWithUs = () => {
                       display: "flex",
                     }}
                   >
-                    <button className="NextBtn" onClick={handleSubmit}>
+                    <button className="NextBtn" onClick={handleSaleWithUs}>
                       Submit Enquiry
                     </button>
                   </div>

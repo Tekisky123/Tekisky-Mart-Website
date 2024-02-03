@@ -42,7 +42,7 @@ const SingleProduct = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://tekisky-mart.onrender.com/admin/getoneproduct/${id}`
+          `https://tekisky-mart.onrender.com/product/getoneproduct/${id}`
         );
         setProduct(response?.data?.getOneProduact);
 
@@ -71,7 +71,6 @@ const SingleProduct = () => {
     singleSubTotal += itemSubTotal;
     singleSavedAmount +=
       (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * quantity;
-
 
       const deliveryCharge = singleSubTotal < 500 ? 30 : 0;
       const grandTotal = singleSubTotal + deliveryCharge;

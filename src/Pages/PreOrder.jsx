@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Col, Row } from "react-bootstrap";
 import { IoIosPhonePortrait } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa";
+import axios from 'axios';
 
 const PreOrder = () => {
   // State object to store user input
@@ -9,7 +10,6 @@ const PreOrder = () => {
     fullName: '',
     preOrderProduct: '',
     quantity: '',
-    name: '',
     phoneNumber: '',
     additionalAdd: '',
     pincode: '',
@@ -17,8 +17,6 @@ const PreOrder = () => {
   const [errors, setErrors] = useState({
     fullName: '',
     preOrderProduct: '',
-    quantity: '',
-    name: '',
     phoneNumber: '',
     additionalAdd: '',
     landMark: '',
@@ -89,9 +87,77 @@ const PreOrder = () => {
   };
 
 
-  const handleSubmit=(e)=>{
+  const handlePreOrder=(e) => {
     e.preventDefault();
-   console.log(formData)
+    const { phoneNumber } = formData;
+
+    if (phoneNumber) {
+      const isConfirmed = window.confirm(
+        `Are you sure This mobile number  ${phoneNumber} is correct?`
+      );
+
+      if (!isConfirmed) {
+        // Stop here if not confirmed
+        return;
+      }
+    } else {
+      alert("Mobile number is required");
+      return;
+    }
+
+    var requiredFields = [
+      "preOrderProduct",
+      "fullName",
+      "quantity",
+      "phoneNumber",
+      // "pincode",
+      // "additionalAdd",
+    ];
+
+    let hasError = false;
+
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [field]: " ",
+        }));
+        hasError = true;
+      }
+    });
+
+    if (hasError) {
+      alert("Mandatory fields are required");
+    }
+    if (!hasError) {
+      handleSubmit()
+    }
+  }
+
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+
+    const payload={
+
+    }
+
+    try {
+      // Make a POST request to your backend API endpoint
+      const response = await axios.post(
+        "",
+        payload
+      );
+
+      if(response.data.status == 200 || response.data.success == true) {
+
+      
+      }
+
+    } catch (error) {
+
+      console.error("Error creating user:", error.message);
+    }
 
   }
 
@@ -145,7 +211,7 @@ const PreOrder = () => {
                   <Col xs={12} md={4} xl={4}>
                   {" "}
                   <div className="Formlabel">
-                    Who much quantity
+                    How much quantity
                     {/* <FaWhatsapp style={{fontSize:"30px",color:"green"}}/> */}
                   
                     <span className="error-message">⁕</span>{" "}
@@ -181,7 +247,7 @@ const PreOrder = () => {
                   />
                 </Col>
                 
-                  <Col xs={12} md={4} xl={4}>
+                  {/* <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
                       Address Details
@@ -233,7 +299,7 @@ const PreOrder = () => {
                       value={formData.pincode}
                       onChange={handleInputChange}
                     />
-                  </Col>
+                  </Col> */}
 
                   <Col xs={12} md={6} xl={6}></Col>
                   <Col xs={12} md={6} xl={6}>
@@ -246,7 +312,7 @@ const PreOrder = () => {
                       }}
                     >
 
-                      <button className="NextBtn" onClick={handleSubmit}>
+                      <button className="NextBtn" onClick={handlePreOrder}>
                         Submit Pre Order
                       </button>
                     </div>
