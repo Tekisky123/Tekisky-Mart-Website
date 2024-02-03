@@ -163,6 +163,7 @@ const ProductList = () => {
               <td>{product.productType}</td>
               <td>
                 <button
+                style={{color:"white"}}
                   className="btn btn-info"
                   onClick={() => handleMoreInfo(product)}
                 >

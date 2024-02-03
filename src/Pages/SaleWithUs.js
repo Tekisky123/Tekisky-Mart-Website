@@ -6,6 +6,7 @@ const SaleWithUs = () => {
     fullName: "",
     saleProduct: "",
     hasGSTNumber: "no",
+    GSTNumber: "",
     name: "",
     phoneNumber: "",
     productDetails: "",
@@ -14,6 +15,7 @@ const SaleWithUs = () => {
     fullName: "",
     saleProduct: "",
     hasGSTNumber: "",
+    GSTNumber: "",
     name: "",
     phoneNumber: "",
     productDetails: "",
@@ -204,11 +206,11 @@ const SaleWithUs = () => {
                 <Col xs={12} md={6} xl={6}>
                   {formData.hasGSTNumber === "yes" && (
                     <input
-                      type="number"
+                      type="text"
                       className="MyInput"
                       placeholder="GST Number"
-                      name="hasGSTNumber"
-                      value={formData.hasGSTNumber}
+                      name="GSTNumber"
+                      value={formData.GSTNumber}
                       onChange={handleInputChange}
                     />
                   )}
