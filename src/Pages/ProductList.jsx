@@ -35,7 +35,7 @@ const ProductList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://tekiskymart.onrender.com/admin/getproduct"
+          "https://tekiskymart.onrender.com/product/getproduct"
         );
         setProducts(response.data.products);
       } catch (error) {
@@ -79,7 +79,7 @@ const ProductList = () => {
     try {
       // Send a request to update the product by ID
       await axios.put(
-        `https://tekiskymart.onrender.com/admin/update/${selectedProduct?._id}`,
+        `https://tekiskymart.onrender.com/product/update/${selectedProduct?._id}`,
         updatedProduct
       );
 
@@ -108,7 +108,7 @@ const ProductList = () => {
     try {
       // Send a request to delete the product by ID
       await axios.get(
-        `https://tekiskymart.onrender.com/admin//delete/${selectedProduct?._id}`
+        `https://tekiskymart.onrender.com/product//delete/${selectedProduct?._id}`
       );
 
       // Display a success toast

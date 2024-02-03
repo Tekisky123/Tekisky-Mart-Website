@@ -3,7 +3,7 @@ export const Base_Url= 'https://tekiskymart.onrender.com';
 
 //  Product APIS
 
- export const getAllProductAPI="/admin/getproduct";
+ export const getAllProductAPI="/product/getproduct";
  export const saveOrderProductAPI="/order/saveOrder";
 
 

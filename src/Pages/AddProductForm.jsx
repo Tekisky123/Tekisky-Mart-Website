@@ -105,7 +105,7 @@ const AddProductForm = () => {
     }
     setLoading(true);
 
-    const apiUrl = "https://tekiskymart.onrender.com/admin/addproduct";
+    const apiUrl = "https://tekiskymart.onrender.com/product/addproduct";
 
     const formDataToSend = new FormData();
 
