@@ -1,8 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { Context } from "../common/Context";
+import { useNavigate } from "react-router-dom";
 
 const SaleWithUs = () => {
+  const {
+
+    ToastContainer,toast
+
+  } = useContext(Context);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
     saleProduct: "",
@@ -87,24 +95,12 @@ const SaleWithUs = () => {
     }
   };
 
-  const handleSaleWithUs =(e)=>{
+
+
+  const handleSaleWithUs = async(e) => {
     e.preventDefault();
-    const { phoneNumber } = formData;
 
-    if (phoneNumber) {
-      const isConfirmed = window.confirm(
-        `Are you sure This mobile number  ${phoneNumber} is correct?`
-      );
-
-      if (!isConfirmed) {
-        // Stop here if not confirmed
-        return;
-      }
-    } else {
-      alert("Mobile number is required");
-      return;
-    }
-
+  
     var requiredFields = [
       "fullName",
       "saleProduct",
@@ -113,9 +109,9 @@ const SaleWithUs = () => {
       "phoneNumber",
       "productDetails",
     ];
-
+  
     let hasError = false;
-
+  
     requiredFields.forEach((field) => {
       if (!formData[field]) {
         setErrors((prevErrors) => ({
@@ -125,56 +121,57 @@ const SaleWithUs = () => {
         hasError = true;
       }
     });
-
+  
     if (hasError) {
       alert("Mandatory fields are required");
     }
     if (!hasError) {
-      handleSubmit()
-    }
-  }
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-
-    const payload={
-      shopSellerName:formData.fullName,
-      doYouHaveGST:formData.hasGSTNumber=='yes' ? true : false,
-      doYouHaveShop:formData.hasShop=='yes' ? true : false,
-      GST:formData.GSTNumber,
-      shopName:formData.shopName,
-      productDetails:formData.productDetails,
-      mobileNumber:formData.phoneNumber,
-      whichProductYouHaveToSale:formData.saleProduct
-
-    }
-
-    try {
-      // Make a POST request to your backend API endpoint
-      const response = await axios.post(
-        "",
-        payload
-      );
-
-      if(response.data.status == 200 || response.data.success == true) {
-
-      
+      const payload = {
+        shopSellerName: formData.fullName,
+        doYouHaveGST: formData.hasGSTNumber === 'yes' ? true : false,
+        doYouHaveShop: formData.hasShop === 'yes' ? true : false,
+        GST: formData.GSTNumber,
+        shopName: formData.shopName,
+        productDetails: formData.productDetails,
+        mobileNumber: formData.phoneNumber,
+        whichProductYouHaveToSale: formData.saleProduct,
+      };
+    
+      try {
+        // Make a POST request to your backend API endpoint
+        const response = await axios.post(
+          "https://tekiskymart.onrender.com/client/enquiry",
+          payload
+        );
+    
+        if (response.data.status === 200 || response.data.success === true) {
+          toast.success('Tekisky Mart team will contact you soon')
+          setTimeout(() => {
+            navigate('/')
+          }, 3000);
+        }
+      } catch (error) {
+        console.error("Error creating user:", error.message);
+        alert(error.message);
       }
-
-    } catch (error) {
-
-      console.error("Error creating user:", error.message);
     }
+  };
 
-   
+  const handleSubmit = async (e) => {
+    if (e) {
+      e.preventDefault();
+    }
+  
+  
   };
 
   return (
     <div>
+      <ToastContainer/>
       <div style={{ width: "80%", margin: " 80px auto" }}>
         <Row className="Row">
           <Col xs={12}>
-            <h1 style={{textAlign:"center"}}>Sale With Us</h1>
+            <h1 style={{textAlign:"center"}}>sell With Us</h1>
             <h3>Terms & Conditions</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ea
@@ -231,7 +228,7 @@ const SaleWithUs = () => {
 
                 <Col xs={12} md={4} xl={4}>
                   <div className="Formlabel">
-                    Which product do you want to sale
+                    Which product do you want to sell
                     <span className="error-message">⁕</span>{" "}
                   </div>
                 </Col>

@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Col, Row } from "react-bootstrap";
 import { IoIosPhonePortrait } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa";
 import axios from 'axios';
+import { Context } from '../common/Context';
+import { useNavigate } from 'react-router-dom';
 
 const PreOrder = () => {
-  // State object to store user input
+
+    const {
+  
+      ToastContainer,toast
+  
+    } = useContext(Context);
+    const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     fullName: '',
     preOrderProduct: '',
     quantity: '',
     phoneNumber: '',
     additionalAdd: '',
+    description: '',
     pincode: '',
   });
   const [errors, setErrors] = useState({
@@ -20,6 +30,7 @@ const PreOrder = () => {
     phoneNumber: '',
     additionalAdd: '',
     landMark: '',
+    description: '',
     pincode: '',
   })
 
@@ -86,6 +97,21 @@ const PreOrder = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://tekiskymart.onrender.com/product/getcategories');
+        if (response.data.success) {
+          setCategories(response.data.categories);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   const handlePreOrder=(e) => {
     e.preventDefault();
@@ -130,7 +156,7 @@ const PreOrder = () => {
       alert("Mandatory fields are required");
     }
     if (!hasError) {
-      handleSubmit()
+      handleSubmit(e)
     }
   }
 
@@ -139,19 +165,26 @@ const PreOrder = () => {
     e.preventDefault();
 
     const payload={
-
+      "costumerName":formData.fullName,
+      "wichPoductWantToPurchase":formData.preOrderProduct,
+      "quantity":formData.quantity,
+      "mobileNumber":formData.phoneNumber
+  
     }
 
     try {
       // Make a POST request to your backend API endpoint
       const response = await axios.post(
-        "",
+        "https://tekiskymart.onrender.com/pre/order",
         payload
       );
 
       if(response.data.status == 200 || response.data.success == true) {
 
-      
+        toast.success('Your pre-order has been booked successfully')
+        setTimeout(() => {
+          navigate('/')
+        }, 3000);
       }
 
     } catch (error) {
@@ -163,9 +196,10 @@ const PreOrder = () => {
 
   return (
     <div style={{ width: "80%", margin: " 80px auto" }}>
-      <h2 style={{textAlign:"center"}}>Pre-Order Page</h2>
-      <p style={{color:"#0cc1e0",fontWeight:"bold"}}>Get 15% off on pre-orders!</p>
-      <p style={{color:"#0cc1e0",fontWeight:"bold"}}>Pre order means order us 5 to 10 days before</p>
+         <ToastContainer/>
+      <h2 style={{textAlign:"center"}}>Pre Order</h2>
+      <marquee direction="left"  style={{color:"#0cc1e0",fontWeight:"bold"}}>Get 15% off on pre-orders!</marquee>
+      <marquee direction="left"  style={{color:"#0cc1e0",fontWeight:"bold"}}>Pre order means order us 5 to 10 days before</marquee>
 
       <form action="">
             <>
@@ -173,7 +207,7 @@ const PreOrder = () => {
                 <Row className="Row">
                   <Col xs={12} md={4} xl={4}>
                     <div className="Formlabel">
-                      Name
+                      Your Name
                       <span className="error-message">⁕</span>{" "}
                     </div>
                   </Col>
@@ -188,26 +222,45 @@ const PreOrder = () => {
                     />
                   </Col>
                   <Col xs={12} md={4} xl={4}>
+                  {" "}
+                  <div className="Formlabel">
+                    Your Mobile Number
+                    {/* <FaWhatsapp style={{fontSize:"30px",color:"green"}}/> */}
+                  
+                    <span className="error-message">⁕</span>{" "}
+                  </div>
+                </Col>
+                <Col xs={12} md={6} xl={6}>
+                  <input
+                    type="number"
+                    className="MyInput"
+                    placeholder="Mobile Number"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                  />
+                </Col>
+                  <Col xs={12} md={4} xl={4}>
                     <div className="Formlabel">
-                    Which product want to purchase
+                    Which product you want to purchase
                       <span className="error-message">⁕</span>{" "}
                     </div>
                   </Col>
-                  <Col xs={12} md={6} xl={6}>
-                  <select
-  className="MyInput"
-  name="preOrderProduct"
-  value={formData.preOrderProduct}
-  onChange={handleInputChange}
->
-  <option value="">Select Product</option>
-  <option value="option1">Option 1</option>
-  <option value="option2">Option 2</option>
-  <option value="option3">Option 3</option>
-  <option value="option4">Option 4</option>
-  <option value="option5">Option 5</option>
-</select>
-                  </Col>
+    <Col xs={12} md={6} xl={6}>
+      <select
+        className="MyInput"
+        name="preOrderProduct"
+        value={formData.preOrderProduct}
+        onChange={handleInputChange}
+      >
+        <option value="">Select Product</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </Col>
                   <Col xs={12} md={4} xl={4}>
                   {" "}
                   <div className="Formlabel">
@@ -227,26 +280,26 @@ const PreOrder = () => {
                     onChange={handleInputChange}
                   />
                 </Col>
-                  <Col xs={12} md={4} xl={4}>
+
+                <Col xs={12} md={4} xl={4}>
                   {" "}
                   <div className="Formlabel">
-                    Mobile Number
-                    {/* <FaWhatsapp style={{fontSize:"30px",color:"green"}}/> */}
-                  
-                    <span className="error-message">⁕</span>{" "}
+                  Description
+                    {/* <span className="error-message">⁕</span>{" "} */}
                   </div>
                 </Col>
                 <Col xs={12} md={6} xl={6}>
-                  <input
-                    type="number"
+                  <textarea
+                    style={{ height: "auto" }}
+                    type="textarea"
+                    rows="4"
                     className="MyInput"
-                    placeholder="Mobile Number"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
+                    placeholder="Enter Description"
+                    name="description"
+                    value={formData.description}
                     onChange={handleInputChange}
                   />
                 </Col>
-                
                   {/* <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">

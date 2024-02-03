@@ -322,12 +322,12 @@ const Header = () => {
 
             <li className="menu-category">
               <Link to="/pre-order" className="menu-title">
-                Pre Order
+                Pre-Order
               </Link>
             </li>
             <li className="menu-category">
               <Link to="/saleWithUs" className="menu-title">
-                Sale with Us
+                Sell with Us
               </Link>
             </li>
           </ul>
