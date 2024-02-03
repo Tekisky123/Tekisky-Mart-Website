@@ -22,6 +22,7 @@ const AllOrders = () => {
   const [newOrderStatus, setNewOrderStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [orderStatusClass, setOrderStatusClass] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   const handleEditOrderStatus = () => {
     if (selectedOrder && selectedOrder.orderStatus !== undefined) {
@@ -46,6 +47,11 @@ const AllOrders = () => {
       }
 
       setIsEditOrderStatus(true);
+
+      // If the order status is "Delivered", set the feedback state
+      if (selectedOrder.orderStatus === "Delivered") {
+        setFeedback(selectedOrder.feedback || "");
+      }
     } else {
       console.error("Invalid selectedOrder or orderStatus");
     }
@@ -57,7 +63,14 @@ const AllOrders = () => {
 
       const apiUrl = `https://tekiskymart.onrender.com/order/updateOrderById/${selectedOrder._id}`;
 
-      await axios.put(apiUrl, { orderStatus: newOrderStatus });
+      const updateData = { orderStatus: newOrderStatus };
+
+      // If the order status is "Delivered", include feedback in the update data
+      if (newOrderStatus === "Delivered") {
+        updateData.feedback = feedback;
+      }
+
+      await axios.put(apiUrl, updateData);
 
       // Fetch the updated order details
       const updatedOrderResponse = await axios.get(
@@ -214,7 +227,7 @@ const AllOrders = () => {
             <tr>
               <th>Order ID</th>
               <th>Customer Name</th>
-              <th>Customer Mobile Number</th>
+              <th>Mobile Number</th>
               <th>Address</th>
               <th>Total Amount</th>
               <th>Order Status</th>
@@ -232,22 +245,29 @@ const AllOrders = () => {
                   <td>{order.address}</td>
                   <td>{order.totalAmount}</td>
                   <td>
-  <b style={{ color: 
-    order && order.orderStatus === "new order" ? "#3bd30c" :
-    order && order.orderStatus === "order-Verified" ? "#0cc1e0" :
-    order && order.orderStatus === "Dispatched" ? "orange" :
-    order && order.orderStatus === "order-cancelled" ? "red" :
-    order && order.orderStatus === "Delivered" ? "green" : "black"
-  }}>
-    {order ? order.orderStatus : ""}
-  </b>
-</td>
-
+                    <b
+                      style={{
+                        color:
+                          order && order.orderStatus === "new order"
+                            ? "#3bd30c"
+                            : order && order.orderStatus === "order-Verified"
+                            ? "#0cc1e0"
+                            : order && order.orderStatus === "Dispatched"
+                            ? "orange"
+                            : order && order.orderStatus === "order-cancelled"
+                            ? "red"
+                            : order && order.orderStatus === "Delivered"
+                            ? "green"
+                            : "black",
+                      }}
+                    >
+                      {order ? order.orderStatus : ""}
+                    </b>
+                  </td>
 
                   <td>{formatDate(order.createdAt)}</td>
                   <td>
                     <BootstrapButton
-                    style={{color:"white"}}
                       variant="info"
                       onClick={() => handleMoreInfo(order)}
                     >
@@ -277,7 +297,7 @@ const AllOrders = () => {
           content: {
             width: "80%", // Adjust the width as needed
             maxWidth: "800px", // Adjust the max-width as needed
-            margin: "auto",
+            // margin: "auto",
           },
         }}
       >
@@ -317,11 +337,11 @@ const AllOrders = () => {
                     <td>{selectedOrder.customerName}</td>
                   </tr>
                   <tr>
-                    <td>WhatsApp Mobile Number</td>
+                    <td>Mobile Number</td>
                     <td>{selectedOrder.mobileNumber}</td>
                   </tr>
                   <tr>
-                    <td>Phone Number</td>
+                    <td>Alternate Number</td>
                     <td>{selectedOrder.alternateNumber}</td>
                   </tr>
                   <tr>
@@ -334,7 +354,7 @@ const AllOrders = () => {
                   </tr>
                   <tr>
                     <td>Total Amount</td>
-                    <td> <b style={{color:"#0cc1e0"}}>{selectedOrder.totalAmount}</b></td>
+                    <td>{selectedOrder.totalAmount}</td>
                   </tr>
                   <tr>
                     <td>Order Status</td>
@@ -367,13 +387,28 @@ const AllOrders = () => {
                             </select>
                           )}
                           {isEditOrderStatus && (
-                            <button className="UpdateStatusBtn" onClick={() => handleUpdateOrderStatus()}>
+                            <button onClick={() => handleUpdateOrderStatus()}>
                               Update Status
                             </button>
                           )}
                         </div>
                       ) : (
                         <span>No order selected</span>
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Feedback</td>
+                    <td colSpan="2">
+                      {selectedOrder.orderStatus === "Delivered" &&
+                      isEditOrderStatus ? (
+                        <input
+                          type="text"
+                          value={feedback}
+                          onChange={(e) => setFeedback(e.target.value)}
+                        />
+                      ) : (
+                        <span>{selectedOrder.feedback}</span>
                       )}
                     </td>
                   </tr>
@@ -387,7 +422,7 @@ const AllOrders = () => {
 
               {/* Products */}
               <h5>Products:</h5>
-              <table className="table table-bordered">
+              <table className="table table-bordered table-responsive">
                 <thead>
                   <tr>
                     <th>Product Name</th>

@@ -31,12 +31,12 @@ const DealOfTheDay = () => {
       const now = new Date();
       const timeDifference = saleEndDate - now;
 
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      // const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      setCountdown({ days, hours, minutes, seconds });
+      setCountdown({  hours, minutes, seconds });
     }, 1000);
 
     // Clear the interval when the component is unmounted
@@ -63,7 +63,7 @@ const DealOfTheDay = () => {
             <div className="countdown-timer">
           <p className="countdown-label">Sale Ends In:</p>
           <div className="countdown">
-          <div className="countdown-item">{countdown.days} <span>days</span></div>
+          {/* <div className="countdown-item">{countdown.days} <span>days</span></div> */}
             <div className="countdown-item">{countdown.hours} <span>hours</span></div>
             <div className="countdown-item">{countdown.minutes} <span>minutes</span></div>
             <div className="countdown-item">{countdown.seconds} <span>seconds</span></div>
@@ -80,7 +80,7 @@ const DealOfTheDay = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -106,7 +106,7 @@ const DealOfTheDay = () => {
               <div className="countdown-timer ">
         <p className="countdown-label">Sale Ends In:</p>
         <div className="countdown">
-        <div className="countdown-item">{countdown.days} <span>days</span></div>
+        {/* <div className="countdown-item">{countdown.days} <span>days</span></div> */}
             <div className="countdown-item">{countdown.hours} <span>hours</span></div>
             <div className="countdown-item">{countdown.minutes} <span>minutes</span></div>
             <div className="countdown-item">{countdown.seconds} <span>seconds</span></div>

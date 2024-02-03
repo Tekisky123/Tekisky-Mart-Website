@@ -147,17 +147,20 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleAccordionToggle = (event) => {
-    const accordionBtn = event.currentTarget;
-    const accordionPanel = accordionBtn.nextElementSibling;
-
-    if (accordionPanel) {
-      accordionPanel.classList.toggle("active");
-      accordionBtn.classList.toggle("active");
-    }
-
+  const handleDynamicAccordionToggle = (category) => {
     // Close the mobile menu when an option is clicked
     handleMobileMenuClose();
+
+    // Add your logic for navigation based on the selected category
+    navigate(`/category/${category}`);
+  };
+
+  const handleStaticAccordionToggle = (path) => {
+    // Close the mobile menu when an option is clicked
+    handleMobileMenuClose();
+
+    // Add your logic for navigation based on the selected path
+    navigate(path);
   };
   return (
     <header>
@@ -274,47 +277,48 @@ const Header = () => {
               <Link href="#" className="menu-title">
                 Home
               </Link>
-
             </li>
-            {userRole !== "seller" && <>
-            {categories.map((category) => (
-              <li className="menu-category" key={category}>
-                <Link to={`/category/${category.toLowerCase()}`} className="menu-title">
-                  {category}
-                </Link>
-              </li>
-            ))}
-              </>}
+            {userRole !== "seller" && (
+              <>
+                {categories.map((category) => (
+                  <li className="menu-category" key={category}>
+                    <Link to={`/category/${category}`} className="menu-title">
+                      {category}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            )}
 
-              {userRole == "superadmin" && <>
+            {userRole == "superadmin" && (
+              <>
+                <li className="menu-category">
+                  <Link to="/all-orders" className="menu-title">
+                    All Order
+                  </Link>
+                </li>
+                <li className="menu-category">
+                  <Link to="/products-list" className="menu-title">
+                    All Products
+                  </Link>
+                </li>
+                <li className="menu-category">
+                  <Link to="/users" className="menu-title">
+                    Users
+                  </Link>
+                </li>
+              </>
+            )}
 
-              <li className="menu-category">
-              <Link to="/all-orders" className="menu-title">
-                All Order
-              </Link>
-            </li>
-              <li className="menu-category">
-              <Link to="/products-list" className="menu-title">
-                All Products
-              </Link>
-            </li>
-              <li className="menu-category">
-              <Link to="/users" className="menu-title">
-                Users
-              </Link>
-            </li>
-
-              </> }
-
-
-              {userRole == "seller" && <>
-              
-              <li className="menu-category">
-              <Link to="/add-product" className="menu-title">
-                Add Product
-              </Link>
-            </li>
-              </>}
+            {userRole == "seller" && (
+              <>
+                <li className="menu-category">
+                  <Link to="/add-product" className="menu-title">
+                    Add Product
+                  </Link>
+                </li>
+              </>
+            )}
 
             <li className="menu-category">
               <Link to="/pre-order" className="menu-title">
@@ -378,9 +382,15 @@ const Header = () => {
 
         <ul className="mobile-menu-category-list">
           <li className="menu-category">
-            <Link to={"/"} className="menu-title">
-              Home
-            </Link>
+            <button
+              className="accordion-menu"
+              data-accordion-btn
+              onClick={() => handleStaticAccordionToggle("/")}
+            >
+              <Link to="/" className="menu-title">
+                Home
+              </Link>
+            </button>
           </li>
 
           {/* Dynamically render product categories */}
@@ -389,9 +399,9 @@ const Header = () => {
               <button
                 className="accordion-menu"
                 data-accordion-btn
-                onClick={handleAccordionToggle}
+                onClick={() => handleDynamicAccordionToggle(category)}
               >
-                <Link to={`/category/${category.toLowerCase()}`} className="menu-title">
+                <Link to={`/category/${category}`} className="menu-title">
                   {category}
                 </Link>
                 <div>
@@ -407,41 +417,84 @@ const Header = () => {
               </ul>
             </li>
           ))}
-          {/* ... other submenu items ... */}
 
+          {userRole === "superadmin" && (
+            <>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/all-orders")}
+                >
+                  <Link to="/all-orders" className="menu-title">
+                    All Order
+                  </Link>
+                </button>
+              </li>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/products-list")}
+                >
+                  <Link to="/products-list" className="menu-title">
+                    All Products
+                  </Link>
+                </button>
+              </li>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/users")}
+                >
+                  <Link to="/users" className="menu-title">
+                    Users
+                  </Link>
+                </button>
+              </li>
+            </>
+          )}
+
+          {/* Static categories for seller */}
+          {userRole === "seller" && (
+            <>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/add-product")}
+                >
+                  <Link to="/add-product" className="menu-title">
+                    Add Product
+                  </Link>
+                </button>
+              </li>
+            </>
+          )}
+
+          {/* Common static categories */}
           <li className="menu-category">
-            {/* <button className="accordion-menu" data-accordion-btn   onClick={handleAccordionToggle}>
-              <p className="menu-title">Clothes</p>
-              <div>
-                <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                <ion-icon
-                  name="remove-outline"
-                  className="remove-icon"
-                ></ion-icon>
-              </div>
-            </button> */}
-            {/* <ul className="submenu-category-list" data-accordion>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Dress & Frock
-                </Link>
-              </li>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Dress & Frock
-                </Link>
-              </li>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Dress & Frock
-                </Link>
-              </li>
-              <li className="submenu-category">
-                <Link href="#" className="submenu-title">
-                  Dress & Frock
-                </Link>
-              </li>
-            </ul> */}
+            <button
+              className="accordion-menu"
+              data-accordion-btn
+              onClick={() => handleStaticAccordionToggle("/pre-order")}
+            >
+              <Link to="/pre-order" className="menu-title">
+                Pre Order
+              </Link>
+            </button>
+          </li>
+          <li className="menu-category">
+            <button
+              className="accordion-menu"
+              data-accordion-btn
+              onClick={() => handleStaticAccordionToggle("/saleWithUs")}
+            >
+              <Link to="/saleWithUs" className="menu-title">
+                Sale with Us
+              </Link>
+            </button>
           </li>
         </ul>
       </nav>

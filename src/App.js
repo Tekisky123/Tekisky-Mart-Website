@@ -23,6 +23,7 @@ import ProductList from './Pages/ProductList';
 import PreOrder from './Pages/PreOrder';
 import SaleWithUs from './Pages/SaleWithUs';
 import Enquiry from './Pages/Enquiry';
+import PreOrdersPage from './Pages/PreOrdersPage';
 
 function App() {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const token = localStorage.getItem('token');
         <Route path="/login" element={<Login/>}/>
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/products-list" element={<ProductList/>}/>
+        <Route path="/pre-orders-page" element={<PreOrdersPage/>}/>
         
       </> 
       }
