@@ -7,7 +7,6 @@ const PreOrderPage = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Fetch data from the API using Axios
     axios.get('https://tekiskymart.onrender.com/pre/getPreOrders')
       .then(response => {
         setOrders(response.data.order);
@@ -18,7 +17,7 @@ const PreOrderPage = () => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container table-responsive'>
       <h2>Orders Table</h2>
       <Table striped bordered hover>
         <thead>
