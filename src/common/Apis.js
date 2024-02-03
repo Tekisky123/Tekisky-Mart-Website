@@ -15,6 +15,8 @@ export const Base_Url= 'https://tekiskymart.onrender.com';
  export const deleteUserAPI="/user/deleteUser/";
  export const getOneUserAPI="/user/getOneUser/";
 
+ export const getCategiesAPI='/product/getcategories'
+
 
 
 
