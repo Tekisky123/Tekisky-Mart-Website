@@ -308,6 +308,11 @@ const Header = () => {
                     Users
                   </Link>
                 </li>
+                <li className="menu-category">
+                  <Link to="/add-product" className="menu-title">
+                    Add Product
+                  </Link>
+                </li>
               </>
             )}
 
@@ -450,6 +455,17 @@ const Header = () => {
                   onClick={() => handleStaticAccordionToggle("/users")}
                 >
                   <Link to="/users" className="menu-title">
+                    Users
+                  </Link>
+                </button>
+              </li>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/add-product")}
+                >
+                  <Link to="/add-product" className="menu-title">
                     Users
                   </Link>
                 </button>

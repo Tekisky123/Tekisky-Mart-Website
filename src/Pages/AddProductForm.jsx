@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Assets/Styles/AddProductForm.css";
+import { Base_Url,AddProduct } from "../common/Apis";
+import { toast } from "react-toastify";
 
 const AddProductForm = () => {
   const navigate = useNavigate();
@@ -105,7 +107,7 @@ const AddProductForm = () => {
     }
     setLoading(true);
 
-    const apiUrl = "https://tekiskymart.onrender.com/product/addproduct";
+    const apiUrl = `${Base_Url}${AddProduct}`
 
     const formDataToSend = new FormData();
 
@@ -124,7 +126,8 @@ const AddProductForm = () => {
     try {
       await axios.post(apiUrl, formDataToSend);
       console.log("Data successfully posted");
-      navigate("/");
+      toast.success("Your Product Is Added Successfully");
+      navigate("/products-list");
     } catch (error) {
       console.error("Error posting data:", error);
     } finally {
