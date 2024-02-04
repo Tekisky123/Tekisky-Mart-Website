@@ -123,13 +123,16 @@ const AllOrders = () => {
   const handleMoreInfo = (order) => {
     setSelectedOrder(order);
     setIsModalOpen(true);
-
+  
     // Generate QR code data
     const productDetails = order.productDetails;
-
-    const productDetailsString = JSON.stringify(productDetails);
-    setQRCodeData(productDetailsString);
+  
+    // Limiting the QR code data to the first 100 characters
+    const limitedProductDetails = JSON.stringify(productDetails).slice(0, 100);
+  
+    setQRCodeData(limitedProductDetails);
   };
+  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -189,6 +192,7 @@ const AllOrders = () => {
 
   const filteredOrders = filterOrders();
 
+  
   const downloadQRCode = (data, filename) => {
     const blob = new Blob([data], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -268,7 +272,7 @@ const AllOrders = () => {
                   <td>{formatDate(order.createdAt)}</td>
                   <td>
                     <BootstrapButton
-                      variant="info"
+                      className="more-info-btn"
                       onClick={() => handleMoreInfo(order)}
                     >
                       More Info
@@ -284,6 +288,7 @@ const AllOrders = () => {
           </tbody>
         </table>
       </div>
+      
       {/* More Info Modal using react-modal */}
       <Modal
         isOpen={isModalOpen}
@@ -297,7 +302,7 @@ const AllOrders = () => {
           content: {
             width: "80%", // Adjust the width as needed
             maxWidth: "800px", // Adjust the max-width as needed
-            // margin: "auto",
+            margin: "auto",
           },
         }}
       >
@@ -308,6 +313,7 @@ const AllOrders = () => {
             onClick={handleCloseModal}
             className="close"
             aria-label="Close"
+          
           >
             <span aria-hidden="true">&times;</span>
           </BootstrapButton>
@@ -428,7 +434,7 @@ const AllOrders = () => {
                     <th>Product Name</th>
                     <th>Image</th>
                     <th>Packet Weight</th>
-                    <th>MRP</th>
+                    <th>Offer Price</th>
                     <th>Quantity</th>
                     <th>Created By</th>
                   </tr>
@@ -448,7 +454,7 @@ const AllOrders = () => {
                         <td>
                           {product.packetweight} {product.unitOfMeasure}
                         </td>
-                        <td>{product.mrp}</td>
+                        <td><b>₹{product.offerPrice}</b></td>
                         <td>{product.quantity}</td>
                         <td>{product.createdBy}</td>
                       </tr>

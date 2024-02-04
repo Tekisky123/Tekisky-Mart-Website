@@ -1,6 +1,4 @@
-/* OrderTable.css */
 
-/* Style for the modal header */
 .modal-header {
   /* background-color: #343a40; Dark background color */
   color: black; /* Light text color */
@@ -14,15 +12,21 @@
 .modal-title {
   margin: 0;
 }
-
-.close {
-  background-color: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 20px;
-  cursor: pointer;
+.more-info-btn{
+  background-color: #004AAD;
+  color: white;
 }
 
+.close {
+  background-color:#004AAD;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+.close:hover{
+  background-color: black;
+}
 /* Style for the modal body */
 .modal-body {
   padding: 20px;
@@ -49,9 +53,6 @@
   
 }
 
-/* AllOrders.css */
-
-/* Styling for the order status dropdown */
 .select-wrapper {
   position: relative;
   display: inline-block;
@@ -100,12 +101,12 @@
 .edit-icon {
   margin-left: 8px;
   cursor: pointer;
+  font-size: 25px;
   color: #007bff;
 }
 
 .edit-icon:hover {
   color: #0056b3;
-  background-color: #3bd30c;
 }
 
 .image-container {
@@ -170,16 +171,6 @@
 
 
 
-
-
-
-
-
-
-
-/* ******************************************************************************************************************** */
-
-/* PreOrderPage.css */
 
 .pre-order-container {
   max-width: 400px;
