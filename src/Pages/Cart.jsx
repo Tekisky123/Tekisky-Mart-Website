@@ -131,7 +131,7 @@ const ShoppingCart = () => {
                     </a>
                   </div>
                   <div className="detail">
-                    <div className="name" style={{color:"#0cc1e06"}}>{item.productName}</div>
+                    <div className="name" style={{color:"#004AAD6"}}>{item.productName}</div>
                     {/* <div className="description">{product.description}</div> */}
                     <div className="price">{currencyFormatted(item?.selectedSize?.offerPrice||item?.offerPrice )}</div>
                   </div>
@@ -152,7 +152,7 @@ const ShoppingCart = () => {
                     className="minus"
                     onClick={() => handleCartProductQuantity("dec", item)}
                   >
-                    <FaMinus  style={{color:"#0cc1e06"}}/>
+                    <FaMinus  style={{color:"#004AAD6"}}/>
                   </span>
                   <span style={{width:"70px"}} className="qty">
                   
@@ -162,7 +162,7 @@ const ShoppingCart = () => {
                     className="plus"
                     onClick={() => handleCartProductQuantity("inc", item)}
                   >
-                    <FaPlus  style={{color:"#0cc1e06"}}/>
+                    <FaPlus  style={{color:"#004AAD6"}}/>
                   </span>
                 </div>
                   </div>
@@ -208,7 +208,7 @@ const ShoppingCart = () => {
             {cartItems.length <= 0 ? 0 : cardDeliveryCharge}
             </span></li>
             <li className="total">Total <span>{cartItems.length <= 0 ? 0 : currencyFormatted(cartGrandTotal)}</span></li>
-            <li style={{color:"#0cc1e0"}} className="total">Total Amount Saved <span >{currencyFormatted(totalSavedAmount)}</span></li>
+            <li style={{color:"#004AAD"}} className="total">Total Amount Saved <span >{currencyFormatted(totalSavedAmount)}</span></li>
           </ul>
         </div>
 

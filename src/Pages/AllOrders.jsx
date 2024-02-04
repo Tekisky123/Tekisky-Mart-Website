@@ -251,7 +251,7 @@ const AllOrders = () => {
                           order && order.orderStatus === "new order"
                             ? "#3bd30c"
                             : order && order.orderStatus === "order-Verified"
-                            ? "#0cc1e0"
+                            ? "#004AAD"
                             : order && order.orderStatus === "Dispatched"
                             ? "orange"
                             : order && order.orderStatus === "order-cancelled"
@@ -387,7 +387,7 @@ const AllOrders = () => {
                             </select>
                           )}
                           {isEditOrderStatus && (
-                            <button onClick={() => handleUpdateOrderStatus()}>
+                            <button className="UpdateStatusBtn" onClick={() => handleUpdateOrderStatus()}>
                               Update Status
                             </button>
                           )}

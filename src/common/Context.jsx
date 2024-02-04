@@ -2,10 +2,13 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import swal from 'sweetalert';
 
 export const Context = createContext();
 
 const AppContext = ({ children }) => {
+
+  const initialCustomerDetail = JSON.parse(localStorage.getItem('customerDetail')) || {};
 
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -13,6 +16,8 @@ const AppContext = ({ children }) => {
   const [ourProduct, setOurProduct] = useState([]);
   const [selectProductData, setSelectProductData] = useState(null);
   const [productSize, setProductSize] = useState("");
+
+  const [customerDetail, setCustomerDetail] = useState(initialCustomerDetail)
  
 
   const [cartItems, setCartItems] = useState([]);
@@ -34,7 +39,30 @@ const [cardDeliveryCharge, setCardDeliveryCharge] = useState(0)
 const [singleDeliveryCharge, setSingleDeliveryCharge] = useState(0)
 
 
+useEffect(() => {
+  localStorage.setItem('customerDetail', JSON.stringify(customerDetail));
+}, [customerDetail]);
 
+
+// swal({
+//   title: "Are you sure?",
+//   text: "Are you sure that you want to leave this page?",
+//   icon: "warning",
+//   dangerMode: true,
+//   buttons: {
+//     cancel: true,
+//     confirm: true,
+//   },
+// })
+// .then((result) => {
+//   if (result) {
+//     // User clicked on confirm button
+//     swal("Deleted!", "Your imaginary file has been deleted!", "success");
+//   } else {
+//     // User clicked on cancel button or closed the modal
+//     // You can add any additional actions or leave it empty to simply close the alert
+//   }
+// });
 
 
   useEffect(() => {
@@ -296,6 +324,9 @@ const [singleDeliveryCharge, setSingleDeliveryCharge] = useState(0)
         cardDeliveryCharge,
         singleDeliveryCharge,
         setSingleDeliveryCharge,
+        setCustomerDetail,
+        customerDetail,
+        swal
       }}
     >
       {children}

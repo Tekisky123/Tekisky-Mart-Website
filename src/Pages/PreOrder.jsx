@@ -198,8 +198,8 @@ const PreOrder = () => {
     <div style={{ width: "80%", margin: " 80px auto" }}>
          <ToastContainer/>
       <h2 style={{textAlign:"center"}}>Pre Order</h2>
-      <marquee direction="left"  style={{color:"#0cc1e0",fontWeight:"bold"}}>Get 15% off on pre-orders!</marquee>
-      <marquee direction="left"  style={{color:"#0cc1e0",fontWeight:"bold"}}>Pre order means order us 5 to 10 days before</marquee>
+      <marquee direction="left"  style={{color:"#004AAD",fontWeight:"bold"}}>Get 15% off on pre-orders!</marquee>
+      <marquee direction="left"  style={{color:"#004AAD",fontWeight:"bold"}}>Pre order means order us 5 to 10 days before</marquee>
 
       <form action="">
             <>

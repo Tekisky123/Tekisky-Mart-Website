@@ -320,6 +320,12 @@
       height: 40px;
       left: calc(50% - 20px);
     }
+    .thumbnail,
+    .detail {
+      float: left;
+      width: 25% !important;
+      align-items: center;
+    }
   
     .remove svg {
       width: 40px;
@@ -341,6 +347,8 @@
     .thumbnail,
     .detail {
       float: left;
+      width: 25% !important;
+      align-items: center;
     }
   
     .detail {

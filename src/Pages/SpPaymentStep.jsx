@@ -20,21 +20,24 @@ const SpPaymentStep = () => {
     singleItems,
     singleDeliveryCharge,
     singleGrandTotal,
+    setCustomerDetail,
+    customerDetail
   } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
   const [responseData, setResponseData] = useState([]);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    AlternateNumber: "",
-    email: "",
-    houseNo: "",
-    area: "",
-    landMark: "",
-    pincode: "",
-    additionalAdd: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   fullName: "",
+  //   phoneNumber: "",
+  //   AlternateNumber: "",
+  //   email: "",
+  //   houseNo: "",
+  //   area: "",
+  //   landMark: "",
+  //   pincode: "",
+  //   additionalAdd: "",
+  // });
+  const [formData, setFormData] = useState(customerDetail);
   const [errors, setErrors] = useState({
     fullName: "",
     phoneNumber: "",
@@ -94,9 +97,9 @@ const SpPaymentStep = () => {
       const data = response?.data;
       setResponseData(data)
       if (data.success||response.status==201) {
-        toast.success(
-          "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
-        );
+        // toast.success(
+        //   "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
+        // );
         // setSingleItems([])
         // Close the modal only after a successful request
         setShowPopup(true);
@@ -125,20 +128,11 @@ const SpPaymentStep = () => {
     const { name, value } = event.target;
 
     if (name === "phoneNumber" || name === "AlternateNumber") {
-      // Remove any non-digit characters (except '-')
       const numericValue = value.replace(/[^0-9-]/g, "");
-
-      // Ensure the length does not exceed 10 digits
       const maxLength = 10;
       const truncatedValue = numericValue.slice(0, maxLength);
-
-      // Parse the numeric value as an integer
       const intValue = parseInt(truncatedValue, 10);
-
-      // Check if the parsed value is a positive number
       const isValidNumber = !isNaN(intValue) && intValue >= 0;
-
-      // Update form data and errors accordingly
       setFormData((prevData) => ({
         ...prevData,
         [name]: isValidNumber ? truncatedValue : "",
@@ -152,28 +146,19 @@ const SpPaymentStep = () => {
       name === "pincode" ||
       name === "rationCardNo"
     ) {
-      // Remove any non-digit characters
       const numericValue = value.replace(/[^0-9]/g, "");
-
-      // Check if the length does not exceed the specified limit
       const maxLength =
         name === "aadharNumber" ? 12 : name === "pincode" ? 6 : 16;
       const truncatedValue = numericValue.slice(0, maxLength);
-
-      // Update form data with the truncated value
       setFormData((prevData) => ({ ...prevData, [name]: truncatedValue }));
     } else if (name === "age") {
       const ageValue = parseInt(value, 10);
-
-      // Check if the value is within the desired range (1 to 120)
       const isValidAge = !isNaN(ageValue) && ageValue >= 1 && ageValue <= 120;
 
       setErrors((prevErrors) => ({
         ...prevErrors,
         [name]: isValidAge ? "" : "Age must be between 1 and 120",
       }));
-
-      // Update form data with the validated value
       setFormData((prevData) => ({
         ...prevData,
         [name]: isValidAge ? ageValue : "",
@@ -182,6 +167,11 @@ const SpPaymentStep = () => {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
+
+    setCustomerDetail((prevCustomerDetail) => ({
+      ...prevCustomerDetail,
+      [name]: value,
+    }));
   };
 
   const handleNext = (e) => {
@@ -300,7 +290,7 @@ const SpPaymentStep = () => {
                     {" "}
                     <div className="Formlabel">
                       Phone Number
-                      <IoIosPhonePortrait style={{fontSize:"30px",color:"#0cc1e0"}}/>
+                      <IoIosPhonePortrait style={{fontSize:"30px",color:"#004AAD"}}/>
                       {/* <span className="error-message">⁕</span>{" "} */}
                     </div>
                   </Col>
@@ -450,8 +440,8 @@ const SpPaymentStep = () => {
                         Shipping
                       </h5>
                       <h6>
-                      <b style={{color:"#0cc1e0"}}>Delivery charge 30 rupees blow ₹500 </b><br/>
-                        <b style={{color:"#0cc1e0"}}>Free delivery for order above ₹500 </b>
+                      <b style={{color:"#004AAD"}}>Delivery charge 30 rupees blow ₹500 </b><br/>
+                        <b style={{color:"#004AAD"}}>Free delivery for order above ₹500 </b>
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
                         <span>saved Amount:</span>
