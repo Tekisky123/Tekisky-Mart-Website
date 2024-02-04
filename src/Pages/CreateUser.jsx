@@ -182,7 +182,7 @@ const AddUser = () => {
           </>
         )}
         <div>
-          <label className="formLabel">Shop Category:</label>
+          <label className="formLabel">Product  Category:</label>
           <select
             name="shopCategory"
             value={formData.shopCategory}

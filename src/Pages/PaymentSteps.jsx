@@ -21,7 +21,10 @@ const PaymentStep = () => {
     setSingleItems,
     totalSavedAmount,
     cartGrandTotal,
-    cardDeliveryCharge
+    cardDeliveryCharge,
+    setCustomerDetail,
+    customerDetail,
+    swal
   } = useContext(Context);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -29,18 +32,19 @@ const PaymentStep = () => {
 
   console.log("responseData",responseData?.order?.orderId)
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    AlternateNumber: "",
-    email: "",
-    houseNo: "",
-    area: "",
-    landMark: "",
-    pincode: "",
-    // addressType: "",
-    additionalAdd: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   fullName: "",
+  //   phoneNumber: "",
+  //   AlternateNumber: "",
+  //   email: "",
+  //   houseNo: "",
+  //   area: "",
+  //   landMark: "",
+  //   pincode: "",
+  //   // addressType: "",
+  //   additionalAdd: "",
+  // });
+  const [formData, setFormData] = useState(customerDetail);
   const [errors, setErrors] = useState({
     fullName: "",
     phoneNumber: "",
@@ -100,9 +104,9 @@ const PaymentStep = () => {
       const data = response?.data;
       setResponseData(data)
       if (data.success||response.status==201) {
-        toast.success(
-          "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
-        );
+        // toast.success(
+        //   "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
+        // );
         setShowPopup(true);
         // setSingleItems([]);
         closeModal();
@@ -133,20 +137,11 @@ const PaymentStep = () => {
     const { name, value } = event.target;
 
     if (name === "phoneNumber" || name === "AlternateNumber") {
-      // Remove any non-digit characters (except '-')
       const numericValue = value.replace(/[^0-9-]/g, "");
-
-      // Ensure the length does not exceed 10 digits
       const maxLength = 10;
       const truncatedValue = numericValue.slice(0, maxLength);
-
-      // Parse the numeric value as an integer
       const intValue = parseInt(truncatedValue, 10);
-
-      // Check if the parsed value is a positive number
       const isValidNumber = !isNaN(intValue) && intValue >= 0;
-
-      // Update form data and errors accordingly
       setFormData((prevData) => ({
         ...prevData,
         [name]: isValidNumber ? truncatedValue : "",
@@ -160,28 +155,19 @@ const PaymentStep = () => {
       name === "pincode" ||
       name === "rationCardNo"
     ) {
-      // Remove any non-digit characters
       const numericValue = value.replace(/[^0-9]/g, "");
-
-      // Check if the length does not exceed the specified limit
       const maxLength =
         name === "aadharNumber" ? 12 : name === "pincode" ? 6 : 16;
       const truncatedValue = numericValue.slice(0, maxLength);
-
-      // Update form data with the truncated value
       setFormData((prevData) => ({ ...prevData, [name]: truncatedValue }));
     } else if (name === "age") {
       const ageValue = parseInt(value, 10);
-
-      // Check if the value is within the desired range (1 to 120)
       const isValidAge = !isNaN(ageValue) && ageValue >= 1 && ageValue <= 120;
 
       setErrors((prevErrors) => ({
         ...prevErrors,
         [name]: isValidAge ? "" : "Age must be between 1 and 120",
       }));
-
-      // Update form data with the validated value
       setFormData((prevData) => ({
         ...prevData,
         [name]: isValidAge ? ageValue : "",
@@ -190,6 +176,10 @@ const PaymentStep = () => {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
+    setCustomerDetail((prevCustomerDetail) => ({
+      ...prevCustomerDetail,
+      [name]: value,
+    }));
   };
 
   const validatePhoneNumber = (phoneNumber) => {
@@ -200,49 +190,56 @@ const PaymentStep = () => {
   const handleNext = (e) => {
     e.preventDefault();
     const { phoneNumber } = formData;
-
+  
     if (phoneNumber) {
-      const isConfirmed = window.confirm(
-        `Are you sure This mobile number  ${phoneNumber} is correct?`
-      );
-
-      if (!isConfirmed) {
-        // Stop here if not confirmed
-        return;
-      }
+      swal({
+        title: "Are you sure?",
+        text: `This mobile number ${phoneNumber} is correct?`,
+        icon: "warning",
+        dangerMode: true,
+        buttons: {
+          cancel: true,
+          confirm: true,
+        },
+      }).then((result) => {
+        if (result) {
+          // User clicked on confirm button
+          var requiredFields = [
+            "phoneNumber",
+            "fullName",
+            "landMark",
+            "pincode",
+            "additionalAdd",
+          ];
+  
+          let hasError = false;
+  
+          requiredFields.forEach((field) => {
+            if (!formData[field]) {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                [field]: " ",
+              }));
+              hasError = true;
+            }
+          });
+  
+          if (hasError) {
+            alert("Mandatory fields are required");
+          } else {
+            // Call your openModal function only if there are no errors
+            openModal();
+          }
+        } else {
+          // User clicked on cancel button or closed the modal
+          // You can add any additional actions or leave it empty
+        }
+      });
     } else {
       alert("Mobile number is required");
-      return;
-    }
-
-    var requiredFields = [
-      "phoneNumber",
-      "fullName",
-      "landMark",
-      "pincode",
-      "additionalAdd",
-    ];
-
-    let hasError = false;
-
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [field]: " ",
-        }));
-        hasError = true;
-      }
-    });
-
-    if (hasError) {
-      alert("Mandatory fields are required");
-    }
-    if (!hasError) {
-      openModal();
     }
   };
-
+  
 
   return (
     <div>
@@ -310,7 +307,7 @@ const PaymentStep = () => {
                     {" "}
                     <div className="Formlabel">
                       Phone Number
-                    <IoIosPhonePortrait style={{fontSize:"30px",color:"#0cc1e0"}}/>
+                    <IoIosPhonePortrait style={{fontSize:"30px",color:"#004AAD"}}/>
                       {/* <span className="error-message">⁕</span>{" "} */}
                     </div>
                   </Col>
@@ -469,8 +466,8 @@ const PaymentStep = () => {
                         Shipping
                       </h5>
                       <h6 >
-                        <b style={{color:"#0cc1e0"}}>Delivery charge 30 rupees blow ₹500 </b><br/>
-                        <b style={{color:"#0cc1e0"}}>Free delivery for order above ₹500 </b>
+                        <b style={{color:"#004AAD"}}>Delivery charge 30 rupees blow ₹500 </b><br/>
+                        <b style={{color:"#004AAD"}}>Free delivery for order above ₹500 </b>
                         {/* delivery charge 20 rs */}
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
@@ -478,11 +475,11 @@ const PaymentStep = () => {
                         <span>&#8377; {totalSavedAmount}</span>
                       </h6>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                        SAs of now we deliver only in Nanded and near by areas
+                        As of now we deliver only in Nanded and near by areas
                       </h6>
-                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }} className="totalDiv">
                         <span>Delivery Charge</span>
-                        <span>{cardDeliveryCharge}</span>
+                        <span>{cardDeliveryCharge} &#8377;</span>
                       </h6>
                       <h5
                         style={{ fontWeight: "600", marginBottom: "1rem" }}

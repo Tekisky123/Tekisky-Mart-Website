@@ -139,12 +139,12 @@
 
 
 .table-data-inputs input:hover {
-  border-color: #0cc1e0;
+  border-color: #004AAD;
 }
 
 .table-data-inputs input:focus {
   outline: none;
-  border-color: #0cc1e0;
+  border-color: #004AAD;
   box-shadow: 0 0 20px rgba(0, 204, 224, 0.5);
 }
 .order-status-container{
@@ -161,8 +161,8 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid;
-  background-color: #0cc1e0;
-  border-color: #0cc1e0;
+  background-color: #004AAD;
+  border-color: #004AAD;
   border-radius: 10px;
   line-height: 35px;
   font-size: 14px;
@@ -208,7 +208,7 @@
 }
 
 .pre-order-button {
-  background: #0cc1e0;
+  background: #004AAD;
   color: white;
   padding: 10px;
   border-radius: 4px;

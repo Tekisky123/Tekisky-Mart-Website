@@ -171,7 +171,7 @@ const SaleWithUs = () => {
       <div style={{ width: "80%", margin: " 80px auto" }}>
         <Row className="Row">
           <Col xs={12}>
-            <h1 style={{textAlign:"center"}}>sell With Us</h1>
+            <h1 style={{textAlign:"center"}}>Sell With Us</h1>
             <h3>Terms & Conditions</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ea
@@ -282,7 +282,12 @@ const SaleWithUs = () => {
                   <div className="Formlabel">
                     Do You have shop ?
                     {/* <span className="error-message">⁕</span>{" "} */}
-                    <div
+                   
+                  
+                  </div>
+                </Col>
+                <Col xs={12} md={6} xl={6}>
+                <div
                       style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -309,10 +314,6 @@ const SaleWithUs = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-                  
-                  </div>
-                </Col>
-                <Col xs={12} md={6} xl={6}>
                   {formData.hasShop === "yes" && (
                     <input
                       type="text"
@@ -330,7 +331,12 @@ const SaleWithUs = () => {
                   <div className="Formlabel">
                     Do You have G.S.T. Number ?
                     {/* <span className="error-message">⁕</span>{" "} */}
-                    <div
+                
+                  
+                  </div>
+                </Col>
+                <Col xs={12} md={6} xl={6}>
+                <div
                       style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -357,10 +363,6 @@ const SaleWithUs = () => {
                         onChange={handleInputChange}
                       />
                     </div>
-                  
-                  </div>
-                </Col>
-                <Col xs={12} md={6} xl={6}>
                   {formData.hasGSTNumber === "yes" && (
                     <input
                       type="text"

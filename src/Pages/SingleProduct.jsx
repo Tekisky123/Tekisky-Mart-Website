@@ -211,7 +211,7 @@ const SingleProduct = () => {
                   className="quantity-button"
                   onClick={() => handleSingleProductQuantity("dec", product)}
                 >
-                  <FaMinus style={{ color: "#0cc1e06" }} />
+                  <FaMinus style={{ color: "#004AAD6" }} />
                 </button>
                 {/* <input
                 type="number"
@@ -225,7 +225,7 @@ const SingleProduct = () => {
                   className="quantity-button"
                   onClick={() => handleSingleProductQuantity("inc", product)}
                 >
-                  <FaPlus style={{ color: "#0cc1e06" }} />
+                  <FaPlus style={{ color: "#004AAD6" }} />
                 </button>
               </div>
             </div>

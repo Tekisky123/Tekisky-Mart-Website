@@ -26,7 +26,7 @@
   }
   
   a:hover {
-    color: #0cc1e0;
+    color: #004AAD;
   }
   
   .cartcartButton {
@@ -45,8 +45,8 @@
   }
   
   .cartButton:hover {
-    background-color: #0cc1e0;
-    border-color: #0cc1e0;
+    background-color: #004AAD;
+    border-color: #004AAD;
   }
   
   .cartButton:hover::after {
@@ -208,7 +208,7 @@
   
   .quantity > input:hover,
   .quantity > input:focus {
-    border-color: #0cc1e0;
+    border-color: #004AAD;
   }
   
   .close {
@@ -219,7 +219,7 @@
   }
   
   .close:hover {
-    fill: #0cc1e0;
+    fill: #004AAD;
   }
   
   /* --- SUMMARY --- */
@@ -247,7 +247,7 @@
   }
   
   .promotion:hover > input {
-    border-color: #0cc1e0;
+    border-color: #004AAD;
   }
   
   .promotion > cartButton {
@@ -258,8 +258,8 @@
   }
   
   .promotion:hover > cartButton {
-    border-color: #0cc1e0;
-    background-color: #0cc1e0;
+    border-color: #004AAD;
+    background-color: #004AAD;
   }
   
   .promotion > cartButton::after {
@@ -295,7 +295,7 @@
     font-size: 1.2rem;
     padding: 0.8rem 2.8rem;
     /* border-radius: 1.5rem; */
-    background-color: #0cc1e0;
+    background-color: #004AAD;
     color: #fff;
   }
   .checkout > .cartButton:disabled {
@@ -320,6 +320,12 @@
       height: 40px;
       left: calc(50% - 20px);
     }
+    .thumbnail,
+    .detail {
+      float: left;
+      width: 25% !important;
+      align-items: center;
+    }
   
     .remove svg {
       width: 40px;
@@ -341,6 +347,8 @@
     .thumbnail,
     .detail {
       float: left;
+      width: 25% !important;
+      align-items: center;
     }
   
     .detail {
