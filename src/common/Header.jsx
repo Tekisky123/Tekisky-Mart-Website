@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import "../Assets/Styles/Header.css"
 import "../App.css";
-import logo from "../Assets/Images/logo-removebg-preview.png";
+import logo from "../Assets/Images/TekiskyMartNewLogo-removebg-preview.png";
 import { CiHome, CiLinkedin, CiSearch } from "react-icons/ci";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Context } from "./Context";
@@ -169,22 +170,22 @@ const Header = () => {
           <ul className="header-social-container">
             <li>
               <Link href="#" className="social-link">
-                <FaWhatsapp />
+                <FaWhatsapp className="social-link-icon"/>
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-                <FaInstagram />
+                <FaInstagram className="social-link-icon"/>
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-                <CiLinkedin />
+                <CiLinkedin className="social-link-icon"/>
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-                <FaFacebookSquare />
+                <FaFacebookSquare className="social-link-icon" />
               </Link>
             </li>
           </ul>
@@ -259,7 +260,7 @@ const Header = () => {
               className="action-btn"
               onClick={() => navigate("/shopping-cart")}
             >
-              <HiOutlineShoppingCart />
+              <AiOutlineShoppingCart />
               <span className="count">{cartItems ? cartItems.length : 0}</span>
             </button>
 
@@ -349,7 +350,7 @@ const Header = () => {
           className="action-btn"
           onClick={() => navigate("/shopping-cart")}
         >
-          <HiOutlineShoppingCart />
+<AiOutlineShoppingCart />
           <span className="count">{cartItems ? cartItems.length : 0}</span>
         </button>
 

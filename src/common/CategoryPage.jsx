@@ -112,18 +112,14 @@ const CategoryPage = () => {
               )}
 
               <div className="showcase-actions">
-                <button className="btn-action">
-                  <CiHeart />
-                </button>
+              
                 <button
                   className="btn-action"
                   onClick={() => handleBuyNow(product)}
                 >
                   <FaRegEye />
                 </button>
-                <button className="btn-action">
-                  <IoRepeatOutline />
-                </button>
+               
                 <button
                   className="btn-action"
                   onClick={() => {
