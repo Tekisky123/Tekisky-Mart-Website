@@ -26,12 +26,12 @@
 }
 
 .formInput:hover {
-  border-color: #0cc1e0;
+  border-color: #004AAD;
 }
 
 .formInput:focus {
   outline: none;
-  border-color: #0cc1e0;
+  border-color: #004AAD;
   box-shadow: 0 0 20px rgba(0, 204, 224, 0.5);
 }
 
@@ -125,7 +125,7 @@
 }
 
 .add {
-  background-color: #0cc1e0;
+  background-color: #004AAD;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -162,8 +162,8 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid;
-  background-color: #0cc1e0;
-  border-color: #0cc1e0;
+  background-color: #004AAD;
+  border-color: #004AAD;
   border-radius: 10px;
   line-height: 5px;
   font-size: 14px;
@@ -184,8 +184,8 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid;
-  background-color: #0cc1e0;
-  border-color: #0cc1e0;
+  background-color: #004AAD;
+  border-color: #004AAD;
   border-radius: 10px;
   line-height: 35px;
   font-size: 14px;
@@ -377,7 +377,7 @@
 
 .spinner div {
   animation: spinner-4t3wzl 1.875s infinite backwards;
-  background-color: #0cc1e0;
+  background-color: #004AAD;
   border-radius: 50%;
   height: 100%;
   position: absolute;

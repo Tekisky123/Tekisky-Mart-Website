@@ -84,7 +84,7 @@
 .quantity-button {
   padding: 5px 10px;
   font-size: 16px;
-  background-color: #0cc1e0;
+  background-color: #004AAD;
   color: white;
   border: none;
   cursor: pointer;
@@ -94,7 +94,7 @@
 .buy-now-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #0cc1e0;
+  background-color: #004AAD;
   color: white;
   border: none;
   cursor: pointer;
@@ -240,9 +240,9 @@
 
 :root {
   --hue: 223;
-  --bg: #0cc1e0;
-  --fg: #0cc1e0;
-  --primary: #0cc1e0;
+  --bg: #004AAD;
+  --fg: #004AAD;
+  --primary: #004AAD;
   --trans-dur: 0.3s;
   /* font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320)); */
 }
@@ -401,7 +401,7 @@
   .quantity-button {
     padding: 0px 10px;
     font-size: 20px;
-    background-color: #0cc1e0;
+    background-color: #004AAD;
     color: white;
     border: none;
     font-weight: bold;
@@ -412,7 +412,7 @@
   .buy-now-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #0cc1e0;
+    background-color: #004AAD;
     color: white;
     border: none;
     cursor: pointer;
@@ -423,7 +423,7 @@
     padding: 10px 20px;
     margin: 10px 0px;
     font-size: 16px;
-    background-color: #0cc1e0;
+    background-color: #004AAD;
     color: white;
     border: none;
     cursor: pointer;
@@ -480,9 +480,9 @@
   }
   
   .size-label.selected {
-    border-color: #0cc1e0; /* Change the color as needed */
+    border-color: #004AAD; /* Change the color as needed */
     border-radius: 5px;
-    box-shadow: 1px 1px 8px #0cc1e0;
+    box-shadow: 1px 1px 8px #004AAD;
   }
   
   .size-label input {
@@ -493,7 +493,7 @@
     width: 50%;
     cursor: pointer;
     border: none;
-    background-color: #0cc1e0;
+    background-color: #004AAD;
     color: #fff;
     height: 40px;
     margin-bottom: 1.5rem;
@@ -513,7 +513,7 @@
   }
 
 .NextBtn{
-  background: #0cc1e0;
+  background: #004AAD;
   border-radius: 0px;
   border: none !important;
   cursor: pointer!important;
@@ -684,8 +684,12 @@
   width: 100%;
   height: auto;
   margin: 30px 0;
-  /* padding: 20px; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  /* border: 1px solid red; */
+
+  box-shadow: 0 0 15px #004AAD;
 }
 
 .slider2-item {
@@ -704,8 +708,9 @@
 .product-details {
   background: rgba(255, 255, 255, 0.9);
   padding: 20px;
+  /* border: 1px solid red; */
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   overflow: hidden; /* Ensure the product details don't overflow on small screens */
 }
 
@@ -722,7 +727,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0cc1e0;
+  background-color: #004AAD;
   color: #fff;
   border-radius: 10px;
   padding: 10px;
