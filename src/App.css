@@ -5762,11 +5762,7 @@ footer {
 
   .desktop-menu-category-list .menu-category > .menu-title {
     position: relative;
-<<<<<<< HEAD
     color:white;
-=======
-    color: #fff;
->>>>>>> dd158b3c590e7cdd01b587f5af74785002328c32
     font-size: var(--fs-7);
     font-weight: var(--weight-600);
     text-transform: uppercase;
@@ -5777,12 +5773,7 @@ footer {
   }
 
   .desktop-menu-category-list .menu-category > .menu-title:hover {
-<<<<<<< HEAD
     color:white;
-=======
-    /* color:#004AAD; */
-    color:#fff;
->>>>>>> dd158b3c590e7cdd01b587f5af74785002328c32
   }
 
   .desktop-menu-category-list .menu-category > .menu-title::after {
