@@ -2,7 +2,9 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import swal from 'sweetalert';
 import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 export const Context = createContext();
 
@@ -326,7 +328,8 @@ useEffect(() => {
         setSingleDeliveryCharge,
         setCustomerDetail,
         customerDetail,
-        swal
+        swal,
+        Swal
       }}
     >
       {children}

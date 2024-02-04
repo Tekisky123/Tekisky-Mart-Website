@@ -288,6 +288,16 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
+               <li className="menu-category">
+              <Link to="/pre-order" className="menu-title">
+                Pre-Order
+              </Link>
+            </li>
+            <li className="menu-category">
+              <Link to="/saleWithUs" className="menu-title">
+                Sell with Us
+              </Link>
+            </li>
               </>
             )}
 
@@ -301,6 +311,11 @@ const Header = () => {
                 <li className="menu-category">
                   <Link to="/products-list" className="menu-title">
                     All Products
+                  </Link>
+                </li>
+                <li className="menu-category">
+                  <Link to="/add-Product" className="menu-title">
+                    Add Product
                   </Link>
                 </li>
                 <li className="menu-category">
@@ -321,16 +336,7 @@ const Header = () => {
               </>
             )}
 
-            <li className="menu-category">
-              <Link to="/pre-order" className="menu-title">
-                Pre-Order
-              </Link>
-            </li>
-            <li className="menu-category">
-              <Link to="/saleWithUs" className="menu-title">
-                Sell with Us
-              </Link>
-            </li>
+
           </ul>
         </div>
       </nav>

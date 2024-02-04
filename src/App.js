@@ -62,8 +62,8 @@ const token = localStorage.getItem('token');
   
   return (
     <div className="App">
-      <Header />
-
+      {location.pathname !== '/login' ? (<>
+        <Header />
       <Routes>
 
      {userRole == "superadmin" &&
@@ -71,7 +71,7 @@ const token = localStorage.getItem('token');
       <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/users" element={<Users/>}/>
         <Route path="/all-orders" element={<AllOrders />} />
-        <Route path="/login" element={<Login/>}/>
+        {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/products-list" element={<ProductList/>}/>
         <Route path="/pre-orders-page" element={<PreOrdersPage/>}/>
@@ -82,7 +82,7 @@ const token = localStorage.getItem('token');
      {userRole == "seller" &&
       <>
         <Route path="/add-product" element={<AddProductForm/>}/>
-        <Route path="/login" element={<Login/>}/>
+        {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/seller-orders" element={<SellerAllOrders />} />
         {/* <Route path="/products-list" element={<ProductList/>}/> */}
 
@@ -92,7 +92,7 @@ const token = localStorage.getItem('token');
      {userRole !== "seller" &&
       <>
         <Route path="/" element={ <Home /> } />
-        <Route path="/login" element={<Login/>}/>
+        {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/pre-order" element={<PreOrder/>}/>
         <Route path="/shopping-cart" element={<ShoppingCart/>} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
@@ -105,8 +105,14 @@ const token = localStorage.getItem('token');
       }
                
       </Routes>
-
       <MyFooter />
+      </>) : (<>
+        <Routes>
+       <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </>)}
+ 
+
     </div>
   );
 }
