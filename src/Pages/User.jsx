@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, FormControl } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { FaUserEdit } from "react-icons/fa";
@@ -13,10 +13,11 @@ import {
   deleteUserAPI,
   updateUserAPI,
 } from "../common/Apis";
+import { Context } from "../common/Context";
 
 
 const Users = () => {
-
+  const { Swal } = useContext(Context);
   const navigate = useNavigate();
   const [editIndex, setEditIndex] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -67,6 +68,66 @@ const Users = () => {
     setPassword(""); // Reset password state
   };
 
+
+  const showChangePasswordAlert = (userId) => {
+    setSelectedUserId(userId);
+  
+    Swal.fire({
+      title: 'Change Password',
+      html:
+        '<label for="password">New Password:</label>' +
+        '<input type="password" id="password" class="swal2-input custom-input" required style="width: 80%;">' +
+        '<label for="confirmPassword">Confirm Password:</label>' +
+        '<input type="password" id="confirmPassword" class="swal2-input custom-input" required style="width: 80%;">',
+      focusConfirm: false,
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      allowOutsideClick: () => !Swal.isLoading(),
+      preConfirm: () => {
+        const password = Swal.getPopup().querySelector('#password').value;
+        const confirmPassword = Swal.getPopup().querySelector('#confirmPassword').value;
+  
+        if (!password || !confirmPassword) {
+          Swal.showValidationMessage('Please fill in both password fields');
+          return false;
+        }
+  
+        // Strong password validation
+        const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!strongPasswordRegex.test(password)) {
+          Swal.showValidationMessage('Password must be strong with at least 1 uppercase, 1 lowercase, 1 special character, 1 number, and a minimum length of 8 characters');
+          return false;
+        }
+  
+        if (password !== confirmPassword) {
+          Swal.showValidationMessage('Passwords do not match');
+          return false;
+        }
+  
+        return axios.post(`${Base_Url}${updateUserAPI}${userId}`, { password })
+          .then(() => {
+            return 'Password updated successfully!';
+          })
+          .catch((error) => {
+            console.error('Error updating password:', error);
+            throw new Error('An error occurred while updating the password');
+          });
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const successMessage = result.value;
+        Swal.fire(successMessage, '', 'success');
+      } else if (result.isDismissed) {
+        console.log('Modal was dismissed');
+      }
+    });
+  };
+  
+  
+  
+  
+  
+
   const handleChangePassword = async () => {
     try {
       // Make API call to update password
@@ -74,7 +135,7 @@ const Users = () => {
         password,
       });
 
-      closeChangePasswordModal();
+      // closeChangePasswordModal();
     } catch (error) {
       console.error("Error updating password:", error);
     }
@@ -290,7 +351,7 @@ const Users = () => {
                     <Button
                     style={{color:"#fff"}}
                       variant="info"
-                      onClick={() => openChangePasswordModal(row._id)}
+                      onClick={() => showChangePasswordAlert(row._id)}
                     >
                       Change Password
                     </Button>
@@ -302,7 +363,7 @@ const Users = () => {
         </tbody>
       </Table>
 
-      <Modal
+      {/* <Modal
         className="changePasswordModal"
         show={showChangePasswordModal}
         onHide={closeChangePasswordModal}
@@ -327,7 +388,7 @@ const Users = () => {
             Save
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

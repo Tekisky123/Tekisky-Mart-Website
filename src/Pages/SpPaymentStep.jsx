@@ -21,7 +21,8 @@ const SpPaymentStep = () => {
     singleDeliveryCharge,
     singleGrandTotal,
     setCustomerDetail,
-    customerDetail
+    customerDetail,
+    swal
   } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
   const [responseData, setResponseData] = useState([]);
@@ -177,50 +178,56 @@ const SpPaymentStep = () => {
   const handleNext = (e) => {
     e.preventDefault();
     const { phoneNumber } = formData;
-
+  
     if (phoneNumber) {
-      const isConfirmed = window.confirm(
-        `Are you sure This mobile number  ${phoneNumber} is correct?`
-      );
-
-      if (!isConfirmed) {
-        // Stop here if not confirmed
-        return;
-      }
+      swal({
+        title: "Are you sure?",
+        text: `This mobile number ${phoneNumber} is correct?`,
+        icon: "warning",
+        dangerMode: true,
+        buttons: {
+          cancel: true,
+          confirm: true,
+        },
+      }).then((result) => {
+        if (result) {
+          // User clicked on confirm button
+          var requiredFields = [
+            "phoneNumber",
+            "fullName",
+            "landMark",
+            "pincode",
+            "additionalAdd",
+          ];
+  
+          let hasError = false;
+  
+          requiredFields.forEach((field) => {
+            if (!formData[field]) {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                [field]: " ",
+              }));
+              hasError = true;
+            }
+          });
+  
+          if (hasError) {
+            alert("Mandatory fields are required");
+          } else {
+            // Call your openModal function only if there are no errors
+            openModal();
+          }
+        } else {
+          // User clicked on cancel button or closed the modal
+          // You can add any additional actions or leave it empty
+        }
+      });
     } else {
       alert("Mobile number is required");
-      return;
-    }
-
-    var requiredFields = [
-      "phoneNumber",
-      "fullName",
-      "landMark",
-      "pincode",
-      "additionalAdd",
-    ];
-
-    let hasError = false;
-
-
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [field]: " ",
-        }));
-        hasError = true;
-      }
-    });
-
-    if (hasError) {
-      alert("Mandatory fields are required");
-    }
-    if (!hasError) {
-      openModal();
     }
   };
-
+  
   const handlePrevious = () => {
     //  setSingleItems({})
     //  navigate(`/single-product/${singleItems.product._id}`)

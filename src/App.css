@@ -2363,11 +2363,13 @@ footer {
   }
 
   .desktop-menu-category-list {
+    overflow-x: auto;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
+    padding: 0px 30px;
     background-color: #004AAD;
   }
 
@@ -5292,6 +5294,10 @@ footer {
     min-width: 300px;
   }
 
+
+  .custom-input {
+    border: 1px solid #333; /* Dark border color */
+  }
   /**
    * #BANNER
    */

@@ -115,21 +115,6 @@ const PreOrder = () => {
 
   const handlePreOrder=(e) => {
     e.preventDefault();
-    const { phoneNumber } = formData;
-
-    if (phoneNumber) {
-      const isConfirmed = window.confirm(
-        `Are you sure This mobile number  ${phoneNumber} is correct?`
-      );
-
-      if (!isConfirmed) {
-        // Stop here if not confirmed
-        return;
-      }
-    } else {
-      alert("Mobile number is required");
-      return;
-    }
 
     var requiredFields = [
       "preOrderProduct",
