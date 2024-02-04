@@ -41,22 +41,23 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `https://tekisky-mart.onrender.com/product/getoneproduct/${id}`
-        );
-        setProduct(response?.data?.getOneProduact);
-
+        console.log("Fetching product with ID:", id);
+        const response = await axios.get(`https://tekiskymart.onrender.com/product/getoneproduct/${id}`);
+        console.log("API Response:", response);
+        
+        setProduct(response?.data?.getOneProduct);
         setSingleItems({
           ...singleItems,
-          product: response?.data?.getOneProduact,
+          product: response?.data?.getOneProduct,
         });
       } catch (error) {
-        console.error("Error fetching product:", error);
+        console.error("Error fetching product:", error.response);
       }
     };
-
+  
     fetchProduct();
   }, [id]);
+  
 
   useEffect(() => {
     handleSingleProductQuantity("inc", product);

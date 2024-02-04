@@ -170,17 +170,17 @@ const Header = () => {
           <ul className="header-social-container">
             <li>
               <Link href="#" className="social-link">
-                <FaWhatsapp className="social-link-icon"/>
+                <FaWhatsapp className="social-link-icon" />
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-                <FaInstagram className="social-link-icon"/>
+                <FaInstagram className="social-link-icon" />
               </Link>
             </li>
             <li>
               <Link href="#" className="social-link">
-                <CiLinkedin className="social-link-icon"/>
+                <CiLinkedin className="social-link-icon" />
               </Link>
             </li>
             <li>
@@ -350,7 +350,7 @@ const Header = () => {
           className="action-btn"
           onClick={() => navigate("/shopping-cart")}
         >
-<AiOutlineShoppingCart />
+          <AiOutlineShoppingCart />
           <span className="count">{cartItems ? cartItems.length : 0}</span>
         </button>
 
