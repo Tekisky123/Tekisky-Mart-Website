@@ -28,7 +28,7 @@ const EnquiryTable = () => {
             <th>Do You Have Shop</th>
             <th>Product Details</th>
             <th>Mobile Number</th>
-            <th>Product You Have to Sell</th>
+            <th>Which product do you want to sell</th>
           </tr>
         </thead>
         <tbody>
