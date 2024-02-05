@@ -179,18 +179,14 @@ const SaleWithUs = () => {
           <Col xs={12}>
             <h1 style={{textAlign:"center"}}>Sell With Us</h1>
             <h3>Terms & Conditions</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ea
-              maxime quibusdam reprehenderit omnis, consequatur, vero sit
-              provident repellendus quidem eveniet pariatur, nisi cupiditate
-              magnam assumenda debitis dicta unde veniam.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ea
-              maxime quibusdam reprehenderit omnis, consequatur, vero sit
-              provident repellendus quidem eveniet pariatur, nisi cupiditate
-              magnam assumenda debitis dicta unde veniam.
-            </p>
+            <ol>
+  <li>1. Authentic and reliable genuine products</li>
+  <li>2. No illegal materials</li>
+  <li>3. All government norms should be followed</li>
+  <li>4. 500₹ subscription for 1 year with a minimum of 10 product sales</li>
+  <li>5. Deals only for premium customers</li>
+</ol>
+
           </Col>
         </Row>
         <form action="">

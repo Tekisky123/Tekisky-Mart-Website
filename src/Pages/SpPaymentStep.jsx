@@ -452,13 +452,8 @@ const SpPaymentStep = () => {
                         Shipping
                       </h5>
                       <h6>
-                        <b style={{ color: "#004AAD" }}>
-                          Delivery charge 30 rupees blow ₹500{" "}
-                        </b>
-                        <br />
-                        <b style={{ color: "#004AAD" }}>
-                          Free delivery for order above ₹500{" "}
-                        </b>
+                      <b style={{color:"#004AAD"}}>Delivery charge 30 rupees below 500₹ </b><br/>
+                        <b style={{color:"#004AAD"}}>Free delivery for order above 500₹ </b>
                       </h6>
                       <h6 style={{ color: "gray", marginBottom: "1rem" }}>
                         <span>saved Amount:</span>
@@ -509,10 +504,7 @@ const SpPaymentStep = () => {
                 </div>
                 <h1 className="title">Order Successfull</h1>
                 <h5>Your order Id : {responseData?.order?.orderId}</h5>
-                <p className="message">
-                  Your order has been placed successfully
-                  <br /> Our delivery boy will contact you shortly
-                </p>
+                <p className="message">Your order has been placed successfully<br/> Our Team will contact you shortly</p>
               </div>
             </div>
           </div>

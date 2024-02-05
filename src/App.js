@@ -35,8 +35,7 @@ function App() {
   const token = localStorage.getItem("token");
 
   const location = useLocation();
-  const userType = "superadmin";
-
+  
   useEffect(() => {
     if (
       singleItems &&
@@ -48,66 +47,62 @@ function App() {
     }
   }, [singleItems, location.pathname, navigate]);
 
-  // useEffect(() => {
-  //   if(!token){
-  //     navigate("/");
-  //   }
-
-  // }, [navigate])
-
+  
   return (
     <div className="App">
-      {location.pathname !== "/login" ? (
-        <>
-          <Header />
-          <Routes>
-            {userRole === "superadmin" && (
-              <>
-                <Route path="/" element={<Home />} />
-                <Route path="/create-user" element={<CreateUser />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/all-orders" element={<AllOrders />} />
-                {/* <Route path="/login" element={<Login/>}/> */}
-                <Route path="/add-product" element={<AddProductForm />} />
-                <Route path="/products-list" element={<ProductList />} />
-                <Route path="/pre-orders-page" element={<PreOrdersPage />} />
-                <Route path="/enquiry-table" element={<EnquiryTable />} />
-              </>
-            )}
-            {userRole === "seller" && (
-              <>
-                <Route path="/" element={<Home />} />
-                <Route path="/add-product" element={<AddProductForm />} />
-                {/* <Route path="/login" element={<Login/>}/> */}
-                <Route path="/seller-orders" element={<SellerAllOrders />} />
-                {/* <Route path="/products-list" element={<ProductList/>}/> */}
-              </>
-            )}
+      {location.pathname !== '/login' ? (<>
+        <Header />
+      <Routes>
 
-            {userRole !== "seller" && (
-              <>
-                <Route path="/" element={<Home />} />
-                {/* <Route path="/login" element={<Login/>}/> */}
-                <Route path="/pre-order" element={<PreOrder />} />
-                <Route path="/shopping-cart" element={<ShoppingCart />} />
-                <Route path="/single-product/:id" element={<SingleProduct />} />
-                <Route path="/payment-step" element={<PaymentStep />} />
-                <Route path="/sp-payment-step" element={<SpPaymentStep />} />
-                <Route path="/category/:category" element={<CategoryPage />} />
-                <Route path="/saleWithUs" element={<SaleWithUs />} />
-                <Route path="/enquiry-form" element={<Enquiry />} />
-              </>
-            )}
-          </Routes>
-          <MyFooter />
-        </>
-      ) : (
-        <>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </>
-      )}
+     {userRole == "superadmin" &&
+      <>
+      <Route path="/create-user" element={<CreateUser/>}/>
+        <Route path="/users" element={<Users/>}/>
+        <Route path="/all-orders" element={<AllOrders />} />
+        {/* <Route path="/login" element={<Login/>}/> */}
+        <Route path="/add-product" element={<AddProductForm/>}/>
+        <Route path="/products-list" element={<ProductList/>}/>
+        <Route path="/pre-orders-page" element={<PreOrdersPage/>}/>
+        <Route path="/enquiry-table" element={<EnquiryTable/>}/>
+        
+      </> 
+      }
+
+     {userRole == "seller" &&
+      <>
+        <Route path="/add-product" element={<AddProductForm/>}/>
+        {/* <Route path="/login" element={<Login/>}/> */}
+        <Route path="/seller-orders" element={<SellerAllOrders />} />
+        {/* <Route path="/products-list" element={<ProductList/>}/> */}
+
+      </> 
+      }
+               
+     {userRole !== "seller" &&
+      <>
+        <Route path="/" element={ <Home /> } />
+        {/* <Route path="/login" element={<Login/>}/> */}
+        <Route path="/pre-order" element={<PreOrder/>}/>
+        <Route path="/shopping-cart" element={<ShoppingCart/>} />
+        <Route path="/single-product/:id" element={<SingleProduct />} />
+        <Route path="/payment-step" element={<PaymentStep/>}/>
+        <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
+        <Route path="/category/:category" element={<CategoryPage />} />
+        <Route path="/saleWithUs" element={<SaleWithUs />} />
+        <Route path="/customer-support" element={<Enquiry />} />
+      </> 
+      }
+               
+      </Routes>
+      <MyFooter />
+      </>) : (<>
+        <Routes>
+       <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </>)}
+ 
+
+         
     </div>
   );
 }

@@ -58,7 +58,7 @@
     max-width: 450px;
   }
   .map-container{
-    width: 650px;
+    width: 100%;
   }
   
   .contact-form textarea {
@@ -139,7 +139,7 @@
       display: block;
     }
     .map-container{
-      width: 350px;
+      width: 100%;
     }
   }
   

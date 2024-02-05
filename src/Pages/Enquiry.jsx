@@ -16,7 +16,7 @@ const Enquiry = () => {
   return (
     <>
       <div className="first-image-container">
-        <h2 className="first-container-heading">CONTACT US</h2>
+        <h2 className="first-container-heading">Customer Support</h2>
       </div>
       <div className="about-card-container container">
         <div className="about-card">
@@ -55,8 +55,8 @@ const Enquiry = () => {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
-        <form action="#" className="contact-form">
-          <h5 className="title">Contact us</h5>
+        {/* <form action="#" className="contact-form">
+          <h5 className="title">Customer Support</h5>
           <p className="description">
             Feel free to contact us if you need any assistance, any help or
             another question.
@@ -91,7 +91,7 @@ const Enquiry = () => {
           <div className="submit-button-wrapper">
             <input type="submit" value="Send" />
           </div>
-        </form>
+        </form> */}
       </div>
     </>
   );
