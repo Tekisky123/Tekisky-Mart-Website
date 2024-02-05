@@ -325,7 +325,7 @@ const Header = () => {
                 </li>
                 <li className="menu-category">
                   <Link to="/enquiry-table" className="menu-title">
-                    Sell With Us Requests
+                    Sell With Us
                   </Link>
                 </li>
               </>
