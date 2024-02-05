@@ -13,6 +13,7 @@ import { Context } from "../common/Context";
 const ProductMain = () => {
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  
 
   const getCategoryProducts = (category, isMobile) => {
     const maxProducts = isMobile ? 1 : 4; // Display 1 product for mobile, 4 for other screens

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Assets/Styles/AddProductForm.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 const AddUser = () => {
   const navigate = useNavigate();
-  // State for form fields
+  const [loading, setLoading] = useState(false); // New state for loader
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,6 +20,13 @@ const AddUser = () => {
     gstNumber: "", 
     shopCategory: "", 
   });
+
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   // State for feedback messages
   const [message, setMessage] = useState(null);
@@ -37,7 +44,7 @@ const AddUser = () => {
     e.preventDefault();
 
     try {
-      // Make a POST request to your backend API endpoint
+      setLoading(true); // Show loader while making the API request
       const response = await axios.post(
         "https://tekiskymart.onrender.com/user/createUser",
         formData
@@ -45,18 +52,40 @@ const AddUser = () => {
 
       // Handle successful user creation
       setMessage({ type: "success", content: "User created successfully." });
-
+      setLoading(false);
       // Optionally, you can redirect the user to another page
-      navigate.push("/");
+      navigate("/users");
     } catch (error) {
+      setLoading(false);
       // Handle error
-      setMessage({ type: "error", content: "Error creating user." });
-      console.error("Error creating user:", error.message);
+      if (error.response && error.response.data && error.response.data.error === "User already exists") {
+        // Show sweet alert for duplicate user
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "User already exists",
+        });
+      } else {
+        // Show generic error message
+        setMessage({ type: "error", content: "Error creating user." });
+        console.error("Error creating user:", error.message);
+      }
     }
   };
 
   return (
     <div>
+        {loading && (
+        <div className="loader-container">
+          <div className="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
       <h2 className="title">Add User</h2>
 
       {/* {message && (

@@ -6,7 +6,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { MdFileDownloadDone } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   AllUserAPI,
   Base_Url,
@@ -36,6 +36,13 @@ const Users = () => {
     role: "",
     shopCategory: "",
   });
+
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   useEffect(() => {
     const fetchProducts = async () => {

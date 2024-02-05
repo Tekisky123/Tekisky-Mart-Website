@@ -10,6 +10,7 @@ const MyFooter = () => {
 
       <div className="footer-nav">
         <div className="container">
+          
           <ul className="footer-nav-list">
             <li className="footer-nav-item">
               <h2 className="nav-title">Popular Categories</h2>

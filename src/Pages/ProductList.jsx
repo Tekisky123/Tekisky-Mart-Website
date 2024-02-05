@@ -3,10 +3,19 @@ import axios from "axios";
 import Modal from "react-modal";
 import "../Assets/Styles/AddProductForm.css";
 import { toast } from "react-toastify";
+import { useLocation, useParams } from "react-router-dom";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
 const ProductList = () => {
+
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
+
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);

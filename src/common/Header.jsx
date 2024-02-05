@@ -275,7 +275,7 @@ const Header = () => {
         <div className="main-container">
           <ul className="desktop-menu-category-list">
             <li className="menu-category" onClick={() => navigate("/")}>
-              <Link href="#" className="menu-title">
+              <Link to="/" className="menu-title">
                 Home
               </Link>
             </li>
@@ -288,7 +288,7 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-               <li className="menu-category">
+                 <li className="menu-category">
               <Link to="/pre-order" className="menu-title">
                 Pre-Order
               </Link>
@@ -314,18 +314,18 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="menu-category">
-                  <Link to="/add-Product" className="menu-title">
-                    Add Product
-                  </Link>
-                </li>
-                <li className="menu-category">
                   <Link to="/users" className="menu-title">
                     Users
                   </Link>
                 </li>
                 <li className="menu-category">
-                  <Link to="/add-product" className="menu-title">
-                    Add Product
+                  <Link to="/pre-orders-page" className="menu-title">
+                    Pre Order Requests
+                  </Link>
+                </li>
+                <li className="menu-category">
+                  <Link to="/enquiry-table" className="menu-title">
+                    Sell With Us Requests
                   </Link>
                 </li>
               </>
@@ -333,6 +333,7 @@ const Header = () => {
 
             {userRole == "seller" && (
               <>
+              
                 <li className="menu-category">
                   <Link to="/add-product" className="menu-title">
                     Add Product
@@ -341,7 +342,7 @@ const Header = () => {
               </>
             )}
 
-
+           
           </ul>
         </div>
       </nav>
@@ -461,17 +462,6 @@ const Header = () => {
                   onClick={() => handleStaticAccordionToggle("/users")}
                 >
                   <Link to="/users" className="menu-title">
-                    Users
-                  </Link>
-                </button>
-              </li>
-              <li className="menu-category">
-                <button
-                  className="accordion-menu"
-                  data-accordion-btn
-                  onClick={() => handleStaticAccordionToggle("/add-product")}
-                >
-                  <Link to="/add-product" className="menu-title">
                     Users
                   </Link>
                 </button>

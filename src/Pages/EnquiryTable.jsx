@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useLocation, useParams } from 'react-router-dom';
 
 const EnquiryTable = () => {
   const [enquiryData, setEnquiryData] = useState([]);
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   useEffect(() => {
     axios.get('https://tekiskymart.onrender.com/client/enquiry')

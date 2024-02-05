@@ -1,7 +1,7 @@
 // Install axios if not already installed: npm install axios
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import "../Assets/Styles/Login.css";
 import { Context } from '../common/Context';
 
@@ -10,6 +10,12 @@ const Login = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const { ToastContainer,toast } = useContext(Context);
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   const handleLogin = async () => {
     try {

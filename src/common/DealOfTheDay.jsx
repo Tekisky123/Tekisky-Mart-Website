@@ -31,17 +31,21 @@ const DealOfTheDay = () => {
       const now = new Date();
       const timeDifference = saleEndDate - now;
 
-      // const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      setCountdown({  hours, minutes, seconds });
+      setCountdown({ hours, minutes, seconds });
     }, 1000);
 
     // Clear the interval when the component is unmounted
     return () => clearInterval(countdownInterval);
   }, []);
+
+  // If there are no products, hide the container
+  if (products.length === 0) {
+    return null; // or return an empty component
+  }
 
   // If there's only one product, skip rendering the slider
   if (products.length === 1) {
