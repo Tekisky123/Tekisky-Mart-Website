@@ -8,12 +8,16 @@ import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
+import { useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Context } from "./Context";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentPath = location.pathname;
+
   const { cartItems } = useContext(Context);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
@@ -201,8 +205,19 @@ const Header = () => {
           <Link className="header-logo">
             <img src={logo} alt="Anon's logo" className="header-logo" />
           </Link>
-
-          <div className="header-search-container">
+        {currentPath === '/pre-orders-page' ||
+         currentPath === '/customer-support' ||
+         currentPath === '/saleWithUs' ||
+         currentPath === '/pre-order' ||
+         currentPath === '/payment-step' ||
+         currentPath === '/sp-payment-step' ||
+         currentPath === '/add-product' ||
+         currentPath === '/seller-orders' ||
+         currentPath === '/users' ||
+         currentPath === '/create-user' ||
+         currentPath === '/enquiry-table' ? null : (<>
+         
+         <div className="header-search-container">
             <div className="search-container">
               <input
                 type="search"
@@ -245,6 +260,8 @@ const Header = () => {
               <CiSearch className="search" />
             </button>
           </div>
+         </>)}
+  
 
           <div className="header-user-actions">
             {/* <button className="action-btn">
@@ -298,6 +315,11 @@ const Header = () => {
                 Sell with Us
               </Link>
             </li>
+            <li className="menu-category">
+              <Link to="/customer-support" className="menu-title">
+                Customer Support
+              </Link>
+            </li>
               </>
             )}
 
@@ -305,29 +327,30 @@ const Header = () => {
               <>
                 <li className="menu-category">
                   <Link to="/all-orders" className="menu-title">
-                    All Order
+                    All Orders
                   </Link>
                 </li>
                 <li className="menu-category">
                   <Link to="/products-list" className="menu-title">
-                    All Products
+                    Products
                   </Link>
                 </li>
-                <li className="menu-category">
+                {/* <li className="menu-category">
                   <Link to="/add-Product" className="menu-title">
                     Add Product
                   </Link>
-                </li>
+                </li> */}
                 <li className="menu-category">
                   <Link to="/users" className="menu-title">
                     Users
                   </Link>
                 </li>
                 <li className="menu-category">
-                  <Link to="/add-product" className="menu-title">
-                    Add Product
+                  <Link to="/pre-orders-page" className="menu-title">
+                    Pre order request
                   </Link>
                 </li>
+
               </>
             )}
 
@@ -450,7 +473,7 @@ const Header = () => {
                   onClick={() => handleStaticAccordionToggle("/products-list")}
                 >
                   <Link to="/products-list" className="menu-title">
-                    All Products
+                    Products
                   </Link>
                 </button>
               </li>
@@ -469,13 +492,15 @@ const Header = () => {
                 <button
                   className="accordion-menu"
                   data-accordion-btn
-                  onClick={() => handleStaticAccordionToggle("/add-product")}
+                  onClick={() => handleStaticAccordionToggle("/pre-orders-page")}
                 >
-                  <Link to="/add-product" className="menu-title">
-                    Users
+                  <Link to="/pre-orders-page" className="menu-title">
+                  Pre orders request
                   </Link>
                 </button>
               </li>
+              
+              
             </>
           )}
 

@@ -39,7 +39,6 @@ const token = localStorage.getItem('token');
 
 
   const location = useLocation();
-  const userType ="superadmin";
   
   useEffect(() => {
     if (
@@ -52,13 +51,6 @@ const token = localStorage.getItem('token');
     }
   }, [singleItems, location.pathname, navigate]);
 
-
-  // useEffect(() => {
-  //   if(!token){
-  //     navigate("/");
-  //   }
-
-  // }, [navigate])
   
   return (
     <div className="App">
@@ -79,6 +71,7 @@ const token = localStorage.getItem('token');
         
       </> 
       }
+
      {userRole == "seller" &&
       <>
         <Route path="/add-product" element={<AddProductForm/>}/>
@@ -100,7 +93,7 @@ const token = localStorage.getItem('token');
         <Route path="/sp-payment-step" element={<SpPaymentStep/>}/>
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/saleWithUs" element={<SaleWithUs />} />
-        <Route path="/enquiry-form" element={<Enquiry />} />
+        <Route path="/customer-support" element={<Enquiry />} />
       </> 
       }
                
