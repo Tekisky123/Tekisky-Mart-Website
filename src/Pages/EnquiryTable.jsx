@@ -43,7 +43,7 @@ const EnquiryTable = () => {
             <tr key={enquiry._id}>
               <td>{enquiry.shopSellerName}</td>
               <td>{enquiry.doYouHaveGST ? 'Yes' : 'No'}</td>
-              <td>{enquiry.GST}</td>
+              <td>{enquiry.GST  ? enquiry.GST : '-'}</td>
               <td>{enquiry.doYouHaveShop ? 'Yes' : 'No'}</td>
               <td>{enquiry.productDetails}</td>
               <td>{enquiry.mobileNumber}</td>

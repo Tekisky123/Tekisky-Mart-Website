@@ -33,48 +33,116 @@ const AddUser = () => {
 
   // Function to handle form field changes
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    // For the mobile number field, allow only numeric input and limit to 10 characters
+    if (e.target.name === "mobileNumber") {
+      const numericValue = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+      const limitedValue = numericValue.slice(0, 10); // Limit to 10 characters
+      setFormData({
+        ...formData,
+        [e.target.name]: limitedValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+  
+  const isValidEmail = (email) => {
+    // You can use a regular expression for a basic email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  
+  // Function to check if a string is a valid phone number
+  const isValidPhoneNumber = (phoneNumber) => {
+    // Check if it contains only digits and has exactly 10 characters
+    const phoneNumberRegex = /^\d{10}$/;
+    return phoneNumberRegex.test(phoneNumber);
   };
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Basic validations for required fields
+    if (!formData.firstName || !formData.lastName || !formData.mobileNumber || !formData.email || !formData.password || !formData.role) {
+      // Display an error message using SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please fill in all required fields.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+  
+    // Additional validations for email and phone number
+    if (!isValidEmail(formData.email)) {
+      // Display an error message using SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please enter a valid email address.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+  
+    if (!isValidPhoneNumber(formData.mobileNumber)) {
+      // Display an error message using SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please enter a valid phone number.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+  
     try {
-      setLoading(true); // Show loader while making the API request
+      setLoading(true);
       const response = await axios.post(
         "https://tekiskymart.onrender.com/user/createUser",
         formData
       );
-
-      // Handle successful user creation
-      setMessage({ type: "success", content: "User created successfully." });
+  
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "User created successfully.",
+        confirmButtonColor: "#28a745",
+      });
       setLoading(false);
-      // Optionally, you can redirect the user to another page
       navigate("/users");
     } catch (error) {
       setLoading(false);
-      // Handle error
       if (error.response && error.response.data && error.response.data.error === "User already exists") {
         // Show sweet alert for duplicate user
         Swal.fire({
           icon: "error",
           title: "Error",
           text: "User already exists",
+          confirmButtonColor: "#d33",
         });
       } else {
         // Show generic error message
-        setMessage({ type: "error", content: "Error creating user." });
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Error creating user.",
+          confirmButtonColor: "#d33",
+        });
         console.error("Error creating user:", error.message);
       }
     }
   };
+  
 
   return (
     <div>
+        
         {loading && (
         <div className="loader-container">
           <div className="spinner">
