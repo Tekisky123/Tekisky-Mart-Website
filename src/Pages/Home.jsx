@@ -44,6 +44,18 @@ const Home = () => {
   ];
   return (
     <>
+    <div className="heading-of-category home-marquee">
+    <marquee
+        direction="left"
+        style={{ color: "#004AAD", fontWeight: "bold" }}
+      >
+        <span style={{ marginLeft:"100px" }}>Delivery within 24 hours</span>
+        <span style={{ marginLeft:"100px" }}>Returns without questions</span>
+        <span style={{ marginLeft:"100px" }}>Quality product at best price</span>
+        <span style={{ marginLeft:"100px" }}>Low price compare to your retail outlet</span>
+      </marquee>
+
+    </div>
       <Banner banners={bannersData} />
       <DealOfTheDay />
 

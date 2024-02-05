@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
-  const { ToastContainer,toast } = useContext(Context);
+  const { ToastContainer,toast ,Swal } = useContext(Context);
   const { id } = useParams();
   const location = useLocation();
 
@@ -22,7 +22,11 @@ const Login = () => {
 
       if (!mobileNumber || !password) {
         // toast.error('Mobile number and password are required');
-        alert('Please enter a mobile number and password');
+        Swal.fire({
+          title: "Oops!",
+          text: "Please enter a mobile number and password",
+          icon: "error"
+        });
         return;
       }
 
@@ -34,25 +38,43 @@ const Login = () => {
 
       if(!response?.status==200) {
         // toast.error('Mobile number and password are required');
-        alert('Mobile number and password are required');
+        Swal.fire({
+          title: "Oops!",
+          text: "Mobile number and password are required",
+          icon: "error"
+        });
         return;
       }
 
       // Check the response for successful login
       if (response?.status==200 || response?.data?.success) {
-        toast.success(response.data.message)
+        // toast.success(response.data.message)
+        Swal.fire({
+          title: "Congratulation!",
+          text: "Login Successful",
+          icon: "success"
+        });
         localStorage.setItem('userRole', response.data.user.role);
+        localStorage.setItem('mobileNumber', response.data.user.mobileNumber);
         localStorage.setItem('token', response.data.token);
 
         navigate('/');
       }else{
-        alert('Invalid mobile number or password');
-        // toast.error('Invalid mobile number or password')
+
+        Swal.fire({
+          title: "Oops!",
+          text: "Invalid mobile number or password",
+          icon: "error"
+        });
       }
     } catch (error) {
       console.error('Login error:', error);
       // toast.error('Invalid mobile number or password')
-      alert('Invalid mobile number or password');
+      Swal.fire({
+        title: "Oops!",
+        text: "Invalid mobile number or password",
+        icon: "error"
+      });
     }
   };
 

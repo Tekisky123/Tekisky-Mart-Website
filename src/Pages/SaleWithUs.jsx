@@ -13,7 +13,7 @@ const SaleWithUs = () => {
   }, [location.pathname, id]);
   const {
 
-    ToastContainer,toast
+    ToastContainer,toast,Swal
 
   } = useContext(Context);
   const navigate = useNavigate();
@@ -129,7 +129,11 @@ const SaleWithUs = () => {
     });
   
     if (hasError) {
-      alert("Mandatory fields are required");
+      Swal.fire({
+        title: "Warning!",
+        text: "All mandatory fields are required",
+        icon: "error"
+      });
     }
     if (!hasError) {
       const payload = {
@@ -151,6 +155,11 @@ const SaleWithUs = () => {
         );
     
         if (response.data.status === 200 || response.data.success === true) {
+          Swal.fire({
+            title: "Submitted",
+            text: "Tekisky Mart team will contact you soon!",
+            icon: "success"
+          });
           toast.success('Tekisky Mart team will contact you soon')
           setTimeout(() => {
             navigate('/')
@@ -158,7 +167,12 @@ const SaleWithUs = () => {
         }
       } catch (error) {
         console.error("Error creating user:", error.message);
-        alert(error.message);
+
+        Swal.fire({
+          title: "Oops!",
+          text: `${error.message}`,
+          icon: "error"
+        });
       }
     }
   };
@@ -183,7 +197,7 @@ const SaleWithUs = () => {
   <li>1. Authentic and reliable genuine products</li>
   <li>2. No illegal materials</li>
   <li>3. All government norms should be followed</li>
-  <li>4. 500₹ subscription for 1 year with a minimum of 10 product sales</li>
+  <li>4. 500₹ subscription for 1 year with a maximum of 10 product sales</li>
   <li>5. Deals only for premium customers</li>
 </ol>
 

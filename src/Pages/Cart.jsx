@@ -101,15 +101,6 @@ const ShoppingCart = () => {
     setProducts(updatedProducts);
   };
 
-  const checkPromoCode = () => {
-    for (let i = 0; i < promotions.length; i++) {
-      if (promoCode === promotions[i].code) {
-        setDiscount(parseFloat(promotions[i].discount.replace("%", "")));
-        return;
-      }
-    }
-    alert("Sorry, the Promotional code you entered is not valid!");
-  };
 
   return (
     <div id="app">

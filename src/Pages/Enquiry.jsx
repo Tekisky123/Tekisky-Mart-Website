@@ -35,15 +35,15 @@ const Enquiry = () => {
           <FaPhoneAlt className="phone-icon" />
           <h3>Phone</h3>
 
-          <span> +91 8625817334</span>
-          <span> +91 9890796149</span>
+          <span> +91 8625817334</span> <br />
+          <span> +91 9890796149</span> <br />
           <span> +91 7387737731</span>
         </div>
         <div className="about-card">
           <MdOutlineAlternateEmail className="email-icon" />
           <h3>Email</h3>
 
-          <span>hr@tekisky.com</span>
+          <span>hr@tekisky.com</span> <br />
           <span>Sales@Tekisky.Com</span>
         </div>
       </div>

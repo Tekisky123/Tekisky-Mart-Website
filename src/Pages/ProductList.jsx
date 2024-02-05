@@ -23,6 +23,8 @@ const ProductList = () => {
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setEditing] = useState(false);
   const userRole = localStorage.getItem("userRole");
+  const mobileNumber = localStorage.getItem("mobileNumber");
+  
   const [updatedProduct, setUpdatedProduct] = useState({
     productBrand: "",
     availableStockQty: 0,
@@ -45,9 +47,17 @@ const ProductList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://tekiskymart.onrender.com/product/getproduct"
+        let response ={}
+        if(userRole=='superadmin'){
+          response= await axios.get(
+            "https://tekiskymart.onrender.com/product/getproduct"
+          );
+        }else{
+          response= await axios.get(
+          "https://tekiskymart.onrender.com/product/mobile/"+mobileNumber
         );
+        }
+        console.log("response",response)
         setProducts(response.data.products);
         setLoading(false);
       } catch (error) {

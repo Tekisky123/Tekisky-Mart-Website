@@ -181,10 +181,11 @@ const SingleProduct = () => {
 
       <div className="product-details">
         <h1 className="product-name">{productName}</h1>
-
+        <h3>{product.header}</h3>
         <div className="product-info">
           <div className="details-section">
             <h2>Product Details</h2>
+           
 
             <div>
               <div key={product._id}>

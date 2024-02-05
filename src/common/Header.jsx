@@ -367,6 +367,11 @@ const Header = () => {
                     Add Product
                   </Link>
                 </li>
+                <li className="menu-category">
+                  <Link to="/products-list" className="menu-title">
+                    Products
+                  </Link>
+                </li>
               </>
             )}
 

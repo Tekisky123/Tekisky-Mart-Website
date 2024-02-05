@@ -31,6 +31,7 @@ function App() {
   // Get userRole from localStorage
   const userRole = localStorage.getItem("userRole");
 
+
   // Get token from localStorage
   const token = localStorage.getItem("token");
 
@@ -70,10 +71,12 @@ function App() {
 
      {userRole == "seller" &&
       <>
+           {/* <Route path="/users" element={<Users/>}/> */}
         <Route path="/add-product" element={<AddProductForm/>}/>
+        <Route path="/" element={ <Home /> } />
         {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/seller-orders" element={<SellerAllOrders />} />
-        {/* <Route path="/products-list" element={<ProductList/>}/> */}
+        <Route path="/products-list" element={<ProductList/>}/>
 
       </> 
       }

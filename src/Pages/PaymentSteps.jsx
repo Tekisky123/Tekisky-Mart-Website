@@ -236,7 +236,11 @@ const PaymentStep = () => {
           });
 
           if (hasError) {
-            alert("Mandatory fields are required");
+            Swal.fire({
+              title: "Warning!",
+              text: "All mandatory fields are required",
+              icon: "error"
+            });
           } else {
             // Call your openModal function only if there are no errors
             openModal();
@@ -247,7 +251,11 @@ const PaymentStep = () => {
         }
       });
     } else {
-      alert("Mobile number is required");
+      Swal.fire({
+        title: "Oops!",
+        text: "Mobile number is required",
+        icon: "error"
+      });
     }
   };
 

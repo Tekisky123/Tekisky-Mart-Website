@@ -14,7 +14,7 @@ const PreOrder = () => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
 
-  const { ToastContainer, toast } = useContext(Context);
+  const { ToastContainer, toast,Swal } = useContext(Context);
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
@@ -141,7 +141,11 @@ const PreOrder = () => {
     });
 
     if (hasError) {
-      alert("Mandatory fields are required");
+      Swal.fire({
+        title: "Warning!",
+        text: "All mandatory fields are required",
+        icon: "error"
+      });
     }
     if (!hasError) {
       handleSubmit(e);

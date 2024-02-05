@@ -193,6 +193,11 @@ body {
   }
 }
 
+
+.home-marquee marquee{
+  color: #fff !important;
+}
+
 .modal.closed {
   display: none;
 }

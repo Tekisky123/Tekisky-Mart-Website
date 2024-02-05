@@ -2,11 +2,13 @@ import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Assets/Styles/AddProductForm.css";
-import { Base_Url,AddProduct } from "../common/Apis";
+import { Base_Url, AddProduct } from "../common/Apis";
 import { ToastContainer, toast } from "react-toastify";
 
 const AddProductForm = () => {
   const navigate = useNavigate();
+  const userRole = localStorage.getItem("userRole");
+  const mobileNumber = localStorage.getItem("mobileNumber");
   const [showOtherCategoryInput, setShowOtherCategoryInput] = useState(false);
   const [formData, setFormData] = useState({
     productCategory: "",
@@ -20,14 +22,16 @@ const AddProductForm = () => {
     packetweight: "",
     unitOfMeasure: "",
     description: "",
-    createdBy: "",
+    header: "",
+    createdBy: mobileNumber,
     files: [],
     manufactureDate: "",
     expiryDate: "",
     sellerInformation: "",
     dealOfDay: false,
+    approved: "false",
   });
-
+  // console.log("approved", formData.approved);
   const [filePreviews, setFilePreviews] = useState([]);
 
   const [errors, setErrors] = useState({});
@@ -51,7 +55,7 @@ const AddProductForm = () => {
     }));
     setFilePreviews(previews);
   }, []);
-  
+
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
 
@@ -99,6 +103,9 @@ const AddProductForm = () => {
         key !== "unitOfMeasure" &&
         key !== "otherCategory" // Add this line for the new field
       ) {
+        if (key === "approved" && formData[key] === "") {
+          newErrors[key] = "Please select approval status";
+        }
         newErrors[key] = "This field is required *";
       }
     }
@@ -114,7 +121,7 @@ const AddProductForm = () => {
     }
     setLoading(true);
 
-    const apiUrl = `${Base_Url}${AddProduct}`
+    const apiUrl = `${Base_Url}${AddProduct}`;
 
     const formDataToSend = new FormData();
 
@@ -129,7 +136,7 @@ const AddProductForm = () => {
         formDataToSend.append(key, formData[key]);
       }
     }
-
+    formDataToSend.append("approved", formData.approved);
     try {
       await axios.post(apiUrl, formDataToSend);
       console.log("Data successfully posted");
@@ -144,7 +151,7 @@ const AddProductForm = () => {
 
   return (
     <div className="addProductForm">
-      <ToastContainer/>
+      <ToastContainer />
       {loading && (
         <div className="loader-container">
           <div className="spinner">
@@ -351,8 +358,22 @@ const AddProductForm = () => {
             <span className="errorMessage">{errors.description}</span>
           )}
         </label>
-
         <label className="formLabel">
+          Bold Header:
+          <input
+            type="text"
+            value={formData.header}
+            onChange={(e) =>
+              setFormData({ ...formData, header: e.target.value })
+            }
+            className={`formInput ${errors.header ? "error" : ""}`}
+          />
+          {errors.header && (
+            <span className="errorMessage">{errors.header}</span>
+          )}
+        </label>
+
+        {/* <label className="formLabel">
           Created By (Mob. No):
           <input
             type="tel" // Use type "tel" to indicate it's a telephone number
@@ -374,7 +395,7 @@ const AddProductForm = () => {
           {errors.createdBy && (
             <span className="errorMessage">{errors.createdBy}</span>
           )}
-        </label>
+        </label> */}
 
         {/* <label className="formLabel">
       Files:
@@ -464,21 +485,56 @@ const AddProductForm = () => {
             className="formInput"
           />
         </label>
-        <div className="cl-toggle-switch">
-          <label className="formLabel">
-            Deal of the Day:
-            <label className="cl-switch">
-              <input
-                type="checkbox"
-                checked={formData.dealOfDay}
-                onChange={() =>
-                  setFormData({ ...formData, dealOfDay: !formData.dealOfDay })
-                }
-              />
-              <span className="slider"></span>
-            </label>
-          </label>
-        </div>
+
+        {userRole == "superadmin" && (
+          <>
+            <div className="cl-toggle-switch">
+              <label className="formLabel">
+                Deal of the Day:
+                <label className="cl-switch">
+                  <input
+                    type="checkbox"
+                    checked={formData.dealOfDay}
+                    onChange={() =>
+                      setFormData({
+                        ...formData,
+                        dealOfDay: !formData.dealOfDay,
+                      })
+                    }
+                  />
+                  <span className="slider"></span>
+                </label>
+              </label>
+            </div>
+            <div className="cl-toggle-switch">
+              <label  style={{width:"250px" , display:"flex", justifyContent:"space-evenly",alignContent:"center"}} className="formLabel">
+                Approved:
+                <label>Yes</label>
+                <input
+                 style={{width:"auto"}}
+                  type="radio"
+                  name="approved"
+                  value="true"
+                  checked={formData.approved === "true"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, approved: e.target.value })
+                  }
+                />
+                <label>No</label>
+                <input
+                style={{width:"auto"}}
+                  type="radio"
+                  name="approved"
+                  value="false"
+                  checked={formData.approved === "false"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, approved: e.target.value })
+                  }
+                />
+              </label>
+            </div>
+          </>
+        )}
 
         <button type="submit" className="formButton">
           Submit
