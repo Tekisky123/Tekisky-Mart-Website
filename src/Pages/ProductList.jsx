@@ -3,15 +3,26 @@ import axios from "axios";
 import Modal from "react-modal";
 import "../Assets/Styles/AddProductForm.css";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
 const ProductList = () => {
+  const [loading, setLoading] = useState(true); // Added loading state
+
+  const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
+
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setEditing] = useState(false);
-
+  const userRole = localStorage.getItem("userRole");
   const [updatedProduct, setUpdatedProduct] = useState({
     productBrand: "",
     availableStockQty: 0,
@@ -38,8 +49,10 @@ const ProductList = () => {
           "https://tekiskymart.onrender.com/product/getproduct"
         );
         setProducts(response.data.products);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
 
@@ -77,6 +90,37 @@ const ProductList = () => {
 
   const handleUpdate = async () => {
     try {
+      setLoading(true); 
+      // Validate fields before submitting
+      const requiredFields = [
+        "productType",
+        "productCategory",
+        "productBrand",
+        "availableStockQty",
+        "mrp",
+        "offerPrice",
+        "packetweight",
+        "unitOfMeasure",
+        "description",
+        "createdBy",
+        "productName",
+        "manufactureDate",
+        "expiryDate",
+        "sellerInformation",
+        "dealOfDay",
+        "imageURL",
+      ];
+
+      // Check if any required field is empty
+      if (requiredFields.some(field => !updatedProduct[field])) {
+        Swal.fire({
+          icon: "error",
+          title: "Validation Error",
+          text: "Please fill in all required fields.",
+        });
+        return;
+      }
+
       // Send a request to update the product by ID
       await axios.put(
         `https://tekiskymart.onrender.com/product/update/${selectedProduct?._id}`,
@@ -85,6 +129,13 @@ const ProductList = () => {
 
       // Display a success toast
       toast.success(`${selectedProduct?.productName} updated successfully`);
+
+      // Display SweetAlert on successful update
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: `${selectedProduct?.productName} has been updated successfully.`,
+      });
 
       // Close the modal and refresh the product list
       setShowModal(false);
@@ -101,8 +152,14 @@ const ProductList = () => {
     } catch (error) {
       console.error("Error updating product:", error);
       toast.error("Failed to update the product");
+    }finally {
+      setLoading(false); // Set loading to false after the update process, whether successful or not
     }
   };
+
+  
+  
+  
 
   const handleDelete = async () => {
     try {
@@ -142,6 +199,11 @@ const ProductList = () => {
 
   return (
     <div className="table-responsive container mt-4">
+          <div style={{marginBottom:"40px"}}>
+      <button className="formButton" onClick={()=>navigate('/add-Product')}>
+       Add product
+      </button>
+    </div>
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
@@ -310,37 +372,41 @@ const ProductList = () => {
               <tr>
                 <th>Packet Weight</th>
                 <td>
-                  {isEditing ? (
-                    <>
-                      <input
-                        type="number"
-                        value={updatedProduct.packetweight}
-                        onChange={(e) =>
-                          setUpdatedProduct({
-                            ...updatedProduct,
-                            packetweight: e.target.value,
-                          })
-                        }
-                      />
-                      <input
-                        type="text"
-                        value={updatedProduct.unitOfMeasure}
-                        onChange={(e) =>
-                          setUpdatedProduct({
-                            ...updatedProduct,
-                            unitOfMeasure: e.target.value,
-                          })
-                        }
-                      />
-                    </>
-                  ) : (
-                    <>
-                      {selectedProduct?.packetweight}{" "}
-                      {selectedProduct?.unitOfMeasure}
-                    </>
-                  )}
-                </td>
-              </tr>
+                {isEditing ? (
+                <>
+                  <input
+                    type="number"
+                    value={updatedProduct.packetweight}
+                    onChange={(e) =>
+                      setUpdatedProduct({
+                        ...updatedProduct,
+                        packetweight: e.target.value,
+                      })
+                    }
+                  />
+                  <select
+                    value={updatedProduct.unitOfMeasure}
+                    onChange={(e) =>
+                      setUpdatedProduct({
+                        ...updatedProduct,
+                        unitOfMeasure: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="g">grams (g)</option>
+                    <option value="kg">kilograms (kg)</option>
+                    <option value="l">liter (l)</option>
+                    <option value="ml">milliliter (ml)</option>
+                  </select>
+                </>
+              ) : (
+                <>
+                  {selectedProduct?.packetweight}{" "}
+                  {selectedProduct?.unitOfMeasure}
+                </>
+              )}
+            </td>
+          </tr>
               <tr>
                 <th>Description</th>
                 <td>
@@ -436,6 +502,8 @@ const ProductList = () => {
                   )}
                 </td>
               </tr>
+              {userRole=='superadmin' && (<>
+
               <tr>
                 <th>Deal of the Day</th>
                 <td>
@@ -457,6 +525,7 @@ const ProductList = () => {
                   )}
                 </td>
               </tr>
+              </>)}
               <tr>
                 <th>Images</th>
                 <td>
@@ -480,7 +549,7 @@ const ProductList = () => {
                 className="btn btn-success"
                 onClick={() => {
                   handleUpdate();
-                  alert("Are You Sure You Want To Save Changes");
+                  // alert("Are You Sure You Want To Save Changes");
                 }}
               >
                 Save Changes

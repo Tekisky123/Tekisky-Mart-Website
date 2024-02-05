@@ -1,39 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import "leaflet/dist/leaflet.css";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 // import { Map, TileLayer } from 'react-leaflet';
 import "../Assets/Styles/Enquiry.css";
+import { useLocation, useParams } from "react-router-dom";
 const Enquiry = () => {
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
   return (
     <>
       <div className="first-image-container">
         <h2 className="first-container-heading">Customer Support</h2>
+        <h5 style={{textAlign:"center"}}>Feel free to contact us if you need any assistance, any help or
+            another question.</h5>
       </div>
       <div className="about-card-container container">
         <div className="about-card">
           <FaLocationDot className="location-icon" />
-          <h2>Address</h2>
+          <h3>Address</h3>
 
-          <p>
+          <span>
             2nd floor, opposite WaterTank,
             <br /> WorkShop Corner, Nanded,
             <br /> Maharashtra 431605 INDIA
-          </p>
+          </span>
         </div>
         <div className="about-card">
           <FaPhoneAlt className="phone-icon" />
-          <h2>Phone</h2>
+          <h3>Phone</h3>
 
-          <p> +91 8625817334</p>
-          <p> +91 9890796149</p>
+          <span> +91 8625817334</span>
+          <span> +91 9890796149</span>
+          <span> +91 7387737731</span>
         </div>
         <div className="about-card">
           <MdOutlineAlternateEmail className="email-icon" />
-          <h2>Email</h2>
+          <h3>Email</h3>
 
-          <p>hr@tekisky.com</p>
+          <span>hr@tekisky.com</span>
+          <span>Sales@Tekisky.Com</span>
         </div>
       </div>
       <div className="second-about-container container">

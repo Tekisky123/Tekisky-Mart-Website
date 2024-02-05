@@ -292,7 +292,7 @@ const Header = () => {
         <div className="main-container">
           <ul className="desktop-menu-category-list">
             <li className="menu-category" onClick={() => navigate("/")}>
-              <Link href="#" className="menu-title">
+              <Link to="/" className="menu-title">
                 Home
               </Link>
             </li>
@@ -305,7 +305,7 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-               <li className="menu-category">
+                 <li className="menu-category">
               <Link to="/pre-order" className="menu-title">
                 Pre-Order
               </Link>
@@ -347,7 +347,7 @@ const Header = () => {
                 </li>
                 <li className="menu-category">
                   <Link to="/pre-orders-page" className="menu-title">
-                    Pre order request
+                    Pre Order Requests
                   </Link>
                 </li>
                 <li className="menu-category">
@@ -361,6 +361,7 @@ const Header = () => {
 
             {userRole == "seller" && (
               <>
+              
                 <li className="menu-category">
                   <Link to="/add-product" className="menu-title">
                     Add Product
@@ -369,7 +370,7 @@ const Header = () => {
               </>
             )}
 
-
+           
           </ul>
         </div>
       </nav>
@@ -508,10 +509,21 @@ const Header = () => {
                 <button
                   className="accordion-menu"
                   data-accordion-btn
-                  onClick={() => handleStaticAccordionToggle("/pre-orders-page")}
+                  onClick={() => handleStaticAccordionToggle("/add-product")}
+                >
+                  <Link to="/add-product" className="menu-title">
+                  Add Product
+                  </Link>
+                </button>
+              </li>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/enquiry-table")}
                 >
                   <Link to="/enquiry-table" className="menu-title">
-                  sell with us request
+                  Sell With Us Requests 
                   </Link>
                 </button>
               </li>
@@ -556,7 +568,7 @@ const Header = () => {
               onClick={() => handleStaticAccordionToggle("/saleWithUs")}
             >
               <Link to="/saleWithUs" className="menu-title">
-                Sale with Us
+                Sell with Us
               </Link>
             </button>
           </li>

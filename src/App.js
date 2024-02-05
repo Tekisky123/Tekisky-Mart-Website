@@ -1,6 +1,4 @@
-
-
-import React from 'react';
+import React from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import MyFooter from "./common/Footer";
@@ -19,24 +17,22 @@ import { Context } from "./common/Context";
 import AllOrders from "./Pages/AllOrders";
 import Users from "./Pages/User";
 import SellerAllOrders from "./Pages/SallerAllOrders";
-import ProductList from './Pages/ProductList';
-import PreOrder from './Pages/PreOrder';
-import SaleWithUs from './Pages/SaleWithUs';
-import Enquiry from './Pages/Enquiry';
-import PreOrdersPage from './Pages/PreOrdersPage';
-import EnquiryTable from './Pages/EnquiryTable';
+import ProductList from "./Pages/ProductList";
+import PreOrder from "./Pages/PreOrder";
+import SaleWithUs from "./Pages/SaleWithUs";
+import Enquiry from "./Pages/Enquiry";
+import PreOrdersPage from "./Pages/PreOrdersPage";
+import EnquiryTable from "./Pages/EnquiryTable";
 
 function App() {
   const navigate = useNavigate();
   const { singleItems } = useContext(Context);
 
-
   // Get userRole from localStorage
-const userRole = localStorage.getItem('userRole');
+  const userRole = localStorage.getItem("userRole");
 
-// Get token from localStorage
-const token = localStorage.getItem('token');
-
+  // Get token from localStorage
+  const token = localStorage.getItem("token");
 
   const location = useLocation();
   
@@ -106,6 +102,7 @@ const token = localStorage.getItem('token');
       </>)}
  
 
+         
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { MdOutlineModeEditOutline } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Assets/Styles/AddProductForm.css";
+import { useLocation, useParams } from "react-router-dom";
 
 // Modal.setAppElement("#root");
 
@@ -23,6 +24,13 @@ const AllOrders = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [orderStatusClass, setOrderStatusClass] = useState("");
   const [feedback, setFeedback] = useState("");
+
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   const handleEditOrderStatus = () => {
     if (selectedOrder && selectedOrder.orderStatus !== undefined) {

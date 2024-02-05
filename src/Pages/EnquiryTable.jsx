@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useLocation, useParams } from 'react-router-dom';
 
 const EnquiryTable = () => {
   const [enquiryData, setEnquiryData] = useState([]);
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   useEffect(() => {
     axios.get('https://tekiskymart.onrender.com/client/enquiry')
@@ -17,7 +24,7 @@ const EnquiryTable = () => {
 
   return (
     <div className="container">
-      <h2>Enquiry Information</h2>
+      <h2>All Sell with us requests</h2>
       <table className="table table-striped table-bordered">
         <thead>
         <tr>
@@ -26,6 +33,7 @@ const EnquiryTable = () => {
             <th>Do You Have GST</th>
             <th>GST Number</th>
             <th>Do You Have Shop</th>
+            <th>Shop Name</th>
             <th>Product Details</th>
             <th>Mobile Number</th>
             <th>Which product do you want to sell</th>
@@ -36,8 +44,9 @@ const EnquiryTable = () => {
             <tr key={enquiry._id}>
               <td>{enquiry.shopSellerName}</td>
               <td>{enquiry.doYouHaveGST ? 'Yes' : 'No'}</td>
-              <td>{enquiry.GST}</td>
+              <td>{enquiry.GST  ? enquiry.GST : '-'}</td>
               <td>{enquiry.doYouHaveShop ? 'Yes' : 'No'}</td>
+              <td>{enquiry.shopName }</td>
               <td>{enquiry.productDetails}</td>
               <td>{enquiry.mobileNumber}</td>
               <td>{enquiry.whichProductYouHaveToSell}</td>

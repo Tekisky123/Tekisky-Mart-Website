@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "../Assets/Styles/cart.css"
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import { Row, Col } from 'react-bootstrap';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Context } from '../common/Context';
 
 const ShoppingCart = () => {
@@ -24,6 +24,12 @@ const ShoppingCart = () => {
     }
   ]);
 
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
   const {
     cartItems,
     handleRemoveFromCart,

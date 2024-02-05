@@ -9,7 +9,7 @@
   
   .about-card {
     width: 30%;
-    height: 200px;
+    min-height: 200px;
     text-align: center;
   
     background-color: #f0f0f0;

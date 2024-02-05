@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../common/Banner";
 import ProductMain from "../Pages/MainProduct";
 import "../App.css";
 import DealOfTheDay from "../common/DealOfTheDay";
+import { useLocation, useParams } from "react-router-dom";
 
 const Home = () => {
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
   const bannersData = [
     {
       imgSrc:

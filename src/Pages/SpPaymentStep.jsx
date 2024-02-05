@@ -1,16 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Modal from "react-modal";
 import axios from "axios";
 import { Base_Url, saveOrderProductAPI } from "../common/Apis";
 import { Context } from "../common/Context";
-import "../Assets/Styles/PaymentSteps.css"
+import "../Assets/Styles/PaymentSteps.css";
 import { IoIosPhonePortrait } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa";
 
-
 const SpPaymentStep = () => {
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
   const {
     cartItems,
     singleSubTotal,
@@ -22,7 +27,8 @@ const SpPaymentStep = () => {
     singleGrandTotal,
     setCustomerDetail,
     customerDetail,
-    swal
+    swal,
+    Swal
   } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
   const [responseData, setResponseData] = useState([]);
@@ -64,8 +70,7 @@ const SpPaymentStep = () => {
   };
 
   const handleSubmit = async () => {
-
-    setLoading(true);
+    // setLoading(true);
     try {
       const payload = {
         customerName: formData.fullName,
@@ -89,37 +94,49 @@ const SpPaymentStep = () => {
 
       payload.products = selectedProducts;
 
-
       const response = await axios.post(
         `
     ${Base_Url}${saveOrderProductAPI}`,
         payload
       );
       const data = response?.data;
-      setResponseData(data)
-      if (data.success||response.status==201) {
-        // toast.success(
-        //   "Your order has been placed successfully. Our operator will contact you shortly", { autoClose: 1500 }
-        // );
-        // setSingleItems([])
-        // Close the modal only after a successful request
-        setShowPopup(true);
-        closeModal();
-        setTimeout(() => {
-      setShowPopup(false);
-    }, 10000); 
-        setTimeout(() => {
-          navigate("/");
-        }, 10000);
+      setResponseData(data);
+      if (data.success || response.status == 201) {
+
+        const orderId = data?.order?.orderId;
+
+        Swal.fire({
+          title: "Order Successful",
+          html: `Your order Id: <b>${orderId}</b><br/> Your order has been placed successfully<br/> Our Team will contact you shortly`,
+          icon: "success",
+          confirmButtonText: "Okay",
+        }).then(() => {
+   
+          setTimeout(() => {
+            navigate("/");
+          }, 3000);
+       
+        });
+   
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
-        // You might want to show an error message to the user here
+        Swal.fire({
+          title: "Network Error",
+          text: "There was a network error. Please try again.",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
       }
     } catch (error) {
       // Handle network error
       console.error("Network error:", error);
-      // You might want to show an error message to the user here
+      Swal.fire({
+        title: "Network Error",
+        text: "There was a network error. Please try again.",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     } finally {
       setLoading(false); // Set loading to false when the request is complete
     }
@@ -178,7 +195,7 @@ const SpPaymentStep = () => {
   const handleNext = (e) => {
     e.preventDefault();
     const { phoneNumber } = formData;
-  
+
     if (phoneNumber) {
       swal({
         title: "Are you sure?",
@@ -199,9 +216,9 @@ const SpPaymentStep = () => {
             "pincode",
             "additionalAdd",
           ];
-  
+
           let hasError = false;
-  
+
           requiredFields.forEach((field) => {
             if (!formData[field]) {
               setErrors((prevErrors) => ({
@@ -211,7 +228,7 @@ const SpPaymentStep = () => {
               hasError = true;
             }
           });
-  
+
           if (hasError) {
             alert("Mandatory fields are required");
           } else {
@@ -227,7 +244,7 @@ const SpPaymentStep = () => {
       alert("Mobile number is required");
     }
   };
-  
+
   const handlePrevious = () => {
     //  setSingleItems({})
     //  navigate(`/single-product/${singleItems.product._id}`)
@@ -247,12 +264,11 @@ const SpPaymentStep = () => {
           </div>
         </div>
       )}
-  
 
       <h2 className="first-container-heading">Payment Step</h2>
 
       <div className="stepContiner">
-      <ToastContainer />
+        <ToastContainer />
         <div style={{ width: "80%", margin: " 80px auto" }}>
           <form action="">
             <>
@@ -275,29 +291,32 @@ const SpPaymentStep = () => {
                     />
                   </Col>
                   <Col xs={12} md={4} xl={4}>
-                  {" "}
-                  <div className="Formlabel">
-                    Enter Your WhatsApp Number
-                    <FaWhatsapp style={{fontSize:"30px",color:"green"}}/>
-                  
-                    <span className="error-message">⁕</span>{" "}
-                  </div>
-                </Col>
-                <Col xs={12} md={6} xl={6}>
-                  <input
-                    type="number"
-                    className="MyInput"
-                    placeholder="Enter Your WhatsApp Number"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleInputChange}
-                  />
-                </Col>
+                    {" "}
+                    <div className="Formlabel">
+                      Enter Your WhatsApp Number
+                      <FaWhatsapp
+                        style={{ fontSize: "30px", color: "green" }}
+                      />
+                      <span className="error-message">⁕</span>{" "}
+                    </div>
+                  </Col>
+                  <Col xs={12} md={6} xl={6}>
+                    <input
+                      type="number"
+                      className="MyInput"
+                      placeholder="Enter Your WhatsApp Number"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleInputChange}
+                    />
+                  </Col>
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
                       Phone Number
-                      <IoIosPhonePortrait style={{fontSize:"30px",color:"#004AAD"}}/>
+                      <IoIosPhonePortrait
+                        style={{ fontSize: "30px", color: "#004AAD" }}
+                      />
                       {/* <span className="error-message">⁕</span>{" "} */}
                     </div>
                   </Col>
@@ -311,9 +330,7 @@ const SpPaymentStep = () => {
                       onChange={handleInputChange}
                     />
                   </Col>
-                 
-             
-                
+
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
@@ -353,7 +370,7 @@ const SpPaymentStep = () => {
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
-                    Pin Code 
+                      Pin Code
                       <span className="error-message">⁕</span>{" "}
                     </div>
                   </Col>
@@ -410,23 +427,25 @@ const SpPaymentStep = () => {
                 <Col xs={12} md={8} xl={8}>
                   <div className="customerDetail">
                     <div>
-                      <span style={{fontWeight:"bold"}}>Name</span>
+                      <span style={{ fontWeight: "bold" }}>Name</span>
                       <span>{formData.fullName}</span>
                     </div>
                     <div>
-                      <span style={{fontWeight:"bold"}}>WhatsApp Number</span>
+                      <span style={{ fontWeight: "bold" }}>
+                        WhatsApp Number
+                      </span>
                       <span>{formData.phoneNumber}</span>
                     </div>
                     <div>
-                      <span style={{fontWeight:"bold"}}>Phone Number</span>
+                      <span style={{ fontWeight: "bold" }}>Phone Number</span>
                       <span>{formData.AlternateNumber}</span>
                     </div>
                     <div>
-                      <span style={{fontWeight:"bold"}}>Landmark</span>
+                      <span style={{ fontWeight: "bold" }}>Landmark</span>
                       <span>{formData.landMark}</span>
                     </div>
                     <div>
-                      <span style={{fontWeight:"bold"}}>Pin Code</span>
+                      <span style={{ fontWeight: "bold" }}>Pin Code</span>
                       <span>{formData.pincode}</span>
                     </div>
                     <div>
@@ -455,11 +474,13 @@ const SpPaymentStep = () => {
                         <span>&#8377; {singleSavedAmount}</span>
                       </h6>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                      As of now we deliver only in Nanded and near by areas
+                        As of now we deliver only in Nanded and near by areas
                       </h6>
-                      <h5  style={{ fontWeight: "600", marginBottom: "1rem" }}
-                        className="totalDiv">
-                      <span>Delivery Charge</span>
+                      <h5
+                        style={{ fontWeight: "600", marginBottom: "1rem" }}
+                        className="totalDiv"
+                      >
+                        <span>Delivery Charge</span>
                         <span>{singleDeliveryCharge}&#8377;</span>
                       </h5>
                       <h5

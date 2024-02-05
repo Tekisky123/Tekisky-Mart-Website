@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Assets/Styles/AddProductForm.css";
 import { Base_Url,AddProduct } from "../common/Apis";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddProductForm = () => {
   const navigate = useNavigate();
@@ -32,6 +32,13 @@ const AddProductForm = () => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname, id]);
 
   const handleFilesChange = useCallback((e) => {
     const { name, files } = e.target;
@@ -137,6 +144,7 @@ const AddProductForm = () => {
 
   return (
     <div className="addProductForm">
+      <ToastContainer/>
       {loading && (
         <div className="loader-container">
           <div className="spinner">
