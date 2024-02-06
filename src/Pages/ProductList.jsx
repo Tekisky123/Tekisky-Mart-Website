@@ -44,6 +44,7 @@ const ProductList = () => {
     expiryDate: "",
     sellerInformation: "",
     dealOfDay: false, // Assuming dealOfDay is a boolean field
+    approved: false, // Assuming dealOfDay is a boolean field
     imageURL: [], // Assuming imageURL is an array field
   });
 
@@ -96,6 +97,7 @@ const ProductList = () => {
         expiryDate: selectedProduct.expiryDate,
         sellerInformation: selectedProduct.sellerInformation,
         dealOfDay: selectedProduct.dealOfDay,
+        approved: selectedProduct.approved,
         imageURL: selectedProduct.imageURL,
       });
     }
@@ -120,7 +122,6 @@ const ProductList = () => {
         "manufactureDate",
         "expiryDate",
         "sellerInformation",
-        "dealOfDay",
         "imageURL",
       ];
 
@@ -559,6 +560,29 @@ const ProductList = () => {
                           <option value="false">No</option>
                         </select>
                       ) : selectedProduct?.dealOfDay ? (
+                        "Yes"
+                      ) : (
+                        "No"
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Approved</th>
+                    <td>
+                      {isEditing ? (
+                        <select
+                          value={updatedProduct.approved}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              approved: e.target.value === "true",
+                            })
+                          }
+                        >
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      ) : selectedProduct?.approved ? (
                         "Yes"
                       ) : (
                         "No"

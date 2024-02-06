@@ -17,8 +17,7 @@ const Enquiry = () => {
     <>
       <div className="first-image-container">
         <h2 className="first-container-heading">Customer Support</h2>
-        <h5 style={{textAlign:"center"}}>Feel free to contact us if you need any assistance, any help or
-            another question.</h5>
+        <h5 style={{textAlign:"center"}}>Feel free to contact us if you need any assistance, any help or questions.</h5>
       </div>
       <div className="about-card-container container">
         <div className="about-card">

@@ -181,7 +181,7 @@ const PreOrder = () => {
   };
 
   return (
-    <div style={{ width: "80%", margin: " 80px auto" }}>
+    <div style={{ width: "80%", margin: " 40px auto" }}>
       <ToastContainer />
       <h2 style={{ textAlign: "center" }}>Pre Order</h2>
       <marquee

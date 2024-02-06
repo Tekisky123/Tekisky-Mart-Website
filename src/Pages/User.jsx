@@ -190,13 +190,29 @@ const Users = () => {
   //   };
 
   const handleDelete = (id) => {
-    const userConfirmed = window.confirm(
-      "Are you sure you want to delete this User?"
-    );
-    if (userConfirmed) {
-      confirmDelete(id);
-      // setDeleteIndex(index);
-    }
+
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "you want to delete this User!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        confirmDelete(id);
+      } else {
+        Swal.fire({
+          title: "Cancelled",
+          text: "User deletion has been cancelled.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    });
+
   };
   const confirmDelete = async (id) => {
 
@@ -215,6 +231,12 @@ const Users = () => {
       // Fetch data again after successful deletion
       const response = await axios.get(`${Base_Url}${AllUserAPI}`);
       setUserData(response?.data?.users?.users);
+      Swal.fire({
+        title: "Deleted!",
+        text: "User has been deleted.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+      });
     } catch (error) {
       console.error("Error deleting user:", error);
     }
