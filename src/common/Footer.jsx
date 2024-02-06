@@ -13,41 +13,30 @@ const MyFooter = () => {
           
           <ul className="footer-nav-list">
             <li className="footer-nav-item">
-              <h2 className="nav-title">Popular Categories</h2>
+              <h2 className="nav-title">Popular</h2>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Dates <b>(Khajur)</b>
+                 <b>Sell with us</b>
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Perfumes
+                Pre-Order
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Clothes
+                Customer Support
               </Link>
             </li>
 
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                HomeMade Snacks
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Watches
-              </Link>
-            </li>
           </ul>
 
-          <ul className="footer-nav-list">
+          {/* <ul className="footer-nav-list">
             <li className="footer-nav-item">
               <h2 className="nav-title">Products</h2>
             </li>
@@ -81,40 +70,34 @@ const MyFooter = () => {
                 Sitemap
               </Link>
             </li>
-          </ul>
+          </ul> */}
 
           <ul className="footer-nav-list">
             <li className="footer-nav-item">
-              <h2 className="nav-title">Our Company</h2>
+              <h2 className="nav-title">Our Commitment</h2>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Delivery
+              Delivery within 24 hours
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Legal Notice
+              Returns without questions
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Terms and conditions
+              Quality product at best price
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                About us
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Secure payment
+              Low price compare to your retail outlet
               </Link>
             </li>
           </ul>
@@ -126,33 +109,16 @@ const MyFooter = () => {
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                Prices drop
+                Develop web sites
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-                New products
+              Develop web apps
               </Link>
             </li>
 
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Best sales
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Contact us
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Sitemap
-              </Link>
-            </li>
           </ul>
 
           <ul className="footer-nav-list">

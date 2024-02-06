@@ -168,15 +168,16 @@ const ProductMain = () => {
                   </p>
                   <h2 className=" weight">{product?.packetweight} {product.unitOfMeasure}</h2>
 
-                  <p>
+                
                     <Link
+                    style={{color:"black",fontSize:"15px"}}
                       to={`/single-product/${product?._id}`}
                       className="showcase-title"
                     >
-                      {product?.productName}
+                       <h3> {product?.productName}</h3>
                     </Link>
-                  </p>
-
+                  
+                  <h4>{product?.header}</h4>
                   <div className="showcase-rating">
                     {Array.from({ length: 3 }, (_, index) => (
                       <ion-icon key={index} name="star"></ion-icon>

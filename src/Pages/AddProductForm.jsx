@@ -29,7 +29,7 @@ const AddProductForm = () => {
     expiryDate: "",
     sellerInformation: "",
     dealOfDay: false,
-    approved: true,
+    approved: false,
   });
   // console.log("approved", formData.approved);
   const [filePreviews, setFilePreviews] = useState([]);
@@ -101,7 +101,8 @@ const AddProductForm = () => {
         key !== "dealOfDay" &&
         !formData[key] &&
         key !== "unitOfMeasure" &&
-        key !== "otherCategory" // Add this line for the new field
+        key !== "otherCategory" &&
+        !(key === "approved" && formData[key] === false) // Allow submission even if approved is false
       ) {
         if (key === "approved" && formData[key] === "") {
           newErrors[key] = "Please select approval status";
@@ -158,7 +159,11 @@ const AddProductForm = () => {
 
   return (
     <div className="addProductForm">
-     
+           <div style={{ marginBottom: "40px" }}>
+        <button className="formButton" onClick={() => navigate("products-list")}>
+          Back
+        </button>
+      </div>
       {loading && (
         <div className="loader-container">
           <div className="spinner">

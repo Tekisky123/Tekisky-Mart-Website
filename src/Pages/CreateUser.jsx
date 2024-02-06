@@ -28,15 +28,11 @@ const AddUser = () => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
 
-  // State for feedback messages
-  const [message, setMessage] = useState(null);
 
-  // Function to handle form field changes
   const handleChange = (e) => {
-    // For the mobile number field, allow only numeric input and limit to 10 characters
     if (e.target.name === "mobileNumber") {
-      const numericValue = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-      const limitedValue = numericValue.slice(0, 10); // Limit to 10 characters
+      const numericValue = e.target.value.replace(/\D/g, '');
+      const limitedValue = numericValue.slice(0, 10);
       setFormData({
         ...formData,
         [e.target.name]: limitedValue,
@@ -62,84 +58,101 @@ const AddUser = () => {
     return phoneNumberRegex.test(phoneNumber);
   };
 
-  // Function to handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Basic validations for required fields
-    if (!formData.firstName || !formData.lastName || !formData.mobileNumber || !formData.email || !formData.password || !formData.role) {
-      // Display an error message using SweetAlert
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Please fill in all required fields.",
-        confirmButtonColor: "#d33",
-      });
-      return;
-    }
-  
-    // Additional validations for email and phone number
-    if (!isValidEmail(formData.email)) {
-      // Display an error message using SweetAlert
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Please enter a valid email address.",
-        confirmButtonColor: "#d33",
-      });
-      return;
-    }
-  
-    if (!isValidPhoneNumber(formData.mobileNumber)) {
-      // Display an error message using SweetAlert
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Please enter a valid phone number.",
-        confirmButtonColor: "#d33",
-      });
-      return;
-    }
-  
-    try {
-      setLoading(true);
-      const response = await axios.post(
-        "https://tekiskymart.up.railway.app/user/createUser",
-        formData
-      );
-  
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "User created successfully.",
-        confirmButtonColor: "#28a745",
-      });
-      setLoading(false);
-      navigate("/users");
-    } catch (error) {
-      setLoading(false);
-      if (error.response && error.response.data && error.response.data.error === "User already exists") {
-        // Show sweet alert for duplicate user
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "User already exists",
-          confirmButtonColor: "#d33",
-        });
-      } else {
-        // Show generic error message
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Error creating user.",
-          confirmButtonColor: "#d33",
-        });
-        console.error("Error creating user:", error.message);
-      }
-    }
-  };
-  
+  const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+// Function to check if a string is a strong password
+const isValidPassword = (password) => {
+  return strongPasswordRegex.test(password);
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Basic validations for required fields
+  if (!formData.firstName || !formData.lastName || !formData.mobileNumber || !formData.email || !formData.password || !formData.role) {
+    // Display an error message using SweetAlert
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Please fill in all required fields.",
+      confirmButtonColor: "#d33",
+    });
+    return;
+  }
+
+  // Additional validations for email and phone number
+  if (!isValidEmail(formData.email)) {
+    // Display an error message using SweetAlert
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Please enter a valid email address.",
+      confirmButtonColor: "#d33",
+    });
+    return;
+  }
+
+  if (!isValidPhoneNumber(formData.mobileNumber)) {
+    // Display an error message using SweetAlert
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Please enter a valid phone number.",
+      confirmButtonColor: "#d33",
+    });
+    return;
+  }
+
+  // Check if the entered password is strong
+  if (!isValidPassword(formData.password)) {
+    // Display a message indicating the password requirements
+    Swal.fire({
+      icon: "warning",
+      title: "Warning",
+      text:
+        "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&).",
+      confirmButtonColor: "#ffc107",
+    });
+    return;
+  }
+
+  try {
+    setLoading(true);
+    const response = await axios.post(
+      "https://tekiskymart.up.railway.app/user/createUser",
+      formData
+    );
+
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "User created successfully.",
+      confirmButtonColor: "#28a745",
+    });
+    setLoading(false);
+    navigate("/users");
+  } catch (error) {
+    setLoading(false);
+    if (error.response && error.response.data && error.response.data.error === "User already exists") {
+      // Show sweet alert for duplicate user
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "User already exists",
+        confirmButtonColor: "#d33",
+      });
+    } else {
+      // Show generic error message
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Error creating user.",
+        confirmButtonColor: "#d33",
+      });
+      console.error("Error creating user:", error.message);
+    }
+  }
+};
   return (
     <div>
         

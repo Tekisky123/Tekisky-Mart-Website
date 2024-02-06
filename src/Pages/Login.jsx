@@ -145,7 +145,8 @@ const Login = () => {
           <div className="toggle">
             <div className="toggle-panel toggle-right">
               <h1>Welcome To Tekisky Mart!</h1>
-              <p>Enter your personal details to use all of site features</p>
+              {/* <p>Enter your personal details to use all of site features</p> */}
+              <p>Admin / Seller Dashboard</p>
               {/* No need for the button with ID "login" in React */}
             </div>
           </div>

@@ -362,7 +362,7 @@ const PaymentStep = () => {
                   <Col xs={12} md={4} xl={4}>
                     {" "}
                     <div className="Formlabel">
-                      Landmark e.g. near IT park
+                      Landmark 
                       <span className="error-message">⁕</span>{" "}
                     </div>
                   </Col>
@@ -396,13 +396,15 @@ const PaymentStep = () => {
                   </Col>
 
                   <Col xs={12} md={6} xl={6}></Col>
-                  <Col xs={12} md={6} xl={6}>
+                  <Col xs={12} md={12} xl={12}>
                     {" "}
                     <div
                       style={{
                         float: "right",
                         margin: "10px",
                         display: "flex",
+                        width:"100%",
+                        justifyContent:"center"
                       }}
                     >
                       <button
@@ -498,6 +500,9 @@ const PaymentStep = () => {
                       </h6>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
                         As of now we deliver only in Nanded and near by areas
+                      </h6>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                        Payment cash on delivery
                       </h6>
                       <h6
                         style={{ fontWeight: "600", marginBottom: "1rem" }}
