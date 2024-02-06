@@ -29,7 +29,7 @@ const AddProductForm = () => {
     expiryDate: "",
     sellerInformation: "",
     dealOfDay: false,
-    approved: false,
+    approved: true,
   });
   // console.log("approved", formData.approved);
   const [filePreviews, setFilePreviews] = useState([]);

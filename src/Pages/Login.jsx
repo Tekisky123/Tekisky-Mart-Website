@@ -105,7 +105,8 @@ const Login = () => {
     </div> */}
 
       {/* ************************************************************************************************ */}
-      <div className="container" id="container">
+      <div className="login-center">
+      <div className="login-page-container" id="container">
         <div className="form-container sign-in">
           <form>
             <img src={logo} alt="Tekisky Mart LOGO" />
@@ -149,6 +150,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
