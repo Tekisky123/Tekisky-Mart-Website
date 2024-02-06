@@ -6,11 +6,12 @@ import { Button as BootstrapButton, Form, Dropdown } from "react-bootstrap";
 import "../Assets/Styles/AllOrders.css";
 import QRCode from "qrcode.react";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Assets/Styles/AddProductForm.css";
 import { useLocation, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { CiSearch } from "react-icons/ci";
 
 // Modal.setAppElement("#root");
 
@@ -25,6 +26,7 @@ const AllOrders = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [orderStatusClass, setOrderStatusClass] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   const { id } = useParams();
   const location = useLocation();
@@ -103,9 +105,8 @@ const AllOrders = () => {
         icon: "success",
         title: `Order status successfully updated to ${newOrderStatus}`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
-      
 
       // Close the modal after the loading is complete
       handleCloseModal();
@@ -116,9 +117,8 @@ const AllOrders = () => {
         icon: "error",
         title: "Failed to update order status",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
-      
     }
   };
 
@@ -140,16 +140,15 @@ const AllOrders = () => {
   const handleMoreInfo = (order) => {
     setSelectedOrder(order);
     setIsModalOpen(true);
-  
+
     // Generate QR code data
     const productDetails = order.productDetails;
-  
+
     // Limiting the QR code data to the first 100 characters
     const limitedProductDetails = JSON.stringify(productDetails).slice(0, 100);
-  
+
     setQRCodeData(limitedProductDetails);
   };
-  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -199,7 +198,9 @@ const AllOrders = () => {
           (order) => new Date(order.createdAt).getTime() >= lastMonth.getTime()
         );
       default:
-        return orders;
+        return orders.filter((order) =>
+          order.orderStatus.toLowerCase().includes(searchInput.toLowerCase())
+        );
     }
   };
 
@@ -207,9 +208,12 @@ const AllOrders = () => {
     setFilterType(eventKey);
   };
 
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
   const filteredOrders = filterOrders();
 
-  
   const downloadQRCode = (data, filename) => {
     const blob = new Blob([data], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -242,6 +246,17 @@ const AllOrders = () => {
           </Dropdown>
         </Form.Group>
       </Form>
+      <div className="custom-search-bar">
+        <input
+          type="text"
+          value={searchInput}
+          onChange={handleSearchInputChange}
+          placeholder="Search by order status"
+        />
+        <div className="search-icon">
+          <CiSearch />
+        </div>
+      </div>
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
           <thead>
@@ -305,7 +320,7 @@ const AllOrders = () => {
           </tbody>
         </table>
       </div>
-      
+
       {/* More Info Modal using react-modal */}
       <Modal
         isOpen={isModalOpen}
@@ -330,7 +345,6 @@ const AllOrders = () => {
             onClick={handleCloseModal}
             className="close"
             aria-label="Close"
-          
           >
             <span aria-hidden="true">&times;</span>
           </BootstrapButton>
@@ -410,7 +424,10 @@ const AllOrders = () => {
                             </select>
                           )}
                           {isEditOrderStatus && (
-                            <button className="UpdateStatusBtn" onClick={() => handleUpdateOrderStatus()}>
+                            <button
+                              className="UpdateStatusBtn"
+                              onClick={() => handleUpdateOrderStatus()}
+                            >
                               Update Status
                             </button>
                           )}
@@ -471,7 +488,9 @@ const AllOrders = () => {
                         <td>
                           {product.packetweight} {product.unitOfMeasure}
                         </td>
-                        <td><b>₹{product.offerPrice}</b></td>
+                        <td>
+                          <b>₹{product.offerPrice}</b>
+                        </td>
                         <td>{product.quantity}</td>
                         <td>{product.createdBy}</td>
                       </tr>

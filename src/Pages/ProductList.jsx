@@ -5,6 +5,7 @@ import "../Assets/Styles/AddProductForm.css";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { CiSearch } from "react-icons/ci";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
@@ -22,6 +23,8 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setEditing] = useState(false);
+  const [searchInput, setSearchInput] = useState(""); // New state for search input
+
   const userRole = localStorage.getItem("userRole");
   const mobileNumber = localStorage.getItem("mobileNumber");
 
@@ -176,23 +179,22 @@ const ProductList = () => {
         cancelButtonColor: "#3085d6",
         confirmButtonText: "Yes, delete it!",
       });
-  
+
       // Check if the user confirmed deletion
       if (result.isConfirmed) {
         // Send a request to delete the product by ID
         await axios.get(
           `https://tekiskymart.up.railway.app/product/delete/${selectedProduct?._id}`
         );
-        
-  
+
         // Display a success toast
-  
+
         // Close the modal and refresh the product list
         setShowModal(false);
         setProducts(
           products.filter((product) => product._id !== selectedProduct?._id)
         );
-  
+
         // Display SweetAlert to indicate successful deletion
         Swal.fire({
           title: "Product Deleted!",
@@ -207,19 +209,38 @@ const ProductList = () => {
       }
     } catch (error) {
       console.error("Error deleting product:", error);
-  
+
       // Display an error toast if the deletion fails
       // toast.error("Failed to delete the product");
     }
   };
-  
 
+  const filteredProducts = products.filter((product) => {
+    const productNameMatch = product.productName
+      .toLowerCase()
+      .includes(searchInput.toLowerCase());
+    const productCategoryMatch = product.productCategory
+      .toLowerCase()
+      .includes(searchInput.toLowerCase());
+    return productNameMatch || productCategoryMatch;
+  });
   return (
     <div className="table-responsive container mt-4">
       <div style={{ marginBottom: "40px" }}>
         <button className="formButton" onClick={() => navigate("/add-Product")}>
           Add product
         </button>
+      </div>
+      <div className="custom-search-bar">
+      <input
+        type="text"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search by Product Name or Product Category"
+      />
+       <div className="search-icon">
+          <CiSearch />
+        </div>
       </div>
       <table className="table table-striped table-bordered">
         <thead>
@@ -233,7 +254,7 @@ const ProductList = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <tr key={product._id}>
               {/* <td>{product._id}</td> */}
               <td>{product.productId}</td>

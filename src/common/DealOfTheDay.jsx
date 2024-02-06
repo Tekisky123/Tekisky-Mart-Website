@@ -82,7 +82,6 @@ const DealOfTheDay = () => {
 
   // If there are multiple products, render the slider
   const sliderSettings = {
-    dots: true,
     infinite: true,
     speed: 800,
     slidesToShow: 1,

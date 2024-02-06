@@ -432,3 +432,34 @@
   text-align: end;
   padding: 8px;
 }
+
+
+.custom-search-bar {
+  width: 100%;
+  max-width: 400px;
+  margin: 40px 0;
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  font-size: 20px;
+  top: 45%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+.custom-search-bar input[type="text"] {
+  width: 100%;
+  padding-left: 30px; 
+  border: 2px solid #004AAD;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  height: 40px;
+}
+
+.custom-search-bar input[type="text"]:focus {
+  border-color:#004AAD;
+  box-shadow: 0 0 10px #004AAD;
+}

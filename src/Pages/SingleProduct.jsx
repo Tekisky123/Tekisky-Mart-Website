@@ -154,7 +154,6 @@ const SingleProduct = () => {
 
   // Settings for the react-slick carousel
   const carouselSettings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
