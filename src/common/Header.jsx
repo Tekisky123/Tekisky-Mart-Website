@@ -293,7 +293,7 @@ const Header = () => {
       <nav className="desktop-navigation-menu">
         <div className="main-container">
           <ul className="desktop-menu-category-list">
-            <li className="menu-category" onClick={() => navigate("/")}>
+            <li className="menu-category" onClick={() => navigate("/")} >
               <Link to="/" className="menu-title">
                 Home
               </Link>
