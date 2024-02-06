@@ -60,3 +60,10 @@
   font-size: 15px;
   margin: 0;
 }
+/* 
+@media (max-width: 600px) {
+  .payment-model{
+    inset: 14px;
+    background-color: white;
+  }
+} */

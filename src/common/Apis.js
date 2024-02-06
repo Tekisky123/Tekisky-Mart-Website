@@ -1,5 +1,6 @@
 
-export const Base_Url= 'https://tekiskymart.onrender.com';
+export const Base_Url= 'https://tekiskymart.up.railway.app';
+
 
 //  Product APIS
 

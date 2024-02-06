@@ -3552,7 +3552,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .menu-top .menu-title {
   color:#004AAD;
-  font-size: var(--fs-4);
+  font-size: 20px;
   font-weight: var(--weight-600);
 }
 
@@ -3591,7 +3591,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .mobile-menu-category-list .menu-title {
   color: var(--onyx);
-  font-size: var(--fs-6);
+  font-size: 18px;
   font-weight: var(--weight-500);
   padding: 12px 0;
 }

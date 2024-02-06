@@ -119,9 +119,8 @@ const PaymentStep = () => {
           confirmButtonText: "Okay",
         }).then(() => {
    
-          setTimeout(() => {
             navigate("/");
-          }, 3000);
+        
        
         });
 
@@ -434,6 +433,7 @@ const PaymentStep = () => {
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           contentLabel="Order Preview"
+          // className={"payment-model"}
         >
           <div>
             <div style={{ width: "80%", margin: "20px auto" }}></div>

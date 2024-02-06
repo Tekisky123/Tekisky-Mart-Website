@@ -30,7 +30,7 @@ const Login = () => {
         return;
       }
 
-      const response = await axios.post('https://tekiskymart.onrender.com/user/login', {
+      const response = await axios.post('https://tekiskymart.up.railway.app/user/login', {
         mobileNumber,
         password,
       });

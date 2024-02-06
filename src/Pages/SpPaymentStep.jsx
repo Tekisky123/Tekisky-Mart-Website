@@ -112,9 +112,9 @@ const SpPaymentStep = () => {
           confirmButtonText: "Okay",
         }).then(() => {
    
-          setTimeout(() => {
+         
             navigate("/");
-          }, 3000);
+      
        
         });
    
@@ -422,6 +422,7 @@ const SpPaymentStep = () => {
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           contentLabel="Order Preview"
+          // className={"payment-model"}
         >
           <div>
             <div style={{ width: "80%", margin: "20px auto" }}></div>

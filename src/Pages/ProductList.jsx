@@ -24,7 +24,7 @@ const ProductList = () => {
   const [isEditing, setEditing] = useState(false);
   const userRole = localStorage.getItem("userRole");
   const mobileNumber = localStorage.getItem("mobileNumber");
-  
+
   const [updatedProduct, setUpdatedProduct] = useState({
     productBrand: "",
     availableStockQty: 0,
@@ -47,17 +47,17 @@ const ProductList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response ={}
-        if(userRole=='superadmin'){
-          response= await axios.get(
-            "https://tekiskymart.onrender.com/product/getproduct"
+        let response = {};
+        if (userRole == "superadmin") {
+          response = await axios.get(
+            "https://tekiskymart.up.railway.app/product/getproduct"
           );
-        }else{
-          response= await axios.get(
-          "https://tekiskymart.onrender.com/product/mobile/"+mobileNumber
-        );
+        } else {
+          response = await axios.get(
+            "https://tekiskymart.up.railway.app/product/mobile/" + mobileNumber
+          );
         }
-        console.log("response",response)
+        console.log("response", response);
         setProducts(response.data.products);
         setLoading(false);
       } catch (error) {
@@ -71,7 +71,7 @@ const ProductList = () => {
 
   const handleMoreInfo = (product) => {
     setSelectedProduct(product);
-   
+
     setShowModal(true);
   };
 
@@ -100,7 +100,7 @@ const ProductList = () => {
 
   const handleUpdate = async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
       // Validate fields before submitting
       const requiredFields = [
         "productType",
@@ -122,7 +122,7 @@ const ProductList = () => {
       ];
 
       // Check if any required field is empty
-      if (requiredFields.some(field => !updatedProduct[field])) {
+      if (requiredFields.some((field) => !updatedProduct[field])) {
         Swal.fire({
           icon: "error",
           title: "Validation Error",
@@ -133,12 +133,9 @@ const ProductList = () => {
 
       // Send a request to update the product by ID
       await axios.put(
-        `https://tekiskymart.onrender.com/product/update/${selectedProduct?._id}`,
+        `https://tekiskymart.up.railway.app/product/update/${selectedProduct?._id}`,
         updatedProduct
       );
-
-      // Display a success toast
-      toast.success(`${selectedProduct?.productName} updated successfully`);
 
       // Display SweetAlert on successful update
       Swal.fire({
@@ -162,58 +159,68 @@ const ProductList = () => {
     } catch (error) {
       console.error("Error updating product:", error);
       toast.error("Failed to update the product");
-    }finally {
+    } finally {
       setLoading(false); // Set loading to false after the update process, whether successful or not
     }
   };
 
-  
-  
-  
-
   const handleDelete = async () => {
     try {
-      // Send a request to delete the product by ID
-      await axios.get(
-        `https://tekiskymart.onrender.com/product//delete/${selectedProduct?._id}`
-      );
-
-      // Display a success toast
-      toast.success(`${selectedProduct?.productName} deleted successfully`);
-
-      // Close the modal and refresh the product list
-      setShowModal(false);
-      setProducts(
-        products.filter((product) => product._id !== selectedProduct?._id)
-      );
+      // Display SweetAlert confirmation dialog
+      const result = await Swal.fire({
+        title: `Are you sure you want to delete ${selectedProduct?.productName}?`,
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+  
+      // Check if the user confirmed deletion
+      if (result.isConfirmed) {
+        // Send a request to delete the product by ID
+        await axios.get(
+          `https://tekiskymart.up.railway.app/product/delete/${selectedProduct?._id}`
+        );
+        
+  
+        // Display a success toast
+  
+        // Close the modal and refresh the product list
+        setShowModal(false);
+        setProducts(
+          products.filter((product) => product._id !== selectedProduct?._id)
+        );
+  
+        // Display SweetAlert to indicate successful deletion
+        Swal.fire({
+          title: "Product Deleted!",
+          text: `${selectedProduct?.productName} has been deleted successfully.`,
+          icon: "success",
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+      }
     } catch (error) {
       console.error("Error deleting product:", error);
-
-      if (error.response) {
-        // The request was made, but the server responded with an error status
-        console.error("Response data:", error.response.data);
-        console.error("Response status:", error.response.status);
-        console.error("Response headers:", error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error("No response received:", error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.error("Error setting up the request:", error.message);
-      }
-
+  
       // Display an error toast if the deletion fails
-      toast.error("Failed to delete the product");
+      // toast.error("Failed to delete the product");
     }
   };
+  
 
   return (
     <div className="table-responsive container mt-4">
-          <div style={{marginBottom:"40px"}}>
-      <button className="formButton" onClick={()=>navigate('/add-Product')}>
-       Add product
-      </button>
-    </div>
+      <div style={{ marginBottom: "40px" }}>
+        <button className="formButton" onClick={() => navigate("/add-Product")}>
+          Add product
+        </button>
+      </div>
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
@@ -235,7 +242,7 @@ const ProductList = () => {
               <td>{product.productType}</td>
               <td>
                 <button
-                style={{color:"white"}}
+                  style={{ color: "white" }}
                   className="btn btn-info"
                   onClick={() => handleMoreInfo(product)}
                 >
@@ -265,7 +272,7 @@ const ProductList = () => {
           <h4>Product Name :- {selectedProduct?.productName}</h4>
           <table className="table table-striped  table-bordered">
             <tbody>
-            <tr>
+              <tr>
                 <th>Product Type</th>
                 <td>
                   {isEditing ? (
@@ -382,41 +389,41 @@ const ProductList = () => {
               <tr>
                 <th>Packet Weight</th>
                 <td>
-                {isEditing ? (
-                <>
-                  <input
-                    type="number"
-                    value={updatedProduct.packetweight}
-                    onChange={(e) =>
-                      setUpdatedProduct({
-                        ...updatedProduct,
-                        packetweight: e.target.value,
-                      })
-                    }
-                  />
-                  <select
-                    value={updatedProduct.unitOfMeasure}
-                    onChange={(e) =>
-                      setUpdatedProduct({
-                        ...updatedProduct,
-                        unitOfMeasure: e.target.value,
-                      })
-                    }
-                  >
-                    <option value="g">grams (g)</option>
-                    <option value="kg">kilograms (kg)</option>
-                    <option value="l">liter (l)</option>
-                    <option value="ml">milliliter (ml)</option>
-                  </select>
-                </>
-              ) : (
-                <>
-                  {selectedProduct?.packetweight}{" "}
-                  {selectedProduct?.unitOfMeasure}
-                </>
-              )}
-            </td>
-          </tr>
+                  {isEditing ? (
+                    <>
+                      <input
+                        type="number"
+                        value={updatedProduct.packetweight}
+                        onChange={(e) =>
+                          setUpdatedProduct({
+                            ...updatedProduct,
+                            packetweight: e.target.value,
+                          })
+                        }
+                      />
+                      <select
+                        value={updatedProduct.unitOfMeasure}
+                        onChange={(e) =>
+                          setUpdatedProduct({
+                            ...updatedProduct,
+                            unitOfMeasure: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="g">grams (g)</option>
+                        <option value="kg">kilograms (kg)</option>
+                        <option value="l">liter (l)</option>
+                        <option value="ml">milliliter (ml)</option>
+                      </select>
+                    </>
+                  ) : (
+                    <>
+                      {selectedProduct?.packetweight}{" "}
+                      {selectedProduct?.unitOfMeasure}
+                    </>
+                  )}
+                </td>
+              </tr>
               <tr>
                 <th>Description</th>
                 <td>
@@ -512,30 +519,33 @@ const ProductList = () => {
                   )}
                 </td>
               </tr>
-              {userRole=='superadmin' && (<>
-
-              <tr>
-                <th>Deal of the Day</th>
-                <td>
-                  {isEditing ? (
-                    <select
-                      value={updatedProduct.dealOfDay}
-                      onChange={(e) =>
-                        setUpdatedProduct({
-                          ...updatedProduct,
-                          dealOfDay: e.target.value === "true",
-                        })
-                      }
-                    >
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
-                    </select>
-                  ) : (
-                    selectedProduct?.dealOfDay ? "Yes" : "No"
-                  )}
-                </td>
-              </tr>
-              </>)}
+              {userRole == "superadmin" && (
+                <>
+                  <tr>
+                    <th>Deal of the Day</th>
+                    <td>
+                      {isEditing ? (
+                        <select
+                          value={updatedProduct.dealOfDay}
+                          onChange={(e) =>
+                            setUpdatedProduct({
+                              ...updatedProduct,
+                              dealOfDay: e.target.value === "true",
+                            })
+                          }
+                        >
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      ) : selectedProduct?.dealOfDay ? (
+                        "Yes"
+                      ) : (
+                        "No"
+                      )}
+                    </td>
+                  </tr>
+                </>
+              )}
               <tr>
                 <th>Images</th>
                 <td>
@@ -554,42 +564,31 @@ const ProductList = () => {
             </tbody>
             <th>Actions</th>
             <div className="option-buttons">
-            {isEditing ? (
-              <button
-                className="btn btn-success"
-                onClick={() => {
-                  handleUpdate();
-                  // alert("Are You Sure You Want To Save Changes");
-                }}
-              >
-                Save Changes
+              {isEditing ? (
+                <button
+                  className="btn btn-success"
+                  onClick={() => {
+                    handleUpdate();
+                    // alert("Are You Sure You Want To Save Changes");
+                  }}
+                >
+                  Save Changes
+                </button>
+              ) : (
+                <button
+                  className="btn btn-warning"
+                  onClick={() => {
+                    setEditing(true);
+                    setUpdatedProduct({ ...selectedProduct });
+                  }}
+                >
+                  Update Product
+                </button>
+              )}
+              <button className="btn btn-danger" onClick={() => handleDelete()}>
+                Delete Product
               </button>
-            ) : (
-              <button
-                className="btn btn-warning"
-                onClick={() => {
-                  setEditing(true);
-                  setUpdatedProduct({ ...selectedProduct });
-                }}
-              >
-                Update Product
-              </button>
-            )}
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                if (
-                  window.confirm(
-                    `Are you sure you want to delete ${selectedProduct?.productName}?`
-                  )
-                ) {
-                  handleDelete();
-                }
-              }}
-            >
-              Delete Product
-            </button>
-          </div>
+            </div>
           </table>
           <button
             className="btn btn-secondary"

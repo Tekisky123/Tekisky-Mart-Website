@@ -103,7 +103,7 @@ const PreOrder = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://tekiskymart.onrender.com/product/getcategories"
+          "https://tekiskymart.up.railway.app/product/getcategories"
         );
         if (response.data.success) {
           setCategories(response.data.categories);
@@ -165,7 +165,7 @@ const PreOrder = () => {
     try {
       // Make a POST request to your backend API endpoint
       const response = await axios.post(
-        "https://tekiskymart.onrender.com/pre/order",
+        "https://tekiskymart.up.railway.app/pre/order",
         payload
       );
 

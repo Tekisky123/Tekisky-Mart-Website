@@ -13,7 +13,7 @@ const EnquiryTable = () => {
   }, [location.pathname, id]);
 
   useEffect(() => {
-    axios.get('https://tekiskymart.onrender.com/client/enquiry')
+    axios.get('https://tekiskymart.up.railway.app/client/enquiry')
       .then(response => {
         setEnquiryData(response.data.data);
       })

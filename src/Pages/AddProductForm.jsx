@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Assets/Styles/AddProductForm.css";
 import { Base_Url, AddProduct } from "../common/Apis";
-import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2"; 
 
 const AddProductForm = () => {
   const navigate = useNavigate();
@@ -140,18 +140,25 @@ const AddProductForm = () => {
     try {
       await axios.post(apiUrl, formDataToSend);
       console.log("Data successfully posted");
-      toast.success("Your Product Is Added Successfully");
+      // Display sweet alert upon successful addition
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Your Product Is Added Successfully",
+      });
+      // Alternatively, you can use toast.success("Your Product Is Added Successfully");
       navigate("/products-list");
     } catch (error) {
       console.error("Error posting data:", error);
     } finally {
       setLoading(false);
     }
+  
   };
 
   return (
     <div className="addProductForm">
-      <ToastContainer />
+     
       {loading && (
         <div className="loader-container">
           <div className="spinner">

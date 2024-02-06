@@ -104,7 +104,7 @@ const AddUser = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://tekiskymart.onrender.com/user/createUser",
+        "https://tekiskymart.up.railway.app/user/createUser",
         formData
       );
   

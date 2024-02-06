@@ -12,7 +12,7 @@ const DealOfTheDay = () => {
 
   useEffect(() => {
     // Fetch data from the API
-    fetch('https://tekiskymart.onrender.com/product/getproduct')
+    fetch('https://tekiskymart.up.railway.app/product/getproduct')
       .then(response => response.json())
       .then(data => {
         // Filter products with "dealOfDay" set to true

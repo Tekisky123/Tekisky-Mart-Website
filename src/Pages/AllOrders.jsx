@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Assets/Styles/AddProductForm.css";
 import { useLocation, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // Modal.setAppElement("#root");
 
@@ -69,7 +70,7 @@ const AllOrders = () => {
     try {
       setIsLoading(true);
 
-      const apiUrl = `https://tekiskymart.onrender.com/order/updateOrderById/${selectedOrder._id}`;
+      const apiUrl = `https://tekiskymart.up.railway.app/order/updateOrderById/${selectedOrder._id}`;
 
       const updateData = { orderStatus: newOrderStatus };
 
@@ -82,7 +83,7 @@ const AllOrders = () => {
 
       // Fetch the updated order details
       const updatedOrderResponse = await axios.get(
-        `https://tekiskymart.onrender.com/order/getOrderById/${selectedOrder._id}`
+        `https://tekiskymart.up.railway.app/order/getOrderById/${selectedOrder._id}`
       );
 
       // Update the local state with the new order details
@@ -98,18 +99,26 @@ const AllOrders = () => {
       setIsEditOrderStatus(false);
       setIsLoading(false);
 
-      // Show toast notification
-      toast.success(`Order status successfully updated to ${newOrderStatus}`, {
-        autoClose: 1500,
+      Swal.fire({
+        icon: "success",
+        title: `Order status successfully updated to ${newOrderStatus}`,
+        showConfirmButton: false,
+        timer: 1500
       });
+      
 
       // Close the modal after the loading is complete
       handleCloseModal();
     } catch (error) {
       console.error("Error updating order status:", error);
       setIsLoading(false);
-      // Show error toast notification
-      toast.error("Failed to update order status");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update order status",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
     }
   };
 
@@ -117,7 +126,7 @@ const AllOrders = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "https://tekiskymart.onrender.com/order/getAllOrders"
+          "https://tekiskymart.up.railway.app/order/getAllOrders"
         );
         setOrders(response.data.orders.reverse());
       } catch (error) {

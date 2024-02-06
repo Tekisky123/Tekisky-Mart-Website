@@ -15,7 +15,7 @@ const PreOrderPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://tekiskymart.onrender.com/pre/getPreOrders")
+      .get("https://tekiskymart.up.railway.app/pre/getPreOrders")
       .then((response) => {
         setOrders(response.data.order);
       })

@@ -26,7 +26,7 @@ const CategoryPage = () => {
       const fetchCategoryProducts = async () => {
         try {
           const response = await axios.get(
-            "https://tekiskymart.onrender.com/product/getproduct"
+            "https://tekiskymart.up.railway.app/product/getproduct"
           );
           const filteredProducts = response?.data?.products.filter(
             (product) => product.productCategory === category

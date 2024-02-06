@@ -11,11 +11,7 @@ const SaleWithUs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
-  const {
-
-    ToastContainer,toast,Swal
-
-  } = useContext(Context);
+  const { ToastContainer, toast, Swal } = useContext(Context);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -101,12 +97,9 @@ const SaleWithUs = () => {
     }
   };
 
-
-
-  const handleSaleWithUs = async(e) => {
+  const handleSaleWithUs = async (e) => {
     e.preventDefault();
 
-  
     var requiredFields = [
       "fullName",
       "saleProduct",
@@ -115,9 +108,9 @@ const SaleWithUs = () => {
       "phoneNumber",
       "productDetails",
     ];
-  
+
     let hasError = false;
-  
+
     requiredFields.forEach((field) => {
       if (!formData[field]) {
         setErrors((prevErrors) => ({
@@ -127,42 +120,42 @@ const SaleWithUs = () => {
         hasError = true;
       }
     });
-  
+
     if (hasError) {
       Swal.fire({
         title: "Warning!",
         text: "All mandatory fields are required",
-        icon: "error"
+        icon: "error",
       });
     }
     if (!hasError) {
       const payload = {
         shopSellerName: formData.fullName,
-        doYouHaveGST: formData.hasGSTNumber === 'yes' ? true : false,
-        doYouHaveShop: formData.hasShop === 'yes' ? true : false,
+        doYouHaveGST: formData.hasGSTNumber === "yes" ? true : false,
+        doYouHaveShop: formData.hasShop === "yes" ? true : false,
         GST: formData.GSTNumber,
         shopName: formData.shopName,
         productDetails: formData.productDetails,
         mobileNumber: formData.phoneNumber,
         whichProductYouHaveToSale: formData.saleProduct,
       };
-    
+
       try {
         // Make a POST request to your backend API endpoint
         const response = await axios.post(
-          "https://tekiskymart.onrender.com/client/enquiry",
+          "https://tekiskymart.up.railway.app/client/enquiry",
           payload
         );
-    
+
         if (response.data.status === 200 || response.data.success === true) {
           Swal.fire({
             title: "Submitted",
             text: "Tekisky Mart team will contact you soon!",
-            icon: "success"
+            icon: "success",
           });
-          toast.success('Tekisky Mart team will contact you soon')
+          toast.success("Tekisky Mart team will contact you soon");
           setTimeout(() => {
-            navigate('/')
+            navigate("/");
           }, 3000);
         }
       } catch (error) {
@@ -171,7 +164,7 @@ const SaleWithUs = () => {
         Swal.fire({
           title: "Oops!",
           text: `${error.message}`,
-          icon: "error"
+          icon: "error",
         });
       }
     }
@@ -181,26 +174,26 @@ const SaleWithUs = () => {
     if (e) {
       e.preventDefault();
     }
-  
-  
   };
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       <div style={{ width: "80%", margin: " 80px auto" }}>
         <Row className="Row">
           <Col xs={12}>
-            <h1 style={{textAlign:"center"}}>Sell With Us</h1>
+            <h1 style={{ textAlign: "center" }}>Sell With Us</h1>
             <h3>Terms & Conditions</h3>
             <ol>
-  <li>1. Authentic and reliable genuine products</li>
-  <li>2. No illegal materials</li>
-  <li>3. All government norms should be followed</li>
-  <li>4. 500₹ subscription for 1 year with a maximum of 10 product sales</li>
-  <li>5. Deals only for premium customers</li>
-</ol>
-
+              <li>1. Authentic and reliable genuine products</li>
+              <li>2. No illegal materials</li>
+              <li>3. All government norms should be followed</li>
+              <li>
+                4. 500₹ subscription for 1 year with a maximum of 10 product
+                sales
+              </li>
+              <li>5. Deals only for premium customers</li>
+            </ol>
           </Col>
         </Row>
         <form action="">
@@ -264,7 +257,7 @@ const SaleWithUs = () => {
                   </select> */}
 
                   <input
-                type="text"
+                    type="text"
                     className="MyInput"
                     placeholder="Enter Product Name"
                     name="saleProduct"
@@ -272,7 +265,7 @@ const SaleWithUs = () => {
                     onChange={handleInputChange}
                   />
                 </Col>
-  
+
                 <Col xs={12} md={4} xl={4}>
                   {" "}
                   <div className="Formlabel">
@@ -298,38 +291,36 @@ const SaleWithUs = () => {
                   <div className="Formlabel">
                     Do You have shop ?
                     {/* <span className="error-message">⁕</span>{" "} */}
-                   
-                  
                   </div>
                 </Col>
                 <Col xs={12} md={6} xl={6}>
-                <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        alignItems: "center",
-                        width:"50%"
-                      }}
-                    >
-                      <label>Yes</label>
-                      <input
-                        style={{ width: "auto" }}
-                        type="radio"
-                        name="hasShop"
-                        value="yes"
-                        checked={formData.hasShop == "yes"}
-                        onChange={handleInputChange}
-                      />
-                      <label> No</label>
-                      <input
-                        style={{ width: "auto" }}
-                        type="radio"
-                        name="hasShop"
-                        value="no"
-                        checked={formData.hasShop == "no"}
-                        onChange={handleInputChange}
-                      />
-                    </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-evenly",
+                      alignItems: "center",
+                      width: "50%",
+                    }}
+                  >
+                    <label>Yes</label>
+                    <input
+                      style={{ width: "auto" }}
+                      type="radio"
+                      name="hasShop"
+                      value="yes"
+                      checked={formData.hasShop == "yes"}
+                      onChange={handleInputChange}
+                    />
+                    <label> No</label>
+                    <input
+                      style={{ width: "auto" }}
+                      type="radio"
+                      name="hasShop"
+                      value="no"
+                      checked={formData.hasShop == "no"}
+                      onChange={handleInputChange}
+                    />
+                  </div>
                   {formData.hasShop === "yes" && (
                     <input
                       type="text"
@@ -347,38 +338,36 @@ const SaleWithUs = () => {
                   <div className="Formlabel">
                     Do You have G.S.T. Number ?
                     {/* <span className="error-message">⁕</span>{" "} */}
-                
-                  
                   </div>
                 </Col>
                 <Col xs={12} md={6} xl={6}>
-                <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        alignItems: "center",
-                        width:"50%"
-                      }}
-                    >
-                      <label>Yes</label>
-                      <input
-                        style={{ width: "auto" }}
-                        type="radio"
-                        name="hasGSTNumber"
-                        value="yes"
-                        checked={formData.hasGSTNumber == "yes"}
-                        onChange={handleInputChange}
-                      />
-                      <label> No</label>
-                      <input
-                        style={{ width: "auto" }}
-                        type="radio"
-                        name="hasGSTNumber"
-                        value="no"
-                        checked={formData.hasGSTNumber == "no"}
-                        onChange={handleInputChange}
-                      />
-                    </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-evenly",
+                      alignItems: "center",
+                      width: "50%",
+                    }}
+                  >
+                    <label>Yes</label>
+                    <input
+                      style={{ width: "auto" }}
+                      type="radio"
+                      name="hasGSTNumber"
+                      value="yes"
+                      checked={formData.hasGSTNumber == "yes"}
+                      onChange={handleInputChange}
+                    />
+                    <label> No</label>
+                    <input
+                      style={{ width: "auto" }}
+                      type="radio"
+                      name="hasGSTNumber"
+                      value="no"
+                      checked={formData.hasGSTNumber == "no"}
+                      onChange={handleInputChange}
+                    />
+                  </div>
                   {formData.hasGSTNumber === "yes" && (
                     <input
                       type="text"
@@ -390,7 +379,6 @@ const SaleWithUs = () => {
                     />
                   )}
                 </Col>
-
 
                 <Col xs={12} md={6} xl={6}></Col>
                 <Col xs={12} md={6} xl={6}>

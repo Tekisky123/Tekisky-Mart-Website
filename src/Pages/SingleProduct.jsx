@@ -42,7 +42,7 @@ const SingleProduct = () => {
     const fetchProduct = async () => {
       try {
         console.log("Fetching product with ID:", id);
-        const response = await axios.get(`https://tekiskymart.onrender.com/product/getoneproduct/${id}`);
+        const response = await axios.get(`https://tekiskymart.up.railway.app/product/getoneproduct/${id}`);
         console.log("API Response:", response);
         
         setProduct(response?.data?.getOneProduct);
