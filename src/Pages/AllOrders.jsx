@@ -28,6 +28,10 @@ const AllOrders = () => {
   const [feedback, setFeedback] = useState("");
   const [searchInput, setSearchInput] = useState("");
 
+  useEffect(() => {
+    setFeedback("");
+  }, [isModalOpen, selectedOrder]);
+
   const { id } = useParams();
   const location = useLocation();
 
@@ -77,7 +81,7 @@ const AllOrders = () => {
       const updateData = { orderStatus: newOrderStatus };
 
       // If the order status is "Delivered", include feedback in the update data
-      if (newOrderStatus === "Delivered") {
+      if (newOrderStatus) {
         updateData.feedback = feedback;
       }
 
@@ -440,13 +444,12 @@ const AllOrders = () => {
                   <tr>
                     <td>Feedback</td>
                     <td colSpan="2">
-                      {selectedOrder.orderStatus === "Delivered" &&
-                      isEditOrderStatus ? (
-                        <input
-                          type="text"
-                          value={feedback}
-                          onChange={(e) => setFeedback(e.target.value)}
-                        />
+                      {isEditOrderStatus ? (
+                       <Form.Control
+                       type="text"
+                       value={feedback}
+                       onChange={(e) => setFeedback(e.target.value)}
+                     />
                       ) : (
                         <span>{selectedOrder.feedback}</span>
                       )}
