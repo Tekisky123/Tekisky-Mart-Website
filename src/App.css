@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Exo+2&family=Merienda&family=Plus+Jakarta+Sans:ital@1&family=Protest+Riot&family=Workbench&display=swap');
+
 :root {
 
 
@@ -55,12 +57,16 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-transform: capitalize;
+  font-family: 'Exo 2', sans-serif;
+
 }
 
 a {

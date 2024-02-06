@@ -14,7 +14,7 @@ const PreOrder = () => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
 
-  const { ToastContainer, toast,Swal } = useContext(Context);
+  const { ToastContainer, toast, Swal } = useContext(Context);
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
@@ -144,7 +144,7 @@ const PreOrder = () => {
       Swal.fire({
         title: "Warning!",
         text: "All mandatory fields are required",
-        icon: "error"
+        icon: "error",
       });
     }
     if (!hasError) {
@@ -188,13 +188,11 @@ const PreOrder = () => {
         direction="left"
         style={{ color: "#004AAD", fontWeight: "bold" }}
       >
-        Get 15% off on pre-orders!
-      </marquee>
-      <marquee
-        direction="left"
-        style={{ color: "#004AAD", fontWeight: "bold" }}
-      >
-        Pre order means order us 5 to 10 days before
+        <span style={{ marginRight: "100px", marginBottom: "50px" }}>
+          {" "}
+          Get 15% off on pre-orders!{" "}
+        </span>
+        <span>Pre order means order us 5 to 10 days before</span>
       </marquee>
 
       <form action="">

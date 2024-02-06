@@ -29,7 +29,7 @@ const AddProductForm = () => {
     expiryDate: "",
     sellerInformation: "",
     dealOfDay: false,
-    approved: "false",
+    approved: false,
   });
   // console.log("approved", formData.approved);
   const [filePreviews, setFilePreviews] = useState([]);
@@ -136,7 +136,7 @@ const AddProductForm = () => {
         formDataToSend.append(key, formData[key]);
       }
     }
-    formDataToSend.append("approved", formData.approved);
+    // formDataToSend.append("approved", formData.approved);
     try {
       await axios.post(apiUrl, formDataToSend);
       console.log("Data successfully posted");
@@ -239,6 +239,20 @@ const AddProductForm = () => {
           />
           {errors.productBrand && (
             <span className="errorMessage">{errors.productBrand}</span>
+          )}
+        </label>
+        <label className="formLabel">
+          Bold Header:
+          <input
+            type="text"
+            value={formData.header}
+            onChange={(e) =>
+              setFormData({ ...formData, header: e.target.value })
+            }
+            className={`formInput ${errors.header ? "error" : ""}`}
+          />
+          {errors.header && (
+            <span className="errorMessage">{errors.header}</span>
           )}
         </label>
 
@@ -356,20 +370,6 @@ const AddProductForm = () => {
           />
           {errors.description && (
             <span className="errorMessage">{errors.description}</span>
-          )}
-        </label>
-        <label className="formLabel">
-          Bold Header:
-          <input
-            type="text"
-            value={formData.header}
-            onChange={(e) =>
-              setFormData({ ...formData, header: e.target.value })
-            }
-            className={`formInput ${errors.header ? "error" : ""}`}
-          />
-          {errors.header && (
-            <span className="errorMessage">{errors.header}</span>
           )}
         </label>
 
@@ -507,32 +507,35 @@ const AddProductForm = () => {
               </label>
             </div>
             <div className="cl-toggle-switch">
-              <label  style={{width:"250px" , display:"flex", justifyContent:"space-evenly",alignContent:"center"}} className="formLabel">
-                Approved:
-                <label>Yes</label>
-                <input
-                 style={{width:"auto"}}
-                  type="radio"
-                  name="approved"
-                  value="true"
-                  checked={formData.approved === "true"}
-                  onChange={(e) =>
-                    setFormData({ ...formData, approved: e.target.value })
-                  }
-                />
-                <label>No</label>
-                <input
-                style={{width:"auto"}}
-                  type="radio"
-                  name="approved"
-                  value="false"
-                  checked={formData.approved === "false"}
-                  onChange={(e) =>
-                    setFormData({ ...formData, approved: e.target.value })
-                  }
-                />
-              </label>
-            </div>
+  <label
+    style={{
+      width: "250px",
+      display: "flex",
+      justifyContent: "space-evenly",
+      alignContent: "center",
+    }}
+    className="formLabel"
+  >
+    Approved:
+    <label>Yes</label>
+    <input
+      style={{ width: "auto" }}
+      type="radio"
+      name="approved"
+      checked={formData.approved === true}
+      onChange={() => setFormData({ ...formData, approved: true })}
+    />
+    <label>No</label>
+    <input
+      style={{ width: "auto" }}
+      type="radio"
+      name="approved"
+      checked={formData.approved === false}
+      onChange={() => setFormData({ ...formData, approved: false })}
+    />
+  </label>
+</div>
+
           </>
         )}
 
