@@ -602,9 +602,10 @@ font-size: 22px;}
 }
 
 .menu-category a{
-  min-width: 120px;
-  width: auto;
-  max-width: 200px;
+padding: 20px !important;
+  display: flex;
+  justify-content: center;
+  width: max-content;
 }
 .mobile-menu-category-list {
   margin-bottom: 30px;
@@ -2395,6 +2396,7 @@ footer {
     position: relative;
     display: flex;
     justify-content: start;
+    flex-wrap: nowrap;
     align-items: center;
     padding: 0px 30px;
     background-color: #004AAD;

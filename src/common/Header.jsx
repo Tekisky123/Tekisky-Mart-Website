@@ -289,10 +289,10 @@ const Header = () => {
           </div>
         </div>
       </div>
-
+{userRole=='superadmin' && ""}
       <nav className="desktop-navigation-menu">
         <div className="main-container">
-          <ul className="desktop-menu-category-list">
+          <ul className="desktop-menu-category-list" style={{justifyContent:userRole =='superadmin' && "start"}}>
             <li className="menu-category" onClick={() => navigate("/")} >
               <Link to="/" className="menu-title">
                 Home
