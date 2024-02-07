@@ -6,11 +6,14 @@ import { toast } from "react-toastify";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { CiSearch } from "react-icons/ci";
+import { HiOutlineClock } from "react-icons/hi";
+import { FaCheckCircle } from "react-icons/fa";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
 const ProductList = () => {
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
+  console.log(loading);
 
   const { id } = useParams();
   const location = useLocation();
@@ -233,13 +236,13 @@ const ProductList = () => {
         </button>
       </div>
       <div className="custom-search-bar">
-      <input
-        type="text"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        placeholder="Search by Product Name or Product Category"
-      />
-       <div className="search-icon">
+        <input
+          type="text"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          placeholder="Search by Product Name or Product Category"
+        />
+        <div className="search-icon">
           <CiSearch />
         </div>
       </div>
@@ -251,6 +254,8 @@ const ProductList = () => {
             <th>Product Category</th>
             <th>Product Name</th>
             <th>Product Type</th>
+            <th>Approved</th>
+            <th>Deal's Of The Day</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -258,10 +263,24 @@ const ProductList = () => {
           {filteredProducts.map((product) => (
             <tr key={product._id}>
               {/* <td>{product._id}</td> */}
-              <td>{product.productId}</td>
+              <td> {product.productId}</td>
               <td>{product.productCategory}</td>
               <td>{product.productName}</td>
               <td>{product.productType}</td>
+              <td className="approved-or-not">
+                {product.approved ? (
+                  <FaCheckCircle className="approved-icon" />
+                ) : (
+                  <HiOutlineClock className="pending-icon" />
+                )}
+              </td>
+              <td className="approved-or-not">
+                {product.dealOfDay ? (
+                  <FaCheckCircle  className="approved-icon" />
+                ) : (
+                  <HiOutlineClock className="pending-icon" />
+                )}
+              </td>
               <td>
                 <button
                   style={{ color: "white" }}
@@ -271,6 +290,7 @@ const ProductList = () => {
                   More Info
                 </button>
               </td>
+             
             </tr>
           ))}
         </tbody>
@@ -297,62 +317,55 @@ const ProductList = () => {
               <tr>
                 <th>Product Type</th>
                 <td>
-                  {isEditing ? (
-                    // <input
-                    //   type="text"
-                    //   value={updatedProduct.productType}
-                    //   onChange={(e) =>
-                    //     setUpdatedProduct({
-                    //       ...updatedProduct,
-                    //       productType: e.target.value,
-                    //     })
-                    //   }
-                    // />
-                    selectedProduct?.productType
-                  ) : (
-                    selectedProduct?.productType
-                  )}
+                  {isEditing
+                    ? // <input
+                      //   type="text"
+                      //   value={updatedProduct.productType}
+                      //   onChange={(e) =>
+                      //     setUpdatedProduct({
+                      //       ...updatedProduct,
+                      //       productType: e.target.value,
+                      //     })
+                      //   }
+                      // />
+                      selectedProduct?.productType
+                    : selectedProduct?.productType}
                 </td>
               </tr>
               <tr>
                 <th>Category</th>
                 <td>
-                  {isEditing ? (
-                    // <input
-                    //   type="text"
-                    //   value={updatedProduct.productCategory}
-                    //   onChange={(e) =>
-                    //     setUpdatedProduct({
-                    //       ...updatedProduct,
-                    //       productCategory: e.target.value,
-                    //     })
-                    //   }
-                    // />
-                    selectedProduct?.productCategory
-                  ) : (
-                    selectedProduct?.productCategory
-                  )}
+                  {isEditing
+                    ? // <input
+                      //   type="text"
+                      //   value={updatedProduct.productCategory}
+                      //   onChange={(e) =>
+                      //     setUpdatedProduct({
+                      //       ...updatedProduct,
+                      //       productCategory: e.target.value,
+                      //     })
+                      //   }
+                      // />
+                      selectedProduct?.productCategory
+                    : selectedProduct?.productCategory}
                 </td>
               </tr>
               <tr>
                 <th>Brand</th>
                 <td>
-                  {isEditing ? (
-                    // <input
-                    //   type="text"
-                    //   value={updatedProduct.productBrand}
-                    //   onChange={(e) =>
-                    //     setUpdatedProduct({
-                    //       ...updatedProduct,
-                    //       productBrand: e.target.value,
-                    //     })
-                    //   }
-                    // />
-                    selectedProduct?.productBrand
-
-                  ) : (
-                    selectedProduct?.productBrand
-                  )}
+                  {isEditing
+                    ? // <input
+                      //   type="text"
+                      //   value={updatedProduct.productBrand}
+                      //   onChange={(e) =>
+                      //     setUpdatedProduct({
+                      //       ...updatedProduct,
+                      //       productBrand: e.target.value,
+                      //     })
+                      //   }
+                      // />
+                      selectedProduct?.productBrand
+                    : selectedProduct?.productBrand}
                 </td>
               </tr>
               <tr>

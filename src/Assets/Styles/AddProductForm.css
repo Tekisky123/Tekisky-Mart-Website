@@ -11,6 +11,7 @@
   text-align: center;
 }
 
+
 .formLabel {
   display: block;
   margin-bottom: 10px;
@@ -462,4 +463,16 @@
 .custom-search-bar input[type="text"]:focus {
   border-color:#004AAD;
   box-shadow: 0 0 10px #004AAD;
+}
+.approved-or-not{
+  text-align: center;
+}
+
+.pending-icon{
+  font-size: 25px;
+  color: red;
+}
+.approved-icon{
+  font-size: 25px;
+  color: green;
 }
