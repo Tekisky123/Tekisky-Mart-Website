@@ -32,6 +32,7 @@ const SpPaymentStep = () => {
   } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
   const [responseData, setResponseData] = useState([]);
+  
   const navigate = useNavigate();
   // const [formData, setFormData] = useState({
   //   fullName: "",
@@ -70,7 +71,7 @@ const SpPaymentStep = () => {
   };
 
   const handleSubmit = async () => {
-    // setLoading(true);
+    setLoading(true);
     try {
       const payload = {
         customerName: formData.fullName,
