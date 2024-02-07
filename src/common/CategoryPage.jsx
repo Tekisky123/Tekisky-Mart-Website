@@ -3,9 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "../App.css";
 import { useParams, Link, useLocation } from "react-router-dom";
-import { CiHeart } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
-import { IoRepeatOutline } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import { Context } from "../common/Context";
 
@@ -46,9 +44,7 @@ const CategoryPage = () => {
         return (
           <div className="product-main">
             <ToastContainer />
-            {/* <h1 style={{ textAlign: "center" }} className="title">
-              Our Products
-            </h1> */}
+        
     
             <div className="product-grid">
               {[...Array(8)].map((_, index) => (
@@ -133,7 +129,6 @@ const CategoryPage = () => {
 
             <div className="showcase-content">
               <p className="showcase-category">{product?.productCategory}</p>
-              <h2 className=" weight">{product?.packetweight}</h2>
               <p>
                 <Link
                   to={`/single-product/${product?._id}`}
@@ -142,6 +137,8 @@ const CategoryPage = () => {
                   {product?.productName}
                 </Link>
               </p>
+              <h2 className="weight">{product?.header}</h2>
+              <h2 className="weight">{product?.packetweight}</h2>
 
               <div className="showcase-rating">
                 {Array.from({ length: 3 }, (_, index) => (

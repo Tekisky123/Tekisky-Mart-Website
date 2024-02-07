@@ -177,7 +177,7 @@ const ProductMain = () => {
                        <h3> {product?.productName}</h3>
                     </Link>
                   
-                  <h4>{product?.header}</h4>
+                  <h4 className="weight">{product?.header}</h4>
                   <div className="showcase-rating">
                     {Array.from({ length: 3 }, (_, index) => (
                       <ion-icon key={index} name="star"></ion-icon>

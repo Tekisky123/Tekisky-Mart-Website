@@ -188,10 +188,10 @@ const SaleWithUs = () => {
               <li>1. Authentic and reliable genuine products</li>
               <li>2. No illegal materials</li>
               <li>3. All government norms should be followed</li>
-              <li>
+              <del><li>
                 4. 500₹ subscription for 1 year with a maximum of 10 product
                 sales
-              </li>
+              </li></del>
               <li>5. Deals only for premium customers</li>
             </ol>
           </Col>

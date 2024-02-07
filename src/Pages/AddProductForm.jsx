@@ -159,11 +159,7 @@ const AddProductForm = () => {
 
   return (
     <div className="addProductForm">
-           <div style={{ marginBottom: "40px" }}>
-        <button className="formButton" onClick={() => navigate("products-list")}>
-          Back
-        </button>
-      </div>
+          
       {loading && (
         <div className="loader-container">
           <div className="spinner">
@@ -551,9 +547,14 @@ const AddProductForm = () => {
           </>
         )}
 
-        <button type="submit" className="formButton">
+<div style={{ marginBottom: "40px",display:"flex", gap:"20px" }}>
+        <button className="formButton" onClick={() => navigate("/products-list")}>
+          Cancel
+        </button>
+        <button type="submit" className="formButton" >
           Submit
         </button>
+      </div>
       </form>
     </div>
   );

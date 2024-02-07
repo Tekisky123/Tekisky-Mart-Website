@@ -1156,8 +1156,8 @@ font-size: 22px;}
   margin-bottom: 3px;
 }
 .weight{
-  font-size: 20px;
-  width: max-content;
+  font-size: 15px;
+  width:fit-content;
   color: var(--davys-gray);
 
   text-transform: capitalize;
@@ -4617,8 +4617,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .product-grid .showcase-title {
-  color: var(--sonic-silver);
-  font-size: var(--fs-8);
+  color: black;
+  font-size:25px;
   font-weight: var(--weight-300);
   text-transform: capitalize;
   letter-spacing: 1px;
@@ -4657,7 +4657,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .product-grid del {
-  color: var(--sonic-silver);
+  color: black;
 }
 
 /*-----------------------------------*\
@@ -5803,7 +5803,7 @@ footer {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-    justify-content: start;
+    justify-content: center;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;

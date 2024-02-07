@@ -208,8 +208,8 @@ const PaymentStep = () => {
         icon: "warning",
         dangerMode: true,
         buttons: {
-          cancel: true,
-          confirm: true,
+          cancel: "No",
+          confirm: "Yes",
         },
       }).then((result) => {
         if (result) {
@@ -498,12 +498,7 @@ const PaymentStep = () => {
                         <span>Total amount saved :</span>
                         <span>&#8377; {totalSavedAmount}</span>
                       </h6>
-                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                        As of now we deliver only in Nanded and near by areas
-                      </h6>
-                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                        Payment cash on delivery
-                      </h6>
+                     
                       <h6
                         style={{ fontWeight: "600", marginBottom: "1rem" }}
                         className="totalDiv"
@@ -512,12 +507,18 @@ const PaymentStep = () => {
                         <span>{cardDeliveryCharge} &#8377;</span>
                       </h6>
                       <h5
-                        style={{ fontWeight: "600", marginBottom: "1rem" }}
+                        style={{ fontWeight: "600", marginBottom: "1rem" ,borderTop:"1px solid gray",borderBottom:"1px solid gray",padding:"10px 0px" }}
                         className="totalDiv"
                       >
-                        <span>Total</span>
+                        <span>Order Total</span>
                         <span>{cartGrandTotal} &#8377;</span>
                       </h5>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                        Pay on Delivery
+                      </h6>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                        As of now we deliver only in Nanded and near by areas
+                      </h6>
                     </div>
                   </div>
                 </Col>

@@ -108,16 +108,16 @@ const ProductList = () => {
       setLoading(true);
       // Validate fields before submitting
       const requiredFields = [
-        "productType",
-        "productCategory",
-        "productBrand",
+        // "productType",
+        // "productCategory",
+        // "productBrand",
         "availableStockQty",
         "mrp",
         "offerPrice",
         "packetweight",
         "unitOfMeasure",
         "description",
-        "createdBy",
+        // "createdBy",
         "productName",
         "manufactureDate",
         "expiryDate",
@@ -298,16 +298,17 @@ const ProductList = () => {
                 <th>Product Type</th>
                 <td>
                   {isEditing ? (
-                    <input
-                      type="text"
-                      value={updatedProduct.productType}
-                      onChange={(e) =>
-                        setUpdatedProduct({
-                          ...updatedProduct,
-                          productType: e.target.value,
-                        })
-                      }
-                    />
+                    // <input
+                    //   type="text"
+                    //   value={updatedProduct.productType}
+                    //   onChange={(e) =>
+                    //     setUpdatedProduct({
+                    //       ...updatedProduct,
+                    //       productType: e.target.value,
+                    //     })
+                    //   }
+                    // />
+                    selectedProduct?.productType
                   ) : (
                     selectedProduct?.productType
                   )}
@@ -317,16 +318,17 @@ const ProductList = () => {
                 <th>Category</th>
                 <td>
                   {isEditing ? (
-                    <input
-                      type="text"
-                      value={updatedProduct.productCategory}
-                      onChange={(e) =>
-                        setUpdatedProduct({
-                          ...updatedProduct,
-                          productCategory: e.target.value,
-                        })
-                      }
-                    />
+                    // <input
+                    //   type="text"
+                    //   value={updatedProduct.productCategory}
+                    //   onChange={(e) =>
+                    //     setUpdatedProduct({
+                    //       ...updatedProduct,
+                    //       productCategory: e.target.value,
+                    //     })
+                    //   }
+                    // />
+                    selectedProduct?.productCategory
                   ) : (
                     selectedProduct?.productCategory
                   )}
@@ -336,16 +338,18 @@ const ProductList = () => {
                 <th>Brand</th>
                 <td>
                   {isEditing ? (
-                    <input
-                      type="text"
-                      value={updatedProduct.productBrand}
-                      onChange={(e) =>
-                        setUpdatedProduct({
-                          ...updatedProduct,
-                          productBrand: e.target.value,
-                        })
-                      }
-                    />
+                    // <input
+                    //   type="text"
+                    //   value={updatedProduct.productBrand}
+                    //   onChange={(e) =>
+                    //     setUpdatedProduct({
+                    //       ...updatedProduct,
+                    //       productBrand: e.target.value,
+                    //     })
+                    //   }
+                    // />
+                    selectedProduct?.productBrand
+
                   ) : (
                     selectedProduct?.productBrand
                   )}
@@ -465,7 +469,7 @@ const ProductList = () => {
                   )}
                 </td>
               </tr>
-              <tr>
+              {/* <tr>
                 <th>Created By</th>
                 <td>
                   {isEditing ? (
@@ -483,7 +487,7 @@ const ProductList = () => {
                     selectedProduct?.createdBy
                   )}
                 </td>
-              </tr>
+              </tr> */}
               <tr>
                 <th>Manufacture Date</th>
                 <td>

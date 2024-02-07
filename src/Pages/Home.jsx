@@ -53,6 +53,7 @@ const Home = () => {
         <span style={{ marginLeft:"100px" }}>Returns without questions</span>
         <span style={{ marginLeft:"100px" }}>Quality product at best price</span>
         <span style={{ marginLeft:"100px" }}>Low price compare to your retail outlet</span>
+        <span style={{ marginLeft:"100px" }}>cheaper than amazon and flipkart</span>
       </marquee>
 
     </div>

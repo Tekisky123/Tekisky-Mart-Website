@@ -212,14 +212,15 @@
   }
   
   .close {
-    fill: #7d7d7d;
+    fill: white;
     transition: color 150ms linear, background-color 150ms linear,
       fill 150ms linear, 150ms opacity linear;
     cursor: pointer;
+    border-radius: 10px;
   }
   
   .close:hover {
-    fill: #004AAD;
+    fill: white;
   }
   
   /* --- SUMMARY --- */
@@ -297,6 +298,8 @@
     /* border-radius: 1.5rem; */
     background-color: #004AAD;
     color: #fff;
+    border-radius: 10px;
+
   }
   .checkout > .cartButton:disabled {
  background-color: lightgrey;

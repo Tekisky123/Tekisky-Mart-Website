@@ -1,39 +1,36 @@
 import React from "react";
-import { FaFacebookSquare, FaLinkedin, FaTwitterSquare, FaWhatsappSquare } from "react-icons/fa";
-import { Link} from "react-router-dom";
-import paymentimg from "../Assets/Images/payment.png"
+import {
+  FaFacebookSquare,
+  FaLinkedin,
+  FaTwitterSquare,
+  FaWhatsappSquare,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import paymentimg from "../Assets/Images/payment.png";
 
 const MyFooter = () => {
   return (
     <footer>
-      
-
       <div className="footer-nav">
         <div className="container">
-          
           <ul className="footer-nav-list">
             <li className="footer-nav-item">
               <h2 className="nav-title">Popular</h2>
             </li>
 
             <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                 <b>Sell with us</b>
+              <Link to="/saleWithUs" className="footer-nav-link">
+                <b>Sell with us</b>
               </Link>
             </li>
 
             <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Pre-Order
-              </Link>
+              <Link to="/pre-order" className="footer-nav-link">Pre-Order</Link>
             </li>
 
             <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Customer Support
-              </Link>
+              <Link to="/customer-support" className="footer-nav-link">Customer Support</Link>
             </li>
-
           </ul>
 
           {/* <ul className="footer-nav-list">
@@ -78,26 +75,22 @@ const MyFooter = () => {
             </li>
 
             <li className="footer-nav-item">
+              <Link className="footer-nav-link">Delivery within 24 hours</Link>
+            </li>
+
+            <li className="footer-nav-item">
+              <Link className="footer-nav-link">Returns without questions</Link>
+            </li>
+
+            <li className="footer-nav-item">
               <Link className="footer-nav-link">
-              Delivery within 24 hours
+                Quality product at best price
               </Link>
             </li>
 
             <li className="footer-nav-item">
               <Link className="footer-nav-link">
-              Returns without questions
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-              Quality product at best price
-              </Link>
-            </li>
-
-            <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-              Low price compare to your retail outlet
+                Low price compare to your retail outlet
               </Link>
             </li>
           </ul>
@@ -108,17 +101,24 @@ const MyFooter = () => {
             </li>
 
             <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-                Develop web sites
-              </Link>
+              <Link className="footer-nav-link">Corporate Training</Link>
             </li>
 
             <li className="footer-nav-item">
-              <Link className="footer-nav-link">
-              Develop web apps
-              </Link>
+              <Link className="footer-nav-link">Corporate Trainers</Link>
             </li>
-
+            <li className="footer-nav-item">
+              <Link className="footer-nav-link">IT Consaltancy</Link>
+            </li>
+            <li className="footer-nav-item">
+              <Link className="footer-nav-link">Software Development </Link>
+            </li>
+            <li className="footer-nav-item">
+              <Link className="footer-nav-link">IT Services </Link>
+            </li>
+            <li className="footer-nav-item">
+              <Link className="footer-nav-link">Website Development </Link>
+            </li>
           </ul>
 
           <ul className="footer-nav-list">
@@ -143,8 +143,9 @@ const MyFooter = () => {
               </div>
 
               <a href="tel:+607936-8058" className="footer-nav-link">
-              +91 8625817334,<br />
-              +91 9890796149
+                +91 8625817334,
+                <br />
+                +91 9890796149
               </a>
             </li>
 
@@ -153,20 +154,17 @@ const MyFooter = () => {
                 <ion-icon name="mail-outline"></ion-icon>
               </div>
 
-              <Link className="footer-nav-link">
-                sales@tekisky.com
-              </Link>
+              <Link className="footer-nav-link">sales@tekisky.com</Link>
             </li>
             <li className="footer-nav-item flex">
               <div className="icon-box">
                 <ion-icon name="mail-outline"></ion-icon>
               </div>
 
-              <Link to={"/login"} className="footer-nav-link" >
+              <Link to={"/login"} className="footer-nav-link">
                 Login
               </Link>
             </li>
-
           </ul>
 
           <ul className="footer-nav-list">
@@ -178,25 +176,25 @@ const MyFooter = () => {
               <ul className="social-link">
                 <li className="footer-nav-item">
                   <Link className="footer-nav-link">
-                  <FaFacebookSquare />
+                    <FaFacebookSquare />
                   </Link>
                 </li>
 
                 <li className="footer-nav-item">
                   <Link className="footer-nav-link">
-                  <FaTwitterSquare />
+                    <FaTwitterSquare />
                   </Link>
                 </li>
 
                 <li className="footer-nav-item">
                   <Link className="footer-nav-link">
-                  <FaLinkedin />
+                    <FaLinkedin />
                   </Link>
                 </li>
 
                 <li className="footer-nav-item">
                   <Link className="footer-nav-link">
-                  <FaWhatsappSquare />
+                    <FaWhatsappSquare />
                   </Link>
                 </li>
               </ul>

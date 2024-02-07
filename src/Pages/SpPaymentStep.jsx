@@ -203,8 +203,8 @@ const SpPaymentStep = () => {
         icon: "warning",
         dangerMode: true,
         buttons: {
-          cancel: true,
-          confirm: true,
+          cancel: "No",
+          confirm: "Yes",
         },
       }).then((result) => {
         if (result) {
@@ -484,12 +484,7 @@ const SpPaymentStep = () => {
                         <span>saved Amount:</span>
                         <span>&#8377; {singleSavedAmount}</span>
                       </h6>
-                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                        As of now we deliver only in Nanded and near by areas
-                      </h6>
-                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
-                        Payment cash on delivery
-                      </h6>
+
                       <h5
                         style={{ fontWeight: "600", marginBottom: "1rem" }}
                         className="totalDiv"
@@ -498,12 +493,18 @@ const SpPaymentStep = () => {
                         <span>{singleDeliveryCharge}&#8377;</span>
                       </h5>
                       <h5
-                        style={{ fontWeight: "600", marginBottom: "1rem" }}
+                        style={{ fontWeight: "600", marginBottom: "1rem" ,borderTop:"1px solid gray",borderBottom:"1px solid gray",padding:"10px 0px"}}
                         className="totalDiv"
                       >
-                        <span>Total</span>
+                        <span>Order Total</span>
                         <span>{singleGrandTotal} &#8377;</span>
                       </h5>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                        Pay on Delivery
+                      </h6>
+                      <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>
+                        As of now we deliver only in Nanded and near by areas
+                      </h6>
                       {/* <button style={{width:"100%",marginBottom:"0.5rem"}} className="checkoutBtn" onClick={()=>navigate('/payment_step')}>Proceed To Checkout</button> */}
                     </div>
                   </div>

@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, FormControl } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { MdFileDownloadDone } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import "../Assets/Styles/AddProductForm.css"
+
 import {
   AllUserAPI,
   Base_Url,
@@ -14,6 +15,7 @@ import {
   updateUserAPI,
 } from "../common/Apis";
 import { Context } from "../common/Context";
+import { CiSearch } from "react-icons/ci";
 
 
 const Users = () => {
@@ -23,7 +25,7 @@ const Users = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [userData, setUserData] = useState([]);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
@@ -251,14 +253,40 @@ const Users = () => {
     setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredUsers = userData.filter((user) => {
+    return (
+      user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.mobileNumber.includes(searchQuery) ||
+      user.role.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
   return (
     <div style={{ width: "90%", margin: "auto",overflowX:"auto" }}>
     <div style={{marginBottom:"40px"}}>
       <button className="formButton" onClick={()=>navigate('/create-user')}>
        Create user
       </button>
+      <div className="custom-search-bar">
+      <input
+          type="text"
+          placeholder="Search by First Name, Mobile Number, or Role"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          style={{ marginRight: "10px" }}
+        />
+        <div className="search-icon">
+          <CiSearch />
+        </div>
+        </div>
     </div>
+    
       <Table striped bordered hover>
+        
         <thead>
           <tr>
             <th>First Name</th>
@@ -270,126 +298,127 @@ const Users = () => {
             <th>Actions</th>
           </tr>
         </thead>
+        
         <tbody>
-          {userData.map((row, index) => (
-            <tr key={index}>
-              <td>
-                {editIndex === index ? (
-                  <FormControl
-                    type="text"
-                    value={formData.firstName || ""}
-                    onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
-                    }
-                  />
-                ) : (
-                  row.firstName
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <FormControl
-                    type="text"
-                    value={formData.lastName || ""}
-                    onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
-                    }
-                  />
-                ) : (
-                  row.lastName
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <FormControl
-                    type="text"
-                    value={formData.mobileNumber || ""}
-                    onChange={(e) =>
-                      handleInputChange("mobileNumber", e.target.value)
-                    }
-                  />
-                ) : (
-                  row.mobileNumber
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <FormControl
-                    type="text"
-                    value={formData.email || ""}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                  />
-                ) : (
-                  row.email
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <FormControl
-                    type="text"
-                    value={formData.role || ""}
-                    onChange={(e) => handleInputChange("role", e.target.value)}
-                  />
-                ) : (
-                  row.role
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <FormControl
-                    type="text"
-                    value={formData.shopCategory || ""}
-                    onChange={(e) =>
-                      handleInputChange("shopCategory", e.target.value)
-                    }
-                  />
-                ) : (
-                  row.shopCategory
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <>
-                    <Button
-                      variant="success"
-                      onClick={() => handleSaveEdit(row?._id)}
-                    >
-                      <MdFileDownloadDone />
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleCancelEdit(row?._id)}
-                    >
-                      <MdCancel />
-                    </Button>
-                    
-                  </>
-                ) : (
-                  <div
-                    style={{ display: "flex", justifyContent: "space-evenly" }}
-                  >
-                    <Button variant="primary" onClick={() => handleEdit(index)}>
-                      <FaUserEdit />
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDelete(row._id)}
-                    >
-                      <MdDeleteForever />
-                    </Button>
-                    <Button
-                    style={{color:"#fff"}}
-                      variant="info"
-                      onClick={() => showChangePasswordAlert(row._id)}
-                    >
-                      Change Password
-                    </Button>
-                  </div>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
+  {userData.map((row, index) => (
+    filteredUsers.includes(row) && (
+      <tr key={index}>
+        <td>
+          {editIndex === index ? (
+            <FormControl
+              type="text"
+              value={formData.firstName || ""}
+              onChange={(e) =>
+                handleInputChange("firstName", e.target.value)
+              }
+            />
+          ) : (
+            row.firstName
+          )}
+        </td>
+        <td>
+          {editIndex === index ? (
+            <FormControl
+              type="text"
+              value={formData.lastName || ""}
+              onChange={(e) =>
+                handleInputChange("lastName", e.target.value)
+              }
+            />
+          ) : (
+            row.lastName
+          )}
+        </td>
+        <td>
+          {editIndex === index ? (
+            <FormControl
+              type="text"
+              value={formData.mobileNumber || ""}
+              onChange={(e) =>
+                handleInputChange("mobileNumber", e.target.value)
+              }
+            />
+          ) : (
+            row.mobileNumber
+          )}
+        </td>
+        <td>
+          {editIndex === index ? (
+            <FormControl
+              type="text"
+              value={formData.email || ""}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+            />
+          ) : (
+            row.email
+          )}
+        </td>
+        <td>
+          {editIndex === index ? (
+            <FormControl
+              type="text"
+              value={formData.role || ""}
+              onChange={(e) => handleInputChange("role", e.target.value)}
+            />
+          ) : (
+            row.role
+          )}
+        </td>
+        <td>
+          {editIndex === index ? (
+            <FormControl
+              type="text"
+              value={formData.shopCategory || ""}
+              onChange={(e) =>
+                handleInputChange("shopCategory", e.target.value)
+              }
+            />
+          ) : (
+            row.shopCategory
+          )}
+        </td>
+        <td>
+          {editIndex === index ? (
+            <>
+              <Button
+                variant="success"
+                onClick={() => handleSaveEdit(row?._id)}
+              >
+                <MdFileDownloadDone />
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => handleCancelEdit(row?._id)}
+              >
+                <MdCancel />
+              </Button>
+            </>
+          ) : (
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <Button variant="primary" onClick={() => handleEdit(index)}>
+                <FaUserEdit />
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => handleDelete(row._id)}
+              >
+                <MdDeleteForever />
+              </Button>
+              <Button
+                style={{ color: "#fff" }}
+                variant="info"
+                onClick={() => showChangePasswordAlert(row._id)}
+              >
+                Change Password
+              </Button>
+            </div>
+          )}
+        </td>
+      </tr>
+    )
+  ))}
+</tbody>
+
       </Table>
 
       {/* <Modal
