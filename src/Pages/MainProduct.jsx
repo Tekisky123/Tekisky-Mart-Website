@@ -39,7 +39,7 @@ const ProductMain = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "https://tekiskymart.up.railway.app/product/getproduct"
+          "https://tekiskymart.up.railway.app/product/approved"
         );
         setProducts(response?.data?.products);
         setLoading(false);

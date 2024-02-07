@@ -140,7 +140,7 @@ const SingleProduct = () => {
           </svg>
           <div className="preloader__text">
             <p className="preloader__msg">Bringing you the goods…</p>
-            <p className="preloader__msg preloader__msg--last">
+            <p className="preloader_msg preloader_msg--last">
               This is taking long. Something’s wrong.
             </p>
           </div>
@@ -254,4 +254,4 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+export default SingleProduct;

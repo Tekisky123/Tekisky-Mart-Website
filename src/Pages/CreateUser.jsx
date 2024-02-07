@@ -294,7 +294,7 @@ const handleSubmit = async (e) => {
           </>
         )}
         <div>
-          <label className="formLabel">Product  Category:</label>
+          <label className="formLabel">Shop Category:</label>
           <select
             name="shopCategory"
             value={formData.shopCategory}
@@ -302,8 +302,9 @@ const handleSubmit = async (e) => {
             className="formInput"
           >
             <option value="dates">Dates</option>
-            <option value="clothing">Clothing</option>
+            <option value="perfumes">Perfumes</option>
             <option value="Homemade Snacks">Homemade Snacks</option>
+            <option value="clothes">Clothes</option>
             <option value="others">Others</option>
           </select>
         </div>

@@ -41,7 +41,7 @@ const Header = () => {
       // Check if the search query is non-empty before making the API call
       if (newSearchQuery.trim() !== "") {
         const response = await fetch(
-          `https://tekiskymart.up.railway.app/product/getproduct?search=${newSearchQuery}`
+          `https://tekiskymart.up.railway.app/product/approved?search=${newSearchQuery}`
         );
         const data = await response.json();
 
@@ -111,7 +111,7 @@ const Header = () => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "https://tekiskymart.up.railway.app/product/getproduct"
+          "https://tekiskymart.up.railway.app/product/approved"
         );
         const data = await response.json();
         const uniqueCategories = Array.from(
