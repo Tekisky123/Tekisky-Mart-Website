@@ -605,6 +605,8 @@ font-size: 22px;}
   min-width: 120px;
   width: auto;
   max-width: 200px;
+  display: flex;
+  justify-content: center;
 }
 .mobile-menu-category-list {
   margin-bottom: 30px;

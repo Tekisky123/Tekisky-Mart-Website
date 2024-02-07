@@ -137,9 +137,9 @@ const SaleWithUs = () => {
         shopName: formData.shopName,
         productDetails: formData.productDetails,
         mobileNumber: formData.phoneNumber,
-        whichProductYouHaveToSale: formData.saleProduct,
+        whichProductYouHaveToSell: formData.saleProduct,
       };
-
+      console.log("payload",payload)
       try {
         // Make a POST request to your backend API endpoint
         const response = await axios.post(
