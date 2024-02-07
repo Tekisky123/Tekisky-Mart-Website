@@ -602,7 +602,7 @@ font-size: 22px;}
 }
 
 .menu-category a{
-padding: 20px !important;
+padding: 20px 10px!important;
   display: flex;
   justify-content: center;
   width: max-content;
