@@ -12,7 +12,7 @@ const CategoryPage = () => {
     const { category } = useParams();
     const [categoryProducts, setCategoryProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { handleAddToCartHome, ToastContainer, quantity, handleBuyNow } =
+    const { handleAddToCartHome,handleAddToCart, ToastContainer, quantity, handleBuyNow } =
       useContext(Context);
 
       useEffect(() => {
@@ -119,7 +119,7 @@ const CategoryPage = () => {
                 <button
                   className="btn-action"
                   onClick={() => {
-                    handleAddToCartHome(product, quantity, index);
+                    handleAddToCart(product, quantity, index);
                   }}
                 >
                   <IoIosAddCircle />
@@ -158,7 +158,7 @@ const CategoryPage = () => {
                 <button
                   className="add-cart-btn-cards"
                   onClick={() => {
-                    handleAddToCartHome(product, quantity, index);
+                    handleAddToCart(product, quantity, index);
                   }}
                 >
                   add to cart

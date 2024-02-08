@@ -31,7 +31,7 @@ const ProductMain = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { handleAddToCartHome, ToastContainer, quantity, handleBuyNow } =
+  const { handleAddToCartHome,handleAddToCart, ToastContainer, quantity, handleBuyNow } =
     useContext(Context);
 
   // Fetch products on component mount
@@ -154,7 +154,7 @@ const ProductMain = () => {
                     <button
                       className="btn-action"
                       onClick={() => {
-                        handleAddToCartHome(product, quantity, index);
+                        handleAddToCart(product, quantity, index);
                       }}
                     >
                       <IoIosAddCircle />
@@ -196,7 +196,7 @@ const ProductMain = () => {
                     <button
                       className="add-cart-btn-cards"
                       onClick={() => {
-                        handleAddToCartHome(product, quantity, index);
+                        handleAddToCart(product, quantity, index);
                       }}
                     >
                       add to cart

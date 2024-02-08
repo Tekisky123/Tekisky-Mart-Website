@@ -217,6 +217,7 @@ const Header = () => {
          currentPath === '/create-user' ||
          currentPath === '/products-list' ||
          currentPath === '/all-orders' ||
+         currentPath === '/shopping-cart' ||
          currentPath === '/enquiry-table' ? null : (<>
          
          <div className="header-search-container">
