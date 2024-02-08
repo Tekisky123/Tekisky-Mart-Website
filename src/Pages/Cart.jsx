@@ -185,18 +185,7 @@ const ShoppingCart = () => {
 
       {/* Summary */}
       <section className="ourcontainer">
-        {products.length > 0 && (
-          <div className="promotion">
-            {/* <label htmlFor="promo-code">Have A Promo Code?</label>
-            <input
-              type="text"
-              id="promo-code"
-              value={promoCode}
-              onChange={(event) => setPromoCode(event.target.value)}
-            />
-            <button className='cartButton' type="button" onClick={checkPromoCode}></button> */}
-          </div>
-        )}
+
 
         <div className="summary">
           <ul>

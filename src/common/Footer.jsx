@@ -20,7 +20,7 @@ const MyFooter = () => {
 
             <li className="footer-nav-item">
               <Link to="/saleWithUs" className="footer-nav-link">
-                <b>Sell with us</b>
+                Sell with us
               </Link>
             </li>
 
@@ -108,7 +108,7 @@ const MyFooter = () => {
               <Link className="footer-nav-link">Corporate Trainers</Link>
             </li>
             <li className="footer-nav-item">
-              <Link className="footer-nav-link">IT Consaltancy</Link>
+              <Link className="footer-nav-link">IT Consultancy</Link>
             </li>
             <li className="footer-nav-item">
               <Link className="footer-nav-link">Software Development </Link>

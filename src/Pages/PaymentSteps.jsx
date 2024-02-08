@@ -276,7 +276,7 @@ const PaymentStep = () => {
 
       <div className="stepContiner">
         <ToastContainer />
-        <div style={{ width: "80%", margin: " 80px auto" }}>
+        <div style={{ width: "80%", margin: " 30px auto" }}>
           <form action="">
             <>
               <div>
@@ -439,7 +439,7 @@ const PaymentStep = () => {
         >
           <div>
             <div style={{ width: "80%", margin: "20px auto" }}></div>
-            <div className="cx-cart m-4">
+            <div className="cx-car">
               <Row>
                 <Col xs={12} md={12} xl={12}>
                   <div className="cx-heading">

@@ -260,7 +260,7 @@ const ProductList = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredProducts.map((product) => (
+          {filteredProducts.reverse().map((product) => (
             <tr key={product._id}>
               {/* <td>{product._id}</td> */}
               <td> {product.productId}</td>
