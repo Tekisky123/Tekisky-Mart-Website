@@ -484,6 +484,13 @@
 }
 .custom-filter {
   margin-bottom: 10px;
+  
+}
+.custom-filter-container{
+  display: flex;
+  justify-content:space-evenly;
+  gap: 50px;
+  align-items: center;
 }
 
 .custom-filter label {

@@ -249,7 +249,7 @@ const ProductList = () => {
         </div>
         
       </div>
-      <div>
+      <div className="custom-filter-container">
       <div className="custom-filter">
               <label htmlFor="approved">Approved Products:</label>
               <select
