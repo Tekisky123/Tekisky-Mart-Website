@@ -47,7 +47,7 @@ const Header = () => {
 
         if (data.success) {
           const matchingProducts = data.products.filter((product) =>
-            product.productName
+            product.productName && product.productCategory
               .toLowerCase()
               .includes(newSearchQuery.toLowerCase())
           );
@@ -427,7 +427,7 @@ const Header = () => {
         <div className="menu-top">
           <h2 className="menu-title">Menu</h2>
           <button data-mobile-menu-close-btn onClick={handleMobileMenuClose}>
-            <IoCloseSharp className="hamburger" />
+            <IoCloseSharp className="cross-ham" />
           </button>
         </div>
 

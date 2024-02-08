@@ -106,6 +106,9 @@ html {
   font-family: "Poppins", sans-serif;
   overscroll-behavior: contain;
 }
+th{
+  border: 1px solid black !important;
+}
 
 input {
   display: block;
@@ -121,6 +124,11 @@ body {
   background: var(--white);
   
 }
+.table-striped>tbody>tr {
+  border: 1px solid black;
+}
+
+
 
 /**
  * scrollbar style
@@ -586,6 +594,10 @@ body {
 }
 .hamburger{
 font-size: 22px;}
+.cross-ham{
+font-size: 22px;
+color: #fff;
+}
 
 .menu-top .menu-title {
   color:#004AAD;
@@ -3472,12 +3484,12 @@ body::-webkit-scrollbar-thumb:hover {
 .mobile-bottom-navigation {
   background: var(--white);
   position: fixed ;
-  bottom: 0;
+  bottom: 0px;
   left: 50% ;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  
+  padding-bottom: 30px!important;
   width: 100%;
   max-width: 500px;
   margin: auto;
@@ -3547,12 +3559,14 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .menu-top {
-  padding-bottom: 15px;
+  padding: 0px 15px;
   margin-bottom: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  height: 50px;
+  background-color: #004AAD;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -3565,7 +3579,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .menu-top .menu-title {
-  color:#004AAD;
+  color:#fff;
   font-size: 20px;
   font-weight: var(--weight-600);
 }

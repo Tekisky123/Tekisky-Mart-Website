@@ -27,7 +27,8 @@ const ProductList = () => {
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setEditing] = useState(false);
   const [searchInput, setSearchInput] = useState(""); // New state for search input
-
+  const [filterByApproved, setFilterByApproved] = useState("");
+  const [filterByDealOfDay, setFilterByDealOfDay] = useState("");  
   const userRole = localStorage.getItem("userRole");
   const mobileNumber = localStorage.getItem("mobileNumber");
 
@@ -220,14 +221,13 @@ const ProductList = () => {
   };
 
   const filteredProducts = products.filter((product) => {
-    const productNameMatch = product.productName
-      .toLowerCase()
-      .includes(searchInput.toLowerCase());
-    const productCategoryMatch = product.productCategory
-      .toLowerCase()
-      .includes(searchInput.toLowerCase());
-    return productNameMatch || productCategoryMatch;
+    const productNameMatch = product.productName.toLowerCase().includes(searchInput.toLowerCase());
+    const productCategoryMatch = product.productCategory.toLowerCase().includes(searchInput.toLowerCase());
+    const approvedMatch = filterByApproved === "" || product.approved.toString() === filterByApproved;
+    const dealOfDayMatch = filterByDealOfDay === "" || product.dealOfDay.toString() === filterByDealOfDay;
+    return (productNameMatch || productCategoryMatch) && approvedMatch && dealOfDayMatch;
   });
+  
   return (
     <div className="table-responsive container mt-4">
       <div style={{ marginBottom: "40px" }}>
@@ -235,6 +235,7 @@ const ProductList = () => {
           Add product
         </button>
       </div>
+      <div className="product-sub-headings">
       <div className="custom-search-bar">
         <input
           type="text"
@@ -244,8 +245,40 @@ const ProductList = () => {
         />
         <div className="search-icon">
           <CiSearch />
+          
         </div>
+        
       </div>
+      <div>
+      <div className="custom-filter">
+              <label htmlFor="approved">Approved Products:</label>
+              <select
+                id="approved"
+                value={filterByApproved}
+                onChange={(e) => setFilterByApproved(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+              </div>
+              <div className="custom-filter">
+              <label htmlFor="dealOfDay">Deals of the Day:</label>
+              <select
+                id="dealOfDay"
+                value={filterByDealOfDay}
+                onChange={(e) => setFilterByDealOfDay(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+              </div>
+      </div>
+             
+</div>
+
+      
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
