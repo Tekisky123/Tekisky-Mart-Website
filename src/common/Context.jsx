@@ -103,49 +103,61 @@ const AppContext = ({ children }) => {
     }
   }, []);
 
-  const handleAddToCart = (product, quantity, currentItem) => {
-    if (!selectProductData) {
-      // Handle the case where selectProductData is not defined
-      ourProduct.push(product._id);
-      console.error("selectProductData is not defined");
+// ...
+
+const handleAddToCart = (product, quantity, currentItem) => {
+  if (!selectProductData) {
+    ourProduct.push(product._id);
+    console.error("selectProductData is not defined");
+  } else {
+    ourProduct.push(selectProductData._id);
+  }
+
+  // Check if the product already exists in cartItems
+  const index = cartItems.findIndex((item) => item._id === product._id);
+
+  if (index !== -1) {
+    // Product already exists in cartItems, increment its quantity
+    const updatedCartItems = [...cartItems];
+    const existingItem = updatedCartItems[index];
+
+    if (existingItem.selectedSize) {
+      // Handle the case where selectedSize is defined
+      existingItem.selectedSize.quantity += quantity;
     } else {
-      // Assuming ourProduct is defined somewhere in your code
-      ourProduct.push(selectProductData._id);
+      // Handle the case where selectedSize is not defined
+      existingItem.quantity += quantity;
     }
 
-    let items = [...cartItems];
-    let index = items.findIndex((p) => p.id === product._id);
+    setCartItems(updatedCartItems);
+  } else {
+    // Product does not exist in cartItems, add it
+    const newItem = {
+      ...product,
+      quantity: quantity,
+    };
 
-    if (index !== -1) {
-      if (Array.isArray(items[index].quantity)) {
-        items[index].quantity += quantity;
-      } else {
-        items[index].quantity = [quantity];
-      }
-    } else {
-      if (Array.isArray(product?.quantity)) {
-        product.quantity = quantity;
-      } else {
-        product.quantity = [quantity];
-      }
-      items = [...items, product];
-    }
+    const updatedCartItems = [...cartItems, newItem];
+    setCartItems(updatedCartItems);
+  }
 
-    localStorage.setItem("cartItems", JSON.stringify(items));
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: `${product?.productName} has been added to your cart`,
+    showConfirmButton: false,
+    timer: 1500,
+  });
 
-    // toast.success(`${product?.productName} has been added to your cart`, { autoClose: 1500 });
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: `${product?.productName} has been added to your cart`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+  
+};
 
-    setCartItems(items);
-  };
+// ...
+
 
   const handleAddToCartHome = (product, quantity) => {
+    
     if (!selectProductData) {
       // Handle the case where selectProductData is not defined
       ourProduct.push(product?._id);
@@ -182,6 +194,7 @@ const AppContext = ({ children }) => {
       timer: 1500,
     });
     setCartItems(items);
+    console.log("cartItems",cartItems)
   };
 
   const handleRemoveFromCart = (product, index) => {

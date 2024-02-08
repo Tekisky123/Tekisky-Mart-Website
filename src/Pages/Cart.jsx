@@ -42,6 +42,7 @@ const ShoppingCart = () => {
     cartGrandTotal
   } = useContext(Context);
 
+  console.log("cartItems",cartItems)
   const [tax] = useState(5);
   const [promotions] = useState([
     { code: "SUMMER", discount: "50%" },

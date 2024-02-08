@@ -234,7 +234,8 @@ const SingleProduct = () => {
               <button
                 className="add-to-cart-button"
                 onClick={() => {
-                  handleAddToCart(product, quantity);
+                  // handleAddToCart(product, quantity);
+                  handleAddToCart(product, singleItems?.quantity || 1);
                 }}
               >
                 Add to cart
