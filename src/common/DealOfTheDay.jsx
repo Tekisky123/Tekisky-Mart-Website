@@ -51,7 +51,7 @@ const DealOfTheDay = () => {
   if (products.length === 1) {
     const product = products[0];
     return (
-      <div className="deal-of-the-day-slider container single-product">
+      <div className="deal-of-the-day-slider  single-product">
         <div className="slider2-item">
           <img src={product.imageURL[0]} alt={product.productName} className='slider2-image' />
 

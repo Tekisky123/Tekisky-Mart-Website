@@ -60,7 +60,9 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+.slick-prev:before {
+  display: none;
+}
 
 *,
 *::before,
@@ -3492,7 +3494,7 @@ body::-webkit-scrollbar-thumb:hover {
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  padding-bottom: 30px!important;
+  /* padding-bottom: 30px!important; */
   width: 100%;
   max-width: 500px;
   margin: auto;

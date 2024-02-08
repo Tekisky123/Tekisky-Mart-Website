@@ -812,6 +812,7 @@
   .deal-of-the-day-slider {
     height: auto;
     margin: 20px 0;
+    width: 92% !important;
     padding: 10px;
   }
 
