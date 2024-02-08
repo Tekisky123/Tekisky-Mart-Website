@@ -179,7 +179,7 @@ const SaleWithUs = () => {
   return (
     <div>
       <ToastContainer />
-      <div style={{ width: "80%", margin: " 40px auto" }}>
+      <div style={{ width: "80%", margin: " 20px auto" }}>
         <Row className="Row">
           <Col xs={12}>
             <h1 style={{ textAlign: "center" }}>Sell With Us</h1>
