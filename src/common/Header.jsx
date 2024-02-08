@@ -167,6 +167,8 @@ const Header = () => {
     // Add your logic for navigation based on the selected path
     navigate(path);
   };
+
+  
   return (
     <header>
       <div className="header-top">

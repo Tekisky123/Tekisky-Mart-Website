@@ -3,14 +3,14 @@ import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import swal from 'sweetalert';
-import swal from 'sweetalert';
-import Swal from 'sweetalert2';
+import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 export const Context = createContext();
 
 const AppContext = ({ children }) => {
-
-  const initialCustomerDetail = JSON.parse(localStorage.getItem('customerDetail')) || {};
+  const initialCustomerDetail =
+    JSON.parse(localStorage.getItem("customerDetail")) || {};
 
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -19,15 +19,13 @@ const AppContext = ({ children }) => {
   const [selectProductData, setSelectProductData] = useState(null);
   const [productSize, setProductSize] = useState("");
 
-  const [customerDetail, setCustomerDetail] = useState(initialCustomerDetail)
- 
+  const [customerDetail, setCustomerDetail] = useState(initialCustomerDetail);
 
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartSubTotal, setCartSubTotal] = useState(0);
   const [totalSavedAmount, setTotalSavedAmount] = useState(0);
   const [cartGrandTotal, setCartGrandTotal] = useState(0);
-
 
   const [singleItems, setSingleItems] = useState({});
   const [singleSubTotal, setSingleSubTotal] = useState(0);
@@ -37,71 +35,67 @@ const AppContext = ({ children }) => {
 
   const [quantity, setQuantity] = useState(1);
 
-const [cardDeliveryCharge, setCardDeliveryCharge] = useState(0)
-const [singleDeliveryCharge, setSingleDeliveryCharge] = useState(0)
+  const [cardDeliveryCharge, setCardDeliveryCharge] = useState(0);
+  const [singleDeliveryCharge, setSingleDeliveryCharge] = useState(0);
 
+  useEffect(() => {
+    localStorage.setItem("customerDetail", JSON.stringify(customerDetail));
+  }, [customerDetail]);
 
-useEffect(() => {
-  localStorage.setItem('customerDetail', JSON.stringify(customerDetail));
-}, [customerDetail]);
-
-
-// swal({
-//   title: "Are you sure?",
-//   text: "Are you sure that you want to leave this page?",
-//   icon: "warning",
-//   dangerMode: true,
-//   buttons: {
-//     cancel: true,
-//     confirm: true,
-//   },
-// })
-// .then((result) => {
-//   if (result) {
-//     // User clicked on confirm button
-//     swal("Deleted!", "Your imaginary file has been deleted!", "success");
-//   } else {
-//     // User clicked on cancel button or closed the modal
-//     // You can add any additional actions or leave it empty to simply close the alert
-//   }
-// });
-
+  // swal({
+  //   title: "Are you sure?",
+  //   text: "Are you sure that you want to leave this page?",
+  //   icon: "warning",
+  //   dangerMode: true,
+  //   buttons: {
+  //     cancel: true,
+  //     confirm: true,
+  //   },
+  // })
+  // .then((result) => {
+  //   if (result) {
+  //     // User clicked on confirm button
+  //     swal("Deleted!", "Your imaginary file has been deleted!", "success");
+  //   } else {
+  //     // User clicked on cancel button or closed the modal
+  //     // You can add any additional actions or leave it empty to simply close the alert
+  //   }
+  // });
 
   useEffect(() => {
     let subTotal = 0;
     let totalSavedAmount = 0;
     let cartCount = 0;
-  
+
     cartItems.forEach((item) => {
       if (item && item.selectedSize) {
-        const itemSubTotal = item.selectedSize.offerPrice * item.selectedSize.quantity;
+        const itemSubTotal =
+          item.selectedSize.offerPrice * item.selectedSize.quantity;
         subTotal += itemSubTotal;
-        totalSavedAmount += (item.selectedSize.mrp - item.selectedSize.offerPrice) * item.selectedSize.quantity;
+        totalSavedAmount +=
+          (item.selectedSize.mrp - item.selectedSize.offerPrice) *
+          item.selectedSize.quantity;
       } else if (item) {
         const itemSubTotal = item.offerPrice * item.quantity;
         subTotal += itemSubTotal;
         totalSavedAmount += (item.mrp - item.offerPrice) * item.quantity;
       }
-  
+
       // Count the total number of items
       cartCount += item.quantity || 0;
     });
 
-      // Add delivery charge if subTotal is less than 500
-  const deliveryCharge = subTotal < 500 ? 30 : 0;
-  const grandTotal = subTotal + deliveryCharge;
+    // Add delivery charge if subTotal is less than 500
+    const deliveryCharge = subTotal < 500 ? 30 : 0;
+    const grandTotal = subTotal + deliveryCharge;
 
-    setCartGrandTotal(grandTotal)
-    setCardDeliveryCharge(deliveryCharge)
+    setCartGrandTotal(grandTotal);
+    setCardDeliveryCharge(deliveryCharge);
     setCartSubTotal(subTotal);
     setTotalSavedAmount(totalSavedAmount);
     setCartCount(cartCount);
-
-
-
   }, [cartItems]);
 
-  
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
     if (storedCartItems) {
@@ -139,7 +133,15 @@ useEffect(() => {
 
     localStorage.setItem("cartItems", JSON.stringify(items));
 
-    toast.success(`${product?.productName} has been added to your cart`, { autoClose: 1500 });
+    // toast.success(`${product?.productName} has been added to your cart`, { autoClose: 1500 });
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `${product?.productName} has been added to your cart`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
     setCartItems(items);
   };
 
@@ -172,14 +174,17 @@ useEffect(() => {
 
     localStorage.setItem("cartItems", JSON.stringify(items));
 
-    toast.success(`${product?.productName} has been added to your cart`, { autoClose: 1500 });
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `${product?.productName} has been added to your cart`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
     setCartItems(items);
   };
 
-
-
   const handleRemoveFromCart = (product, index) => {
-
     // Remove from cartItems
     let updatedCartItems = [...cartItems];
     updatedCartItems = updatedCartItems.filter((p) => p._id !== product._id);
@@ -199,21 +204,20 @@ useEffect(() => {
     setOurProduct(updatedOurProduct);
   };
 
-
   const handleBuyNow = (product) => {
     // setSingleItems(product)
 
     setSingleItems({
       ...singleItems,
-      product:product,
+      product: product,
     });
-    navigate(`/single-product/${product?._id}`)
-  }
+    navigate(`/single-product/${product?._id}`);
+  };
 
   const handleSingleCheckout = (product) => {
     // setSingleItems(product)
-    navigate(`/sp-payment-step`)
-  }
+    navigate(`/sp-payment-step`);
+  };
 
   const handleCartProductQuantity = (type, product) => {
     setCartItems((prevItems) => {
@@ -261,25 +265,23 @@ useEffect(() => {
     setSingleItems((prevItem) => {
       // Create a copy of the previous item to avoid mutating the state directly
       const newItem = { ...prevItem };
-  
 
-        if (newItem) {
-          if (type === "inc") {
-            if (typeof newItem.quantity == "number") {
-              newItem.quantity += 1;
-            } else {
-              newItem.quantity = 1;
-            }
-          } else if (type === "dec" && newItem.quantity > 1) {
-            newItem.quantity -= 1;
+      if (newItem) {
+        if (type === "inc") {
+          if (typeof newItem.quantity == "number") {
+            newItem.quantity += 1;
+          } else {
+            newItem.quantity = 1;
           }
+        } else if (type === "dec" && newItem.quantity > 1) {
+          newItem.quantity -= 1;
         }
-        // newItem.product = product;
-  
+      }
+      // newItem.product = product;
+
       return newItem;
     });
   };
-  
 
   return (
     <Context.Provider
@@ -329,7 +331,7 @@ useEffect(() => {
         setCustomerDetail,
         customerDetail,
         swal,
-        Swal
+        Swal,
       }}
     >
       {children}

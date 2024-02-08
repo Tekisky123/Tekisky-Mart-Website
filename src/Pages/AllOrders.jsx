@@ -445,11 +445,11 @@ const AllOrders = () => {
                     <td>Feedback</td>
                     <td colSpan="2">
                       {isEditOrderStatus ? (
-                       <Form.Control
-                       type="text"
-                       value={feedback}
-                       onChange={(e) => setFeedback(e.target.value)}
-                     />
+                        <Form.Control
+                          type="text"
+                          value={feedback}
+                          onChange={(e) => setFeedback(e.target.value)}
+                        />
                       ) : (
                         <span>{selectedOrder.feedback}</span>
                       )}
