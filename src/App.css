@@ -3036,7 +3036,7 @@ body::-webkit-scrollbar-thumb:hover {
 \*-----------------------------------*/
 
 .container {
-  padding: 0 15px;
+  padding: 15px;
 }
 
 .has-scrollbar {
@@ -3741,6 +3741,11 @@ body::-webkit-scrollbar-thumb:hover {
 
 .banner {
   margin: 30px 0;
+}
+@media (max-width: 768px) {
+  .banner {
+    margin: -40px 0 !important;
+  }
 }
 
 .slider-container {

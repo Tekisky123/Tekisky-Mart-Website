@@ -35,9 +35,9 @@ const Banner = ({ banners }) => {
               <div className="banner-content">
                 <p className="banner-subtitle">{banner.subtitle}</p>
                 <h4 className="banner-title">{banner.title}</h4>
-                <p className="banner-text">
+                {/* <p className="banner-text">
                   starting at ₹ <b>{banner.price}</b>
-                </p>
+                </p> */}
                 <Link to={banner.link} className="banner-btn">
                   Shop now
                 </Link>
