@@ -171,8 +171,8 @@ const Header = () => {
   
   return (
     <header>
-      <div className="header-top">
-        <div className="container">
+      <div className="header-top" style={{padding:"0px"}}>
+        <div className="container" style={{padding:"0px"}}>
           <ul className="header-social-container">
             <li>
               <Link href="#" className="social-link">
@@ -203,7 +203,7 @@ const Header = () => {
       </div>
 
       <div className="header-main">
-        <div className="container">
+        <div className="container" style={{padding:"0px"}}>
           <Link className="header-logo">
             <img src={logo} alt="Anon's logo" className="header-logo" />
           </Link>
