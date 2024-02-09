@@ -57,7 +57,7 @@ const DealOfTheDay = () => {
 
           <div className="product-details">
             <h3>{product.productName}</h3>
-            <h4>{product?.header && product.header.slice(0, 2)}</h4>
+            <h4 className='dod-bold'>{product?.header}</h4>
 
             {/* <p>{product.description}</p> */}
             <p>MRP: <del> ₹{product.mrp}</del></p>
@@ -102,7 +102,9 @@ const DealOfTheDay = () => {
 
             <div className="product-details">
               <h3>{product.productName}</h3>
-              <p>{product.description}</p>
+              <h4 className='dod-bold'>{product?.header}</h4>
+
+              {/* <p>{product.description}</p> */}
               <p>MRP: <del> ₹{product.mrp}</del></p>
               <p>Offer Price: ₹{product.offerPrice}</p>
 

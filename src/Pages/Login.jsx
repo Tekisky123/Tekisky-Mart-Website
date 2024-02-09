@@ -4,7 +4,7 @@ import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Assets/Styles/Login.css";
 import { Context } from "../common/Context";
-import logo from "../Assets/Images/TekiskyMartNewLogo-removebg-preview.png"
+import logo from "../Assets/Images/TekiskyMartNewLogo-removebg-preview.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,10 +30,13 @@ const Login = () => {
         return;
       }
 
-      const response = await axios.post('https://tekiskymart.up.railway.app/user/login', {
-        mobileNumber,
-        password,
-      });
+      const response = await axios.post(
+        "https://tekiskymart.up.railway.app/user/login",
+        {
+          mobileNumber,
+          password,
+        }
+      );
 
       if (!response?.status == 200) {
         // toast.error('Mobile number and password are required');
@@ -57,7 +60,7 @@ const Login = () => {
         localStorage.setItem("mobileNumber", response.data.user.mobileNumber);
         localStorage.setItem("token", response.data.token);
 
-        navigate("/");
+        navigate("/welcome");
       } else {
         Swal.fire({
           title: "Oops!",
@@ -106,52 +109,52 @@ const Login = () => {
 
       {/* ************************************************************************************************ */}
       <div className="login-center">
-      <div className="login-page-container" id="container">
-        <div className="form-container sign-in">
-          <form>
-            <img src={logo} alt="Tekisky Mart LOGO" />
-            <h1>Sign In</h1>
-            <div className="social-icons"></div>
+        <div className="login-page-container" id="container">
+          <div className="form-container sign-in">
+            <form>
+              <img src={logo} alt="Tekisky Mart LOGO" />
+              <h1>Sign In</h1>
+              <div className="social-icons"></div>
 
-            {/* <input type="email" placeholder="Email" />
+              {/* <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" /> */}
-            <label htmlFor="mobileNumber" className="lable">
-              Mobile Number:
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="mobileNumber"
-              value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-            />
-            <label className="lable" htmlFor="password">
-              Password:
-            </label>
-            <input
-              className="input"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              <label htmlFor="mobileNumber" className="lable">
+                Mobile Number:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="mobileNumber"
+                value={mobileNumber}
+                onChange={(e) => setMobileNumber(e.target.value)}
+              />
+              <label className="lable" htmlFor="password">
+                Password:
+              </label>
+              <input
+                className="input"
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-            <button type="button" onClick={handleLogin}>
-              Sign In
-            </button>
-          </form>
-        </div>
-        <div className="toggle-container">
-          <div className="toggle">
-            <div className="toggle-panel toggle-right">
-              <h1>Welcome To Tekisky Mart!</h1>
-              {/* <p>Enter your personal details to use all of site features</p> */}
-              <p>Admin / Seller Dashboard</p>
-              {/* No need for the button with ID "login" in React */}
+              <button type="button" onClick={handleLogin}>
+                Sign In
+              </button>
+            </form>
+          </div>
+          <div className="toggle-container">
+            <div className="toggle">
+              <div className="toggle-panel toggle-right">
+                <h1>Welcome To Tekisky Mart!</h1>
+                {/* <p>Enter your personal details to use all of site features</p> */}
+                <p>Admin / Seller Dashboard</p>
+                {/* No need for the button with ID "login" in React */}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );

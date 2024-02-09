@@ -82,9 +82,9 @@ function App() {
         <Route path="/welcome" element={ <WelcomePage /> } />
         {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/seller-orders" element={<SellerAllOrders />} />
-        <Route path="/single-product/:id" element={<SingleProduct />} />
+        {/* <Route path="/single-product/:id" element={<SingleProduct />} /> */}
         <Route path="/products-list" element={<ProductList/>}/>
-        <Route path="/shopping-cart" element={<ShoppingCart/>} />
+        {/* <Route path="/shopping-cart" element={<ShoppingCart/>} /> */}
 
       </> 
       }

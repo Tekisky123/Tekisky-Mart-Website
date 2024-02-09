@@ -14,7 +14,6 @@ import { Context } from "./Context";
 import { IoIosLogOut } from "react-icons/io";
 import { GoHomeFill } from "react-icons/go";
 
-
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -178,7 +177,7 @@ const Header = () => {
     localStorage.removeItem("mobileNumber");
     localStorage.removeItem("token");
     navigate("/login");
-    handleStaticAccordionToggle("/login")
+    handleStaticAccordionToggle("/login");
   };
   return (
     <header>
@@ -229,6 +228,7 @@ const Header = () => {
           currentPath === "/products-list" ||
           currentPath === "/all-orders" ||
           currentPath === "/shopping-cart" ||
+          currentPath === "/welcome" ||
           currentPath === "/enquiry-table" ? null : (
             <>
               <div className="header-search-container">
@@ -295,12 +295,12 @@ const Header = () => {
               <span className="count">{cartItems ? cartItems.length : 0}</span>
             </button>
             {token && (
-                <>
-                  <button className="action-btn" onClick={() => handleLogOut()}>
-                    <IoIosLogOut />
-                  </button>
-                </>
-              )}
+              <>
+                <button className="action-btn" onClick={() => handleLogOut()}>
+                  <IoIosLogOut />
+                </button>
+              </>
+            )}
 
             {/* <button className="action-btn">
               <LuLogIn />
@@ -308,50 +308,52 @@ const Header = () => {
           </div>
         </div>
       </div>
-   
+
       <nav className="desktop-navigation-menu">
         <div className="main-container">
           <ul
             className="desktop-menu-category-list"
             //  style={{justifyContent:userRole =='superadmin' && "start"}}
           >
-            <li className="menu-category" onClick={() => navigate("/")}>
-              <Link to="/" className="menu-title">
-                Home
-              </Link>
-            </li>
-            {!token &&(
-                  <>
-                    {categories.map((category) => (
-                      <li className="menu-category" key={category}>
-                        <Link
-                          to={`/category/${category}`}
-                          className="menu-title"
-                        >
-                          {category}
-                        </Link>
-                      </li>
-                    ))}
-                    <li className="menu-category">
-                      <Link to="/pre-order" className="menu-title">
-                        Pre-Order
-                      </Link>
-                    </li>
-                    <li className="menu-category">
-                      <Link to="/saleWithUs" className="menu-title">
-                        Sell with Us
-                      </Link>
-                    </li>
-                    <li className="menu-category">
-                      <Link to="/customer-support" className="menu-title">
-                        Customer Support
-                      </Link>
-                    </li>
-                  </>
-                )}
+            {!token && (
+              <>
+                <li className="menu-category" onClick={() => navigate("/")}>
+                  <Link to="/" className="menu-title">
+                    Home
+                  </Link>
+                </li>
+                {categories.map((category) => (
+                  <li className="menu-category" key={category}>
+                    <Link to={`/category/${category}`} className="menu-title">
+                      {category}
+                    </Link>
+                  </li>
+                ))}
+                <li className="menu-category">
+                  <Link to="/pre-order" className="menu-title">
+                    Pre-Order
+                  </Link>
+                </li>
+                <li className="menu-category">
+                  <Link to="/saleWithUs" className="menu-title">
+                    Sell with Us
+                  </Link>
+                </li>
+                <li className="menu-category">
+                  <Link to="/customer-support" className="menu-title">
+                    Customer Support
+                  </Link>
+                </li>
+              </>
+            )}
 
             {userRole == "superadmin" && (
               <>
+                <li className="menu-category">
+                  <Link to="/" className="menu-title">
+                    Home
+                  </Link>
+                </li>
                 <li className="menu-category">
                   <Link to="/all-orders" className="menu-title">
                     All Orders
@@ -388,6 +390,11 @@ const Header = () => {
             {userRole == "seller" && (
               <>
                 <li className="menu-category">
+                  <Link to="/welcome" className="menu-title">
+                    welcome
+                  </Link>
+                </li>
+                <li className="menu-category">
                   <Link to="/add-product" className="menu-title">
                     Add Product
                   </Link>
@@ -409,16 +416,38 @@ const Header = () => {
         <button data-mobile-menu-open-btn onClick={handleMobileMenuToggle}>
           <GiHamburgerMenu className="hamburger" />
         </button>
-{location.pathname=='/' ? <>
-<button className="action-btn" onClick={() => navigate("/")}>
-<GoHomeFill />
-        </button>
-</> : <>
-<button className="action-btn" onClick={() => navigate("/")}>
-          <CiHome />
-        </button>
-</>}
-
+       { userRole == "seller" ? <>
+       
+       {location.pathname == "/welcome" ? (
+          <>
+            <button className="action-btn" onClick={() => navigate("/welcome")}>
+              <GoHomeFill />
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="action-btn" onClick={() => navigate("/welcome")}>
+              <CiHome />
+            </button>
+          </>
+        )}
+       </> : <>
+       {location.pathname == "/" ? (
+          <>
+            <button className="action-btn" onClick={() => navigate("/")}>
+              <GoHomeFill />
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="action-btn" onClick={() => navigate("/")}>
+              <CiHome />
+            </button>
+          </>
+        )}
+       
+       </>}
+      
 
         {/* <GoHomeFill /> */}
 
@@ -458,19 +487,20 @@ const Header = () => {
         </div>
 
         <ul className="mobile-menu-category-list">
-          <li className="menu-category">
-            <button
-              className="accordion-menu"
-              data-accordion-btn
-              onClick={() => handleStaticAccordionToggle("/")}
-            >
-              <Link to="/" className="menu-title">
-                Home
-              </Link>
-            </button>
-          </li>
-
-          {/* Dynamically render product categories */}
+          {!token && (
+            <>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/")}
+                >
+                  <Link to="/" className="menu-title">
+                    Home
+                  </Link>
+                </button>
+              </li>
+                 {/* Dynamically render product categories */}
           {categories.map((category) => (
             <li className="menu-category" key={category}>
               <button
@@ -494,6 +524,10 @@ const Header = () => {
               </ul>
             </li>
           ))}
+            </>
+          )}
+
+       
 
           {userRole === "superadmin" && (
             <>
@@ -554,6 +588,7 @@ const Header = () => {
                   </Link>
                 </button>
               </li>
+       
               <li className="menu-category">
                 <button
                   className="accordion-menu"
@@ -579,6 +614,17 @@ const Header = () => {
                 >
                   <Link to="/add-product" className="menu-title">
                     Add Product
+                  </Link>
+                </button>
+              </li>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/products-list")}
+                >
+                  <Link to="/products-list" className="menu-title">
+                    Products
                   </Link>
                 </button>
               </li>
@@ -608,33 +654,36 @@ const Header = () => {
               </Link>
             </button>
           </li> */}
-          
-        {token ? <>
-          <li className="menu-category">
-            <button
-              className="accordion-menu"
-              data-accordion-btn
-              onClick={() => handleStaticAccordionToggle("/login")}
-            >
-              <Link to="/login" className="menu-title">
-                Logout
-              </Link>
-            </button>
-          </li>
-        </> : <>
-        <li className="menu-category">
-            <button
-              className="accordion-menu"
-              data-accordion-btn
-              onClick={() => handleLogOut()}
-            >
-              <Link to="/login" className="menu-title">
-                Login
-              </Link>
-            </button>
-          </li>
-        </>}
-              
+
+          {token ? (
+            <>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/login")}
+                >
+                  <Link to="/login" className="menu-title">
+                    Logout
+                  </Link>
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleLogOut()}
+                >
+                  <Link to="/login" className="menu-title">
+                    Login
+                  </Link>
+                </button>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>

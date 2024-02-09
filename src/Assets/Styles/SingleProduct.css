@@ -33,6 +33,13 @@
 .product-details {
   width: 55%;
 }
+.dod-bold{
+  display: flex;
+  flex-wrap: wrap;
+   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .product-name {
   font-size: 28px;
