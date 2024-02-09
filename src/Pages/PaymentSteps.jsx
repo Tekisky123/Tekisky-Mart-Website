@@ -24,6 +24,7 @@ const PaymentStep = () => {
     ToastContainer,
     toast,
     singleItems,
+    setCartItems,
     setSingleItems,
     totalSavedAmount,
     cartGrandTotal,
@@ -121,7 +122,7 @@ const PaymentStep = () => {
    
             navigate("/");
         
-       
+            setCartItems([])
         });
 
       } else {
