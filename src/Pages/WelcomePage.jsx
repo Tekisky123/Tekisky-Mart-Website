@@ -5,7 +5,7 @@ const WelcomePage = () => {
   return (
     <>
     <div className='box'>
-        <h3>Tekisky Mart <br /> Seller DashBoard</h3>
+        <h3>Tekisky Mart <br />  DashBoard</h3>
     </div>
     </>
   )

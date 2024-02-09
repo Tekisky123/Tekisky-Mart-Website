@@ -12,6 +12,8 @@ import "../Assets/Styles/AddProductForm.css";
 import { useLocation, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { CiSearch } from "react-icons/ci";
+import * as XLSX from "xlsx"; // Import Excel library
+
 
 // Modal.setAppElement("#root");
 
@@ -230,6 +232,66 @@ const AllOrders = () => {
     URL.revokeObjectURL(url);
   };
 
+
+  const handleDownloadReports = () => {
+    // Filter orders with status "order-Verified"
+    const verifiedOrders = orders.filter(
+      (order) => order.orderStatus === "order-Verified"
+    );
+
+    // Convert orders to Excel format
+const wb = XLSX.utils.book_new();
+wb.Props = {
+  Title: "Verified Orders Report",
+  Subject: "List of orders with status 'order-Verified'",
+  CreatedDate: new Date(),
+};
+wb.SheetNames.push("Orders");
+const wsData = [
+  [
+    "Order ID",
+    "Customer Name",
+    "Mobile Number",
+    "Address",
+    "Total Amount",
+    // "Created At",
+    "Product Name",
+    // "Image",
+    "Packet Weight",
+    "Unit of Measure",
+    "Offer Price",
+    "Quantity",
+    // "Created By",
+  ],
+];
+verifiedOrders.forEach((order) => {
+  order.productDetails.forEach((product) => {
+    wsData.push([
+      order.orderId,
+      order.customerName,
+      order.mobileNumber,
+      order.address,
+      order.totalAmount,
+      // formatDate(order.createdAt),
+      product.productName,
+      // product.imageURL[0],
+      product.packetweight,
+      product.unitOfMeasure,
+      product.offerPrice,
+      product.quantity,
+      // product.createdBy,
+    ]);
+  });
+});
+const ws = XLSX.utils.aoa_to_sheet(wsData);
+wb.Sheets["Orders"] = ws;
+
+
+    // Save Excel file
+    const excelFileName = "verified_orders_report.xlsx";
+    XLSX.writeFile(wb, excelFileName);
+  };
+  
   return (
     <div className="container mt-4">
       <ToastContainer />
@@ -260,6 +322,15 @@ const AllOrders = () => {
         <div className="search-icon">
           <CiSearch />
         </div>
+      </div>
+      <div style={{ marginBottom: "20px" }}>
+        <BootstrapButton
+          variant="primary"
+          onClick={handleDownloadReports}
+          style={{ marginRight: "10px" }}
+        >
+          Download Verified Orders
+        </BootstrapButton>
       </div>
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
