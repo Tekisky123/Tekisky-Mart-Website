@@ -12,6 +12,8 @@ import { useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Context } from "./Context";
 import { IoIosLogOut } from "react-icons/io";
+import { GoHomeFill } from "react-icons/go";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -407,10 +409,18 @@ const Header = () => {
         <button data-mobile-menu-open-btn onClick={handleMobileMenuToggle}>
           <GiHamburgerMenu className="hamburger" />
         </button>
-
-        <button className="action-btn" onClick={() => navigate("/")}>
+{location.pathname=='/' ? <>
+<button className="action-btn" onClick={() => navigate("/")}>
+<GoHomeFill />
+        </button>
+</> : <>
+<button className="action-btn" onClick={() => navigate("/")}>
           <CiHome />
         </button>
+</>}
+
+
+        {/* <GoHomeFill /> */}
 
         <button
           className="action-btn"
