@@ -210,7 +210,7 @@ const Header = () => {
 
       <div className="header-main">
         <div className="container" style={{ padding: "0px" }}>
-          <Link className="header-logo">
+          <Link to="/" className="header-logo">
             <img src={logo} alt="Anon's logo" className="header-logo" />
           </Link>
           {currentPath === "/pre-orders-page" ||

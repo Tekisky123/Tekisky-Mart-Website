@@ -693,9 +693,9 @@
 
 /* Original styles for larger screens */
 .deal-of-the-day-slider {
-  width: 100%;
+  width: 80%;
   height: auto;
-  margin: 30px 0;
+  margin: 30px auto;
   border-radius: 10px;
   padding: 10px;
   background-color: white;
@@ -776,6 +776,7 @@
 @media screen and (max-width: 1200px) {
   .deal-of-the-day-slider {
     /* padding: 20px; */
+    margin: auto;
   }
 
   .product-details h3 {
@@ -853,7 +854,7 @@
 @media screen and (max-width: 768px) {
   .deal-of-the-day-slider {
     height: auto;
-    margin: 20px 0;
+    margin: 20px auto;
     width: 92% !important;
     padding: 10px;
   }
@@ -904,6 +905,7 @@
 @media screen and (max-width: 480px) {
   .deal-of-the-day-slider {
     padding: 5px;
+    
   }
 
   .product-details h3 {

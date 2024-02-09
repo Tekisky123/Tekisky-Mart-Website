@@ -23,6 +23,7 @@ import SaleWithUs from "./Pages/SaleWithUs";
 import Enquiry from "./Pages/Enquiry";
 import PreOrdersPage from "./Pages/PreOrdersPage";
 import EnquiryTable from "./Pages/EnquiryTable";
+import WelcomePage from "./Pages/WelcomePage";
 
 function App() {
   const navigate = useNavigate();
@@ -63,6 +64,8 @@ function App() {
         <Route path="/users" element={<Users/>}/>
         <Route path="/all-orders" element={<AllOrders />} />
         {/* <Route path="/login" element={<Login/>}/> */}
+        <Route path="/welcome" element={ <WelcomePage /> } />
+
         <Route path="/add-product" element={<AddProductForm/>}/>
         <Route path="/products-list" element={<ProductList/>}/>
         <Route path="/pre-orders-page" element={<PreOrdersPage/>}/>
@@ -76,7 +79,7 @@ function App() {
       <>
            {/* <Route path="/users" element={<Users/>}/> */}
         <Route path="/add-product" element={<AddProductForm/>}/>
-        <Route path="/" element={ <Home /> } />
+        <Route path="/welcome" element={ <WelcomePage /> } />
         {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/seller-orders" element={<SellerAllOrders />} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
