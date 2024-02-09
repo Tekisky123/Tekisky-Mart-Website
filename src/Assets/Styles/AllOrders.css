@@ -121,13 +121,14 @@
 
 }
 
-.option-buttons{
+/* .option-buttons{
   display: flex !important;
   justify-content: space-between !important;
   gap: 30px;
-}
+} */
 .product-list-btn{
   width: 150px;
+  margin-top:20px ;
 }
 .table-data-inputs input {
   padding: 8px;

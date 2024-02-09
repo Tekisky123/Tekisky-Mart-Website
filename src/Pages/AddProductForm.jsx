@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Assets/Styles/AddProductForm.css";
 import { Base_Url, AddProduct } from "../common/Apis";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 const AddProductForm = () => {
   const navigate = useNavigate();
@@ -154,12 +154,10 @@ const AddProductForm = () => {
     } finally {
       setLoading(false);
     }
-  
   };
 
   return (
     <div className="addProductForm">
-          
       {loading && (
         <div className="loader-container">
           <div className="spinner">
@@ -425,6 +423,7 @@ const AddProductForm = () => {
               <input
                 type="file"
                 name="files"
+                accept="image/*"
                 multiple
                 data-max_length="5"
                 className="upload__inputfile"
@@ -515,46 +514,48 @@ const AddProductForm = () => {
               </label>
             </div>
             <div className="cl-toggle-switch">
-  <label
-    style={{
-      width: "250px",
-      display: "flex",
-      justifyContent: "space-evenly",
-      alignContent: "center",
-    }}
-    className="formLabel"
-  >
-    Approved:
-    <label>Yes</label>
-    <input
-      style={{ width: "auto" }}
-      type="radio"
-      name="approved"
-      checked={formData.approved === true}
-      onChange={() => setFormData({ ...formData, approved: true })}
-    />
-    <label>No</label>
-    <input
-      style={{ width: "auto" }}
-      type="radio"
-      name="approved"
-      checked={formData.approved === false}
-      onChange={() => setFormData({ ...formData, approved: false })}
-    />
-  </label>
-</div>
-
+              <label
+                style={{
+                  width: "250px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignContent: "center",
+                }}
+                className="formLabel"
+              >
+                Approved:
+                <label>Yes</label>
+                <input
+                  style={{ width: "auto" }}
+                  type="radio"
+                  name="approved"
+                  checked={formData.approved === true}
+                  onChange={() => setFormData({ ...formData, approved: true })}
+                />
+                <label>No</label>
+                <input
+                  style={{ width: "auto" }}
+                  type="radio"
+                  name="approved"
+                  checked={formData.approved === false}
+                  onChange={() => setFormData({ ...formData, approved: false })}
+                />
+              </label>
+            </div>
           </>
         )}
 
-<div style={{ marginBottom: "40px",display:"flex", gap:"20px" }}>
-        <button className="formButton" onClick={() => navigate("/products-list")}>
-          Cancel
-        </button>
-        <button type="submit" className="formButton" >
-          Submit
-        </button>
-      </div>
+        <div style={{ marginBottom: "40px", display: "flex", gap: "20px" }}>
+          <button
+            className="formButton"
+            onClick={() => navigate("/products-list")}
+          >
+            Cancel
+          </button>
+          <button type="submit" className="formButton">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

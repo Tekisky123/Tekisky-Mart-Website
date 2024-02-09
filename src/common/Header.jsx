@@ -318,9 +318,7 @@ const Header = () => {
                 Home
               </Link>
             </li>
-            {userRole !== "seller" ||
-              userRole !==
-                "superadmin" &&(
+            {!token &&(
                   <>
                     {categories.map((category) => (
                       <li className="menu-category" key={category}>
@@ -578,7 +576,7 @@ const Header = () => {
           )}
 
           {/* Common static categories */}
-          <li className="menu-category">
+          {/* <li className="menu-category">
             <button
               className="accordion-menu"
               data-accordion-btn
@@ -599,7 +597,7 @@ const Header = () => {
                 Sell with Us
               </Link>
             </button>
-          </li>
+          </li> */}
           
         {token ? <>
           <li className="menu-category">

@@ -67,6 +67,7 @@ function App() {
         <Route path="/products-list" element={<ProductList/>}/>
         <Route path="/pre-orders-page" element={<PreOrdersPage/>}/>
         <Route path="/enquiry-table" element={<EnquiryTable/>}/>
+        <Route path="/shopping-cart" element={<ShoppingCart/>} />
         
       </> 
       }
@@ -80,6 +81,7 @@ function App() {
         <Route path="/seller-orders" element={<SellerAllOrders />} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
         <Route path="/products-list" element={<ProductList/>}/>
+        <Route path="/shopping-cart" element={<ShoppingCart/>} />
 
       </> 
       }
