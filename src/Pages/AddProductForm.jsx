@@ -358,11 +358,11 @@ const AddProductForm = () => {
             <option value="kg">Kilogram (kg)</option>
             <option value="ml">Milliliter (ml)</option>
             <option value="l">Liter (l)</option>
-            <option value="l">S (36)</option>
-            <option value="l">M (38)</option>
-            <option value="l">L (40)</option>
-            <option value="l">XL (42)</option>
-            <option value="l">XXL (44)</option>
+            <option value="s">S (36)</option>
+            <option value="m">M (38)</option>
+            <option value="L">L (40)</option>
+            <option value="xl">XL (42)</option>
+            <option value="xxl">XXL (44)</option>
           </select>
           {errors.unitOfMeasure && (
             <span className="errorMessage">{errors.unitOfMeasure}</span>
