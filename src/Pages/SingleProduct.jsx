@@ -14,7 +14,6 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-
   const {
     handleAddToCart,
     ToastContainer,
@@ -44,9 +43,11 @@ const SingleProduct = () => {
     const fetchProduct = async () => {
       try {
         console.log("Fetching product with ID:", id);
-        const response = await axios.get(`https://tekiskymart.up.railway.app/product/getoneproduct/${id}`);
+        const response = await axios.get(
+          `https://tekiskymart.up.railway.app/product/getoneproduct/${id}`
+        );
         console.log("API Response:", response);
-        
+
         setProduct(response?.data?.getOneProduct);
         setSingleItems({
           ...singleItems,
@@ -56,10 +57,9 @@ const SingleProduct = () => {
         console.error("Error fetching product:", error.response);
       }
     };
-  
+
     fetchProduct();
   }, [id]);
-  
 
   useEffect(() => {
     handleSingleProductQuantity("inc", product);
@@ -75,15 +75,13 @@ const SingleProduct = () => {
     singleSavedAmount +=
       (singleItems?.product?.mrp - singleItems?.product?.offerPrice) * quantity;
 
-      const deliveryCharge = singleSubTotal < 500 ? 30 : 0;
-      const grandTotal = singleSubTotal + deliveryCharge;
+    const deliveryCharge = singleSubTotal < 500 ? 30 : 0;
+    const grandTotal = singleSubTotal + deliveryCharge;
 
-    setSingleGrandTotal(grandTotal)
-    setSingleDeliveryCharge(deliveryCharge)
+    setSingleGrandTotal(grandTotal);
+    setSingleDeliveryCharge(deliveryCharge);
     setSingleSubTotal(singleSubTotal);
     setSingleSavedAmount(singleSavedAmount);
-
-
   }, [singleItems]);
 
   if (!product) {
@@ -151,198 +149,142 @@ const SingleProduct = () => {
     );
   }
 
-   // Destructure product data
-   const { productName, productDetails, imageURL } = product;
+  // Destructure product data
+  const { productName, productDetails, imageURL } = product;
 
-   // Settings for the react-slick carousel
-   const carouselSettings = {
-     infinite: true,
-     speed: 500,
-     slidesToShow: 1,
-     slidesToScroll: 1,
-     autoplay: true,
-     autoplaySpeed: 3000,
-   };
- 
-   // Handler function to set the selected image index
-   const handleImageClick = (index) => {
-     setSelectedImageIndex(index);
-   };
- 
-   // JSX for the preview images
-   const previewImages = imageURL.map((url, index) => (
-     <img
-       key={index}
-       src={url}
-       alt={`Product ${index + 1}`}
-       className={`preview-image ${selectedImageIndex === index ? 'selected' : ''}`}
-       onClick={() => handleImageClick(index)}
-     />
-   ));
- 
-   // JSX for the main slider
-   const mainSliderImages = imageURL.map((url, index) => (
-     <img
-       key={index}
-       src={url}
-       alt={`Product ${index + 1}`}
-       className={`product-image ${selectedImageIndex === index ? 'selected' : ''}`}
-     />
-   ));
- 
-   // JSX for the image carousel
-   const imageCarousel = (
-     <Slider {...carouselSettings}>
-       {mainSliderImages}
-     </Slider>
-   );
- 
-   return (<>
-     <div className="product-container">
-       <ToastContainer />
-       <div className="image-carousel">
-         {imageCarousel}
-       <div className="product-preview-images">
-         {previewImages}
-       </div>
-       </div>
- 
+  // Settings for the react-slick carousel
+  const carouselSettings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
 
+  // Handler function to set the selected image index
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index);
+  };
 
-      <div className="product-details">
-        <h1 className="product-name">{productName}</h1>
-        <h3>{product.header}</h3>
-        <div className="product-info">
-          <div className="details-section">
-            <h2>Product Details</h2>
-           
+  // JSX for the preview images
+  const previewImages = imageURL.map((url, index) => (
+    <img
+      key={index}
+      src={url}
+      alt={`Product ${index + 1}`}
+      className={`preview-image ${
+        selectedImageIndex === index ? "selected" : ""
+      }`}
+      onClick={() => handleImageClick(index)}
+    />
+  ));
 
-            <div>
-              <div key={product._id}>
-                <p>
-                  MRP: <del>{product.mrp}₹</del>
-                </p>
-                <p>Offer Price: {product.offerPrice}₹</p>
-                <p>
-                  Packet Weight: {product.packetweight} {product.unitOfMeasure}
-                </p>
-              
+  // JSX for the main slider
+  const mainSliderImages = imageURL.map((url, index) => (
+    <img
+      key={index}
+      src={url}
+      alt={`Product ${index + 1}`}
+      className={`product-image ${
+        selectedImageIndex === index ? "selected" : ""
+      }`}
+    />
+  ));
+
+  // JSX for the image carousel
+  const imageCarousel = (
+    <Slider {...carouselSettings}>{mainSliderImages}</Slider>
+  );
+
+  return (
+    <>
+      <div className="product-container">
+        <ToastContainer />
+        <div className="image-carousel">
+          {imageCarousel}
+          <div className="product-preview-images">{previewImages}</div>
+        </div>
+
+        <div className="product-details">
+          <h1 className="product-name">{productName}</h1>
+          <h3>{product.header}</h3>
+          <div className="product-info">
+            <div className="details-section">
+              <h2>Product Details</h2>
+
+              <div>
+                <div key={product._id}>
+                  <p>
+                    MRP: <del>{product.mrp}₹</del>
+                  </p>
+                  <p className="offer-price">Offer Price: {product.offerPrice}₹</p>
+                  <p>
+                    Packet Weight: {product.packetweight}{" "}
+                    {product.unitOfMeasure}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="buying-section">
-          <div className="quantity-section">
-            {/* <label htmlFor="quantity" className="quantity-label">Quantity:</label> */}
-            <div className="quantity-input-container">
-              <label htmlFor="quantity" className="quantity-label">
-                Quantity:
-              </label>
-              <div className="counterDiv">
-                <button
-                  className="quantity-button"
-                  onClick={() => handleSingleProductQuantity("dec", product)}
-                >
-                  <FaMinus style={{ color: "#004AAD6" }} />
-                </button>
-                {/* <input
+          <div className="buying-section">
+            <div className="quantity-section">
+              {/* <label htmlFor="quantity" className="quantity-label">Quantity:</label> */}
+              <div className="quantity-input-container">
+                <label htmlFor="quantity" className="quantity-label">
+                  Quantity:
+                </label>
+                <div className="counterDiv">
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleSingleProductQuantity("dec", product)}
+                  >
+                    <FaMinus style={{ color: "#004AAD6" }} />
+                  </button>
+                  {/* <input
                 type="number"
                 id="quantity"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 className="quantity-input"
               /> */}
-                {singleItems ? singleItems?.quantity || 1 : 1}
+                  {singleItems ? singleItems?.quantity || 1 : 1}
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleSingleProductQuantity("inc", product)}
+                  >
+                    <FaPlus style={{ color: "#004AAD6" }} />
+                  </button>
+                </div>
+              </div>
+              <div className="button-div">
                 <button
-                  className="quantity-button"
-                  onClick={() => handleSingleProductQuantity("inc", product)}
+                  className="add-to-cart-button"
+                  onClick={() => {
+                    // handleAddToCart(product, quantity);
+                    handleAddToCart(product, singleItems?.quantity || 1);
+                  }}
                 >
-                  <FaPlus style={{ color: "#004AAD6" }} />
+                  Add to cart
                 </button>
               </div>
-            </div>
-            <div className="button-div">
+
               <button
-                className="add-to-cart-button"
-                onClick={() => {
-                  // handleAddToCart(product, quantity);
-                  handleAddToCart(product, singleItems?.quantity || 1);
-                }}
+                className="buy-now-button"
+                onClick={() => handleSingleCheckout(product)}
               >
-                Add to cart
+                Check out
               </button>
             </div>
-
-            <button
-              className="buy-now-button"
-              onClick={() => handleSingleCheckout(product)}
-            >
-              Check out
-            </button>
           </div>
         </div>
       </div>
-    </div>
-      <div className="single-product-details-description"><h1>Description: </h1><p>{product.description}</p>
-      <div className="d-flex align-items-center justify-content-center vh-100">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-            <div className="d-flex px-3 py-4 border border-bottom-0 border-light rounded-top">
-              <div className="flex-shrink-0">
-                <div className="avatar avatar-sm rounded-circle">
-                  <img className="avatar-img" src="https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="" />
-                </div>
-              </div>
-              <div className="flex-grow-1 ms-2 ms-md-3">
-                <div className="d-flex align-items-baseline">
-                  <h6 className="me-2">Matthew Twomey</h6>
-                  <span className="badge py-1 bg-light text-muted fw-normal">2 days ago</span>
-                </div>
-                <div>This is some content from a media component. You can replace this with any content and adjust it as needed.</div>
-              </div>
-            </div>
-
-            <div className="bg-light px-3 py-3 rounded-bottom">
-              <div className="d-flex">
-                <div className="flex-shrink-0">
-                  <div className="avatar avatar-sm rounded-circle">
-                    <img className="avatar-img" src="https://images.pexels.com/photos/936229/pexels-photo-936229.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="" />
-                  </div>
-                </div>
-                <div className="flex-grow-1 ms-2 ms-md-3">
-                  <div className="d-flex align-items-baseline">
-                    <h6 className="me-2">Jordan Singer</h6>
-                    <span className="badge py-1 bg-white text-muted fw-normal">2 days ago</span>
-                  </div>
-                  <div>That sounds good! When can we start?</div>
-                </div>
-              </div>
-
-              <div className="my-3 bg-white" style={{ height: '1px', width: '100%' }}></div>
-
-              <div className="d-flex">
-                <div className="flex-shrink-0">
-                  <div className="avatar avatar-sm rounded-circle">
-                    <img className="avatar-img" src="https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="" />
-                  </div>
-                </div>
-                <div className="flex-grow-1 ms-2 ms-md-3">
-                  <div className="d-flex align-items-baseline">
-                    <h6 className="me-2">Gregory Harrison</h6>
-                    <span className="badge py-1 bg-white text-muted fw-normal">2 days ago</span>
-                  </div>
-                  <div>Yep, I agree with <span className="badge py-1 bg-dark text-white fw-normal rounded-pill">Jordan S</span>.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <div className="single-product-details-description">
+        <h1>Description: </h1>
+        <p>{product.description}</p>
       </div>
     </>
   );
 };
 
-export default SingleProduct;
+export default SingleProduct;
