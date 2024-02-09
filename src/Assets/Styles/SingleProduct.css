@@ -150,6 +150,18 @@
   margin-right: 10px; /* Adjust as needed */
   cursor: pointer;
 }
+.offer-price{
+  color: #4caf50;
+  font-weight: 700;
+}
+.share{
+  text-align: end;
+
+}
+.share-icon{
+  font-size: 30px;
+  text-align: end;
+}
 
 /* Media queries for responsiveness */
 @media screen and (max-width: 768px) {
@@ -450,7 +462,7 @@
   font-weight: bold;
 }
 .single-product-details-description{
-  padding: 60px;
+  padding: 50px;
 }
 
 /* .first-image-container {

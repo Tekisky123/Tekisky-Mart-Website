@@ -114,7 +114,7 @@ const PaymentStep = () => {
 
         Swal.fire({
           title: "Order Successful",
-          html: `Your order Id: <b>${orderId}</b><br/> Your order has been placed successfully<br/> Our Team will contact you shortly`,
+          html: `Your order Id: <b>${orderId}</b><br/> Your order has been placed successfully<br/> Our Team will contact you shortly.`,
           icon: "success",
           confirmButtonText: "Okay",
         }).then(() => {
@@ -546,7 +546,7 @@ const PaymentStep = () => {
                 </div>
                 <h1 className="title">Order Successfull</h1>
                 <h5>Your order Id : {responseData?.order?.orderId}</h5>
-                <p className="message">Your order has been placed successfully<br/> Our Team will contact you shortly</p>
+                <p className="message">Your order has been placed successfully<br/> Our Team will contact you shortly.</p>
               </div>
             </div>
           </div>

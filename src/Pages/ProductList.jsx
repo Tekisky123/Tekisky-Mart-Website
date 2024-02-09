@@ -344,7 +344,7 @@ const ProductList = () => {
         }}
       >
         <div className="table-data-inputs">
-          <h4>Product Name :- {selectedProduct?.productName}</h4>
+          <h4>Product Name : {selectedProduct?.productName}</h4>
           <table className="table table-striped  table-bordered">
             <tbody>
               <tr>
@@ -657,11 +657,11 @@ const ProductList = () => {
                 </td>
               </tr>
             </tbody>
-            <th>Actions</th>
-            <div className="option-buttons">
+            <h5>Actions</h5>
+            <div className="option-buttons menu-buttons">
               {isEditing ? (
                 <button
-                  className="btn btn-success"
+                  className="btn btn-success product-list-btn"
                   onClick={() => {
                     handleUpdate();
                     // alert("Are You Sure You Want To Save Changes");
@@ -671,7 +671,7 @@ const ProductList = () => {
                 </button>
               ) : (
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning  product-list-btn"
                   onClick={() => {
                     setEditing(true);
                     setUpdatedProduct({ ...selectedProduct });
@@ -680,7 +680,7 @@ const ProductList = () => {
                   Update Product
                 </button>
               )}
-              <button className="btn btn-danger" onClick={() => handleDelete()}>
+              <button className="btn btn-danger   product-list-btn" onClick={() => handleDelete()}>
                 Delete Product
               </button>
             </div>

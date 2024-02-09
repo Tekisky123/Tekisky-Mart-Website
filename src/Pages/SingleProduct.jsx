@@ -8,11 +8,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../Assets/Styles/SingleProduct.css"; // Import the CSS file
 import { Context } from "../common/Context";
+import { IoShareSocial } from "react-icons/io5";
 
 // SingleProduct component
 const SingleProduct = () => {
   const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  
 
   const {
     handleAddToCart,
@@ -196,6 +198,23 @@ const SingleProduct = () => {
   const imageCarousel = (
     <Slider {...carouselSettings}>{mainSliderImages}</Slider>
   );
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.productName,
+          text: product.productDetails,
+          url: window.location.href,
+        });
+        console.log("Shared successfully");
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      console.log("Web Share API not supported");
+      // You can provide a fallback here for platforms where Web Share API is not supported
+    }
+  };
 
   return (
     <>
@@ -207,6 +226,10 @@ const SingleProduct = () => {
         </div>
 
         <div className="product-details">
+          <div className="share">
+            {" "}
+            <IoShareSocial className="share-icon" onClick={handleShare} />
+          </div>
           <h1 className="product-name">{productName}</h1>
           <h3>{product.header}</h3>
           <div className="product-info">
@@ -216,9 +239,11 @@ const SingleProduct = () => {
               <div>
                 <div key={product._id}>
                   <p>
-                    MRP: <del>{product.mrp}₹</del>
+                    MRP: <del style={{ color: "red" }}>{product.mrp}₹</del>
                   </p>
-                  <p className="offer-price">Offer Price: {product.offerPrice}₹</p>
+                  <p className="offer-price">
+                    Offer Price: {product.offerPrice}₹
+                  </p>
                   <p>
                     Packet Weight: {product.packetweight}{" "}
                     {product.unitOfMeasure}

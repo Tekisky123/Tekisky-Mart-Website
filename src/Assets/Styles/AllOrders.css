@@ -122,8 +122,12 @@
 }
 
 .option-buttons{
-  display: flex;
-  justify-content: space-evenly;
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 30px;
+}
+.product-list-btn{
+  width: 150px;
 }
 .table-data-inputs input {
   padding: 8px;

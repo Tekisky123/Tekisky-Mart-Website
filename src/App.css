@@ -504,6 +504,11 @@ body {
   z-index: 1000;
 }
 
+.header-alert-news b{
+  font-size: 20px;
+  font-weight: 800;
+}
+
 .search-results-overlay {
   position: fixed;
   top: 0;

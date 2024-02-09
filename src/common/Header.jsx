@@ -46,10 +46,12 @@ const Header = () => {
         const data = await response.json();
 
         if (data.success) {
-          const matchingProducts = data.products.filter((product) =>
-            product.productName && product.productCategory
-              .toLowerCase()
-              .includes(newSearchQuery.toLowerCase())
+          const matchingProducts = data.products.filter(
+            (product) =>
+              product.productName &&
+              product.productCategory
+                .toLowerCase()
+                .includes(newSearchQuery.toLowerCase())
           );
 
           setSearchResults(matchingProducts);
@@ -168,29 +170,19 @@ const Header = () => {
     navigate(path);
   };
 
-  
   return (
     <header>
-      <div className="header-top" style={{padding:"0px"}}>
-        <div className="container" style={{padding:"0px"}}>
+      <div className="header-top" style={{ padding: "0px" }}>
+        <div className="container" style={{ padding: "0px" }}>
           <ul className="header-social-container">
             <li>
-              <Link href="#" className="social-link">
-                <FaWhatsapp className="social-link-icon" />
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="social-link">
+              <Link to="https://www.instagram.com/tekiskymart/?hl=en" className="social-link">
                 <FaInstagram className="social-link-icon" />
               </Link>
             </li>
+
             <li>
-              <Link href="#" className="social-link">
-                <CiLinkedin className="social-link-icon" />
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="social-link">
+              <Link to="https://www.facebook.com/profile.php?id=61555941436344" className="social-link">
                 <FaFacebookSquare className="social-link-icon" />
               </Link>
             </li>
@@ -203,70 +195,71 @@ const Header = () => {
       </div>
 
       <div className="header-main">
-        <div className="container" style={{padding:"0px"}}>
+        <div className="container" style={{ padding: "0px" }}>
           <Link className="header-logo">
             <img src={logo} alt="Anon's logo" className="header-logo" />
           </Link>
-        {currentPath === '/pre-orders-page' ||
-         currentPath === '/customer-support' ||
-         currentPath === '/saleWithUs' ||
-         currentPath === '/pre-order' ||
-         currentPath === '/payment-step' ||
-         currentPath === '/sp-payment-step' ||
-         currentPath === '/add-product' ||
-         currentPath === '/seller-orders' ||
-         currentPath === '/users' ||
-         currentPath === '/create-user' ||
-         currentPath === '/products-list' ||
-         currentPath === '/all-orders' ||
-         currentPath === '/shopping-cart' ||
-         currentPath === '/enquiry-table' ? null : (<>
-         
-         <div className="header-search-container">
-            <div className="search-container">
-              <input
-                type="search"
-                name="search"
-                className="search-field"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-              {searchResults.length > 0 && (
-                <div className="search-results-dropdown">
-                  <button className="close-modal-btn" onClick={closeModal}>
-                    <IoCloseSharp className="close-icon" />
-                  </button>
-                  {isLoading ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <>
-                      {searchResults.map((product) => (
-                        <div
-                          key={product.productId}
-                          onClick={() => handleSuggestionClick(product._id)}
-                        >
-                          <img
-                            src={product.imageURL[0]}
-                            alt={product.productName}
-                          />
-                          <p>{product.productName}</p>
-                        </div>
-                      ))}
-                    </>
+          {currentPath === "/pre-orders-page" ||
+          currentPath === "/customer-support" ||
+          currentPath === "/saleWithUs" ||
+          currentPath === "/pre-order" ||
+          currentPath === "/payment-step" ||
+          currentPath === "/sp-payment-step" ||
+          currentPath === "/add-product" ||
+          currentPath === "/add-Product" ||
+          currentPath === "/seller-orders" ||
+          currentPath === "/users" ||
+          currentPath === "/create-user" ||
+          currentPath === "/products-list" ||
+          currentPath === "/all-orders" ||
+          currentPath === "/shopping-cart" ||
+          currentPath === "/enquiry-table" ? null : (
+            <>
+              <div className="header-search-container">
+                <div className="search-container">
+                  <input
+                    type="search"
+                    name="search"
+                    className="search-field"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                  {searchResults.length > 0 && (
+                    <div className="search-results-dropdown">
+                      <button className="close-modal-btn" onClick={closeModal}>
+                        <IoCloseSharp className="close-icon" />
+                      </button>
+                      {isLoading ? (
+                        <p>Loading...</p>
+                      ) : (
+                        <>
+                          {searchResults.map((product) => (
+                            <div
+                              key={product.productId}
+                              onClick={() => handleSuggestionClick(product._id)}
+                            >
+                              <img
+                                src={product.imageURL[0]}
+                                alt={product.productName}
+                              />
+                              <p>{product.productName}</p>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
                   )}
+                  {!isLoading &&
+                    searchQuery.trim() !== "" &&
+                    searchResults.length === 0 && <p>No products found</p>}
                 </div>
-              )}
-              {!isLoading &&
-                searchQuery.trim() !== "" &&
-                searchResults.length === 0 && <p>No products found</p>}
-            </div>
-            <button className="search-btn">
-              <CiSearch className="search" />
-            </button>
-          </div>
-         </>)}
-  
+                <button className="search-btn">
+                  <CiSearch className="search" />
+                </button>
+              </div>
+            </>
+          )}
 
           <div className="header-user-actions">
             {/* <button className="action-btn">
@@ -292,41 +285,49 @@ const Header = () => {
           </div>
         </div>
       </div>
-{userRole=='superadmin' && ""}
+      {userRole == "superadmin" && ""}
       <nav className="desktop-navigation-menu">
         <div className="main-container">
-          <ul className="desktop-menu-category-list" style={{justifyContent:userRole =='superadmin' && "start"}}>
-            <li className="menu-category" onClick={() => navigate("/")} >
+          <ul
+            className="desktop-menu-category-list"
+            //  style={{justifyContent:userRole =='superadmin' && "start"}}
+          >
+            <li className="menu-category" onClick={() => navigate("/")}>
               <Link to="/" className="menu-title">
                 Home
               </Link>
             </li>
-            {userRole !== "seller" && (
-              <>
-                {categories.map((category) => (
-                  <li className="menu-category" key={category}>
-                    <Link to={`/category/${category}`} className="menu-title">
-                      {category}
-                    </Link>
-                  </li>
-                ))}
-                 <li className="menu-category">
-              <Link to="/pre-order" className="menu-title">
-                Pre-Order
-              </Link>
-            </li>
-            <li className="menu-category">
-              <Link to="/saleWithUs" className="menu-title">
-                Sell with Us
-              </Link>
-            </li>
-            <li className="menu-category">
-              <Link to="/customer-support" className="menu-title">
-                Customer Support
-              </Link>
-            </li>
-              </>
-            )}
+            {userRole !== "seller" ||
+              userRole !==
+                "superadmin"(
+                  <>
+                    {categories.map((category) => (
+                      <li className="menu-category" key={category}>
+                        <Link
+                          to={`/category/${category}`}
+                          className="menu-title"
+                        >
+                          {category}
+                        </Link>
+                      </li>
+                    ))}
+                    <li className="menu-category">
+                      <Link to="/pre-order" className="menu-title">
+                        Pre-Order
+                      </Link>
+                    </li>
+                    <li className="menu-category">
+                      <Link to="/saleWithUs" className="menu-title">
+                        Sell with Us
+                      </Link>
+                    </li>
+                    <li className="menu-category">
+                      <Link to="/customer-support" className="menu-title">
+                        Customer Support
+                      </Link>
+                    </li>
+                  </>
+                )}
 
             {userRole == "superadmin" && (
               <>
@@ -360,13 +361,11 @@ const Header = () => {
                     sell with us request
                   </Link>
                 </li>
-
               </>
             )}
 
             {userRole == "seller" && (
               <>
-              
                 <li className="menu-category">
                   <Link to="/add-product" className="menu-title">
                     Add Product
@@ -379,8 +378,6 @@ const Header = () => {
                 </li>
               </>
             )}
-
-           
           </ul>
         </div>
       </nav>
@@ -508,10 +505,12 @@ const Header = () => {
                 <button
                   className="accordion-menu"
                   data-accordion-btn
-                  onClick={() => handleStaticAccordionToggle("/pre-orders-page")}
+                  onClick={() =>
+                    handleStaticAccordionToggle("/pre-orders-page")
+                  }
                 >
                   <Link to="/pre-orders-page" className="menu-title">
-                  Pre orders request
+                    Pre orders request
                   </Link>
                 </button>
               </li>
@@ -522,7 +521,7 @@ const Header = () => {
                   onClick={() => handleStaticAccordionToggle("/add-product")}
                 >
                   <Link to="/add-product" className="menu-title">
-                  Add Product
+                    Add Product
                   </Link>
                 </button>
               </li>
@@ -533,12 +532,10 @@ const Header = () => {
                   onClick={() => handleStaticAccordionToggle("/enquiry-table")}
                 >
                   <Link to="/enquiry-table" className="menu-title">
-                  Sell With Us Requests 
+                    Sell With Us Requests
                   </Link>
                 </button>
               </li>
-              
-              
             </>
           )}
 

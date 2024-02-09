@@ -103,61 +103,55 @@ const AppContext = ({ children }) => {
     }
   }, []);
 
-// ...
+  // ...
 
-const handleAddToCart = (product, quantity, currentItem) => {
-  if (!selectProductData) {
-    ourProduct.push(product._id);
-    console.error("selectProductData is not defined");
-  } else {
-    ourProduct.push(selectProductData._id);
-  }
-
-  // Check if the product already exists in cartItems
-  const index = cartItems.findIndex((item) => item._id === product._id);
-
-  if (index !== -1) {
-    // Product already exists in cartItems, increment its quantity
-    const updatedCartItems = [...cartItems];
-    const existingItem = updatedCartItems[index];
-
-    if (existingItem.selectedSize) {
-      // Handle the case where selectedSize is defined
-      existingItem.selectedSize.quantity += quantity;
+  const handleAddToCart = (product, quantity, currentItem) => {
+    if (!selectProductData) {
+      ourProduct.push(product._id);
+      console.error("selectProductData is not defined");
     } else {
-      // Handle the case where selectedSize is not defined
-      existingItem.quantity += quantity;
+      ourProduct.push(selectProductData._id);
     }
 
-    setCartItems(updatedCartItems);
-  } else {
-    // Product does not exist in cartItems, add it
-    const newItem = {
-      ...product,
-      quantity: quantity,
-    };
+    // Check if the product already exists in cartItems
+    const index = cartItems.findIndex((item) => item._id === product._id);
 
-    const updatedCartItems = [...cartItems, newItem];
-    setCartItems(updatedCartItems);
-  }
+    if (index !== -1) {
+      // Product already exists in cartItems, increment its quantity
+      const updatedCartItems = [...cartItems];
+      const existingItem = updatedCartItems[index];
 
-  localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: `${product?.productName} has been added to your cart`,
-    showConfirmButton: false,
-    timer: 1500,
-  });
+      if (existingItem.selectedSize) {
+        // Handle the case where selectedSize is defined
+        existingItem.selectedSize.quantity += quantity;
+      } else {
+        // Handle the case where selectedSize is not defined
+        existingItem.quantity += quantity;
+      }
 
-  
-};
+      setCartItems(updatedCartItems);
+    } else {
+      // Product does not exist in cartItems, add it
+      const newItem = {
+        ...product,
+        quantity: quantity,
+      };
 
+      const updatedCartItems = [...cartItems, newItem];
+      setCartItems(updatedCartItems);
+    }
 
-
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `${product?.productName} has been added to your cart`,
+      showConfirmButton: false,
+      timer: 1500,
+    })
+  };
 
   const handleAddToCartHome = (product, quantity) => {
-    
     if (!selectProductData) {
       // Handle the case where selectProductData is not defined
       ourProduct.push(product?._id);
@@ -192,9 +186,9 @@ const handleAddToCart = (product, quantity, currentItem) => {
       title: `${product?.productName} has been added to your cart`,
       showConfirmButton: false,
       timer: 1500,
-    });
+    }).toUpperCase();
     setCartItems(items);
-    console.log("cartItems",cartItems)
+    console.log("cartItems", cartItems);
   };
 
   const handleRemoveFromCart = (product, index) => {
