@@ -153,7 +153,7 @@ const handleAddToCart = (product, quantity, currentItem) => {
   
 };
 
-// ...
+
 
 
   const handleAddToCartHome = (product, quantity) => {

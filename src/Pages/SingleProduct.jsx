@@ -12,6 +12,8 @@ import { Context } from "../common/Context";
 // SingleProduct component
 const SingleProduct = () => {
   const navigate = useNavigate();
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
 
   const {
     handleAddToCart,
@@ -149,34 +151,63 @@ const SingleProduct = () => {
     );
   }
 
-  // Destructure product data
-  const { productName, productDetails, imageURL } = product;
+   // Destructure product data
+   const { productName, productDetails, imageURL } = product;
 
-  // Settings for the react-slick carousel
-  const carouselSettings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true, // Auto scroll
-    autoplaySpeed: 3000, // Delay between slides in milliseconds (e.g., 3000ms = 3 seconds)
-  };
+   // Settings for the react-slick carousel
+   const carouselSettings = {
+     infinite: true,
+     speed: 500,
+     slidesToShow: 1,
+     slidesToScroll: 1,
+     autoplay: true,
+     autoplaySpeed: 3000,
+   };
+ 
+   // Handler function to set the selected image index
+   const handleImageClick = (index) => {
+     setSelectedImageIndex(index);
+   };
+ 
+   // JSX for the preview images
+   const previewImages = imageURL.map((url, index) => (
+     <img
+       key={index}
+       src={url}
+       alt={`Product ${index + 1}`}
+       className={`preview-image ${selectedImageIndex === index ? 'selected' : ''}`}
+       onClick={() => handleImageClick(index)}
+     />
+   ));
+ 
+   // JSX for the main slider
+   const mainSliderImages = imageURL.map((url, index) => (
+     <img
+       key={index}
+       src={url}
+       alt={`Product ${index + 1}`}
+       className={`product-image ${selectedImageIndex === index ? 'selected' : ''}`}
+     />
+   ));
+ 
+   // JSX for the image carousel
+   const imageCarousel = (
+     <Slider {...carouselSettings}>
+       {mainSliderImages}
+     </Slider>
+   );
+ 
+   return (<>
+     <div className="product-container">
+       <ToastContainer />
+       <div className="image-carousel">
+         {imageCarousel}
+       <div className="product-preview-images">
+         {previewImages}
+       </div>
+       </div>
+ 
 
-  return (
-    <div className="product-container">
-      <ToastContainer />
-      <div className="image-carousel">
-        <Slider {...carouselSettings}>
-          {imageURL.map((url, index) => (
-            <img
-              key={index}
-              src={url}
-              alt={`Product ${index + 1}`}
-              className="product-image"
-            />
-          ))}
-        </Slider>
-      </div>
 
       <div className="product-details">
         <h1 className="product-name">{productName}</h1>
@@ -195,7 +226,7 @@ const SingleProduct = () => {
                 <p>
                   Packet Weight: {product.packetweight} {product.unitOfMeasure}
                 </p>
-                <p>Description: {product.description}</p>
+              
               </div>
             </div>
           </div>
@@ -252,6 +283,65 @@ const SingleProduct = () => {
         </div>
       </div>
     </div>
+      <div className="single-product-details-description"><h1>Description: </h1><p>{product.description}</p>
+      <div className="d-flex align-items-center justify-content-center vh-100">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="d-flex px-3 py-4 border border-bottom-0 border-light rounded-top">
+              <div className="flex-shrink-0">
+                <div className="avatar avatar-sm rounded-circle">
+                  <img className="avatar-img" src="https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="" />
+                </div>
+              </div>
+              <div className="flex-grow-1 ms-2 ms-md-3">
+                <div className="d-flex align-items-baseline">
+                  <h6 className="me-2">Matthew Twomey</h6>
+                  <span className="badge py-1 bg-light text-muted fw-normal">2 days ago</span>
+                </div>
+                <div>This is some content from a media component. You can replace this with any content and adjust it as needed.</div>
+              </div>
+            </div>
+
+            <div className="bg-light px-3 py-3 rounded-bottom">
+              <div className="d-flex">
+                <div className="flex-shrink-0">
+                  <div className="avatar avatar-sm rounded-circle">
+                    <img className="avatar-img" src="https://images.pexels.com/photos/936229/pexels-photo-936229.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="" />
+                  </div>
+                </div>
+                <div className="flex-grow-1 ms-2 ms-md-3">
+                  <div className="d-flex align-items-baseline">
+                    <h6 className="me-2">Jordan Singer</h6>
+                    <span className="badge py-1 bg-white text-muted fw-normal">2 days ago</span>
+                  </div>
+                  <div>That sounds good! When can we start?</div>
+                </div>
+              </div>
+
+              <div className="my-3 bg-white" style={{ height: '1px', width: '100%' }}></div>
+
+              <div className="d-flex">
+                <div className="flex-shrink-0">
+                  <div className="avatar avatar-sm rounded-circle">
+                    <img className="avatar-img" src="https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="" />
+                  </div>
+                </div>
+                <div className="flex-grow-1 ms-2 ms-md-3">
+                  <div className="d-flex align-items-baseline">
+                    <h6 className="me-2">Gregory Harrison</h6>
+                    <span className="badge py-1 bg-white text-muted fw-normal">2 days ago</span>
+                  </div>
+                  <div>Yep, I agree with <span className="badge py-1 bg-dark text-white fw-normal rounded-pill">Jordan S</span>.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </>
   );
 };
 

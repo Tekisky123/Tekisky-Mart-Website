@@ -49,11 +49,11 @@ const Home = () => {
         direction="left"
         style={{ color: "#004AAD", fontWeight: "bold" }}
       >
-        <span style={{ marginLeft:"100px" }}>Delivery within 24 hours</span>
-        <span style={{ marginLeft:"100px" }}>Returns without questions</span>
-        <span style={{ marginLeft:"100px" }}>Quality product at best price</span>
-        <span style={{ marginLeft:"100px" }}>Low price compare to your retail outlet</span>
-        <span style={{ marginLeft:"100px" }}>cheaper than amazon and flipkart</span>
+        <span style={{ marginLeft:"100px" , color:"#004AAD" }}>Delivery within 24 hours</span>
+        <span style={{ marginLeft:"100px" , color:"#004AAD" }}>Returns without questions</span>
+        <span style={{ marginLeft:"100px"  , color:"#004AAD"}}>Quality product at best price</span>
+        <span style={{ marginLeft:"100px" , color:"#004AAD" }}>Low price compare to your retail outlet</span>
+        <span style={{ marginLeft:"100px" , color:"#004AAD" }}>cheaper than amazon and flipkart</span>
       </marquee>
 
     </div>
