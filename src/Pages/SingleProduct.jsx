@@ -256,7 +256,7 @@ const SingleProduct = () => {
                     Offer Price: {product.offerPrice}₹
                   </p>
                   <p>
-                    Packet Weight: {product.packetweight}{" "}
+                     Weight / Size: {product.packetweight}{" "}
                     {product.unitOfMeasure}
                   </p>
                 </div>

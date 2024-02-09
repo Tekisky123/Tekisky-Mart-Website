@@ -470,7 +470,7 @@ const AllOrders = () => {
                   <tr>
                     <th>Product Name</th>
                     <th>Image</th>
-                    <th>Packet Weight</th>
+                    <th>Weight / Size</th>
                     <th>Offer Price</th>
                     <th>Quantity</th>
                     <th>Created By</th>

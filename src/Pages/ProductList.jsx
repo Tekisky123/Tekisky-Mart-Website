@@ -459,7 +459,7 @@ const ProductList = () => {
                 </td>
               </tr>
               <tr>
-                <th>Packet Weight</th>
+                <th>Weight / Size</th>
                 <td>
                   {isEditing ? (
                     <>
