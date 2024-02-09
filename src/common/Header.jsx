@@ -16,7 +16,7 @@ import { IoIosLogOut } from "react-icons/io";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const token = localStorage.getItem("token");
   const currentPath = location.pathname;
 
   const { cartItems } = useContext(Context);
@@ -171,26 +171,32 @@ const Header = () => {
     navigate(path);
   };
 
-  const handleLogOut =()=>{
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('mobileNumber');
-    localStorage.removeItem('token');
-    navigate('/login')
-
-  }
+  const handleLogOut = () => {
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("mobileNumber");
+    localStorage.removeItem("token");
+    navigate("/login");
+    handleStaticAccordionToggle("/login")
+  };
   return (
     <header>
       <div className="header-top" style={{ padding: "0px" }}>
         <div className="container" style={{ padding: "0px" }}>
           <ul className="header-social-container">
             <li>
-              <Link to="https://www.instagram.com/tekiskymart/?hl=en" className="social-link">
+              <Link
+                to="https://www.instagram.com/tekiskymart/?hl=en"
+                className="social-link"
+              >
                 <FaInstagram className="social-link-icon" />
               </Link>
             </li>
 
             <li>
-              <Link to="https://www.facebook.com/profile.php?id=61555941436344" className="social-link">
+              <Link
+                to="https://www.facebook.com/profile.php?id=61555941436344"
+                className="social-link"
+              >
                 <FaFacebookSquare className="social-link-icon" />
               </Link>
             </li>
@@ -286,13 +292,13 @@ const Header = () => {
               <AiOutlineShoppingCart />
               <span className="count">{cartItems ? cartItems.length : 0}</span>
             </button>
-            <button
-              className="action-btn"
-              onClick={() => handleLogOut()}
-            >
-              <IoIosLogOut />
-              
-            </button>
+            {token && (
+                <>
+                  <button className="action-btn" onClick={() => handleLogOut()}>
+                    <IoIosLogOut />
+                  </button>
+                </>
+              )}
 
             {/* <button className="action-btn">
               <LuLogIn />
@@ -300,7 +306,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {userRole == "superadmin" && ""}
+   
       <nav className="desktop-navigation-menu">
         <div className="main-container">
           <ul
@@ -314,7 +320,7 @@ const Header = () => {
             </li>
             {userRole !== "seller" ||
               userRole !==
-                "superadmin"(
+                "superadmin" &&(
                   <>
                     {categories.map((category) => (
                       <li className="menu-category" key={category}>
@@ -594,6 +600,33 @@ const Header = () => {
               </Link>
             </button>
           </li>
+          
+        {token ? <>
+          <li className="menu-category">
+            <button
+              className="accordion-menu"
+              data-accordion-btn
+              onClick={() => handleStaticAccordionToggle("/login")}
+            >
+              <Link to="/login" className="menu-title">
+                Logout
+              </Link>
+            </button>
+          </li>
+        </> : <>
+        <li className="menu-category">
+            <button
+              className="accordion-menu"
+              data-accordion-btn
+              onClick={() => handleLogOut()}
+            >
+              <Link to="/login" className="menu-title">
+                Login
+              </Link>
+            </button>
+          </li>
+        </>}
+              
         </ul>
       </nav>
     </header>
