@@ -12,8 +12,10 @@ import { Context } from "../common/Context";
 // SingleProduct component
 const SingleProduct = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const location = useLocation();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
+  const [product, setProduct] = useState(null);
 
   const {
     handleAddToCart,
@@ -28,16 +30,25 @@ const SingleProduct = () => {
     setSingleDeliveryCharge,
     setSingleGrandTotal,
   } = useContext(Context);
-  const { id } = useParams();
-  const location = useLocation();
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
 
-  // State to store product data
-  const [product, setProduct] = useState(null);
-  // State to manage quantity
+  // useEffect(() => {
+  //   if (resetQuantity) {
+  //     handleSingleProductQuantity("reset", product);
+  //     setResetQuantity(false); 
+  //   }
+  // }, [resetQuantity, location.pathname, id]);
+
+  useEffect(() => {    
+    
+    singleItems.quantity = 1;
+
+  }, [location.pathname, navigate])
+
 
   // Effect to fetch product data based on the product ID
   useEffect(() => {

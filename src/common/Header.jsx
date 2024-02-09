@@ -11,6 +11,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Context } from "./Context";
+import { IoIosLogOut } from "react-icons/io";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -168,7 +169,13 @@ const Header = () => {
     navigate(path);
   };
 
-  
+  const handleLogOut =()=>{
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('mobileNumber');
+    localStorage.removeItem('token');
+    navigate('/login')
+
+  }
   return (
     <header>
       <div className="header-top" style={{padding:"0px"}}>
@@ -264,6 +271,7 @@ const Header = () => {
             <button className="search-btn">
               <CiSearch className="search" />
             </button>
+        
           </div>
          </>)}
   
@@ -284,6 +292,13 @@ const Header = () => {
             >
               <AiOutlineShoppingCart />
               <span className="count">{cartItems ? cartItems.length : 0}</span>
+            </button>
+            <button
+              className="action-btn"
+              onClick={() => handleLogOut()}
+            >
+              <IoIosLogOut />
+              
             </button>
 
             {/* <button className="action-btn">
