@@ -13,7 +13,6 @@ import { Context } from "../common/Context";
 const ProductMain = () => {
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(null);
-  
 
   const getCategoryProducts = (category, isMobile) => {
     const maxProducts = isMobile ? 1 : 4; // Display 1 product for mobile, 4 for other screens
@@ -31,8 +30,13 @@ const ProductMain = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { handleAddToCartHome,handleAddToCart, ToastContainer, quantity, handleBuyNow } =
-    useContext(Context);
+  const {
+    handleAddToCartHome,
+    handleAddToCart,
+    ToastContainer,
+    quantity,
+    handleBuyNow,
+  } = useContext(Context);
 
   // Fetch products on component mount
   useEffect(() => {
@@ -56,7 +60,7 @@ const ProductMain = () => {
   if (loading) {
     return (
       <div className="product-main notification-toadt">
-        <ToastContainer/>
+        <ToastContainer />
         <h1 style={{ textAlign: "center" }} className="title">
           Our Products
         </h1>
@@ -70,7 +74,6 @@ const ProductMain = () => {
                 <div className="showcase-actions">
                   <div className="skeleton-btn"></div>
                   <div className="skeleton-btn"></div>
-                 
                 </div>
               </div>
 
@@ -124,93 +127,97 @@ const ProductMain = () => {
           <div className="product-grid">
             {getCategoryProducts(category, window.innerWidth <= 768).map(
               (product, index) => (
-              <div className="showcase" key={product?._id}>
-                <div className="showcase-banner" onClick={() => handleBuyNow(product)}>
-                  {product?.imageURL && (
-                    <>
-                      <img
-                        src={product.imageURL[0]}
-                        alt={product.productName}
-                        className="product-img default"
-                      />
-                      <img
-                        src={product.imageURL[1] || product.imageURL[0]}
-                        alt={product.productName}
-                        className="product-img hover"
-                      />
-                    </>
-                  )}
+                <div className="showcase" key={product?._id}>
+                  <div
+                    className="showcase-banner"
+                    onClick={() => handleBuyNow(product)}
+                  >
+                    {product?.imageURL && (
+                      <>
+                        <img
+                          src={product.imageURL[0]}
+                          alt={product.productName}
+                          className="product-img default"
+                        />
+                        <img
+                          src={product.imageURL[1] || product.imageURL[0]}
+                          alt={product.productName}
+                          className="product-img hover"
+                        />
+                      </>
+                    )}
 
-                  <div className="showcase-actions">
-                  
-                    <button
-                      className="btn-action"
-                      onClick={() => handleBuyNow(product)}
-                    >
-                      <FaRegEye />
-                    </button>
-                
-                    <button
-                      className="btn-action"
-                      onClick={() => {
-                        handleAddToCart(product, quantity, index);
-                      }}
-                    >
-                      <IoIosAddCircle />
-                    </button>
+                    <div className="showcase-actions">
+                      <button
+                        className="btn-action"
+                        onClick={() => handleBuyNow(product)}
+                      >
+                        <FaRegEye />
+                      </button>
+
+                      <button
+                        className="btn-action"
+                        onClick={() => {
+                          handleAddToCart(product, quantity, index);
+                        }}
+                      >
+                        <IoIosAddCircle />
+                      </button>
+                    </div>
                   </div>
-                </div>
 
-                <div className="showcase-content">
-                <p className="showcase-category">{product?.productCategory}</p>
+                  <div className="showcase-content">
+                    <p className="showcase-category">
+                      {product?.productCategory}
+                    </p>
 
-<h2 className=" packetweight-unitOfMeasure ">{product?.packetweight} {product.unitOfMeasure}</h2>
+                    <h2 className=" packetweight-unitOfMeasure ">
+                      {product?.packetweight} {product.unitOfMeasure}
+                    </h2>
 
-
-                
                     <Link
-                    style={{color:"black",fontSize:"15px"}}
+                      style={{ color: "black", fontSize: "15px" }}
                       to={`/single-product/${product?._id}`}
                       className="showcase-title"
                     >
-                       <h3> {product?.productName}</h3>
+                      <h3> {product?.productName}</h3>
                     </Link>
-                  
-                  <h4 className="weight">{product?.header}</h4>
-                  <div className="showcase-rating">
-                    {Array.from({ length: 3 }, (_, index) => (
-                      <ion-icon key={index} name="star"></ion-icon>
-                    ))}
-                    {Array.from({ length: 2 }, (_, index) => (
-                      <ion-icon key={index} name="star-outline"></ion-icon>
-                    ))}
-                  </div>
 
-                  <div className="price-box">
-                    <p className="price">{`₹${product?.offerPrice}`}</p>
-                    {product?.mrp && <del>{`₹${product?.mrp}`}</del>}
-                  </div>
+                    <h4 className="weight">{product?.header}</h4>
+                    <div className="showcase-rating">
+                      {Array.from({ length: 3 }, (_, index) => (
+                        <ion-icon key={index} name="star"></ion-icon>
+                      ))}
+                      {Array.from({ length: 2 }, (_, index) => (
+                        <ion-icon key={index} name="star-outline"></ion-icon>
+                      ))}
+                    </div>
 
-                  <div className="buttons">
-                    <button
-                      className="add-cart-btn-cards"
-                      onClick={() => {
-                        handleAddToCart(product, quantity, index);
-                      }}
-                    >
-                      add to cart
-                    </button>
-                    <button
-                      className="add-cart-btn-cards"
-                      onClick={() => handleBuyNow(product)}
-                    >
-                      Buy Now
-                    </button>
+                    <div className="price-box">
+                      <p className="price">Offer Price : {`₹${product?.offerPrice}`}</p><br />
+                      {product?.mrp && <span> MRP : {`₹${product?.mrp}`}</span>}
+                    </div>
 
+                    <div className="buttons">
+                      <button
+                        className="add-cart-btn-cards"
+                        onClick={() => {
+                          handleAddToCart(product, quantity, index);
+                        }}
+                      >
+                        add to cart
+                      </button>
+                      <button
+                        className="add-cart-btn-cards"
+                        onClick={() => handleBuyNow(product)}
+                      >
+                        Buy Now
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
 
           {/* View All button */}

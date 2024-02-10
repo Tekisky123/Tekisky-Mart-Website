@@ -152,9 +152,9 @@ const CategoryPage = () => {
               </div>
 
               <div className="price-box">
-                <p className="price">{`₹${product?.offerPrice}`}</p>
-                {product?.mrp && <del>{`₹${product?.mrp}`}</del>}
-              </div>
+                      <p className="price">Offer Price : {`₹${product?.offerPrice}`}</p><br />
+                      {product?.mrp && <span> MRP : {`₹${product?.mrp}`}</span>}
+                    </div>
 
               <div className="buttons">
                 <button

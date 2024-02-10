@@ -189,6 +189,8 @@ const AddProductForm = () => {
             <option value="HOMEMADE SNACKS">HOMEMADE SNACKS</option>
             <option value="CLOTHES">CLOTHES</option>
             <option value="PERFUMES">PERFUMES</option>
+            <option value="GIFTITEMS">GIFT ITEMS</option>
+            <option value="BOOKS">BOOKS</option>
             <option value="OTHERS">OTHERS</option>
           </select>
           {errors.productCategory && (
