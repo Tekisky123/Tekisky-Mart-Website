@@ -663,7 +663,7 @@
   .ReactModalPortal div {
 
 
-      inset:20px
+      inset:10px !important;
     }
   .progress-bar {
     position: relative;
@@ -672,7 +672,7 @@
     height: 100px;
   }
   .NextBtn {
-    width: 100px;
+    width: 150px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -704,6 +704,10 @@
   .first-container-heading {
     font-size: 20px; /* Adjust the font size as needed */
     top: 70px; /* Adjust the position as needed */
+  }
+  .payment-heading {
+    font-size: 20px; /* Adjust the font size as needed */
+    top: 20px !important; /* Adjust the position as needed */
   }
 }
 
@@ -992,12 +996,14 @@
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
   .slider2-item img {
     object-fit: contain;
+    height: 400px;
   }
 }
 
 @media only screen and (min-width: 1201px) and (max-width: 1400px) {
   .slider2-item img {
     object-fit: contain;
+    height: 400px;
   }
   .slider2-item {
     height: 330px;
@@ -1010,6 +1016,7 @@
 @media only screen and (min-width: 1401px) {
   .slider2-item img {
     object-fit: contain;
+    height: 400px;
   }
   .slider2-item {
     height: 350px;
