@@ -103,6 +103,14 @@ const ShoppingCart = () => {
   };
 
 
+  useEffect(() => {
+  if(cartItems.length <= 0){
+     navigate('/')
+  }
+  }, [cartItems])
+  
+
+
   return (
     <div id="app">
       {/* Header */}
