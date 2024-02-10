@@ -250,7 +250,7 @@ const SingleProduct = () => {
               <div>
                 <div key={product._id}>
                   <p className="mrp-price">
-                    MRP: <del>₹{product.mrp}</del>
+                    MRP : <span>₹ {product.mrp}</span>
                   </p>
                   <p className="offer-price">
                     Offer Price: ₹{product.offerPrice}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Banner = ({ banners }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,12 +26,14 @@ const Banner = ({ banners }) => {
     }
   }, [currentIndex]);
 
+
+
   return (
-    <div className="banner">
+    <div className="banner" >
       <div className="container">
         <div className="slider-container has-scrollbar" ref={sliderRef}>
           {banners.map((banner, index) => (
-            <div className="slider-item" key={index}>
+            <div className="slider-item" key={index}   onClick={()=>{navigate(`${banner.link}`)}}>
               <img src={banner.imgSrc} alt={banner.subtitle} className="banner-img" />
               <div className="banner-content">
                 <p className="banner-subtitle">{banner.subtitle}</p>

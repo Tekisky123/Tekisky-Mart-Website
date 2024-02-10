@@ -167,7 +167,7 @@
   font-weight: 900 !important;
   font-size: 20px !important;
 }
-.mrp-price del{
+.mrp-price span{
   color: red;
 }
 .share{

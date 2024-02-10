@@ -481,23 +481,23 @@ const SpPaymentStep = () => {
                       <b style={{color:"#004AAD"}}>Delivery charge 30 rupees below 500₹ </b><br/>
                         <b style={{color:"#004AAD"}}>Free delivery for order above 500₹ </b>
                       </h6>
-                      <h6 style={{ color: "gray", marginBottom: "1rem" }}>
-                        <span>saved Amount:</span>
-                        <span>&#8377; {singleSavedAmount}</span>
+                      <h6 style={{ color: "green", marginBottom: "1rem" , fontSize:"18px",fontWeight:"800"}} className="totalDiv">
+                        <span>saved Amount : </span>
+                        <span> {singleSavedAmount}&#8377; </span>
                       </h6>
 
                       <h5
                         style={{ fontWeight: "600", marginBottom: "1rem" }}
                         className="totalDiv"
                       >
-                        <span>Delivery Charge</span>
+                        <span>Delivery Charge :</span>
                         <span>{singleDeliveryCharge}&#8377;</span>
                       </h5>
                       <h5
                         style={{ fontWeight: "600", marginBottom: "1rem" ,borderTop:"1px solid gray",borderBottom:"1px solid gray",padding:"10px 0px"}}
                         className="totalDiv"
                       >
-                        <span>Order Total</span>
+                        <span>Order Total :</span>
                         <span>{singleGrandTotal} &#8377;</span>
                       </h5>
                       <h6 style={{ fontWeight: "600", marginBottom: "1rem" }}>

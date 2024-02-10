@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../Assets/Styles/SingleProduct.css';
@@ -9,6 +9,7 @@ import "../App.css";
 const DealOfTheDay = () => {
   const [products, setProducts] = useState([]);
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch data from the API
@@ -52,7 +53,8 @@ const DealOfTheDay = () => {
     const product = products[0];
     return (
       <div className="deal-of-the-day-slider  single-product">
-        <div className="slider2-item">
+        
+        <div className="slider2-item" >
           <img src={product.imageURL[0]} alt={product.productName} className='slider2-image' />
 
           <div className="product-details">
@@ -94,11 +96,11 @@ const DealOfTheDay = () => {
   };
 
   return (
-    <div className="deal-of-the-day-slider container">
+    <div className="deal-of-the-day-slider container" >
       <Slider {...sliderSettings}>
         {products.map(product => (
           <div key={product._id} className="slider2-item">
-            <img src={product.imageURL[0]} alt={product.productName} className='slider2-image' />
+            <img src={product.imageURL[0]} alt={product.productName} className='slider2-image'  onClick={()=>{navigate(`/single-product/${product._id}`)}}/>
 
             <div className="product-details">
               <h3>{product.productName}</h3>
