@@ -136,13 +136,17 @@ const Header = () => {
     };
 
     const handleOverlayClick = (event) => {
-      if (overlayRef.current && event.target === overlayRef.current) {
-        handleMobileMenuClose();
+      const isHamburgerMenuButtonClicked = event.target.closest('[data-mobile-menu-open-btn]');
+      const isMobileMenuClicked = event.target.closest('.mobile-navigation-menu');
+  
+      // If the click is not within the mobile menu or on the hamburger menu button
+      if (!isMobileMenuClicked && !isHamburgerMenuButtonClicked) {
+        setIsMobileMenuOpen(false);
       }
     };
-
+  
     document.addEventListener("click", handleOverlayClick);
-
+  
     return () => {
       document.removeEventListener("click", handleOverlayClick);
     };
@@ -179,6 +183,8 @@ const Header = () => {
     navigate("/login");
     handleStaticAccordionToggle("/login");
   };
+
+  
   return (
     <header>
       <div className="header-top" style={{ padding: "0px" }}>
@@ -416,38 +422,45 @@ const Header = () => {
         <button data-mobile-menu-open-btn onClick={handleMobileMenuToggle}>
           <GiHamburgerMenu className="hamburger" />
         </button>
-       { userRole == "seller" ? <>
-       
-       {location.pathname == "/welcome" ? (
+        {userRole == "seller" ? (
           <>
-            <button className="action-btn" onClick={() => navigate("/welcome")}>
-              <GoHomeFill />
-            </button>
+            {location.pathname == "/welcome" ? (
+              <>
+                <button
+                  className="action-btn"
+                  onClick={() => navigate("/welcome")}
+                >
+                  <GoHomeFill />
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="action-btn"
+                  onClick={() => navigate("/welcome")}
+                >
+                  <CiHome />
+                </button>
+              </>
+            )}
           </>
         ) : (
           <>
-            <button className="action-btn" onClick={() => navigate("/welcome")}>
-              <CiHome />
-            </button>
+            {location.pathname == "/" ? (
+              <>
+                <button className="action-btn" onClick={() => navigate("/")}>
+                  <GoHomeFill />
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="action-btn" onClick={() => navigate("/")}>
+                  <CiHome />
+                </button>
+              </>
+            )}
           </>
         )}
-       </> : <>
-       {location.pathname == "/" ? (
-          <>
-            <button className="action-btn" onClick={() => navigate("/")}>
-              <GoHomeFill />
-            </button>
-          </>
-        ) : (
-          <>
-            <button className="action-btn" onClick={() => navigate("/")}>
-              <CiHome />
-            </button>
-          </>
-        )}
-       
-       </>}
-      
 
         {/* <GoHomeFill /> */}
 
@@ -500,34 +513,57 @@ const Header = () => {
                   </Link>
                 </button>
               </li>
-                 {/* Dynamically render product categories */}
-          {categories.map((category) => (
-            <li className="menu-category" key={category}>
-              <button
-                className="accordion-menu"
-                data-accordion-btn
-                onClick={() => handleDynamicAccordionToggle(category)}
-              >
-                <Link to={`/category/${category}`} className="menu-title">
-                  {category}
-                </Link>
-                <div>
-                  <ion-icon name="add-outline" className="add-icon"></ion-icon>
-                  <ion-icon
-                    name="remove-outline"
-                    className="remove-icon"
-                  ></ion-icon>
-                </div>
-              </button>
-              <ul className="submenu-category-list" data-accordion>
-                {/* You can add submenu items here if needed */}
-              </ul>
-            </li>
-          ))}
+              {/* Dynamically render product categories */}
+              {categories.map((category) => (
+                <li className="menu-category" key={category}>
+                  <button
+                    className="accordion-menu"
+                    data-accordion-btn
+                    onClick={() => handleDynamicAccordionToggle(category)}
+                  >
+                    <Link to={`/category/${category}`} className="menu-title">
+                      {category}
+                    </Link>
+                  </button>
+
+                  <ul className="submenu-category-list" data-accordion>
+                    {/* You can add submenu items here if needed */}
+                  </ul>
+                </li>
+              ))}
+              <li className="menu-category">
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/pre-order")}
+                >
+                  <Link to="/pre-order" className="menu-title">
+                    Pre Orders
+                  </Link>
+                </button>
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() => handleStaticAccordionToggle("/saleWithUs")}
+                >
+                  <Link to="/saleWithUs" className="menu-title">
+                    Sell With Us
+                  </Link>
+                </button>
+                <button
+                  className="accordion-menu"
+                  data-accordion-btn
+                  onClick={() =>
+                    handleStaticAccordionToggle("/customer-support")
+                  }
+                >
+                  <Link to="/customer-support" className="menu-title">
+                    Customer Support
+                  </Link>
+                </button>
+              </li>
             </>
           )}
-
-       
 
           {userRole === "superadmin" && (
             <>
@@ -588,7 +624,7 @@ const Header = () => {
                   </Link>
                 </button>
               </li>
-       
+
               <li className="menu-category">
                 <button
                   className="accordion-menu"

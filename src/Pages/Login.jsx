@@ -29,6 +29,15 @@ const Login = () => {
         });
         return;
       }
+      // Check if mobile number is exactly 10 digits
+      if (mobileNumber.length !== 10) {
+        Swal.fire({
+          title: "Oops!",
+          text: "Mobile number must be 10 digits long",
+          icon: "error",
+        });
+        return;
+      }
 
       const response = await axios.post(
         "https://tekiskymart.up.railway.app/user/login",
@@ -126,7 +135,15 @@ const Login = () => {
                 type="text"
                 id="mobileNumber"
                 value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
+                onChange={(e) => {
+                  // Restrict input to numbers only
+                  const onlyNumbers = e.target.value.replace(/[^0-9]/g, "");
+                  // Limit input length to 10 characters
+                  const truncatedInput = onlyNumbers.slice(0, 10);
+                  setMobileNumber(truncatedInput);
+                }}
+                pattern="[0-9]*" // Only accept numeric characters
+                maxLength={10} // Limit input length to 10 characters
               />
               <label className="lable" htmlFor="password">
                 Password:

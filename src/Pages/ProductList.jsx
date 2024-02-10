@@ -516,6 +516,25 @@ const ProductList = () => {
                   )}
                 </td>
               </tr>
+              <tr>
+                <th>Header</th>
+                <td>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={updatedProduct.header}
+                      onChange={(e) =>
+                        setUpdatedProduct({
+                          ...updatedProduct,
+                          header: e.target.value,
+                        })
+                      }
+                    />
+                  ) : (
+                    selectedProduct?.header
+                  )}
+                </td>
+              </tr>
               {/* <tr>
                 <th>Created By</th>
                 <td>

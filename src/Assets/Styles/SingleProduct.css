@@ -158,8 +158,17 @@
   cursor: pointer;
 }
 .offer-price{
-  color: #4caf50;
-  font-weight: 700;
+  color: black;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+}
+.mrp-price{
+  color: black;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+}
+.mrp-price del{
+  color: red;
 }
 .share{
   text-align: end;

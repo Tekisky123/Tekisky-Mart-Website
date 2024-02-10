@@ -249,11 +249,11 @@ const SingleProduct = () => {
 
               <div>
                 <div key={product._id}>
-                  <p>
-                    MRP: <del style={{ color: "red" }}>{product.mrp}₹</del>
+                  <p className="mrp-price">
+                    MRP: <del>₹{product.mrp}</del>
                   </p>
                   <p className="offer-price">
-                    Offer Price: {product.offerPrice}₹
+                    Offer Price: ₹{product.offerPrice}
                   </p>
                   <p>
                      Weight / Size: {product.packetweight}{" "}

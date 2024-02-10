@@ -70,8 +70,7 @@ const ProductMain = () => {
                 <div className="showcase-actions">
                   <div className="skeleton-btn"></div>
                   <div className="skeleton-btn"></div>
-                  <div className="skeleton-btn"></div>
-                  <div className="skeleton-btn"></div>
+                 
                 </div>
               </div>
 
@@ -163,10 +162,10 @@ const ProductMain = () => {
                 </div>
 
                 <div className="showcase-content">
-                  <p className="showcase-category">
-                    {product?.productCategory}
-                  </p>
-                  <h2 className=" weight">{product?.packetweight} {product.unitOfMeasure}</h2>
+                <p className="showcase-category">{product?.productCategory}</p>
+
+<h2 className=" packetweight-unitOfMeasure ">{product?.packetweight} {product.unitOfMeasure}</h2>
+
 
                 
                     <Link

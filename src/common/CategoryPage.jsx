@@ -8,85 +8,84 @@ import { IoIosAddCircle } from "react-icons/io";
 import { Context } from "../common/Context";
 
 const CategoryPage = () => {
-    const location = useLocation();
-    const { category } = useParams();
-    const [categoryProducts, setCategoryProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { handleAddToCartHome,handleAddToCart, ToastContainer, quantity, handleBuyNow } =
-      useContext(Context);
+  const location = useLocation();
+  const { category } = useParams();
+  const [categoryProducts, setCategoryProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const {
+    handleAddToCartHome,
+    handleAddToCart,
+    ToastContainer,
+    quantity,
+    handleBuyNow,
+  } = useContext(Context);
 
-      useEffect(() => {
-        window.scrollTo(0, 0);
-      }, [location.pathname]);
-    
-  
-    useEffect(() => {
-      const fetchCategoryProducts = async () => {
-        try {
-          const response = await axios.get(
-            "https://tekiskymart.up.railway.app/product/approved"
-          );
-          const filteredProducts = response?.data?.products.filter(
-            (product) => product.productCategory === category
-          );
-          setCategoryProducts(filteredProducts);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error fetching category products:", error);
-          setLoading(false);
-        }
-      };
-  
-      fetchCategoryProducts();
-    }, [category]);
-  
-    if (loading) {
-        return (
-          <div className="product-main">
-            <ToastContainer />
-        
-    
-            <div className="product-grid">
-              {[...Array(8)].map((_, index) => (
-                <div className="showcase skeleton" key={index}>
-                  <div className="showcase-banner">
-                    <div className="skeleton-img default"></div>
-                    <div className="skeleton-img hover"></div>
-                    <div className="showcase-actions">
-                      <div className="skeleton-btn"></div>
-                      <div className="skeleton-btn"></div>
-                      <div className="skeleton-btn"></div>
-                      <div className="skeleton-btn"></div>
-                    </div>
-                  </div>
-    
-                  <div className="showcase-content">
-                    <div className="showcase-category skeleton"></div>
-                    <div className="showcase-title skeleton"></div>
-                    <div className="showcase-rating skeleton"></div>
-                    <div className="price-box">
-                      <div className="price skeleton"></div>
-                      <div className="skeleton"></div>
-                    </div>
-    
-                    <div className="buttons">
-                      <div className="add-cart-btn-cards skeleton"></div>
-                      <div className="add-cart-btn-cards skeleton"></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchCategoryProducts = async () => {
+      try {
+        const response = await axios.get(
+          "https://tekiskymart.up.railway.app/product/approved"
         );
-    }
+        const filteredProducts = response?.data?.products.filter(
+          (product) => product.productCategory === category
+        );
+        setCategoryProducts(filteredProducts);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching category products:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchCategoryProducts();
+  }, [category]);
+
+  if (loading) {
+    return (
+      <div className="product-main">
+        <ToastContainer />
+
+        <div className="product-grid">
+          {[...Array(8)].map((_, index) => (
+            <div className="showcase skeleton" key={index}>
+              <div className="showcase-banner">
+                <div className="skeleton-img default"></div>
+                <div className="skeleton-img hover"></div>
+                <div className="showcase-actions">
+                  <div className="skeleton-btn"></div>
+                  <div className="skeleton-btn"></div>
+                </div>
+              </div>
+
+              <div className="showcase-content">
+                <div className="showcase-category skeleton"></div>
+                <div className="showcase-title skeleton"></div>
+                <div className="showcase-rating skeleton"></div>
+                <div className="price-box">
+                  <div className="price skeleton"></div>
+                  <div className="skeleton"></div>
+                </div>
+
+                <div className="buttons">
+                  <div className="add-cart-btn-cards skeleton"></div>
+                  <div className="add-cart-btn-cards skeleton"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="product-main">
       <ToastContainer />
-      <h1 className="heading-of-category">
-        {category}
-      </h1>
+      <h1 className="heading-of-category">{category}</h1>
 
       <div className="product-grid">
         {categoryProducts.map((product, index) => (
@@ -108,14 +107,13 @@ const CategoryPage = () => {
               )}
 
               <div className="showcase-actions">
-              
                 <button
                   className="btn-action"
                   onClick={() => handleBuyNow(product)}
                 >
                   <FaRegEye />
                 </button>
-               
+
                 <button
                   className="btn-action"
                   onClick={() => {
@@ -129,6 +127,11 @@ const CategoryPage = () => {
 
             <div className="showcase-content">
               <p className="showcase-category">{product?.productCategory}</p>
+
+              <h2 className=" packetweight-unitOfMeasure ">
+                {product?.packetweight} {product.unitOfMeasure}
+              </h2>
+
               <p>
                 <Link
                   to={`/single-product/${product?._id}`}
@@ -137,8 +140,7 @@ const CategoryPage = () => {
                   {product?.productName}
                 </Link>
               </p>
-              <h2 className="weight">{product?.header}</h2>
-              <h2 className="weight">{product?.packetweight}</h2>
+              <h4 className="weight">{product?.header}</h4>
 
               <div className="showcase-rating">
                 {Array.from({ length: 3 }, (_, index) => (
