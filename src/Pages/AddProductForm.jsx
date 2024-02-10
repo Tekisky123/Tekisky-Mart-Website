@@ -189,7 +189,7 @@ const AddProductForm = () => {
             <option value="HOMEMADE SNACKS">HOMEMADE SNACKS</option>
             <option value="CLOTHES">CLOTHES</option>
             <option value="PERFUMES">PERFUMES</option>
-            <option value="GIFTITEMS">GIFT ITEMS</option>
+            <option value="GIFT-ITEMS">GIFT-ITEMS</option>
             <option value="BOOKS">BOOKS</option>
             <option value="OTHERS">OTHERS</option>
           </select>
@@ -372,6 +372,11 @@ const AddProductForm = () => {
             <option value="L">L (40)</option>
             <option value="xl">XL (42)</option>
             <option value="xxl">XXL (44)</option>
+            <option value="Inch">Inch</option>
+            <option value="cm">cm</option>
+            <option value="Each">Each</option>
+            <option value="Piece">Piece</option>
+            <option value="Nos">Nos</option>
           </select>
           {errors.unitOfMeasure && (
             <span className="errorMessage">{errors.unitOfMeasure}</span>

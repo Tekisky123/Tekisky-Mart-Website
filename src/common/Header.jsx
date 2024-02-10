@@ -33,29 +33,27 @@ const Header = () => {
 
   const handleSearchChange = async (event) => {
     const newSearchQuery = event.target.value;
-
+  
     // Update the search query as the user types
     setSearchQuery(newSearchQuery);
-
+  
     try {
       setIsLoading(true);
-
+  
       // Check if the search query is non-empty before making the API call
       if (newSearchQuery.trim() !== "") {
         const response = await fetch(
           `https://tekiskymart.up.railway.app/product/approved?search=${newSearchQuery}`
         );
         const data = await response.json();
-
+  
         if (data.success) {
           const matchingProducts = data.products.filter(
             (product) =>
-              product.productName &&
-              product.productCategory
-                .toLowerCase()
-                .includes(newSearchQuery.toLowerCase())
+              (product.productName && product.productName.toLowerCase().includes(newSearchQuery.toLowerCase())) ||
+              (product.productCategory && product.productCategory.toLowerCase().includes(newSearchQuery.toLowerCase()))
           );
-
+  
           setSearchResults(matchingProducts);
         } else {
           setSearchResults([]);
