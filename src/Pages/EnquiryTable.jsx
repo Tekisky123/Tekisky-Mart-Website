@@ -23,7 +23,7 @@ const EnquiryTable = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container table-responsive">
       <h2>All Sell with us requests</h2>
       <table className="table table-striped table-bordered">
         <thead>
