@@ -131,6 +131,15 @@
   }
   
   
+  @media screen and (max-width: 600px) {
+    .about-card-container{
+      margin-top: 0px;
+    }
+    .first-image-container {
+height: 130px;
+    }
+  }
+  
   @media screen and (max-width: 768px) {
     .about-card {
       width: 45%;
