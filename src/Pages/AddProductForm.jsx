@@ -120,6 +120,13 @@ const AddProductForm = () => {
     if (!validateForm()) {
       return;
     }
+    if (formData.header.length > 80) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        header: "Header must be 80 characters or less",
+      }));
+      return;
+    }
     setLoading(true);
 
     const apiUrl = `${Base_Url}${AddProduct}`;
