@@ -126,7 +126,7 @@ const ProductMain = () => {
             {getCategoryProducts(category, window.innerWidth <= 768).map(
               (product, index) => (
               <div className="showcase" key={product?._id}>
-                <div className="showcase-banner">
+                <div className="showcase-banner" onClick={() => handleBuyNow(product)}>
                   {product?.imageURL && (
                     <>
                       <img
