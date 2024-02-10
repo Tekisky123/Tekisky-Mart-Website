@@ -274,7 +274,7 @@ const SpPaymentStep = () => {
         </div>
       )}
 
-      <h2 className="first-container-heading">Payment Step</h2>
+      <h2 className="first-container-heading payment-heading" >Payment Step</h2>
 
       <div className="stepContiner">
         <ToastContainer />

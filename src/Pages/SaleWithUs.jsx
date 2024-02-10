@@ -300,6 +300,7 @@ const SaleWithUs = () => {
                       justifyContent: "space-evenly",
                       alignItems: "center",
                       width: "50%",
+                      marginBottom:"15px"
                     }}
                   >
                     <label>Yes</label>
@@ -347,6 +348,7 @@ const SaleWithUs = () => {
                       justifyContent: "space-evenly",
                       alignItems: "center",
                       width: "50%",
+                      marginBottom:"15px"
                     }}
                   >
                     <label>Yes</label>
