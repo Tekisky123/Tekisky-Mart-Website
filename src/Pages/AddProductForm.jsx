@@ -190,6 +190,8 @@ const AddProductForm = () => {
             <option value="CLOTHES">CLOTHES</option>
             <option value="PERFUMES">PERFUMES</option>
             <option value="GIFT-ITEMS">GIFT-ITEMS</option>
+            <option value="TOY'S">TOY'S</option>
+            <option value="FURNITURE">FURNITURE</option>
             <option value="BOOKS">BOOKS</option>
             <option value="OTHERS">OTHERS</option>
           </select>
