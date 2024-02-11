@@ -753,6 +753,10 @@
 .product-details p {
   font-size: 18px; /* Adjusted for smaller screens */
 }
+.dod-mrp{
+  color: red;
+  
+}
 
 .countdown-timer {
   display: flex;

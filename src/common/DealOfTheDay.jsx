@@ -107,7 +107,7 @@ const DealOfTheDay = () => {
               <h4 className='dod-bold'>{product?.header}</h4>
 
               {/* <p>{product.description}</p> */}
-              <p>MRP: <del> ₹{product.mrp}</del></p>
+              <p>MRP: <span className='dod-mrp'> ₹{product.mrp}</span></p>
               <p>Offer Price: ₹{product.offerPrice}</p>
 
               <Link to={`/single-product/${product._id}`}>

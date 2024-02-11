@@ -4674,6 +4674,7 @@ body::-webkit-scrollbar-thumb:hover {
   -webkit-transition: var(--transition-timing);
   -o-transition: var(--transition-timing);
   transition: var(--transition-timing);
+  height: 60px;
 }
 
 .product-grid .showcase-title:hover {
