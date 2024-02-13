@@ -28,6 +28,11 @@ const ShoppingCart = () => {
   const location = useLocation();
 
   useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(products));
+  }, [products]);
+
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
   const {

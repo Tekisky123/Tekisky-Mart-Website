@@ -874,6 +874,7 @@ padding: 20px 10px!important;
   padding: 10px;
   margin-top: 50px !important;
   color: #004AAD;
+  cursor: pointer;
 }
 .category-item-container {
   display: flex;

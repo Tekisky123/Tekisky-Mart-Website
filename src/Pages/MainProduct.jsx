@@ -111,7 +111,15 @@ const ProductMain = () => {
         new Set(products.map((product) => product.productCategory))
       ).map((category) => (
         <div key={category}>
-          <h2 className="heading-of-category">{category}</h2>
+          <h2
+            className="heading-of-category"
+            onClick={() => {
+              setSelectedCategory(category);
+              navigate(`/category/${category}`);
+            }}
+          >
+            {category}
+          </h2>
 
           <div className="view-all-btn">
             <button
@@ -194,7 +202,10 @@ const ProductMain = () => {
                     </div>
 
                     <div className="price-box">
-                      <p className="price">Offer Price : {`₹${product?.offerPrice}`}</p><br />
+                      <p className="price">
+                        Offer Price : {`₹${product?.offerPrice}`}
+                      </p>
+                      <br />
                       {product?.mrp && <span> MRP : {`₹${product?.mrp}`}</span>}
                     </div>
 
