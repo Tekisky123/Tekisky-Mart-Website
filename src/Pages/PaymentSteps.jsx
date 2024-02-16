@@ -93,6 +93,11 @@ const PaymentStep = () => {
 
       const selectedProducts = [];
 
+      if (formData.phoneNumber.length !== 10) {
+        throw new Error("Please enter a valid 10-digit WhatsApp number");
+      }
+  
+
       cartItems.forEach((product, index) => {
         selectedProducts.push({
           product: product._id,
@@ -201,6 +206,16 @@ const PaymentStep = () => {
   const handleNext = (e) => {
     e.preventDefault();
     const { phoneNumber } = formData;
+
+    
+    if (!phoneNumber || phoneNumber.length !== 10) {
+      Swal.fire({
+        title: "Error!",
+        text: "Please enter a valid 10-digit WhatsApp number",
+        icon: "error",
+      });
+      return;
+    }
 
     if (phoneNumber) {
       swal({

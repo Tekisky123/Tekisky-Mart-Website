@@ -28,11 +28,11 @@ const SpPaymentStep = () => {
     setCustomerDetail,
     customerDetail,
     swal,
-    Swal
+    Swal,
   } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
   const [responseData, setResponseData] = useState([]);
-  
+
   const navigate = useNavigate();
   // const [formData, setFormData] = useState({
   //   fullName: "",
@@ -84,6 +84,11 @@ const SpPaymentStep = () => {
         totalAmount: singleGrandTotal,
       };
 
+      if (formData.phoneNumber.length !== 10) {
+        throw new Error("Please enter a valid 10-digit WhatsApp number");
+      }
+
+      
       const selectedProducts = [];
 
       let quantity = singleItems?.quantity ? singleItems?.quantity : 1;
@@ -103,7 +108,6 @@ const SpPaymentStep = () => {
       const data = response?.data;
       setResponseData(data);
       if (data.success || response.status == 201) {
-
         const orderId = data?.order?.orderId;
 
         Swal.fire({
@@ -112,13 +116,8 @@ const SpPaymentStep = () => {
           icon: "success",
           confirmButtonText: "Okay",
         }).then(() => {
-   
-         
-            navigate("/");
-      
-       
+          navigate("/");
         });
-   
       } else {
         // Handle error if needed
         console.error("Error fetching data:", data.error);
@@ -197,6 +196,15 @@ const SpPaymentStep = () => {
     e.preventDefault();
     const { phoneNumber } = formData;
 
+    if (!phoneNumber || phoneNumber.length !== 10) {
+      Swal.fire({
+        title: "Error!",
+        text: "Please enter a valid 10-digit WhatsApp number",
+        icon: "error",
+      });
+      return;
+    }
+
     if (phoneNumber) {
       swal({
         title: "Are you sure?",
@@ -234,7 +242,7 @@ const SpPaymentStep = () => {
             Swal.fire({
               title: "Warning!",
               text: "All mandatory fields are required",
-              icon: "error"
+              icon: "error",
             });
           } else {
             // Call your openModal function only if there are no errors
@@ -249,7 +257,7 @@ const SpPaymentStep = () => {
       Swal.fire({
         title: "Oops!",
         text: "Mobile number is required",
-        icon: "error"
+        icon: "error",
       });
     }
   };
@@ -274,7 +282,7 @@ const SpPaymentStep = () => {
         </div>
       )}
 
-      <h2 className="first-container-heading payment-heading" >Payment Step</h2>
+      <h2 className="first-container-heading payment-heading">Payment Step</h2>
 
       <div className="stepContiner">
         <ToastContainer />
@@ -402,8 +410,8 @@ const SpPaymentStep = () => {
                         float: "right",
                         margin: "10px",
                         display: "flex",
-                        width:"100%",
-                        justifyContent:"center"
+                        width: "100%",
+                        justifyContent: "center",
                       }}
                     >
                       <button className="NextBtn" onClick={handlePrevious}>
@@ -478,10 +486,23 @@ const SpPaymentStep = () => {
                         Shipping
                       </h5>
                       <h6>
-                      <b style={{color:"#004AAD"}}>Delivery charge 30 rupees below 500₹ </b><br/>
-                        <b style={{color:"#004AAD"}}>Free delivery for order above 500₹ </b>
+                        <b style={{ color: "#004AAD" }}>
+                          Delivery charge 30 rupees below 500₹{" "}
+                        </b>
+                        <br />
+                        <b style={{ color: "#004AAD" }}>
+                          Free delivery for order above 500₹{" "}
+                        </b>
                       </h6>
-                      <h6 style={{ color: "green", marginBottom: "1rem" , fontSize:"18px",fontWeight:"800"}} className="totalDiv">
+                      <h6
+                        style={{
+                          color: "green",
+                          marginBottom: "1rem",
+                          fontSize: "18px",
+                          fontWeight: "800",
+                        }}
+                        className="totalDiv"
+                      >
                         <span>saved Amount : </span>
                         <span> {singleSavedAmount}&#8377; </span>
                       </h6>
@@ -494,7 +515,13 @@ const SpPaymentStep = () => {
                         <span>{singleDeliveryCharge}&#8377;</span>
                       </h5>
                       <h5
-                        style={{ fontWeight: "600", marginBottom: "1rem" ,borderTop:"1px solid gray",borderBottom:"1px solid gray",padding:"10px 0px"}}
+                        style={{
+                          fontWeight: "600",
+                          marginBottom: "1rem",
+                          borderTop: "1px solid gray",
+                          borderBottom: "1px solid gray",
+                          padding: "10px 0px",
+                        }}
                         className="totalDiv"
                       >
                         <span>Order Total :</span>
@@ -534,7 +561,10 @@ const SpPaymentStep = () => {
                 </div>
                 <h1 className="title">Order Successfull</h1>
                 <h5>Your order Id : {responseData?.order?.orderId}</h5>
-                <p className="message">Your order has been placed successfully<br/> Our Team will contact you shortly.</p>
+                <p className="message">
+                  Your order has been placed successfully
+                  <br /> Our Team will contact you shortly.
+                </p>
               </div>
             </div>
           </div>

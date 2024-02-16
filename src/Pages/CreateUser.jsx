@@ -16,9 +16,9 @@ const AddUser = () => {
     password: "",
     role: "",
     shopName: "",
-    shopAddress: "", 
-    gstNumber: "", 
-    shopCategory: "", 
+    shopAddress: "",
+    gstNumber: "",
+    shopCategory: "",
   });
 
   const { id } = useParams();
@@ -28,10 +28,9 @@ const AddUser = () => {
     window.scrollTo(0, 0);
   }, [location.pathname, id]);
 
-
   const handleChange = (e) => {
     if (e.target.name === "mobileNumber") {
-      const numericValue = e.target.value.replace(/\D/g, '');
+      const numericValue = e.target.value.replace(/\D/g, "");
       const limitedValue = numericValue.slice(0, 10);
       setFormData({
         ...formData,
@@ -44,13 +43,13 @@ const AddUser = () => {
       });
     }
   };
-  
+
   const isValidEmail = (email) => {
     // You can use a regular expression for a basic email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  
+
   // Function to check if a string is a valid phone number
   const isValidPhoneNumber = (phoneNumber) => {
     // Check if it contains only digits and has exactly 10 characters
@@ -58,105 +57,115 @@ const AddUser = () => {
     return phoneNumberRegex.test(phoneNumber);
   };
 
-  const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const strongPasswordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-// Function to check if a string is a strong password
-const isValidPassword = (password) => {
-  return strongPasswordRegex.test(password);
-};
+  // Function to check if a string is a strong password
+  const isValidPassword = (password) => {
+    return strongPasswordRegex.test(password);
+  };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Basic validations for required fields
-  if (!formData.firstName || !formData.lastName || !formData.mobileNumber || !formData.email || !formData.password || !formData.role) {
-    // Display an error message using SweetAlert
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "Please fill in all required fields.",
-      confirmButtonColor: "#d33",
-    });
-    return;
-  }
-
-  // Additional validations for email and phone number
-  if (!isValidEmail(formData.email)) {
-    // Display an error message using SweetAlert
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "Please enter a valid email address.",
-      confirmButtonColor: "#d33",
-    });
-    return;
-  }
-
-  if (!isValidPhoneNumber(formData.mobileNumber)) {
-    // Display an error message using SweetAlert
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "Please enter a valid phone number.",
-      confirmButtonColor: "#d33",
-    });
-    return;
-  }
-
-  // Check if the entered password is strong
-  if (!isValidPassword(formData.password)) {
-    // Display a message indicating the password requirements
-    Swal.fire({
-      icon: "warning",
-      title: "Warning",
-      text:
-        "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&).",
-      confirmButtonColor: "#ffc107",
-    });
-    return;
-  }
-
-  try {
-    setLoading(true);
-    const response = await axios.post(
-      "https://tekiskymart.up.railway.app/user/createUser",
-      formData
-    );
-
-    Swal.fire({
-      icon: "success",
-      title: "Success",
-      text: "User created successfully.",
-      confirmButtonColor: "#28a745",
-    });
-    setLoading(false);
-    navigate("/users");
-  } catch (error) {
-    setLoading(false);
-    if (error.response && error.response.data && error.response.data.error === "User already exists") {
-      // Show sweet alert for duplicate user
+    // Basic validations for required fields
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.mobileNumber ||
+      !formData.email ||
+      !formData.password ||
+      !formData.role
+    ) {
+      // Display an error message using SweetAlert
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "User already exists",
+        text: "Please fill in all required fields.",
         confirmButtonColor: "#d33",
       });
-    } else {
-      // Show generic error message
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Error creating user.",
-        confirmButtonColor: "#d33",
-      });
-      console.error("Error creating user:", error.message);
+      return;
     }
-  }
-};
+
+    // Additional validations for email and phone number
+    if (!isValidEmail(formData.email)) {
+      // Display an error message using SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please enter a valid email address.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+
+    if (!isValidPhoneNumber(formData.mobileNumber)) {
+      // Display an error message using SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please enter a valid phone number.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+
+    // Check if the entered password is strong
+    if (!isValidPassword(formData.password)) {
+      // Display a message indicating the password requirements
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&).",
+        confirmButtonColor: "#ffc107",
+      });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        "https://tekiskymart.up.railway.app/user/createUser",
+        formData
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "User created successfully.",
+        confirmButtonColor: "#28a745",
+      });
+      setLoading(false);
+      navigate("/users");
+    } catch (error) {
+      setLoading(false);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.error === "User already exists"
+      ) {
+        // Show sweet alert for duplicate user
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "User already exists",
+          confirmButtonColor: "#d33",
+        });
+      } else {
+        // Show generic error message
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Error creating user.",
+          confirmButtonColor: "#d33",
+        });
+        console.error("Error creating user:", error.message);
+      }
+    }
+  };
   return (
     <div>
-        
-        {loading && (
+      {loading && (
         <div className="loader-container">
           <div className="spinner">
             <div></div>
@@ -253,8 +262,8 @@ const handleSubmit = async (e) => {
 
         {/* Additional fields specific to shop users */}
 
-            {/* Additional fields specific to seller role */}
-            {formData.role === "seller" && (
+        {/* Additional fields specific to seller role */}
+        {formData.role === "seller" && (
           <>
             <div>
               <label className="formLabel">Shop Name:</label>
@@ -269,16 +278,16 @@ const handleSubmit = async (e) => {
             </div>
 
             <div>
-  <label className="formLabel">Shop Address:</label>
-  <textarea
-    className="formInput"
-    name="shopAddress"
-    value={formData.shopAddress}
-    onChange={handleChange}
-    required
-    rows={4} // Specify the number of visible rows
-  />
-</div>
+              <label className="formLabel">Shop Address:</label>
+              <textarea
+                className="formInput"
+                name="shopAddress"
+                value={formData.shopAddress}
+                onChange={handleChange}
+                required
+                rows={4} // Specify the number of visible rows
+              />
+            </div>
 
             <div>
               <label className="formLabel">G.S.T. Number:</label>
@@ -301,16 +310,23 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
             className="formInput"
           >
-            <option value="dates">Dates</option>
-            <option value="perfumes">Perfumes</option>
-            <option value="Homemade Snacks">Homemade Snacks</option>
-            <option value="clothes">Clothes</option>
-            <option value="others">Others</option>
+            <option value="DATES">DATES</option>
+            <option value="HOMEMADE SNACKS">HOMEMADE SNACKS</option>
+            <option value="CLOTHES">CLOTHES</option>
+            <option value="PERFUMES">PERFUMES</option>
+            <option value="KIRANA">KIRANA</option>
+            <option value="GIFT-ITEMS">GIFT-ITEMS</option>
+            <option value="TOY'S">TOY'S</option>
+            <option value="FURNITURE">FURNITURE</option>
+            <option value="BOOKS">BOOKS</option>
+            <option value="OTHERS">OTHERS</option>
           </select>
         </div>
 
         <div>
-          <button className="formButton" type="submit">Add User</button>
+          <button className="formButton" type="submit">
+            Add User
+          </button>
         </div>
       </form>
     </div>

@@ -14,7 +14,6 @@ import Swal from "sweetalert2";
 import { CiSearch } from "react-icons/ci";
 import * as XLSX from "xlsx"; // Import Excel library
 
-
 // Modal.setAppElement("#root");
 
 const AllOrders = () => {
@@ -141,7 +140,7 @@ const AllOrders = () => {
     };
 
     fetchOrders();
-  }, []);
+  }, [isEditOrderStatus]);
 
   const handleMoreInfo = (order) => {
     setSelectedOrder(order);
@@ -232,7 +231,6 @@ const AllOrders = () => {
     URL.revokeObjectURL(url);
   };
 
-
   const handleDownloadReports = () => {
     // Filter orders with status "order-Verified"
     const verifiedOrders = orders.filter(
@@ -240,58 +238,157 @@ const AllOrders = () => {
     );
 
     // Convert orders to Excel format
-const wb = XLSX.utils.book_new();
-wb.Props = {
-  Title: "Verified Orders Report",
-  Subject: "List of orders with status 'order-Verified'",
-  CreatedDate: new Date(),
-};
-wb.SheetNames.push("Orders");
-const wsData = [
-  [
-    "Order ID",
-    "Customer Name",
-    "Mobile Number",
-    "Address",
-    "Total Amount",
-    // "Created At",
-    "Product Name",
-    // "Image",
-    "Packet Weight",
-    "Unit of Measure",
-    "Offer Price",
-    "Quantity",
-    // "Created By",
-  ],
-];
-verifiedOrders.forEach((order) => {
-  order.productDetails.forEach((product) => {
-    wsData.push([
-      order.orderId,
-      order.customerName,
-      order.mobileNumber,
-      order.address,
-      order.totalAmount,
-      // formatDate(order.createdAt),
-      product.productName,
-      // product.imageURL[0],
-      product.packetweight,
-      product.unitOfMeasure,
-      product.offerPrice,
-      product.quantity,
-      // product.createdBy,
-    ]);
-  });
-});
-const ws = XLSX.utils.aoa_to_sheet(wsData);
-wb.Sheets["Orders"] = ws;
-
+    const wb = XLSX.utils.book_new();
+    wb.Props = {
+      Title: "Verified Orders Report",
+      Subject: "List of orders with status 'order-Verified'",
+      CreatedDate: new Date(),
+    };
+    wb.SheetNames.push("Orders");
+    const wsData = [
+      [
+        "Order ID",
+        "Customer Name",
+        "Mobile Number",
+        "Address",
+        "Total Amount",
+        // "Created At",
+        "Product Name",
+        // "Image",
+        "Packet Weight",
+        "Unit of Measure",
+        "Offer Price",
+        "Quantity",
+        // "Created By",
+      ],
+    ];
+    verifiedOrders.forEach((order) => {
+      order.productDetails.forEach((product) => {
+        wsData.push([
+          order.orderId,
+          order.customerName,
+          order.mobileNumber,
+          order.address,
+          order.totalAmount,
+          // formatDate(order.createdAt),
+          product.productName,
+          // product.imageURL[0],
+          product.packetweight,
+          product.unitOfMeasure,
+          product.offerPrice,
+          product.quantity,
+          // product.createdBy,
+        ]);
+      });
+    });
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    wb.Sheets["Orders"] = ws;
 
     // Save Excel file
     const excelFileName = "verified_orders_report.xlsx";
     XLSX.writeFile(wb, excelFileName);
   };
+
+  const handleDeleteOrder = async () => {
+    try {
+      const confirmed = await Swal.fire({
+        title: `Are you sure you want to delete order ${selectedOrder.orderId}?`,
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (confirmed.isConfirmed) {
+        const apiUrl = `https://tekiskymart.up.railway.app/order/deleteOrderById/${selectedOrder._id}`;
+        await axios.delete(apiUrl);
+
+        // Remove the deleted order from the state
+        setOrders(orders.filter((order) => order._id !== selectedOrder._id));
+
+        Swal.fire({
+          icon: "success",
+          title: "Order deleted successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        handleCloseModal();
+      }
+    } catch (error) {
+      console.error("Error deleting order:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to delete order",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+  const handleEditOrder = () => {
+    // Toggle edit mode for the selected order
+    setIsEditOrderStatus(true);
+  };
   
+
+  const handleSaveChanges = async () => {
+    try {
+      setIsLoading(true);
+
+      const apiUrl = `https://tekiskymart.up.railway.app/order/updateOrderById/${selectedOrder._id}`;
+
+      // Prepare the update data with the changed fields
+      const updateData = {
+        customerName: selectedOrder.customerName,
+        mobileNumber: selectedOrder.mobileNumber,
+        alternateNumber: selectedOrder.alternateNumber,
+        address: selectedOrder.address,
+        landmark: selectedOrder.landmark,
+        totalAmount: selectedOrder.totalAmount,
+      };
+
+      // Make the API call to update the order details
+      await axios.put(apiUrl, updateData);
+
+      // Fetch the updated order details from the server
+      const updatedOrderResponse = await axios.get(
+        `https://tekiskymart.up.railway.app/order/getOrderById/${selectedOrder._id}`
+      );
+
+      // Update the local state with the updated order details
+      setSelectedOrder(updatedOrderResponse.data.order);
+
+      // Exit edit mode and stop loading
+      setIsEditOrderStatus(false);
+      setIsLoading(false);
+
+      // Show success message to the user
+      Swal.fire({
+        icon: "success",
+        title: "Order details updated successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      // Close the modal
+      handleCloseModal();
+      // window.location.reload();
+    } catch (error) {
+      console.error("Error updating order details:", error);
+
+      // Stop loading and show error message to the user
+      setIsLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update order details",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
   return (
     <div className="container mt-4">
       <ToastContainer />
@@ -446,28 +543,121 @@ wb.Sheets["Orders"] = ws;
                   </tr>
                   <tr>
                     <td>Customer Name</td>
-                    <td>{selectedOrder.customerName}</td>
+                    <td>
+                      {isEditOrderStatus ? (
+                        <Form.Control
+                          type="text"
+                          value={selectedOrder.customerName}
+                          onChange={(e) =>
+                            setSelectedOrder({
+                              ...selectedOrder,
+                              customerName: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        selectedOrder.customerName
+                      )}
+                    </td>
                   </tr>
+
                   <tr>
                     <td>Mobile Number</td>
-                    <td>{selectedOrder.mobileNumber}</td>
+                    <td>
+                      {isEditOrderStatus ? (
+                        <Form.Control
+                          type="text"
+                          value={selectedOrder.mobileNumber}
+                          onChange={(e) =>
+                            setSelectedOrder({
+                              ...selectedOrder,
+                              mobileNumber: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        selectedOrder.mobileNumber
+                      )}
+                    </td>
                   </tr>
+
                   <tr>
                     <td>Alternate Number</td>
-                    <td>{selectedOrder.alternateNumber}</td>
+                    <td>
+                      {isEditOrderStatus ? (
+                        <Form.Control
+                          type="text"
+                          value={selectedOrder.alternateNumber}
+                          onChange={(e) =>
+                            setSelectedOrder({
+                              ...selectedOrder,
+                              alternateNumber: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        selectedOrder.alternateNumber
+                      )}
+                    </td>
                   </tr>
                   <tr>
                     <td>Address</td>
-                    <td>{selectedOrder.address}</td>
+                    <td>
+                      {isEditOrderStatus ? (
+                        <Form.Control
+                          type="text"
+                          value={selectedOrder.address}
+                          onChange={(e) =>
+                            setSelectedOrder({
+                              ...selectedOrder,
+                              address: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        selectedOrder.address
+                      )}
+                    </td>
                   </tr>
                   <tr>
                     <td>Landmark</td>
-                    <td>{selectedOrder.landmark}</td>
+                    <td>
+                      {isEditOrderStatus ? (
+                        <Form.Control
+                          type="text"
+                          value={selectedOrder.landmark}
+                          onChange={(e) =>
+                            setSelectedOrder({
+                              ...selectedOrder,
+                              landmark: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        selectedOrder.landmark
+                      )}
+                    </td>
                   </tr>
                   <tr>
                     <td>Total Amount</td>
-                    <td>{selectedOrder.totalAmount}</td>
+                    <td>
+                      {isEditOrderStatus ? (
+                        <Form.Control
+                          type="text"
+                          value={selectedOrder.totalAmount}
+                          onChange={(e) =>
+                            setSelectedOrder({
+                              ...selectedOrder,
+                              totalAmount: e.target.value,
+                            })
+                          }
+                        />
+                      ) : (
+                        selectedOrder.totalAmount
+                      )}
+                    </td>
                   </tr>
+
                   <tr>
                     <td>Order Status</td>
                     <td>
@@ -587,6 +777,25 @@ wb.Sheets["Orders"] = ws;
                 Download QR Code
               </BootstrapButton>
             </div>
+          )}
+          <BootstrapButton
+            variant="danger"
+            onClick={handleDeleteOrder}
+            style={{ marginRight: "10px" }}
+          >
+            Delete
+          </BootstrapButton>
+
+          {/* Edit Order Button */}
+          {!isEditOrderStatus && (
+            <BootstrapButton variant="info" onClick={handleEditOrder}>
+              Edit
+            </BootstrapButton>
+          )}
+          {isEditOrderStatus && (
+            <BootstrapButton variant="primary" onClick={handleSaveChanges}>
+              Save
+            </BootstrapButton>
           )}
         </div>
       </Modal>
