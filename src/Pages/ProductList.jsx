@@ -28,7 +28,7 @@ const ProductList = () => {
   const [isEditing, setEditing] = useState(false);
   const [searchInput, setSearchInput] = useState(""); // New state for search input
   const [filterByApproved, setFilterByApproved] = useState("");
-  const [filterByDealOfDay, setFilterByDealOfDay] = useState("");  
+  const [filterByDealOfDay, setFilterByDealOfDay] = useState("");
   const userRole = localStorage.getItem("userRole");
   const mobileNumber = localStorage.getItem("mobileNumber");
 
@@ -62,7 +62,8 @@ const ProductList = () => {
           );
         } else {
           response = await axios.get(
-            "https://tekiskymart.up.railway.app/product/mobile/" + mobileNumber
+            "https://tekiskymart.up.railway.app/product/mobile/" +
+              mobileNumber
           );
         }
         console.log("response", response);
@@ -118,8 +119,8 @@ const ProductList = () => {
         "availableStockQty",
         "mrp",
         "offerPrice",
-        "packetweight",
-        "unitOfMeasure",
+        // "packetweight",
+        // "unitOfMeasure",
         "description",
         // "createdBy",
         "productName",
@@ -221,13 +222,25 @@ const ProductList = () => {
   };
 
   const filteredProducts = products.filter((product) => {
-    const productNameMatch = product.productName.toLowerCase().includes(searchInput.toLowerCase());
-    const productCategoryMatch = product.productCategory.toLowerCase().includes(searchInput.toLowerCase());
-    const approvedMatch = filterByApproved === "" || product.approved.toString() === filterByApproved;
-    const dealOfDayMatch = filterByDealOfDay === "" || product.dealOfDay.toString() === filterByDealOfDay;
-    return (productNameMatch || productCategoryMatch) && approvedMatch && dealOfDayMatch;
+    const productNameMatch = product.productName
+      .toLowerCase()
+      .includes(searchInput.toLowerCase());
+    const productCategoryMatch = product.productCategory
+      .toLowerCase()
+      .includes(searchInput.toLowerCase());
+    const approvedMatch =
+      filterByApproved === "" ||
+      product.approved.toString() === filterByApproved;
+    const dealOfDayMatch =
+      filterByDealOfDay === "" ||
+      product.dealOfDay.toString() === filterByDealOfDay;
+    return (
+      (productNameMatch || productCategoryMatch) &&
+      approvedMatch &&
+      dealOfDayMatch
+    );
   });
-  
+
   return (
     <div className="table-responsive container mt-4">
       <div style={{ marginBottom: "40px" }}>
@@ -236,50 +249,46 @@ const ProductList = () => {
         </button>
       </div>
       <div className="product-sub-headings">
-      <div className="custom-search-bar">
-        <input
-          type="text"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search by Product Name or Product Category"
-        />
-        <div className="search-icon">
-          <CiSearch />
-          
+        <div className="custom-search-bar">
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search by Product Name or Product Category"
+          />
+          <div className="search-icon">
+            <CiSearch />
+          </div>
         </div>
-        
-      </div>
-      
-      <div className="custom-filter-container">
-      <div className="custom-filter">
-              <label htmlFor="approved">Approved Products:</label>
-              <select
-                id="approved"
-                value={filterByApproved}
-                onChange={(e) => setFilterByApproved(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-              </div>
-              <div className="custom-filter">
-              <label htmlFor="dealOfDay">Deals of the Day:</label>
-              <select
-                id="dealOfDay"
-                value={filterByDealOfDay}
-                onChange={(e) => setFilterByDealOfDay(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-              </div>
-      </div>
-             
-</div>
 
-      
+        <div className="custom-filter-container">
+          <div className="custom-filter">
+            <label htmlFor="approved">Approved Products:</label>
+            <select
+              id="approved"
+              value={filterByApproved}
+              onChange={(e) => setFilterByApproved(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <div className="custom-filter">
+            <label htmlFor="dealOfDay">Deals of the Day:</label>
+            <select
+              id="dealOfDay"
+              value={filterByDealOfDay}
+              onChange={(e) => setFilterByDealOfDay(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
@@ -310,7 +319,7 @@ const ProductList = () => {
               </td>
               <td className="approved-or-not">
                 {product.dealOfDay ? (
-                  <FaCheckCircle  className="approved-icon" />
+                  <FaCheckCircle className="approved-icon" />
                 ) : (
                   <HiOutlineClock className="pending-icon" />
                 )}
@@ -324,7 +333,6 @@ const ProductList = () => {
                   More Info
                 </button>
               </td>
-             
             </tr>
           ))}
         </tbody>
@@ -483,10 +491,21 @@ const ProductList = () => {
                           })
                         }
                       >
-                        <option value="g">grams (g)</option>
-                        <option value="kg">kilograms (kg)</option>
-                        <option value="l">liter (l)</option>
-                        <option value="ml">milliliter (ml)</option>
+                        <option value="">Select Unit</option>
+                        <option value="gram">Gram (g)</option>
+                        <option value="kg">Kilogram (kg)</option>
+                        <option value="ml">Milliliter (ml)</option>
+                        <option value="l">Liter (l)</option>
+                        <option value="s">S (36)</option>
+                        <option value="m">M (38)</option>
+                        <option value="L">L (40)</option>
+                        <option value="xl">XL (42)</option>
+                        <option value="xxl">XXL (44)</option>
+                        <option value="Inch">Inch</option>
+                        <option value="cm">cm</option>
+                        <option value="Each">Each</option>
+                        <option value="Piece">Piece</option>
+                        <option value="Nos">Nos</option>
                       </select>
                     </>
                   ) : (
@@ -700,7 +719,10 @@ const ProductList = () => {
                   Update Product
                 </button>
               )}
-              <button className="btn btn-danger   product-list-btn" onClick={() => handleDelete()}>
+              <button
+                className="btn btn-danger   product-list-btn"
+                onClick={() => handleDelete()}
+              >
                 Delete Product
               </button>
             </div>

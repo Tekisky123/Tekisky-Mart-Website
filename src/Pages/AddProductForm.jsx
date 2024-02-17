@@ -10,6 +10,8 @@ const AddProductForm = () => {
   const userRole = localStorage.getItem("userRole");
   const mobileNumber = localStorage.getItem("mobileNumber");
   const [showOtherCategoryInput, setShowOtherCategoryInput] = useState(false);
+  const [showClothingFields, setShowClothingFields] = useState(false); // Add this line
+
   const [formData, setFormData] = useState({
     productCategory: "",
     otherCategory: "",
@@ -30,6 +32,9 @@ const AddProductForm = () => {
     sellerInformation: "",
     dealOfDay: false,
     approved: false,
+    size: "",
+    color: "",
+    material: "",
   });
   // console.log("approved", formData.approved);
   const [filePreviews, setFilePreviews] = useState([]);
@@ -64,7 +69,14 @@ const AddProductForm = () => {
       productCategory: selectedCategory,
     }));
 
-    // Show additional input when "Others" is selected
+    // Show additional input when "CLOTHES" is selected
+    if (selectedCategory === "CLOTHES") {
+      setShowClothingFields(true); // Assuming you have a state variable to track whether clothing fields should be displayed
+    } else {
+      setShowClothingFields(false);
+    }
+
+    // Show additional input when "OTHERS" is selected
     setShowOtherCategoryInput(selectedCategory === "OTHERS");
   };
 
@@ -92,34 +104,40 @@ const AddProductForm = () => {
     };
   }, [filePreviews]);
 
-  const validateForm = () => {
-    const newErrors = {};
-    for (const key in formData) {
-      // Exclude checkbox (dealOfDay) from validation
-      if (
-        key !== "files" &&
-        key !== "dealOfDay" &&
-        !formData[key] &&
-        key !== "unitOfMeasure" &&
-        key !== "otherCategory" &&
-        !(key === "approved" && formData[key] === false) // Allow submission even if approved is false
-      ) {
-        if (key === "approved" && formData[key] === "") {
-          newErrors[key] = "Please select approval status";
-        }
-        newErrors[key] = "This field is required *";
-      }
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  // const validateForm = () => {
+  //   const newErrors = {};
+  //   for (const key in formData) {
+  //     // Exclude checkbox (dealOfDay) from validation
+  //     if (
+  //       key !== "files" &&
+  //       key !== "dealOfDay" &&
+  //       key !== "otherCategory" &&
+  //       !(key === "approved" && formData[key] === false) // Allow submission even if approved is false
+  //     ) {
+  //       if (
+  //         (formData.productCategory !== "CLOTHES" && !formData[key]) || // Validate all fields except for "Packet Weight" and "Unit of Measure" when category is not "CLOTHES"
+  //         (formData.productCategory === "CLOTHES" && // Validate "Packet Weight" and "Unit of Measure" only when category is "CLOTHES"
+  //           (key === "packetweight" || key === "unitOfMeasure") &&
+  //           !formData[key])
+  //       ) {
+  //         if (key === "approved" && formData[key] === "") {
+  //           newErrors[key] = "Please select approval status";
+  //         }
+  //         newErrors[key] = "This field is required *";
+  //       }
+  //     }
+  //   }
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
+    // if (!validateForm()) {
+    //   return;
+    // }
     if (formData.header.length > 80) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -213,6 +231,46 @@ const AddProductForm = () => {
               className="formInput"
             />
           </label>
+        )}
+
+        {showClothingFields && (
+          <>
+            <label className="formLabel">
+              Size:
+              <input
+                type="text"
+                value={formData.size}
+                onChange={(e) =>
+                  setFormData({ ...formData, size: e.target.value })
+                }
+                className="formInput"
+              />
+            </label>
+
+            <label className="formLabel">
+              Color:
+              <input
+                type="text"
+                value={formData.color}
+                onChange={(e) =>
+                  setFormData({ ...formData, color: e.target.value })
+                }
+                className="formInput"
+              />
+            </label>
+
+            <label className="formLabel">
+              Material:
+              <input
+                type="text"
+                value={formData.material}
+                onChange={(e) =>
+                  setFormData({ ...formData, material: e.target.value })
+                }
+                className="formInput"
+              />
+            </label>
+          </>
         )}
 
         <label className="formLabel">
@@ -341,50 +399,54 @@ const AddProductForm = () => {
           )}
         </label>
 
-        <label className="formLabel">
-          Packet Weight:
-          <input
-            type="number"
-            value={formData.packetweight}
-            onChange={(e) =>
-              setFormData({ ...formData, packetweight: e.target.value })
-            }
-            className={`formInput ${errors.packetweight ? "error" : ""}`}
-          />
-          {errors.packetweight && (
-            <span className="errorMessage">{errors.packetweight}</span>
-          )}
-        </label>
+        {formData.productCategory !== "CLOTHES" && (
+          <>
+            <label className="formLabel">
+              Packet Weight:
+              <input
+                type="number"
+                value={formData.packetweight}
+                onChange={(e) =>
+                  setFormData({ ...formData, packetweight: e.target.value })
+                }
+                className={`formInput ${errors.packetweight ? "error" : ""}`}
+              />
+              {/* {errors.packetweight && (
+                <span className="errorMessage">{errors.packetweight}</span>
+              )} */}
+            </label>
 
-        <label className="formLabel">
-          Unit of Measure:
-          <select
-            value={formData.unitOfMeasure}
-            onChange={(e) =>
-              setFormData({ ...formData, unitOfMeasure: e.target.value })
-            }
-            className={`formInput ${errors.unitOfMeasure ? "error" : ""}`}
-          >
-            <option value="">Select Unit</option>
-            <option value="gram">Gram (g)</option>
-            <option value="kg">Kilogram (kg)</option>
-            <option value="ml">Milliliter (ml)</option>
-            <option value="l">Liter (l)</option>
-            <option value="s">S (36)</option>
-            <option value="m">M (38)</option>
-            <option value="L">L (40)</option>
-            <option value="xl">XL (42)</option>
-            <option value="xxl">XXL (44)</option>
-            <option value="Inch">Inch</option>
-            <option value="cm">cm</option>
-            <option value="Each">Each</option>
-            <option value="Piece">Piece</option>
-            <option value="Nos">Nos</option>
-          </select>
-          {errors.unitOfMeasure && (
-            <span className="errorMessage">{errors.unitOfMeasure}</span>
-          )}
-        </label>
+            <label className="formLabel">
+              Unit of Measure:
+              <select
+                value={formData.unitOfMeasure}
+                onChange={(e) =>
+                  setFormData({ ...formData, unitOfMeasure: e.target.value })
+                }
+                className={`formInput ${errors.unitOfMeasure ? "error" : ""}`}
+              >
+                <option value="">Select Unit</option>
+                <option value="gram">Gram (g)</option>
+                <option value="kg">Kilogram (kg)</option>
+                <option value="ml">Milliliter (ml)</option>
+                <option value="l">Liter (l)</option>
+                <option value="s">S (36)</option>
+                <option value="m">M (38)</option>
+                <option value="L">L (40)</option>
+                <option value="xl">XL (42)</option>
+                <option value="xxl">XXL (44)</option>
+                <option value="Inch">Inch</option>
+                <option value="cm">cm</option>
+                <option value="Each">Each</option>
+                <option value="Piece">Piece</option>
+                <option value="Nos">Nos</option>
+              </select>
+              {/* {errors.unitOfMeasure && (
+                <span className="errorMessage">{errors.unitOfMeasure}</span>
+              )} */}
+            </label>
+          </>
+        )}
 
         <label className="formLabel">
           Description:

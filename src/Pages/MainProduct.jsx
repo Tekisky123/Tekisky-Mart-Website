@@ -2,9 +2,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { CiHeart } from "react-icons/ci";
+// import { CiHeart } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
-import { IoRepeatOutline } from "react-icons/io5";
+// import { IoRepeatOutline } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import "../App.css";
 import { Context } from "../common/Context";

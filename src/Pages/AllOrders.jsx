@@ -289,6 +289,58 @@ const AllOrders = () => {
     XLSX.writeFile(wb, excelFileName);
   };
 
+  const handleDownloadDeliveredOrders = () => {
+    // Filter orders with status "Delivered"
+    const deliveredOrders = orders.filter(
+      (order) => order.orderStatus === "Delivered"
+    );
+
+    // Convert orders to Excel format
+    const wb = XLSX.utils.book_new();
+    wb.Props = {
+      Title: "Delivered Orders Report",
+      Subject: "List of orders with status 'Delivered'",
+      CreatedDate: new Date(),
+    };
+    wb.SheetNames.push("Orders");
+    const wsData = [
+      [
+        "Order ID",
+        "Customer Name",
+        "Mobile Number",
+        "Address",
+        "Total Amount",
+        "Product Name",
+        "Packet Weight",
+        "Unit of Measure",
+        "Offer Price",
+        "Quantity",
+      ],
+    ];
+    deliveredOrders.forEach((order) => {
+      order.productDetails.forEach((product) => {
+        wsData.push([
+          order.orderId,
+          order.customerName,
+          order.mobileNumber,
+          order.address,
+          order.totalAmount,
+          product.productName,
+          product.packetweight,
+          product.unitOfMeasure,
+          product.offerPrice,
+          product.quantity,
+        ]);
+      });
+    });
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    wb.Sheets["Orders"] = ws;
+
+    // Save Excel file
+    const excelFileName = "delivered_orders_report.xlsx";
+    XLSX.writeFile(wb, excelFileName);
+  };
+
   const handleDeleteOrder = async () => {
     try {
       const confirmed = await Swal.fire({
@@ -331,7 +383,6 @@ const AllOrders = () => {
     // Toggle edit mode for the selected order
     setIsEditOrderStatus(true);
   };
-  
 
   const handleSaveChanges = async () => {
     try {
@@ -427,6 +478,12 @@ const AllOrders = () => {
           style={{ marginRight: "10px" }}
         >
           Download Verified Orders
+        </BootstrapButton>
+        <BootstrapButton
+          variant="primary"
+          onClick={handleDownloadDeliveredOrders}
+        >
+          Download Delivered Orders
         </BootstrapButton>
       </div>
       <div className="table-responsive">
